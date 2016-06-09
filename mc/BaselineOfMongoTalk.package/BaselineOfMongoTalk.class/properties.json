@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BaselineOf",
+	"category" : "BaselineOfMongoTalk",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "BaselineOfMongoTalk",
+	"type" : "normal"
+}
