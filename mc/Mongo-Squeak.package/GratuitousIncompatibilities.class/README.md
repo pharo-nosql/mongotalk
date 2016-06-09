@@ -1,0 +1,1 @@
+Utilitiy class to overcome gratuitous incompatibilities 

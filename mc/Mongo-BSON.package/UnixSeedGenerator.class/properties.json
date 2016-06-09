@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "UniqueNumberGenerator",
+	"category" : "Mongo-BSON-Generators",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "UnixSeedGenerator",
+	"type" : "normal"
+}

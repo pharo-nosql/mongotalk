@@ -1,0 +1,15 @@
+{
+	"instance" : {
+		"visitObject:" : "NicolasPetton 11/16/2012 13:29",
+		"visit:" : "NicolasPetton 11/16/2012 13:35",
+		"visitComparisonCondition:" : "NicolasPetton 11/16/2012 13:35",
+		"visitEqualCondition:" : "NicolasPetton 11/16/2012 13:35",
+		"visitNotCondition:" : "NicolasPetton 11/16/2012 15:45",
+		"visitCondition:" : "NicolasPetton 11/16/2012 13:35",
+		"visitLogicalCondition:" : "NicolasPetton 11/16/2012 13:45",
+		"visitField:" : "NicolasPetton 11/16/2012 13:35",
+		"visitWhereCondition:" : "NicolasPetton 11/16/2012 15:48",
+		"visitNode:" : "NicolasPetton 11/16/2012 13:35"
+	},
+	"class" : { }
+}

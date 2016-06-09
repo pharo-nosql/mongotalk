@@ -1,0 +1,3 @@
+default
+defaultWhere
+	^Dictionary new

@@ -1,0 +1,40 @@
+{
+	"instance" : {
+		"stream:" : "NorbertHartl 11/27/2013 14:03",
+		"admin" : "guest 2/11/2010 23:42",
+		"close" : "guest 2/11/2010 23:42",
+		"update:with:collection:" : "HolgerHansPeterFreyther 2/11/2016 10:22",
+		"stream" : "guest 2/11/2010 23:42",
+		"authCache" : "NorbertHartl 11/27/2013 09:36",
+		"isAvailable" : "TorstenBergmann 3/17/2015 21:55",
+		"replicaSet" : "MartinDias 5/16/2016 00:31",
+		"delete:collection:" : "KentBeck 2/16/2010 13:03",
+		"cursorQuery:" : "MartinDias 5/28/2016 01:37",
+		"getMore:collection:chunkSize:" : "Hacker 4/10/2016 20:35",
+		"queryOne:" : "FrancoisStephany 11/6/2012 12:01",
+		"host" : "MartinDias 5/28/2016 05:23",
+		"port" : "MartinDias 5/28/2016 05:23",
+		"replicaSetStatus" : "MartinDias 5/16/2016 00:25",
+		"databases" : "guest 2/11/2010 23:42",
+		"databaseNamed:" : "guest 2/11/2010 23:42",
+		"authenticateUsername:password:database:" : "MartinDias 5/17/2016 00:53",
+		"setHost:port:" : "guest 2/11/2010 23:42",
+		"username:password:database:" : "NorbertHartl 11/27/2013 09:56",
+		"query:" : "FrancoisStephany 11/6/2012 12:55",
+		"command:database:" : "MartinDias 5/17/2016 00:26",
+		"open" : "NorbertHartl 11/27/2013 14:01",
+		"printOn:" : "TorstenBergmann 3/10/2015 20:19",
+		"nextRequestID" : "Hacker 4/10/2016 20:57",
+		"isOpen" : "EstebanLorenzano 9/24/2011 08:24",
+		"update:with:collection:flags:" : "HolgerHansPeterFreyther 2/11/2016 10:22",
+		"insert:collection:" : "KentBeck 2/16/2010 12:21"
+	},
+	"class" : {
+		"default" : "TorstenBergmann 3/17/2015 21:51",
+		"default:" : "TorstenBergmann 3/17/2015 21:52",
+		"ascending" : "TorstenBergmann 3/17/2015 21:52",
+		"host:port:" : "TorstenBergmann 3/17/2015 21:52",
+		"descending" : "TorstenBergmann 3/17/2015 21:52",
+		"local" : "TorstenBergmann 3/17/2015 21:50"
+	}
+}

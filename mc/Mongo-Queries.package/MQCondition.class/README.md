@@ -1,0 +1,1 @@
+A mongo query condition

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MongoReplicationTest",
+	"category" : "Mongo-Tests-Core-Replication",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoNoReplicationTest",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+writing
+fixedHeaderSize
+	^ 24

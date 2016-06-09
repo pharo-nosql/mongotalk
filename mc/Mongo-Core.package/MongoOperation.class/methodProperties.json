@@ -1,0 +1,11 @@
+{
+	"instance" : {
+		"writeHeader" : "KentBeck 2/16/2010 17:42",
+		"setCollection:id:stream:" : "KentBeck 2/16/2010 17:15",
+		"write" : "KentBeck 2/16/2010 17:41",
+		"flush" : "KentBeck 2/16/2010 17:41"
+	},
+	"class" : {
+		"collection:id:stream:" : "KentBeck 2/16/2010 11:36"
+	}
+}

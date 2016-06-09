@@ -1,0 +1,3 @@
+accessing
+authShouldFail
+	succeedAuth := false

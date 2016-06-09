@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "UniqueNumberGenerator",
+	"category" : "Mongo-BSON-Generators",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"currentNumber",
+		"startNumber"
+	],
+	"name" : "SequentialGenerator",
+	"type" : "normal"
+}

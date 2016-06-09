@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "TorstenBergmann 3/4/2015 09:38",
+	"super" : "MongoOperation",
+	"category" : "Mongo-Core-Operations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"mongoQuery",
+		"dataBytes",
+		"flags"
+	],
+	"name" : "QueryOperation",
+	"type" : "normal"
+}

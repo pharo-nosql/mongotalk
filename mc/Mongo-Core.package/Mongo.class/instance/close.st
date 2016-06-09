@@ -1,0 +1,3 @@
+operations
+close
+	stream close

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "guest 2/12/2010 18:06",
+	"super" : "TestCase",
+	"category" : "",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoTestCase",
+	"type" : "normal"
+}

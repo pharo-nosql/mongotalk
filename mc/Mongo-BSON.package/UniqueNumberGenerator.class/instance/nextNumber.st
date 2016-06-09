@@ -1,0 +1,3 @@
+acccessing
+nextNumber 
+	^ self subclassResponsibility

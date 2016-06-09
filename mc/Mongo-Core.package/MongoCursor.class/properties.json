@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "TorstenBergmann 3/4/2015 09:39",
+	"super" : "Object",
+	"category" : "Mongo-Core-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"root",
+		"query",
+		"queryOperationFlags"
+	],
+	"name" : "MongoCursor",
+	"type" : "normal"
+}

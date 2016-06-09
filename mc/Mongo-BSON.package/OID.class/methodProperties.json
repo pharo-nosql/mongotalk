@@ -1,0 +1,24 @@
+{
+	"instance" : {
+		"value" : "guest 2/7/2010 19:08",
+		"printOn:" : "MartinDias 4/25/2016 19:20",
+		"initialize" : "HenrikSperreJohansen 5/30/2016 18:57",
+		"=" : "guest 2/7/2010 19:08",
+		"hash" : "NorbertHartl 5/11/2014 18:07",
+		"writeBSONOn:" : "guest 2/7/2010 19:08",
+		"setValue:" : "guest 2/7/2010 19:08",
+		"bsonTypeCode" : "NorbertHartl 5/11/2014 18:07",
+		"timeStamp" : "NorbertHartl 5/11/2014 18:10"
+	},
+	"class" : {
+		"shutDown:" : "NorbertHartl 5/11/2014 18:05",
+		"newMachineIdentifier" : "HenrikSperreJohansen 5/19/2015 12:40",
+		"value:" : "NorbertHartl 5/11/2014 17:57",
+		"initialize" : "HenrikSperreJohansen 5/19/2015 11:59",
+		"nextOID" : "NorbertHartl 5/11/2014 17:58",
+		"counterNext" : "HenrikSperreJohansen 5/31/2016 13:07",
+		"newCounter" : "HenrikSperreJohansen 5/30/2016 18:54",
+		"machineIdentifier" : "HenrikSperreJohansen 5/20/2015 18:42",
+		"reset" : "HenrikSperreJohansen 5/30/2016 18:54"
+	}
+}

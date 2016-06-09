@@ -1,0 +1,20 @@
+{
+	"instance" : {
+		"testNot" : "NicolasPetton 11/17/2012 13:59",
+		"testNestedQueries" : "NicolasPetton 11/17/2012 13:44",
+		"testAt" : "NicolasPetton 11/17/2012 13:23",
+		"tearDown" : "NicolasPetton 11/16/2012 14:04",
+		"testAndNot" : "NicolasPetton 11/17/2012 13:59",
+		"testDetect" : "NicolasPetton 11/16/2012 14:22",
+		"testType" : "NicolasPetton 11/17/2012 14:15",
+		"testWhere" : "NicolasPetton 11/17/2012 14:04",
+		"testSize" : "NicolasPetton 11/17/2012 14:17",
+		"testNor" : "NicolasPetton 11/17/2012 13:53",
+		"testOr" : "NicolasPetton 11/17/2012 13:04",
+		"testAnd" : "NicolasPetton 11/17/2012 13:04",
+		"testSelect" : "NicolasPetton 11/16/2012 14:06",
+		"testComparison" : "NicolasPetton 11/17/2012 13:17",
+		"setUp" : "NicolasPetton 11/16/2012 14:04"
+	},
+	"class" : { }
+}

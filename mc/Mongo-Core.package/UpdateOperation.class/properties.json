@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "TorstenBergmann 3/4/2015 09:38",
+	"super" : "MongoOperation",
+	"category" : "Mongo-Core-Operations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"originalObject",
+		"newObject",
+		"dataBytes",
+		"flags"
+	],
+	"name" : "UpdateOperation",
+	"type" : "normal"
+}

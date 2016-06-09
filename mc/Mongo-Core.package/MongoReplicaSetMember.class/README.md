@@ -1,0 +1,1 @@
+I represent a member of a Mongo Replica Set configuration. More concretely, I reify part of the result of config command (https://docs.mongodb.com/v3.0/reference/command/replSetGetConfig/)

@@ -1,0 +1,29 @@
+{
+	"instance" : {
+		"nextBytesPut:" : "guest 2/7/2010 19:08",
+		"contents" : "guest 2/7/2010 19:08",
+		"nextSizedStringPut:" : "KentBeck 2/9/2010 16:44",
+		"nextInt32Put:" : "guest 2/8/2010 22:12",
+		"nextInt32" : "KentBeck 2/9/2010 16:59",
+		"position" : "guest 2/7/2010 19:08",
+		"skip:" : "EstebanLorenzano 7/1/2012 13:08",
+		"null" : "guest 2/7/2010 19:08",
+		"nextByte" : "guest 2/7/2010 19:08",
+		"encode:" : "EstebanLorenzano 7/2/2012 12:32",
+		"nextBytePut:" : "guest 2/7/2010 19:08",
+		"nextString:" : "EstebanLorenzano 7/2/2012 15:01",
+		"nextInt64Put:" : "guest 2/8/2010 22:12",
+		"position:" : "guest 2/7/2010 19:08",
+		"setReader:" : "guest 2/7/2010 19:08",
+		"nextStringPut:" : "jvds 2/17/2012 13:58",
+		"nextBytes:" : "NicolasPetton 1/29/2012 16:17",
+		"nextEncodedStringPut:" : "KentBeck 2/9/2010 14:40",
+		"nextString" : "EstebanLorenzano 7/2/2012 14:57",
+		"flush" : "guest 2/7/2010 19:08",
+		"nextInt64" : "guest 2/7/2010 19:08",
+		"nextUInt32" : "jvds 2/17/2012 13:59"
+	},
+	"class" : {
+		"on:" : "guest 2/7/2010 19:08"
+	}
+}

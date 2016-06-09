@@ -1,0 +1,3 @@
+reading
+nextNil
+	^nil

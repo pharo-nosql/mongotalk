@@ -1,0 +1,1 @@
+A visitor to build queries

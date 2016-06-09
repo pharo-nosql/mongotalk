@@ -1,0 +1,3 @@
+reading
+nextKey
+	^stream nextString

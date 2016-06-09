@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "MongoTestCase",
+	"category" : "Mongo-Experimental",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"root",
+		"database",
+		"collection"
+	],
+	"name" : "SelectTest",
+	"type" : "normal"
+}

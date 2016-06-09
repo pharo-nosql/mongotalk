@@ -1,0 +1,3 @@
+factory
+newQuery
+	^ MQQuery new

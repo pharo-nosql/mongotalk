@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "TorstenBergmann 3/10/2015 20:38",
+	"super" : "Object",
+	"category" : "Mongo-Pharo-Tools-UI",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoBrowser",
+	"type" : "normal"
+}

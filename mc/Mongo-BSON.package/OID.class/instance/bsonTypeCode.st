@@ -1,0 +1,3 @@
+mongo
+bsonTypeCode
+	^ 7

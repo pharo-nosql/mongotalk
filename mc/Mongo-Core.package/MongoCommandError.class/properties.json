@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "MartinDias 5/16/2016 23:52",
+	"super" : "Error",
+	"category" : "Mongo-Core-Errors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"reply"
+	],
+	"name" : "MongoCommandError",
+	"type" : "normal"
+}

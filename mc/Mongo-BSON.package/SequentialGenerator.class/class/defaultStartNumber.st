@@ -1,0 +1,3 @@
+defaults
+defaultStartNumber
+	^ 0

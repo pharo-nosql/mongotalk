@@ -1,0 +1,3 @@
+instance creation
+newMongo
+	self subclassResponsibility

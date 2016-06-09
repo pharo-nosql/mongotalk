@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "jvds 2/17/2012 13:59",
+	"super" : "Object",
+	"category" : "Mongo-BSON-Base",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"stream"
+	],
+	"name" : "BSON",
+	"type" : "normal"
+}
