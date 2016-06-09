@@ -1,9 +1,9 @@
 tests
 testReplicaSet
-	"Follow comment in my superclass to set up the expected test mongo replica set."
-
 	| replicaSet |
-	self skip. "<-- Remove this skip if proper external set up"
+
+	"Follow my class comment to set up the expected mongodb replica set."
+	isMongoAvailable ifFalse: [ ^self skip ].
 
 	replicaSet := mongo replicaSet.
 
