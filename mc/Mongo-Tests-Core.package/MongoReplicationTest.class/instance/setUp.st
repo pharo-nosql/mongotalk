@@ -1,5 +1,8 @@
 running
 setUp
 	super setUp.
-	mongo := self newMongo.
-	mongo open.
+	
+	isMongoAvailable :=
+		[ mongo := self newMongo. mongo open. true ] 
+			on: NetworkError 
+			do: [ 	false ].
