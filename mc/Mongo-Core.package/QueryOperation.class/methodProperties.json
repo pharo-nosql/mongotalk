@@ -1,25 +1,22 @@
 {
+	"class" : {
+		"collection:id:stream:query:fields:returnCount:numberToSkip:" : "FrancoisStephany 11/6/2012 18:01",
+		"flagAwaitData" : "HolgerHansPeterFreyther 1/19/2016 15:59",
+		"flagExhaust" : "HolgerHansPeterFreyther 1/19/2016 15:59",
+		"flagNoCursorTimeout" : "HolgerHansPeterFreyther 1/19/2016 15:59",
+		"flagPartial" : "HolgerHansPeterFreyther 1/19/2016 15:59",
+		"flagReserved" : "HolgerHansPeterFreyther 1/19/2016 15:36",
+		"flagSlaveOk" : "HolgerHansPeterFreyther 1/19/2016 15:59",
+		"flagTailableCursor" : "HolgerHansPeterFreyther 1/19/2016 15:57",
+		"id:stream:query:" : "NicolasPetton 11/16/2012 11:13" },
 	"instance" : {
-		"opCode" : "KentBeck 2/16/2010 10:41",
-		"flags:" : "HolgerHansPeterFreyther 1/19/2016 15:02",
-		"fixedHeaderSize" : "KentBeck 2/16/2010 17:18",
-		"messageSize" : "KentBeck 2/16/2010 17:36",
 		"computeDataBytes" : "NicolasPetton 11/16/2012 11:23",
+		"dataBytes" : "KentBeck 2/16/2010 17:32",
+		"fixedHeaderSize" : "KentBeck 2/16/2010 17:18",
 		"flags" : "HolgerHansPeterFreyther 1/19/2016 15:00",
-		"writeBody" : "HolgerHansPeterFreyther 1/19/2016 15:00",
+		"flags:" : "HolgerHansPeterFreyther 1/19/2016 15:02",
+		"messageSize" : "KentBeck 2/16/2010 17:36",
 		"mongoQuery" : "FrancoisStephany 11/6/2012 18:01",
 		"mongoQuery:" : "FrancoisStephany 11/6/2012 18:01",
-		"dataBytes" : "KentBeck 2/16/2010 17:32"
-	},
-	"class" : {
-		"flagNoCursorTimeout" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"flagTailableCursor" : "HolgerHansPeterFreyther 1/19/2016 15:57",
-		"flagExhaust" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"flagAwaitData" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"flagPartial" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"collection:id:stream:query:fields:returnCount:numberToSkip:" : "FrancoisStephany 11/6/2012 18:01",
-		"flagSlaveOk" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"id:stream:query:" : "NicolasPetton 11/16/2012 11:13",
-		"flagReserved" : "HolgerHansPeterFreyther 1/19/2016 15:36"
-	}
-}
+		"opCode" : "KentBeck 2/16/2010 10:41",
+		"writeBody" : "HolgerHansPeterFreyther 1/19/2016 15:00" } }

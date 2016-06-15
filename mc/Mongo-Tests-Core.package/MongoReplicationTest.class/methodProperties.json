@@ -2,6 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
+		"addNewCollection" : "MartinDias 6/15/2016 12:18",
 		"newMongo" : "MartinDias 5/12/2016 01:40",
 		"setUp" : "MartinDias 6/9/2016 19:28",
 		"tearDown" : "MartinDias 6/9/2016 19:25" } }

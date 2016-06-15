@@ -1,11 +1,10 @@
 {
+	"class" : {
+		 },
 	"instance" : {
-		"testDatabaseAuthenticationSameUser" : "NorbertHartl 11/27/2013 10:21",
 		"setUp" : "NorbertHartl 4/1/2016 09:59",
-		"testDatabaseAuthenticationSameUserTwice" : "NorbertHartl 11/27/2013 10:17",
+		"testAuthenticationSucceeds" : "NorbertHartl 11/27/2013 10:14",
 		"testDatabaseAuthenticationDifferentUser" : "NorbertHartl 11/27/2013 10:21",
-		"testTwoDatabasesAuthenticationSameUser" : "NorbertHartl 11/27/2013 10:22",
-		"testAuthenticationSucceeds" : "NorbertHartl 11/27/2013 10:14"
-	},
-	"class" : { }
-}
+		"testDatabaseAuthenticationSameUser" : "NorbertHartl 11/27/2013 10:21",
+		"testDatabaseAuthenticationSameUserTwice" : "NorbertHartl 11/27/2013 10:17",
+		"testTwoDatabasesAuthenticationSameUser" : "NorbertHartl 11/27/2013 10:22" } }

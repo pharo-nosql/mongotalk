@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "TorstenBergmann 3/4/2015 09:38",
-	"super" : "MongoOperation",
 	"category" : "Mongo-Core-Operations",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "TorstenBergmann 3/4/2015 09:38",
 	"instvars" : [
 		"cursorId",
-		"returnCount"
-	],
+		"returnCount" ],
 	"name" : "GetMoreOperation",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "MongoOperation",
+	"type" : "normal" }

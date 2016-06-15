@@ -1,8 +1,7 @@
 {
+	"class" : {
+		 },
 	"instance" : {
+		"setUp" : "guest 2/11/2010 23:42",
 		"tearDown" : "guest 2/11/2010 23:42",
-		"testBasics" : "guest 2/11/2010 23:42",
-		"setUp" : "guest 2/11/2010 23:42"
-	},
-	"class" : { }
-}
+		"testBasics" : "guest 2/11/2010 23:42" } }

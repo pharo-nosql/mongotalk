@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "sebastiansastre 11/30/2012 13:13",
-	"super" : "DynamicVariable",
 	"category" : "Mongo-Core-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "sebastiansastre 11/30/2012 13:13",
+	"instvars" : [
+		 ],
 	"name" : "CurrentMongoDatabase",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "DynamicVariable",
+	"type" : "normal" }

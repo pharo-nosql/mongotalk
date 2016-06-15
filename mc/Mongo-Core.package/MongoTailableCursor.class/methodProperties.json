@@ -1,12 +1,11 @@
 {
+	"class" : {
+		 },
 	"instance" : {
 		"create" : "HolgerHansPeterFreyther 1/28/2016 17:31",
+		"cursorId" : "HolgerHansPeterFreyther 1/19/2016 17:59",
 		"next" : "HolgerHansPeterFreyther 1/20/2016 15:27",
 		"query:" : "HolgerHansPeterFreyther 1/19/2016 17:50",
-		"cursorId" : "HolgerHansPeterFreyther 1/19/2016 17:59",
-		"requestNext" : "HolgerHansPeterFreyther 1/20/2016 13:25",
 		"readNext" : "HolgerHansPeterFreyther 1/20/2016 20:37",
-		"root:" : "HolgerHansPeterFreyther 1/19/2016 17:50"
-	},
-	"class" : { }
-}
+		"requestNext" : "HolgerHansPeterFreyther 1/20/2016 13:25",
+		"root:" : "HolgerHansPeterFreyther 1/19/2016 17:50" } }

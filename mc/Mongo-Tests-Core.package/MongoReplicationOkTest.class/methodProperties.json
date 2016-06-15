@@ -2,6 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
-		"newMongo" : "MartinDias 6/9/2016 19:23",
+		"newMongo" : "MartinDias 6/15/2016 11:59",
 		"testReplicaSet" : "MartinDias 6/9/2016 19:28",
-		"testReplicaSetStatus" : "MartinDias 6/9/2016 19:28" } }
+		"testReplicaSetStatus" : "MartinDias 6/9/2016 19:28",
+		"testReplicaSetStepDown" : "MartinDias 6/15/2016 12:27" } }

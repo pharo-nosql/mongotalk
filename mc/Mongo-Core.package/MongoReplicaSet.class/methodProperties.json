@@ -1,12 +1,9 @@
 {
+	"class" : {
+		"with:" : "MartinDias 5/11/2016 02:16" },
 	"instance" : {
-		"printOn:" : "MartinDias 5/11/2016 02:14",
+		"config" : "MartinDias 5/11/2016 02:08",
 		"initialize:" : "MartinDias 5/11/2016 02:16",
 		"members" : "MartinDias 5/11/2016 02:11",
 		"name" : "MartinDias 5/11/2016 02:06",
-		"config" : "MartinDias 5/11/2016 02:08"
-	},
-	"class" : {
-		"with:" : "MartinDias 5/11/2016 02:16"
-	}
-}
+		"printOn:" : "MartinDias 5/11/2016 02:14" } }

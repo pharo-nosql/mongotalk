@@ -1,17 +1,14 @@
 {
+	"class" : {
+		"with:" : "MartinDias 5/11/2016 05:12" },
 	"instance" : {
 		"host" : "MartinDias 5/12/2016 02:00",
-		"port" : "MartinDias 5/12/2016 02:00",
-		"name" : "MartinDias 5/11/2016 05:14",
+		"initialize:" : "MartinDias 5/11/2016 05:13",
 		"isArbiterOnly" : "MartinDias 5/11/2016 05:13",
-		"stateString" : "MartinDias 5/11/2016 05:17",
+		"isPrimary" : "MartinDias 5/11/2016 05:18",
 		"isSecondary" : "MartinDias 5/11/2016 05:18",
+		"name" : "MartinDias 5/11/2016 05:14",
+		"port" : "MartinDias 5/12/2016 02:00",
 		"printOn:" : "MartinDias 5/11/2016 05:19",
 		"state" : "MartinDias 5/11/2016 05:18",
-		"initialize:" : "MartinDias 5/11/2016 05:13",
-		"isPrimary" : "MartinDias 5/11/2016 05:18"
-	},
-	"class" : {
-		"with:" : "MartinDias 5/11/2016 05:12"
-	}
-}
+		"stateString" : "MartinDias 5/11/2016 05:17" } }

@@ -1,18 +1,15 @@
 {
-	"instance" : {
-		"isNotMasterAndSlaveOkIsFalse" : "MartinDias 6/4/2016 02:29",
-		"code" : "MartinDias 6/4/2016 02:25",
-		"codeIfPresent:ifAbsent:" : "MartinDias 5/27/2016 19:58",
-		"isCollectionAlreadyExists" : "MartinDias 5/27/2016 20:02",
-		"reply" : "MartinDias 5/16/2016 23:55",
-		"isNotMaster" : "MartinDias 6/4/2016 02:29",
-		"errmsg" : "MartinDias 6/4/2016 02:25",
-		"messageText" : "MartinDias 5/17/2016 00:18",
-		"initialize:" : "MartinDias 5/16/2016 23:49",
-		"isNotRunningWithReplSet" : "MartinDias 6/6/2016 19:03"
-	},
 	"class" : {
 		"newFor:" : "MartinDias 5/17/2016 00:12",
-		"signalFor:" : "MartinDias 5/17/2016 00:13"
-	}
-}
+		"signalFor:" : "MartinDias 5/17/2016 00:13" },
+	"instance" : {
+		"code" : "MartinDias 6/4/2016 02:25",
+		"codeIfPresent:ifAbsent:" : "MartinDias 5/27/2016 19:58",
+		"errmsg" : "MartinDias 6/4/2016 02:25",
+		"initialize:" : "MartinDias 5/16/2016 23:49",
+		"isCollectionAlreadyExists" : "MartinDias 5/27/2016 20:02",
+		"isNotMaster" : "MartinDias 6/4/2016 02:29",
+		"isNotMasterAndSlaveOkIsFalse" : "MartinDias 6/4/2016 02:29",
+		"isNotRunningWithReplSet" : "MartinDias 6/6/2016 19:03",
+		"messageText" : "MartinDias 5/17/2016 00:18",
+		"reply" : "MartinDias 5/16/2016 23:55" } }
