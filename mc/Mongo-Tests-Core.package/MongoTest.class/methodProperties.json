@@ -31,4 +31,5 @@
 		"testSelect" : "FrancoisStephany 11/6/2012 15:54",
 		"testSelectWithLimit" : "FrancoisStephany 11/6/2012 15:40",
 		"testSelectWithLimitAndNumberToSkip" : "NicolasPetton 11/16/2012 11:22",
-		"testUpdateWithFlags" : "HolgerHansPeterFreyther 2/11/2016 16:11" } }
+		"testUpdateWithFlags" : "HolgerHansPeterFreyther 2/11/2016 16:11",
+		"testVersion" : "MartinDias 6/15/2016 19:22" } }
