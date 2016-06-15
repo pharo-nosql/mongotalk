@@ -3,7 +3,7 @@
 		 },
 	"instance" : {
 		"newMongo" : "MartinDias 5/12/2016 02:09",
-		"shouldSignalNotRunningWithReplSet:" : "MartinDias 6/15/2016 12:34",
+		"shouldSignalNotRunningWithReplSet:" : "MartinDias 6/15/2016 19:10",
 		"testReplicaSet" : "MartinDias 6/15/2016 12:38",
 		"testReplicaSetStatus" : "MartinDias 6/15/2016 12:38",
 		"testReplicaSetStepDown" : "MartinDias 6/15/2016 12:32" } }
