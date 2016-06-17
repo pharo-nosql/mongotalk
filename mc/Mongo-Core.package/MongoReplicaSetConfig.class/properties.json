@@ -7,7 +7,7 @@
 	"commentStamp" : "MartinDias 5/12/2016 01:30",
 	"instvars" : [
 		"configuration" ],
-	"name" : "MongoReplicaSet",
+	"name" : "MongoReplicaSetConfig",
 	"pools" : [
 		 ],
 	"super" : "Object",
