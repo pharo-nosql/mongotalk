@@ -1,0 +1,14 @@
+{
+	"category" : "Mongo-Core-Replication",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "MartinDias 5/12/2016 01:30",
+	"instvars" : [
+		"configuration" ],
+	"name" : "MongoReplicaSetConfig",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

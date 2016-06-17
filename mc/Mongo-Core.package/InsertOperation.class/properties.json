@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "TorstenBergmann 3/4/2015 09:38",
-	"super" : "MongoOperation",
 	"category" : "Mongo-Core-Collections",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "TorstenBergmann 3/4/2015 09:38",
 	"instvars" : [
 		"objects",
-		"dataBytes"
-	],
+		"dataBytes" ],
 	"name" : "InsertOperation",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "MongoOperation",
+	"type" : "normal" }

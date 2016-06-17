@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "MartinDias 5/12/2016 01:31",
-	"super" : "Object",
 	"category" : "Mongo-Core-Replication",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "MartinDias 5/12/2016 01:31",
 	"instvars" : [
-		"status"
-	],
+		"status" ],
 	"name" : "MongoReplicaSetStatus",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

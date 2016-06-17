@@ -1,12 +1,9 @@
 {
+	"class" : {
+		"collection:id:stream:cursorId:returnCount:" : "KentBeck 2/16/2010 12:45" },
 	"instance" : {
 		"fixedHeaderSize" : "KentBeck 2/16/2010 17:26",
-		"setCursorId:returnCount:" : "KentBeck 2/17/2010 11:15",
-		"opCode" : "KentBeck 2/16/2010 12:46",
 		"messageSize" : "KentBeck 2/16/2010 17:36",
-		"writeBody" : "KentBeck 2/16/2010 17:39"
-	},
-	"class" : {
-		"collection:id:stream:cursorId:returnCount:" : "KentBeck 2/16/2010 12:45"
-	}
-}
+		"opCode" : "KentBeck 2/16/2010 12:46",
+		"setCursorId:returnCount:" : "KentBeck 2/17/2010 11:15",
+		"writeBody" : "KentBeck 2/16/2010 17:39" } }

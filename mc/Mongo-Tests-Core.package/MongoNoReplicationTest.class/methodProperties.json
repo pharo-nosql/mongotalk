@@ -3,5 +3,7 @@
 		 },
 	"instance" : {
 		"newMongo" : "MartinDias 5/12/2016 02:09",
-		"testReplicaSet" : "MartinDias 5/17/2016 00:33",
-		"testReplicaSetStatus" : "MartinDias 5/17/2016 00:33" } }
+		"shouldSignalNotRunningWithReplSet:" : "MartinDias 6/15/2016 19:26",
+		"testReplicaSetConfig" : "MartinDias 6/17/2016 00:12",
+		"testReplicaSetStatus" : "MartinDias 6/15/2016 12:38",
+		"testReplicaSetStepDown" : "MartinDias 6/16/2016 23:51" } }

@@ -1,19 +1,18 @@
 {
-	"commentStamp" : "TorstenBergmann 3/4/2015 09:36",
-	"super" : "Object",
 	"category" : "Mongo-Core-Base",
-	"classinstvars" : [ ],
-	"pools" : [ ],
+	"classinstvars" : [
+		 ],
 	"classvars" : [
-		"Default"
-	],
+		"Default" ],
+	"commentStamp" : "TorstenBergmann 3/4/2015 09:36",
 	"instvars" : [
 		"host",
 		"port",
 		"stream",
 		"requestID",
-		"authCache"
-	],
+		"authCache" ],
 	"name" : "Mongo",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

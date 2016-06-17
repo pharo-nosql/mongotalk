@@ -1,0 +1,14 @@
+{
+	"category" : "Mongo-Tests-Core-Replication",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "MartinDias 6/17/2016 01:04",
+	"instvars" : [
+		 ],
+	"name" : "MongoReplicationTestResources",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
