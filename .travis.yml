@@ -1,8 +1,6 @@
 language: smalltalk
 sudo: false
 
-before_script:
-  - mongo --eval "rs.config()"
 os:
   - linux
 #  - osx
