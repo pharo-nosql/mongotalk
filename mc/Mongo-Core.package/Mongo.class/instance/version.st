@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 version
 	"Get the mongodb instance vrsion. The result is obtained via `buildInfo` command. 
 	See more: https://docs.mongodb.com/manual/reference/command/buildInfo/"
