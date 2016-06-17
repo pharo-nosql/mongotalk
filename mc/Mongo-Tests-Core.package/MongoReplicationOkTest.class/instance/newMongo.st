@@ -1,4 +1,4 @@
 instance creation
 newMongo
 
-	^ MongoReplicationTestResources newMongoA
+	^Mongo host: 'localhost' port: 27031

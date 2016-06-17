@@ -1,4 +1,4 @@
 running
 tearDown
 	super tearDown.
-	mongo isOpen ifTrue: [mongo close].
+	(mongo isNotNil and: [mongo isOpen]) ifTrue: [mongo close].

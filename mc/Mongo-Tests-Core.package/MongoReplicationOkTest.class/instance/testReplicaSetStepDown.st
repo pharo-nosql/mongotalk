@@ -14,6 +14,6 @@ testReplicaSetStepDown
 			do: [ :error | 
 				self assert: error isNotMaster ].
 			
-	15 seconds wait.
+	20 seconds wait.
 	
 	self addNewCollection. "It should be primary again"
