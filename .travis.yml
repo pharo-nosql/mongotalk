@@ -6,8 +6,6 @@ os:
 #  - osx
 services: 
   - mongodb
-before_script:
-  - mongo --version
 smalltalk:
   - Pharo-5.0
   - Pharo-4.0
