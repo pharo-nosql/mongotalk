@@ -4,11 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "MartinDias 6/16/2016 21:06",
+	"commentStamp" : "MartinDias 6/15/2016 15:02",
 	"instvars" : [
 		 ],
-	"name" : "MongoReplicationOkTest",
+	"name" : "MongoReplicationTestResources",
 	"pools" : [
 		 ],
-	"super" : "MongoReplicationTest",
+	"super" : "TestCase",
 	"type" : "normal" }

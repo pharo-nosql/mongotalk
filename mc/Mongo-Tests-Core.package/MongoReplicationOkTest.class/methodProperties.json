@@ -2,7 +2,8 @@
 	"class" : {
 		 },
 	"instance" : {
-		"newMongo" : "MartinDias 6/15/2016 11:59",
-		"testReplicaSetConfig" : "MartinDias 6/17/2016 00:12",
-		"testReplicaSetStatus" : "MartinDias 6/9/2016 19:28",
-		"testReplicaSetStepDown" : "MartinDias 6/15/2016 12:27" } }
+		"_manual_set_up_" : "MartinDias 6/16/2016 21:05",
+		"newMongo" : "MartinDias 6/16/2016 22:48",
+		"testReplicaSetConfig" : "MartinDias 6/17/2016 00:38",
+		"testReplicaSetStatus" : "MartinDias 6/16/2016 22:54",
+		"testReplicaSetStepDown" : "MartinDias 6/16/2016 22:54" } }
