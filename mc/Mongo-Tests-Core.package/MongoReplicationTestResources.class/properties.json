@@ -1,7 +1,7 @@
 {
 	"category" : "Mongo-Tests-Core-Replication",
 	"classinstvars" : [
-		 ],
+		"isTestScenarioAvailable" ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "MartinDias 6/17/2016 01:04",

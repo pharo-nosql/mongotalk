@@ -1,0 +1,14 @@
+{
+	"category" : "Mongo-Core-Errors",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "MartinDias 6/24/2016 19:12",
+	"instvars" : [
+		"reply" ],
+	"name" : "MongoLastError",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

@@ -1,0 +1,3 @@
+accessing
+resetIsTestScenarioAvailable
+	isTestScenarioAvailable := nil
