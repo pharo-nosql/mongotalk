@@ -1,0 +1,13 @@
+{
+	"class" : {
+		"newFor:" : "MartinDias 6/24/2016 21:00",
+		"signalFor:" : "MartinDias 6/24/2016 21:00" },
+	"instance" : {
+		"code" : "MartinDias 6/24/2016 21:00",
+		"codeIfPresent:ifAbsent:" : "MartinDias 6/24/2016 21:00",
+		"err" : "MartinDias 6/24/2016 21:00",
+		"errorMessage" : "MartinDias 6/24/2016 21:01",
+		"initialize:" : "MartinDias 6/24/2016 21:00",
+		"isNotMasterAndSlaveOkIsFalse" : "MartinDias 6/24/2016 21:00",
+		"messageText" : "MartinDias 6/24/2016 21:02",
+		"reply" : "MartinDias 6/24/2016 21:00" } }

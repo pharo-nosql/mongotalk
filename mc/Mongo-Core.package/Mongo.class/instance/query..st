@@ -5,4 +5,6 @@ query: aMongoQuery
 	aMongoQuery doBlock isNil ifTrue: [
 		aMongoQuery doBlock: [:each | results add: each]].
 	(MongoCursor root: self query: aMongoQuery ) execute.
-	^results
+	(results isNotEmpty and: [ results first includesKey: '$err' ])
+		ifTrue: [ ^ MongoQueryError signalFor: results first ].
+	^ results
