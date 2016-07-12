@@ -1,0 +1,14 @@
+{
+	"class" : {
+		"newFor:" : "MartinDias 6/24/2016 19:37" },
+	"instance" : {
+		"code" : "MartinDias 6/24/2016 19:29",
+		"codeIfPresent:ifAbsent:" : "MartinDias 6/24/2016 19:47",
+		"err" : "MartinDias 6/24/2016 19:32",
+		"errorMessage" : "MartinDias 6/24/2016 19:37",
+		"initialize:" : "MartinDias 6/24/2016 19:38",
+		"isNotMaster" : "MartinDias 6/24/2016 19:49",
+		"isNotPrimary" : "MartinDias 6/24/2016 19:49",
+		"n" : "MartinDias 6/24/2016 19:33",
+		"numberOfMatchedDocuments" : "MartinDias 6/24/2016 19:34",
+		"ok" : "MartinDias 6/24/2016 19:45" } }
