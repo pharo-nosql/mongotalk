@@ -4,10 +4,16 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 $DIR/rs-checkEnvirnomentVariables.sh
 
+# wait mongos are ready
+for i in `seq 1 3`;
+do
+	until nc -z localhost 2703$i ; do echo "waiting for mongo 2703$i"; sleep 1; done
+done
 
+# set up mongo A
 mongo --port 27031 --eval 'rs.initiate({ "_id" : '\"${replicaSetName}\"', "members" : [ { "_id" : 1, "host" : "localhost:27031", } ], })'
 
-# add secondaries
+# add mongo B and C
 mongo --port 27031 --eval 'rs.add("localhost:27032")'
 mongo --port 27031 --eval 'rs.add("localhost:27033")'
 
