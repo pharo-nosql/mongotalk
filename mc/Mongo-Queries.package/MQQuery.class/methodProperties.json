@@ -1,10 +1,9 @@
 {
+	"class" : {
+		 },
 	"instance" : {
-		"at:" : "NicolasPetton 11/16/2012 13:16",
-		"doesNotUnderstand:" : "NicolasPetton 11/16/2012 13:15",
-		"fieldNamed:" : "NicolasPetton 11/16/2012 13:16",
-		"name" : "NicolasPetton 11/16/2012 13:15",
-		"where:" : "NicolasPetton 11/17/2012 14:03"
-	},
-	"class" : { }
-}
+		"at:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"doesNotUnderstand:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"fieldNamed:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"name" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"where:" : "EstebanLorenzano 6/9/2016 13:29:49" } }

@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "TorstenBergmann 3/4/2015 10:42",
-	"super" : "MQNode",
 	"category" : "Mongo-Queries-Nodes-Conditions",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "TorstenBergmann 3/4/2015 10:42",
+	"instvars" : [
+		 ],
 	"name" : "MQCondition",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "MQNode",
+	"type" : "normal" }

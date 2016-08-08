@@ -1,9 +1,8 @@
 {
+	"class" : {
+		 },
 	"instance" : {
-		"not" : "NicolasPetton 11/16/2012 15:46",
-		"mqAccept:" : "NicolasPetton 11/16/2012 13:34",
-		"&" : "NicolasPetton 11/16/2012 13:49",
-		"|" : "NicolasPetton 11/16/2012 15:42"
-	},
-	"class" : { }
-}
+		"&" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"mqAccept:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"not" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"|" : "EstebanLorenzano 6/9/2016 13:29:49" } }

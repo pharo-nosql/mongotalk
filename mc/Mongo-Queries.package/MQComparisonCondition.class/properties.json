@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "TorstenBergmann 3/4/2015 10:38",
-	"super" : "MQCondition",
 	"category" : "Mongo-Queries-Nodes-Conditions",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "TorstenBergmann 3/4/2015 10:38",
 	"instvars" : [
 		"left",
-		"right"
-	],
+		"right" ],
 	"name" : "MQComparisonCondition",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "MQCondition",
+	"type" : "normal" }

@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "TorstenBergmann 3/4/2015 10:43",
-	"super" : "MQVisitor",
 	"category" : "Mongo-Queries-Utilities",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "TorstenBergmann 3/4/2015 10:43",
+	"instvars" : [
+		 ],
 	"name" : "MQMongoQueryGenerator",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "MQVisitor",
+	"type" : "normal" }

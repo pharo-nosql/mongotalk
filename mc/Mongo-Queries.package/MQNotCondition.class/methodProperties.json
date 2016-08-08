@@ -1,11 +1,8 @@
 {
-	"instance" : {
-		"condition" : "NicolasPetton 11/16/2012 15:44",
-		"condition:" : "NicolasPetton 11/16/2012 15:44",
-		"label" : "NicolasPetton 11/16/2012 15:43",
-		"mqAccept:" : "NicolasPetton 11/16/2012 15:46"
-	},
 	"class" : {
-		"condition:" : "NicolasPetton 11/16/2012 15:44"
-	}
-}
+		"condition:" : "EstebanLorenzano 6/9/2016 13:29:49" },
+	"instance" : {
+		"condition" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"condition:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"label" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"mqAccept:" : "EstebanLorenzano 6/9/2016 13:29:49" } }

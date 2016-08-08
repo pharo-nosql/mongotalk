@@ -1,10 +1,7 @@
 {
-	"instance" : {
-		"newGenerator" : "NicolasPetton 11/16/2012 13:32",
-		"newQuery" : "NicolasPetton 11/16/2012 13:17",
-		"buildQueryFor:" : "NicolasPetton 11/16/2012 13:46"
-	},
 	"class" : {
-		"queryFor:" : "NicolasPetton 11/16/2012 13:05"
-	}
-}
+		"queryFor:" : "EstebanLorenzano 6/9/2016 13:29:49" },
+	"instance" : {
+		"buildQueryFor:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"newGenerator" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"newQuery" : "EstebanLorenzano 6/9/2016 13:29:49" } }

@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "TorstenBergmann 3/4/2015 10:34",
-	"super" : "Error",
 	"category" : "Mongo-Queries-Exceptions",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "TorstenBergmann 3/4/2015 10:34",
+	"instvars" : [
+		 ],
 	"name" : "MQQueryError",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Error",
+	"type" : "normal" }
