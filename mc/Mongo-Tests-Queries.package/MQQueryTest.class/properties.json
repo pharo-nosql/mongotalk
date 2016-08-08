@@ -1,15 +1,16 @@
 {
-	"commentStamp" : "TorstenBergmann 3/4/2015 10:47",
-	"super" : "TestCase",
 	"category" : "Mongo-Tests-Queries-Base",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "TorstenBergmann 3/4/2015 10:47",
 	"instvars" : [
 		"collection",
 		"root",
-		"database"
-	],
+		"database" ],
 	"name" : "MQQueryTest",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
