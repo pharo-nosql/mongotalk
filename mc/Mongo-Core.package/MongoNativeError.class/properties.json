@@ -4,11 +4,11 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "MartinDias 6/24/2016 19:12",
+	"commentStamp" : "MartinDias 8/10/2016 16:15",
 	"instvars" : [
-		 ],
-	"name" : "MongoLastError",
+		"reply" ],
+	"name" : "MongoNativeError",
 	"pools" : [
 		 ],
-	"super" : "MongoNativeError",
+	"super" : "Error",
 	"type" : "normal" }
