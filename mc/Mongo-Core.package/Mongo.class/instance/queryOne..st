@@ -9,4 +9,3 @@ queryOne: aMongoQuery
 		root: self;
 		query: aMongoQuery;
 		execute).
-	^nil
