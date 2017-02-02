@@ -4,10 +4,10 @@
 		 ],
 	"classvars" : [
 		 ],
-	"commentStamp" : "TorstenBergmann 3/4/2015 10:40",
+	"commentStamp" : "HolgerHansPeterFreyther 8/8/2016 21:00",
 	"instvars" : [
 		 ],
-	"name" : "MQSizeCondition",
+	"name" : "MQRegexCondition",
 	"pools" : [
 		 ],
 	"super" : "MQComparisonCondition",

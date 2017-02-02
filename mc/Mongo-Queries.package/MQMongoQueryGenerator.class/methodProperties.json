@@ -1,13 +1,12 @@
 {
+	"class" : {
+		 },
 	"instance" : {
-		"visitInCondition:" : "NicolasPetton 11/16/2012 15:27",
-		"visitEqualCondition:" : "NicolasPetton 11/16/2012 13:46",
-		"visitNotCondition:" : "NicolasPetton 11/17/2012 13:11",
-		"visitWhereCondition:" : "NicolasPetton 11/16/2012 15:49",
-		"visitObject:" : "NicolasPetton 11/16/2012 13:33",
-		"visitField:" : "NicolasPetton 11/16/2012 13:34",
-		"visitComparisonCondition:" : "NicolasPetton 11/16/2012 15:46",
-		"visitLogicalCondition:" : "NicolasPetton 11/16/2012 13:47"
-	},
-	"class" : { }
-}
+		"visitComparisonCondition:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"visitEqualCondition:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"visitField:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"visitInCondition:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"visitLogicalCondition:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"visitNotCondition:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"visitObject:" : "EstebanLorenzano 6/9/2016 13:29:49",
+		"visitWhereCondition:" : "EstebanLorenzano 6/9/2016 13:29:49" } }
