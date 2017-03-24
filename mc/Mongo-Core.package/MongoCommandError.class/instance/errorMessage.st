@@ -1,3 +1,3 @@
 accessing
-messageText
+errorMessage
 	^ reply at: 'errmsg' ifAbsent: 'unknown'

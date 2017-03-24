@@ -6,9 +6,9 @@
 		 ],
 	"commentStamp" : "MartinDias 5/16/2016 23:52",
 	"instvars" : [
-		"reply" ],
+		 ],
 	"name" : "MongoCommandError",
 	"pools" : [
 		 ],
-	"super" : "Error",
+	"super" : "MongoNativeError",
 	"type" : "normal" }
