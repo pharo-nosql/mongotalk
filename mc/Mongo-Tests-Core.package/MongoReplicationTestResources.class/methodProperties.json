@@ -1,15 +1,18 @@
 {
-	"class" : {
-		"allMongoUrls" : "MartinDias 6/16/2016 22:31",
-		"cleanUp:" : "MartinDias 6/16/2016 22:31",
-		"databaseName" : "MartinDias 6/16/2016 22:31",
-		"isTestScenarioAvailable" : "MartinDias 6/24/2016 18:02",
-		"mongoUrlA" : "MartinDias 6/16/2016 22:31",
-		"mongoUrlB" : "MartinDias 6/16/2016 22:31",
-		"mongoUrlC" : "MartinDias 6/16/2016 22:31",
-		"mongoUrlOffline" : "MartinDias 6/16/2016 22:31",
-		"newMongoA" : "MartinDias 6/16/2016 22:48",
-		"resetIsTestScenarioAvailable" : "MartinDias 6/24/2016 18:04",
-		"stepDownA:" : "MartinDias 6/16/2016 22:41" },
 	"instance" : {
-		"_manual_set_up_" : "MartinDias 6/16/2016 22:43" } }
+		"_manual_set_up_" : "tinchodias 6/24/2016 20:04:10"
+	},
+	"class" : {
+		"mongoUrlA" : "tinchodias 6/24/2016 20:04:10",
+		"cleanUp:" : "tinchodias 6/24/2016 20:04:10",
+		"allMongoUrls" : "tinchodias 6/24/2016 20:04:10",
+		"resetIsTestScenarioAvailable" : "tinchodias 6/24/2016 20:04:10",
+		"mongoUrlC" : "tinchodias 6/24/2016 20:04:10",
+		"databaseName" : "tinchodias 6/24/2016 20:04:10",
+		"mongoUrlB" : "tinchodias 6/24/2016 20:04:10",
+		"isTestScenarioAvailable" : "tinchodias 6/24/2016 20:04:10",
+		"mongoUrlOffline" : "tinchodias 6/24/2016 20:04:10",
+		"newMongoA" : "tinchodias 6/24/2016 20:04:10",
+		"stepDownA:" : "tinchodias 6/24/2016 20:04:10"
+	}
+}

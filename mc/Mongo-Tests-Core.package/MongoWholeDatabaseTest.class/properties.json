@@ -1,14 +1,11 @@
 {
-	"category" : "Mongo-Tests-Core-Tests",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "MongoWholeDatabaseTest",
-	"pools" : [
-		 ],
 	"super" : "MongoTest",
-	"type" : "normal" }
+	"category" : "Mongo-Tests-Core-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoWholeDatabaseTest",
+	"type" : "normal"
+}
