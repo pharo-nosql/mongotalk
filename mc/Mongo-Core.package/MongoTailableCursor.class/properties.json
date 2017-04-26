@@ -1,16 +1,15 @@
 {
-	"category" : "Mongo-Core-Utilities",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "HolgerHansPeterFreyther 1/19/2016 17:49",
+	"super" : "Object",
+	"category" : "Mongo-Core-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"root",
 		"query",
-		"cursorId" ],
+		"cursorId"
+	],
 	"name" : "MongoTailableCursor",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

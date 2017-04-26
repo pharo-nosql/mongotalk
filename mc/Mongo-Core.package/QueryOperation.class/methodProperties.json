@@ -1,22 +1,25 @@
 {
-	"class" : {
-		"collection:id:stream:query:fields:returnCount:numberToSkip:" : "FrancoisStephany 11/6/2012 18:01",
-		"flagAwaitData" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"flagExhaust" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"flagNoCursorTimeout" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"flagPartial" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"flagReserved" : "HolgerHansPeterFreyther 1/19/2016 15:36",
-		"flagSlaveOk" : "HolgerHansPeterFreyther 1/19/2016 15:59",
-		"flagTailableCursor" : "HolgerHansPeterFreyther 1/19/2016 15:57",
-		"id:stream:query:" : "NicolasPetton 11/16/2012 11:13" },
 	"instance" : {
-		"computeDataBytes" : "NicolasPetton 11/16/2012 11:23",
-		"dataBytes" : "KentBeck 2/16/2010 17:32",
-		"fixedHeaderSize" : "KentBeck 2/16/2010 17:18",
-		"flags" : "HolgerHansPeterFreyther 1/19/2016 15:00",
-		"flags:" : "HolgerHansPeterFreyther 1/19/2016 15:02",
-		"messageSize" : "KentBeck 2/16/2010 17:36",
-		"mongoQuery" : "FrancoisStephany 11/6/2012 18:01",
-		"mongoQuery:" : "FrancoisStephany 11/6/2012 18:01",
-		"opCode" : "KentBeck 2/16/2010 10:41",
-		"writeBody" : "HolgerHansPeterFreyther 1/19/2016 15:00" } }
+		"opCode" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flags:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"fixedHeaderSize" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"messageSize" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"computeDataBytes" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flags" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"writeBody" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"mongoQuery" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"mongoQuery:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"dataBytes" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"flagNoCursorTimeout" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flagTailableCursor" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flagExhaust" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flagAwaitData" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flagPartial" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"collection:id:stream:query:fields:returnCount:numberToSkip:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flagSlaveOk" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"id:stream:query:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flagReserved" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}

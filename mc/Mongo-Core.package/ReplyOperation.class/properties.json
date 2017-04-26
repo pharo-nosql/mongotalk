@@ -1,19 +1,18 @@
 {
-	"category" : "Mongo-Core-Operations",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "TorstenBergmann 3/4/2015 09:38",
+	"super" : "Object",
+	"category" : "Mongo-Core-Operations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"stream",
 		"cursorId",
 		"startingFrom",
 		"returnCount",
 		"responseTo",
-		"id" ],
+		"id"
+	],
 	"name" : "ReplyOperation",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

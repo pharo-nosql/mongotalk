@@ -1,13 +1,16 @@
 {
-	"class" : {
-		"newFor:" : "MartinDias 6/24/2016 21:00",
-		"signalFor:" : "MartinDias 6/24/2016 21:00" },
 	"instance" : {
-		"code" : "MartinDias 6/24/2016 21:00",
-		"codeIfPresent:ifAbsent:" : "MartinDias 6/24/2016 21:00",
-		"err" : "MartinDias 6/24/2016 21:00",
-		"errorMessage" : "MartinDias 6/24/2016 21:01",
-		"initialize:" : "MartinDias 6/24/2016 21:00",
-		"isNotMasterAndSlaveOkIsFalse" : "MartinDias 6/24/2016 21:00",
-		"messageText" : "MartinDias 6/24/2016 21:02",
-		"reply" : "MartinDias 6/24/2016 21:00" } }
+		"err" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"errorMessage" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"code" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"isNotMasterAndSlaveOkIsFalse" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"codeIfPresent:ifAbsent:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"initialize:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"reply" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"messageText" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"newFor:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"signalFor:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}

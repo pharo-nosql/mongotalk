@@ -1,14 +1,13 @@
 {
-	"category" : "Mongo-Core-Errors",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "MartinDias 5/16/2016 23:52",
-	"instvars" : [
-		"reply" ],
-	"name" : "MongoCommandError",
-	"pools" : [
-		 ],
 	"super" : "Error",
-	"type" : "normal" }
+	"category" : "Mongo-Core-Errors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"reply"
+	],
+	"name" : "MongoCommandError",
+	"type" : "normal"
+}

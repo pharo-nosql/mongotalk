@@ -1,9 +1,12 @@
 {
-	"class" : {
-		"with:" : "MartinDias 5/11/2016 05:04" },
 	"instance" : {
-		"initialize:" : "MartinDias 5/11/2016 05:08",
-		"members" : "MartinDias 5/11/2016 05:20",
-		"name" : "MartinDias 5/12/2016 02:02",
-		"primaryMember" : "MartinDias 5/11/2016 05:21",
-		"printOn:" : "MartinDias 5/11/2016 05:04" } }
+		"printOn:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"initialize:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"members" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"primaryMember" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"name" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"with:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}
