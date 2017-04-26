@@ -1,11 +1,14 @@
 {
-	"class" : {
-		"with:" : "MartinDias 5/11/2016 02:16" },
 	"instance" : {
-		"initialize:" : "MartinDias 5/11/2016 02:16",
-		"isArbiterOnly" : "MartinDias 5/12/2016 01:56",
-		"name" : "MartinDias 5/12/2016 01:58",
-		"printOn:" : "MartinDias 5/12/2016 02:37",
-		"priority" : "MartinDias 5/12/2016 01:54",
-		"tags" : "MartinDias 5/11/2016 02:10",
-		"votes" : "MartinDias 5/11/2016 02:10" } }
+		"votes" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"printOn:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"initialize:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"priority" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"name" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"tags" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"isArbiterOnly" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"with:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}

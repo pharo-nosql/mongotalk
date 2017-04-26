@@ -1,11 +1,14 @@
 {
-	"class" : {
-		"collection:id:stream:objects:" : "KentBeck 2/16/2010 12:22" },
 	"instance" : {
-		"computeDataBytes" : "KentBeck 2/16/2010 17:22",
-		"dataBytes" : "KentBeck 2/16/2010 17:31",
-		"fixedHeaderSize" : "KentBeck 2/16/2010 17:18",
-		"messageSize" : "KentBeck 2/16/2010 17:35",
-		"opCode" : "KentBeck 2/16/2010 11:39",
-		"setObjects:" : "KentBeck 2/16/2010 11:38",
-		"writeBody" : "KentBeck 2/16/2010 17:39" } }
+		"writeBody" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"fixedHeaderSize" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"dataBytes" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"opCode" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"messageSize" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"computeDataBytes" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"setObjects:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"collection:id:stream:objects:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}

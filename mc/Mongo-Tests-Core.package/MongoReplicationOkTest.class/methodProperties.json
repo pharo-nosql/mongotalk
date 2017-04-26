@@ -1,9 +1,10 @@
 {
-	"class" : {
-		 },
 	"instance" : {
-		"_manual_set_up_" : "MartinDias 6/16/2016 21:05",
-		"newMongo" : "MartinDias 6/17/2016 01:10",
-		"testReplicaSetConfig" : "MartinDias 6/17/2016 00:38",
-		"testReplicaSetStatus" : "MartinDias 6/16/2016 22:54",
-		"testReplicaSetStepDown" : "MartinDias 6/17/2016 01:15" } }
+		"testReplicaSetStatus" : "tinchodias 6/24/2016 20:04:10",
+		"testReplicaSetConfig" : "tinchodias 6/24/2016 20:04:10",
+		"_manual_set_up_" : "tinchodias 6/24/2016 20:04:10",
+		"testReplicaSetStepDown" : "tinchodias 6/24/2016 20:04:10",
+		"newMongo" : "tinchodias 6/24/2016 20:04:10"
+	},
+	"class" : { }
+}

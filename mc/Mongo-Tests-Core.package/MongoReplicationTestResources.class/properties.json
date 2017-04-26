@@ -1,14 +1,13 @@
 {
+	"commentStamp" : "MartinDias 6/17/2016 01:04",
+	"super" : "Object",
 	"category" : "Mongo-Tests-Core-Replication",
 	"classinstvars" : [
-		"isTestScenarioAvailable" ],
-	"classvars" : [
-		 ],
-	"commentStamp" : "MartinDias 6/17/2016 01:04",
-	"instvars" : [
-		 ],
+		"isTestScenarioAvailable"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
 	"name" : "MongoReplicationTestResources",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

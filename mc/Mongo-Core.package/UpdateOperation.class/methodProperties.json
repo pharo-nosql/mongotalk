@@ -1,16 +1,19 @@
 {
-	"class" : {
-		"collection:id:stream:originalObject:newObject:" : "EstebanLorenzano 9/23/2011 23:17",
-		"flagMultiUpdate" : "HolgerHansPeterFreyther 2/11/2016 10:19",
-		"flagUpsert" : "HolgerHansPeterFreyther 2/11/2016 10:19" },
 	"instance" : {
-		"computeDataBytes" : "EstebanLorenzano 9/23/2011 23:34",
-		"dataBytes" : "EstebanLorenzano 9/23/2011 23:14",
-		"fixedHeaderSize" : "EstebanLorenzano 9/23/2011 23:40",
-		"flags" : "HolgerHansPeterFreyther 2/11/2016 10:16",
-		"flags:" : "HolgerHansPeterFreyther 2/11/2016 10:16",
-		"messageSize" : "EstebanLorenzano 9/23/2011 23:14",
-		"newObject:" : "EstebanLorenzano 9/23/2011 23:15",
-		"opCode" : "EstebanLorenzano 9/23/2011 23:26",
-		"originalObject:" : "EstebanLorenzano 9/23/2011 23:15",
-		"writeBody" : "HolgerHansPeterFreyther 2/11/2016 10:19" } }
+		"opCode" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flags:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"fixedHeaderSize" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"messageSize" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"computeDataBytes" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flags" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"originalObject:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"writeBody" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"dataBytes" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"newObject:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"flagMultiUpdate" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"collection:id:stream:originalObject:newObject:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flagUpsert" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}

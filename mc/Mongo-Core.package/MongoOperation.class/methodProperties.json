@@ -1,8 +1,11 @@
 {
-	"class" : {
-		"collection:id:stream:" : "KentBeck 2/16/2010 11:36" },
 	"instance" : {
-		"flush" : "KentBeck 2/16/2010 17:41",
-		"setCollection:id:stream:" : "KentBeck 2/16/2010 17:15",
-		"write" : "KentBeck 2/16/2010 17:41",
-		"writeHeader" : "KentBeck 2/16/2010 17:42" } }
+		"writeHeader" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"setCollection:id:stream:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"write" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"flush" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"collection:id:stream:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}
