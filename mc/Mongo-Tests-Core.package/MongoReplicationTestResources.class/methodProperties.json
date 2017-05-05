@@ -4,11 +4,11 @@
 	},
 	"class" : {
 		"mongoUrlA" : "tinchodias 6/24/2016 20:04:10",
-		"cleanUp:" : "tinchodias 6/24/2016 20:04:10",
-		"allMongoUrls" : "tinchodias 6/24/2016 20:04:10",
 		"resetIsTestScenarioAvailable" : "tinchodias 6/24/2016 20:04:10",
+		"allMongoUrls" : "tinchodias 6/24/2016 20:04:10",
 		"mongoUrlC" : "tinchodias 6/24/2016 20:04:10",
 		"databaseName" : "tinchodias 6/24/2016 20:04:10",
+		"cleanUpRepository:" : "HolgerHansPeterFreyther 5/5/2017 14:15",
 		"mongoUrlB" : "tinchodias 6/24/2016 20:04:10",
 		"isTestScenarioAvailable" : "tinchodias 6/24/2016 20:04:10",
 		"mongoUrlOffline" : "tinchodias 6/24/2016 20:04:10",
