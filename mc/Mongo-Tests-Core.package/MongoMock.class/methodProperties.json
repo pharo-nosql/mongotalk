@@ -1,9 +1,10 @@
 {
-	"class" : {
-		 },
 	"instance" : {
-		"authCalls" : "NorbertHartl 11/27/2013 10:15",
-		"authShouldFail" : "NorbertHartl 11/27/2013 10:11",
-		"authenticateUsername:password:database:" : "NorbertHartl 11/27/2013 10:15",
-		"initialize" : "NorbertHartl 11/27/2013 10:15",
-		"reset" : "NorbertHartl 3/30/2016 09:55" } }
+		"authCalls" : "tinchodias 6/24/2016 20:04:10",
+		"authenticateUsername:password:database:" : "tinchodias 6/24/2016 20:04:10",
+		"initialize" : "tinchodias 6/24/2016 20:04:10",
+		"reset" : "tinchodias 6/24/2016 20:04:10",
+		"authShouldFail" : "tinchodias 6/24/2016 20:04:10"
+	},
+	"class" : { }
+}

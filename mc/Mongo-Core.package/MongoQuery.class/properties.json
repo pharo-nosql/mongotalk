@@ -1,10 +1,10 @@
 {
-	"category" : "Mongo-Core-Base",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "TorstenBergmann 3/4/2015 09:38",
+	"super" : "Object",
+	"category" : "Mongo-Core-Base",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"database",
 		"where",
@@ -15,9 +15,8 @@
 		"chunkSize",
 		"doBlock",
 		"collection",
-		"flags" ],
+		"flags"
+	],
 	"name" : "MongoQuery",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

@@ -1,14 +1,13 @@
 {
-	"category" : "Mongo-Core-Errors",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"collectionName" ],
-	"name" : "MongoCollectionAlreadyExists",
-	"pools" : [
-		 ],
 	"super" : "Error",
-	"type" : "normal" }
+	"category" : "Mongo-Core-Errors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"collectionName"
+	],
+	"name" : "MongoCollectionAlreadyExists",
+	"type" : "normal"
+}

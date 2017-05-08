@@ -1,14 +1,18 @@
 {
-	"class" : {
-		"newFor:" : "MartinDias 6/24/2016 19:37" },
 	"instance" : {
-		"code" : "MartinDias 6/24/2016 19:29",
-		"codeIfPresent:ifAbsent:" : "MartinDias 6/24/2016 19:47",
-		"err" : "MartinDias 6/24/2016 19:32",
-		"errorMessage" : "MartinDias 6/24/2016 19:37",
-		"initialize:" : "MartinDias 6/24/2016 19:38",
-		"isNotMaster" : "MartinDias 6/24/2016 19:49",
-		"isNotPrimary" : "MartinDias 6/24/2016 19:49",
-		"n" : "MartinDias 6/24/2016 19:33",
-		"numberOfMatchedDocuments" : "MartinDias 6/24/2016 19:34",
-		"ok" : "MartinDias 6/24/2016 19:45" } }
+		"isInsertionError" : "HolgerHansPeterFreyther 5/5/2017 23:02",
+		"numberOfMatchedDocuments" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"code" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"codeIfPresent:ifAbsent:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"ok" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"n" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"isNotMaster" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"err" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"initialize:" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"isNotPrimary" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"errorMessage" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"newFor:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}

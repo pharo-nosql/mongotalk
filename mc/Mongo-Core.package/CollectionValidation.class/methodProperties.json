@@ -1,6 +1,9 @@
 {
-	"class" : {
-		"on:" : "guest 2/11/2010 23:42" },
 	"instance" : {
-		"isOK" : "KentBeck 2/11/2010 22:59",
-		"setValues:" : "guest 2/11/2010 23:42" } }
+		"isOK" : "EstebanLorenzano 2/3/2017 11:38:22",
+		"setValues:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	},
+	"class" : {
+		"on:" : "EstebanLorenzano 2/3/2017 11:38:22"
+	}
+}
