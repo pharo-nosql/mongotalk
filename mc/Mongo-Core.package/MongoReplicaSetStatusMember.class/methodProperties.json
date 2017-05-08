@@ -1,17 +1,17 @@
 {
 	"instance" : {
-		"host" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"port" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"name" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"isArbiterOnly" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"stateString" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"isSecondary" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"printOn:" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"state" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"initialize:" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"isPrimary" : "EstebanLorenzano 2/3/2017 11:38:22"
+		"host" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"port" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"name" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"isArbiterOnly" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"stateString" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"isSecondary" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"printOn:" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"state" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"initialize:" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"isPrimary" : "HolgerHansPeterFreyther 4/26/2017 14:36:47"
 	},
 	"class" : {
-		"with:" : "EstebanLorenzano 2/3/2017 11:38:22"
+		"with:" : "HolgerHansPeterFreyther 4/26/2017 14:36:47"
 	}
 }

@@ -1,14 +1,14 @@
 {
 	"instance" : {
-		"writeBody" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"fixedHeaderSize" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"dataBytes" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"opCode" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"messageSize" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"computeDataBytes" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"setQuery:" : "EstebanLorenzano 2/3/2017 11:38:22"
+		"writeBody" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"fixedHeaderSize" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"dataBytes" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"opCode" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"messageSize" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"computeDataBytes" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"setQuery:" : "HolgerHansPeterFreyther 4/26/2017 14:36:47"
 	},
 	"class" : {
-		"collection:id:stream:query:" : "EstebanLorenzano 2/3/2017 11:38:22"
+		"collection:id:stream:query:" : "HolgerHansPeterFreyther 4/26/2017 14:36:47"
 	}
 }

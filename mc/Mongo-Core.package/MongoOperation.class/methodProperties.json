@@ -1,11 +1,11 @@
 {
 	"instance" : {
-		"writeHeader" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"setCollection:id:stream:" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"write" : "EstebanLorenzano 2/3/2017 11:38:22",
-		"flush" : "EstebanLorenzano 2/3/2017 11:38:22"
+		"writeHeader" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"setCollection:id:stream:" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"write" : "HolgerHansPeterFreyther 4/26/2017 14:36:47",
+		"flush" : "HolgerHansPeterFreyther 4/26/2017 14:36:47"
 	},
 	"class" : {
-		"collection:id:stream:" : "EstebanLorenzano 2/3/2017 11:38:22"
+		"collection:id:stream:" : "HolgerHansPeterFreyther 4/26/2017 14:36:47"
 	}
 }
