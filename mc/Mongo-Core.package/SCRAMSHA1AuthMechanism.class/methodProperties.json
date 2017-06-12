@@ -1,0 +1,8 @@
+{
+	"instance" : {
+		"parseScramResponse:" : "mikefilonov 6/11/2017 18:23",
+		"authenticateUsername:password:database:" : "mikefilonov 6/11/2017 18:36",
+		"digestUsername:password:" : "mikefilonov 6/11/2017 18:36"
+	},
+	"class" : { }
+}

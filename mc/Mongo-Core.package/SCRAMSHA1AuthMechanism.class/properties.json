@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "mikefilonov 6/11/2017 12:24",
+	"super" : "MongoAuthMechanism",
+	"category" : "Mongo-Core-Auth",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SCRAMSHA1AuthMechanism",
+	"type" : "normal"
+}

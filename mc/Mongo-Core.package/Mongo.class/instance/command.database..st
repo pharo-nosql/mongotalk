@@ -5,6 +5,7 @@ command: aDictionary database: aDatabase
 		database: aDatabase;
 		collection: (MongoMetaCollection name: '$cmd');
 		where: aDictionary;
+		operation: CommandOperation;
 		yourself.
 
 	reply := self queryOne: query.

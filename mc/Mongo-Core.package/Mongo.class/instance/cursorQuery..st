@@ -2,7 +2,7 @@ private-communicating
 cursorQuery: aQuery
 	| id |
 	id := self nextRequestID.
-	(QueryOperation 
+	(aQuery operation 
 		id: id
 		stream: stream
 		query: aQuery)
