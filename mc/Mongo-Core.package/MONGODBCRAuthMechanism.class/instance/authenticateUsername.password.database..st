@@ -10,7 +10,7 @@ authenticateUsername: user password: pass database: aDatabase
 	nonce := reply at: 'nonce'.
 	pwd := (MD5 hashMessage: user , ':mongo:' , pass) hex asLowercase.
 	key := (MD5 hashMessage: nonce , user , pwd) hex asLowercase.
-	self root
+	[ self root
 		command:
 			(OrderedIdentityDictionary new
 				at: #authenticate put: 1;
@@ -18,5 +18,7 @@ authenticateUsername: user password: pass database: aDatabase
 				at: #nonce put: nonce;
 				at: #key put: key;
 				yourself)
-		database: aDatabase.
+		database: aDatabase.]
+		on: MongoCommandError
+		do: [ ^ false ].
 	^ true
