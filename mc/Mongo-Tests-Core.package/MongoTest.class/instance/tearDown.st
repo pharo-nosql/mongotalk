@@ -1,4 +1,10 @@
 running
 tearDown
 	collection drop.
-	root close
+	
+	root admin
+		command:
+			(OrderedIdentityDictionary new
+				add: #dropUser -> 'pharounittest';
+				yourself).
+	root close.
