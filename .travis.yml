@@ -14,6 +14,9 @@ smalltalk:
   - Pharo-4.0
   - Pharo-3.0
 
+before_script:
+  - mongo mydb_test --eval 'db.addUser("pharounittest", "test");'
+
 # bob-bench xUnit file analysis
 after_success:
   - benchupload --dir=$SMALLTALK_CI_BUILD
