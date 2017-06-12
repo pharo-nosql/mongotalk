@@ -15,6 +15,7 @@ smalltalk:
   - Pharo-3.0
 
 before_script:
+  - sleep 15
   - mongo test --eval 'db.addUser("pharounittest", "test");'
 
 # bob-bench xUnit file analysis
