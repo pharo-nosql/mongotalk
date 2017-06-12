@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "mikefilonov 6/11/2017 10:48",
+	"super" : "QueryOperation",
+	"category" : "Mongo-Core-Operations",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CommandOperation",
+	"type" : "normal"
+}
