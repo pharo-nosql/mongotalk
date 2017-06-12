@@ -12,10 +12,11 @@ authenticateUsername: user password: pass database: aDatabase
 	key := (MD5 hashMessage: nonce , user , pwd) hex asLowercase.
 	self root
 		command:
-			(Dictionary new
-				at: 'authenticate' put: 1;
-				at: 'user' put: user;
-				at: 'nonce' put: nonce;
-				at: 'key' put: key;
-				yourself).
+			(OrderedIdentityDictionary new
+				at: #authenticate put: 1;
+				at: #user put: user;
+				at: #nonce put: nonce;
+				at: #key put: key;
+				yourself)
+		database: aDatabase.
 	^ true
