@@ -1,3 +1,3 @@
 accessing
 authMechanism
-	^ authMechanism ifNil: [ authMechanism := MONGODBCRAuthMechanism root: self ]
+	^ authMechanism ifNil: [ authMechanism := self class defaultAuthMechanismClass root: self ]

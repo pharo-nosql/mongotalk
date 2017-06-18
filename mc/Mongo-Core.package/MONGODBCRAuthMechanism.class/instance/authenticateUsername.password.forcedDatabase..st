@@ -1,5 +1,5 @@
 operations
-authenticateUsername: user password: pass database: aDatabase
+authenticateUsername: user password: pass forcedDatabase: aDatabase
 	| nonce reply pwd key |
 	reply := self root
 		command:
@@ -18,7 +18,7 @@ authenticateUsername: user password: pass database: aDatabase
 				at: #nonce put: nonce;
 				at: #key put: key;
 				yourself)
-		database: aDatabase.]
+		database: aDatabase ]
 		on: MongoCommandError
 		do: [ ^ false ].
 	^ true

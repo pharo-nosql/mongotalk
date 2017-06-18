@@ -2,11 +2,14 @@
 	"commentStamp" : "mikefilonov 6/11/2017 12:24",
 	"super" : "Object",
 	"category" : "Mongo-Core-Auth",
-	"classinstvars" : [ ],
+	"classinstvars" : [
+		"authAgainstAdmin"
+	],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"root"
+		"root",
+		"forceDatabase"
 	],
 	"name" : "MongoAuthMechanism",
 	"type" : "normal"

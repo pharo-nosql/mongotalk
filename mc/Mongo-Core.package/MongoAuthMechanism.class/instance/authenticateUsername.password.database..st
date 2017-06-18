@@ -1,3 +1,3 @@
 operations
 authenticateUsername: user password: pass database: aDatabase
-	^self subclassResponsibility 
+	^self authenticateUsername: user password: pass forcedDatabase: (self forceDatabase ifNil: [ aDatabase ])

@@ -26,7 +26,7 @@
 		"username:password:database:" : "NorbertHartl 11/27/2013 09:56",
 		"version" : "MartinDias 6/15/2016 19:30",
 		"command:database:" : "mikefilonov 6/11/2017 11:53",
-		"authMechanism" : "mikefilonov 6/11/2017 12:05",
+		"authMechanism" : "mikefilonov 6/12/2017 12:04",
 		"open" : "NorbertHartl 11/27/2013 14:01",
 		"printOn:" : "TorstenBergmann 3/10/2015 20:19",
 		"nextRequestID" : "Hacker 4/10/2016 20:57",
@@ -35,11 +35,13 @@
 		"insert:collection:" : "KentBeck 2/16/2010 12:21"
 	},
 	"class" : {
-		"default" : "TorstenBergmann 3/17/2015 21:51",
+		"defaultAuthMechanismClass:" : "mikefilonov 6/12/2017 12:03",
 		"default:" : "TorstenBergmann 3/17/2015 21:52",
 		"ascending" : "TorstenBergmann 3/17/2015 21:52",
-		"host:port:" : "TorstenBergmann 3/17/2015 21:52",
+		"default" : "TorstenBergmann 3/17/2015 21:51",
 		"descending" : "TorstenBergmann 3/17/2015 21:52",
-		"local" : "TorstenBergmann 3/17/2015 21:50"
+		"host:port:" : "TorstenBergmann 3/17/2015 21:52",
+		"local" : "TorstenBergmann 3/17/2015 21:50",
+		"defaultAuthMechanismClass" : "mikefilonov 6/12/2017 12:03"
 	}
 }
