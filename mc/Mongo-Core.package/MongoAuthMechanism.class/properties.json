@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "mikefilonov 6/11/2017 12:24",
+	"super" : "Object",
+	"category" : "Mongo-Core-Auth",
+	"classinstvars" : [
+		"authAgainstAdmin"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"root",
+		"forceDatabase"
+	],
+	"name" : "MongoAuthMechanism",
+	"type" : "normal"
+}
