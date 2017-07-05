@@ -19,9 +19,9 @@ addons:
     - mongodb-org-shell
  
 smalltalk:
+  - Pharo-6.0
   - Pharo-5.0
   - Pharo-4.0
-  - Pharo-3.0
 
 before_script:
   - "mongo test --eval 'db.createUser({ \"user\": \"pharounittest\", \"pwd\": \"test\", roles: [] });'"
