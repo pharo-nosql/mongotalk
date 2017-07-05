@@ -1,10 +1,10 @@
 operations
-command: aDictionary database: aDatabase
+command: anOrderedDictionary database: aDatabase
 	| query reply |
 	query := MongoQuery new
 		database: aDatabase;
 		collection: (MongoMetaCollection name: '$cmd');
-		where: aDictionary;
+		where: anOrderedDictionary;
 		operation: CommandOperation;
 		yourself.
 

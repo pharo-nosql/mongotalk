@@ -1,6 +1,7 @@
 operations
 drop
-	| command |
-	command := Dictionary new.
-	command at: 'drop' put: name.
-	database command: command "check return value"
+	database
+		command:
+			(OrderedIdentityDictionary new
+				at: #drop put: name;
+				yourself)	"check return value"

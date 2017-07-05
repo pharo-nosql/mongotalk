@@ -1,3 +1,3 @@
 operations
-command: aDictionary
-	^ root command: aDictionary database: self
+command: anOrderedDictionary
+	^ root command: anOrderedDictionary database: self
