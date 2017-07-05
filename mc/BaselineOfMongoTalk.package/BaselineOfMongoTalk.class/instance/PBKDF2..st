@@ -4,5 +4,5 @@ PBKDF2: spec
 		project: 'PBKDF2'
 		with: [ spec
 				className: #ConfigurationOfPBKDF2;
-				versionString: #stable;
+				versionString: #bleedingEdge;
 				repository: 'http://smalltalkhub.com/mc/UdoSchneider/PBKDF2/main' ]
