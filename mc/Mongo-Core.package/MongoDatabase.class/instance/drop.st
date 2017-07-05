@@ -1,3 +1,3 @@
 operations
 drop
-	self command: (Dictionary new at: 'dropDatabase' put: 1.0; yourself)
+	self command: (OrderedIdentityDictionary new at: #dropDatabase put: 1.0; yourself)

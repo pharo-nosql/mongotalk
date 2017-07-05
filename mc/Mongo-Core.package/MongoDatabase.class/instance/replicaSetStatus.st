@@ -4,6 +4,6 @@ replicaSetStatus
 	See more at: https://docs.mongodb.com/v3.2/reference/command/replSetGetStatus/"
 
 	| reply |
-	reply := self command: (Dictionary new at: 'replSetGetStatus' put: 1; yourself).
+	reply := self command: (OrderedIdentityDictionary new at: #replSetGetStatus put: 1; yourself).
 
 	^MongoReplicaSetStatus with: reply

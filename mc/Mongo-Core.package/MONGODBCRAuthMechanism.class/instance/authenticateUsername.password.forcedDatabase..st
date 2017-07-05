@@ -3,8 +3,8 @@ authenticateUsername: user password: pass forcedDatabase: aDatabase
 	| nonce reply pwd key |
 	reply := self root
 		command:
-			(Dictionary new
-				at: 'getnonce' put: 1;
+			(OrderedIdentityDictionary new
+				at: #getnonce put: 1;
 				yourself)
 		database: aDatabase.
 	nonce := reply at: 'nonce'.
