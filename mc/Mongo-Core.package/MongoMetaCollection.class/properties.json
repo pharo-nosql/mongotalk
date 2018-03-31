@@ -1,14 +1,11 @@
 {
-	"category" : "Mongo-Core-Collections",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "TorstenBergmann 3/4/2015 09:37",
-	"instvars" : [
-		 ],
-	"name" : "MongoMetaCollection",
-	"pools" : [
-		 ],
 	"super" : "MongoCollection",
-	"type" : "normal" }
+	"category" : "Mongo-Core-Collections",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoMetaCollection",
+	"type" : "normal"
+}
