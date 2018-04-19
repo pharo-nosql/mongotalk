@@ -1,6 +1,6 @@
 reading
 nextDictionary
-	| result byteSize start end |
+	| result byteSize |
 	result := Dictionary new.
 	byteSize := stream nextUInt32.
 	[| type |

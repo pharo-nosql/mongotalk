@@ -1,0 +1,34 @@
+{
+	"instance" : {
+		"insert:collection:" : " 4/19/2018 10:56:06",
+		"addCollection:" : " 4/19/2018 10:56:06",
+		"collections" : " 4/19/2018 10:56:06",
+		"setRoot:name:" : " 4/19/2018 10:56:06",
+		"update:with:collection:" : " 4/19/2018 10:56:06",
+		"update:with:collection:flags:" : " 4/19/2018 10:56:06",
+		"name" : " 4/19/2018 10:56:06",
+		"replicaSetConfig" : " 4/19/2018 10:56:06",
+		"root" : " 4/19/2018 10:56:06",
+		"command:" : " 4/19/2018 10:56:06",
+		"getCollection:" : " 4/19/2018 10:56:06",
+		"drop" : " 4/19/2018 10:56:06",
+		"do:" : " 4/19/2018 10:56:06",
+		"delete:collection:" : " 4/19/2018 10:56:06",
+		"queryOne:" : " 4/19/2018 10:56:06",
+		"replicaSetStatus" : " 4/19/2018 10:56:06",
+		"qualifiedName" : " 4/19/2018 10:56:06",
+		"commandUpdate:with:collection:" : " 4/19/2018 10:56:06",
+		"query:" : " 4/19/2018 10:56:06",
+		"mongo2CollectionNames" : " 4/19/2018 10:56:06",
+		"collectionAt:" : " 4/19/2018 10:56:06",
+		"username:password:" : " 4/19/2018 10:56:06",
+		"printOn:" : " 4/19/2018 10:56:06",
+		"mongo3CollectionNames" : " 4/19/2018 10:56:06",
+		"hasCollectionNamed:" : " 4/19/2018 10:56:06",
+		"addCollection:capped:size:max:" : " 4/19/2018 10:56:06",
+		"lastError" : " 4/19/2018 10:56:06"
+	},
+	"class" : {
+		"root:name:" : " 4/19/2018 10:56:06"
+	}
+}
