@@ -1,0 +1,25 @@
+{
+	"instance" : {
+		"opCode" : " 4/19/2018 10:56:06",
+		"flags:" : " 4/19/2018 10:56:06",
+		"fixedHeaderSize" : " 4/19/2018 10:56:06",
+		"messageSize" : " 4/19/2018 10:56:06",
+		"computeDataBytes" : " 4/19/2018 10:56:06",
+		"flags" : " 4/19/2018 10:56:06",
+		"writeBody" : " 4/19/2018 10:56:06",
+		"mongoQuery" : " 4/19/2018 10:56:06",
+		"mongoQuery:" : " 4/19/2018 10:56:06",
+		"dataBytes" : " 4/19/2018 10:56:06"
+	},
+	"class" : {
+		"flagNoCursorTimeout" : " 4/19/2018 10:56:06",
+		"flagTailableCursor" : " 4/19/2018 10:56:06",
+		"flagExhaust" : " 4/19/2018 10:56:06",
+		"flagAwaitData" : " 4/19/2018 10:56:06",
+		"flagPartial" : " 4/19/2018 10:56:06",
+		"collection:id:stream:query:fields:returnCount:numberToSkip:" : " 4/19/2018 10:56:06",
+		"flagSlaveOk" : " 4/19/2018 10:56:06",
+		"id:stream:query:" : " 4/19/2018 10:56:06",
+		"flagReserved" : " 4/19/2018 10:56:06"
+	}
+}

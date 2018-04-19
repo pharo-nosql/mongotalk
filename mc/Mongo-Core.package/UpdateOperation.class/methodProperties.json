@@ -1,0 +1,19 @@
+{
+	"instance" : {
+		"opCode" : " 4/19/2018 10:56:06",
+		"flags:" : " 4/19/2018 10:56:06",
+		"fixedHeaderSize" : " 4/19/2018 10:56:06",
+		"messageSize" : " 4/19/2018 10:56:06",
+		"computeDataBytes" : " 4/19/2018 10:56:06",
+		"flags" : " 4/19/2018 10:56:06",
+		"originalObject:" : " 4/19/2018 10:56:06",
+		"writeBody" : " 4/19/2018 10:56:06",
+		"dataBytes" : " 4/19/2018 10:56:06",
+		"newObject:" : " 4/19/2018 10:56:06"
+	},
+	"class" : {
+		"flagMultiUpdate" : " 4/19/2018 10:56:06",
+		"collection:id:stream:originalObject:newObject:" : " 4/19/2018 10:56:06",
+		"flagUpsert" : " 4/19/2018 10:56:06"
+	}
+}

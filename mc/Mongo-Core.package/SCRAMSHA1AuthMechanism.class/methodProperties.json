@@ -1,0 +1,8 @@
+{
+	"instance" : {
+		"parseScramResponse:" : " 4/19/2018 10:56:06",
+		"digestUsername:password:" : " 4/19/2018 10:56:06",
+		"authenticateUsername:password:forcedDatabase:" : " 4/19/2018 10:56:06"
+	},
+	"class" : { }
+}
