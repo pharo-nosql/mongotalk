@@ -1,6 +1,8 @@
 operations
 lastError
-	| reply |
-	reply := self command: (OrderedIdentityDictionary new at: #getLastError put: 1; yourself).
+	"Answer the result of getLastError mongodb command. 
 	
-	^ MongoLastError newFor: reply
+	See more: https://docs.mongodb.com/manual/reference/command/getLastError
+	"
+
+	^ self lastError: nil

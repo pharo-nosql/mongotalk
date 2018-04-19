@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "MartinDias 4/15/2018 12:35",
+	"super" : "Object",
+	"category" : "Mongo-Core-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"w",
+		"j",
+		"wtimeout"
+	],
+	"name" : "MongoWriteConcern",
+	"type" : "normal"
+}
