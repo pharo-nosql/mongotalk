@@ -1,0 +1,11 @@
+{
+	"instance" : {
+		"testDatabaseAuthenticationSameUser" : " 4/19/2018 11:46:05",
+		"setUp" : " 4/19/2018 11:46:05",
+		"testDatabaseAuthenticationSameUserTwice" : " 4/19/2018 11:46:05",
+		"testDatabaseAuthenticationDifferentUser" : " 4/19/2018 11:46:05",
+		"testTwoDatabasesAuthenticationSameUser" : " 4/19/2018 11:46:05",
+		"testAuthenticationSucceeds" : " 4/19/2018 11:46:05"
+	},
+	"class" : { }
+}

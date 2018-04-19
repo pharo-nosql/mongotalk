@@ -7,4 +7,4 @@ testDelete
 	collection add: data.
 	collection delete: data.
 	results := collection query: [ :query | ].
-	self assert: results size = 0
+	self assert: results isEmpty

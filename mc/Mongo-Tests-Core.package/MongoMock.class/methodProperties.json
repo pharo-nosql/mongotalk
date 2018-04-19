@@ -1,0 +1,10 @@
+{
+	"instance" : {
+		"authCalls" : " 4/19/2018 11:46:05",
+		"authenticateUsername:password:database:" : " 4/19/2018 11:46:05",
+		"initialize" : " 4/19/2018 11:46:05",
+		"reset" : " 4/19/2018 11:46:05",
+		"authShouldFail" : " 4/19/2018 11:46:05"
+	},
+	"class" : { }
+}
