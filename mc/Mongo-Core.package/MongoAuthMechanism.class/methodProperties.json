@@ -1,0 +1,16 @@
+{
+	"instance" : {
+		"root:" : " 4/19/2018 10:56:06",
+		"authenticateUsername:password:database:" : " 4/19/2018 10:56:06",
+		"root" : " 4/19/2018 10:56:06",
+		"forceDatabase" : " 4/19/2018 10:56:06",
+		"forceDatabase:" : " 4/19/2018 10:56:06",
+		"authenticateUsername:password:forcedDatabase:" : " 4/19/2018 10:56:06"
+	},
+	"class" : {
+		"authAgainstAdmin:" : " 4/19/2018 10:56:06",
+		"beDefault" : " 4/19/2018 10:56:06",
+		"root:" : " 4/19/2018 10:56:06",
+		"authAgainstAdmin" : " 4/19/2018 10:56:06"
+	}
+}
