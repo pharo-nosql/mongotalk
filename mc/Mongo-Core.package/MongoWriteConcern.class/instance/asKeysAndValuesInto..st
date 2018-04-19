@@ -1,5 +1,5 @@
 converting
 asKeysAndValuesInto: aDictionary
-	j ifNotNil: [ aDictionary at: 'j' put: j ].
-	w ifNotNil: [ aDictionary at: 'w' put: w ].
-	wtimeout ifNotNil: [ aDictionary at: 'wtimeout' put: wtimeout ]
+	self j ifNotNil: [:value | aDictionary at: 'j' put: value ].
+	self w ifNotNil: [:value | aDictionary at: 'w' put: value ].
+	self wtimeout ifNotNil: [:value | aDictionary at: 'wtimeout' put: value ]

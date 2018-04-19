@@ -9,8 +9,8 @@ commandUpdate: origDictionary with: newDictionary collection: collectionName wri
 		'updates'->{{
 			'q'->origDictionary.
 			'u'->newDictionary.
-			} asDictionary}.
-		} asDictionary.
+			} asOrderedDictionary}.
+		} asOrderedDictionary.
 	aConcern ifNotNil: [
 		dict at: 'writeConcern' put: aConcern concernForCommand].
 	^self command: dict.

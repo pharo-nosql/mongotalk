@@ -6,7 +6,9 @@ lastError: aWriteConcernOrNil
 	"
 
 	| reply command |
-	command := { 'getLastError'->1 } asDictionary.
+	command := OrderedIdentityDictionary new 
+		at: 'getLastError' put: 1; 
+		yourself.
 	aWriteConcernOrNil ifNotNil: [ aWriteConcernOrNil asKeysAndValuesInto: command ].
 	reply := self command: command.
 	
