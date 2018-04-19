@@ -5,7 +5,7 @@ testUpdateWithWriteConcern
 	new := { 'key' -> 'new value' } asDictionary.
 
 	collection add: old.
-	collection update: old with: new.
+	collection commandUpdate: old with: new.
 	result := collection query: [:query | ].
 	self assert: result size equals: 1.
 	self assert: (result first at: 'key') equals: 'new value'.
