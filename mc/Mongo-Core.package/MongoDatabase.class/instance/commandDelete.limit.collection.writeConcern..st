@@ -9,8 +9,8 @@ commandDelete: origDictionary limit: aLimit collection: collectionName writeConc
 		'deletes'->{{
 			'q'->origDictionary.
 			'limit'->aLimit.
-			} asOrderedDictionary}.
-		} asOrderedDictionary.
+			} as: OrderedDictionary}.
+		} as: OrderedDictionary.
 	aConcern ifNotNil: [
 		dict at: 'writeConcern' put: aConcern concernForCommand].
 	^self command: dict.
