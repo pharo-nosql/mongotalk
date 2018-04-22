@@ -1,4 +1,4 @@
 accessing
-cleanUp: aRepository
+cleanUpRepository: aRepository
 
 	aRepository dropDatabase

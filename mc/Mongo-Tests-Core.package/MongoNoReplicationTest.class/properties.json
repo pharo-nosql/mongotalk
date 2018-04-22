@@ -1,14 +1,11 @@
 {
-	"category" : "Mongo-Tests-Core-Replication",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "MartinDias 6/9/2016 19:41",
-	"instvars" : [
-		 ],
-	"name" : "MongoNoReplicationTest",
-	"pools" : [
-		 ],
 	"super" : "MongoReplicationTest",
-	"type" : "normal" }
+	"category" : "Mongo-Tests-Core-Replication",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoNoReplicationTest",
+	"type" : "normal"
+}

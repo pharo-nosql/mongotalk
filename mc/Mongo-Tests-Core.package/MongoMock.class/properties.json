@@ -1,15 +1,14 @@
 {
-	"category" : "Mongo-Tests-Core-Mocks",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "TorstenBergmann 3/4/2015 09:40",
+	"super" : "Mongo",
+	"category" : "Mongo-Tests-Core-Mocks",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"succeedAuth",
-		"authCalls" ],
+		"authCalls"
+	],
 	"name" : "MongoMock",
-	"pools" : [
-		 ],
-	"super" : "Mongo",
-	"type" : "normal" }
+	"type" : "normal"
+}

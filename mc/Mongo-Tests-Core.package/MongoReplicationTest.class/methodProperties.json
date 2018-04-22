@@ -1,8 +1,9 @@
 {
-	"class" : {
-		 },
 	"instance" : {
-		"addNewCollection" : "MartinDias 6/15/2016 12:18",
-		"newMongo" : "MartinDias 5/12/2016 01:40",
-		"setUp" : "MartinDias 6/9/2016 19:28",
-		"tearDown" : "MartinDias 6/17/2016 01:12" } }
+		"newMongo" : " 4/19/2018 11:46:05",
+		"tearDown" : " 4/19/2018 11:46:05",
+		"addNewCollection" : " 4/19/2018 11:46:05",
+		"setUp" : " 4/19/2018 11:46:05"
+	},
+	"class" : { }
+}
