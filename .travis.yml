@@ -1,27 +1,31 @@
 language: smalltalk
-sudo: false
 
-install:
-  - pip install --user benchupload
+sudo: required
 
 os:
   - linux
-#  - osx
-services: 
-  - mongodb
- 
-addons:
-  apt:
-    sources:
-    - mongodb-3.0-precise
-    packages:
-    - mongodb-org-server
-    - mongodb-org-shell
- 
+
 smalltalk:
   - Pharo-6.0
   - Pharo-5.0
   - Pharo-4.0
+
+env:
+  - MONGODB=2.6
+  - MONGODB=3.0
+  - MONGODB=3.4
+
+matrix:
+  # Finish the build as soon as one job fails
+  fast_finish: true
+
+before_install:
+- bash .install_mongodb_on_travis.sh
+- sleep 15  # https://docs.travis-ci.com/user/database-setup/#MongoDB-does-not-immediately-accept-connections
+- mongo --eval 'db.version();'
+ 
+install:
+  - pip install --user benchupload
 
 before_script:
   - "mongo test --eval 'db.createUser({ \"user\": \"pharounittest\", \"pwd\": \"test\", roles: [] });'"
@@ -31,3 +35,4 @@ after_success:
   - benchupload --dir=$SMALLTALK_CI_BUILD
 after_failure:
   - benchupload --dir=$SMALLTALK_CI_BUILD
+
