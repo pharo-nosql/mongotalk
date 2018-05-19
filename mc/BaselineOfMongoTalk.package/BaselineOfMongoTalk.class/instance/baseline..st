@@ -7,7 +7,7 @@ baseline: spec
 			spec
 				package: 'Mongo-BSON';
 				package: 'Mongo-Squeak' with: [ spec requires: #('Grease' 'Mongo-BSON') ];
-				package: 'Mongo-Core' with: [ spec requires: #('PBKDF2' 'Mongo-Squeak' 'Mongo-BSON') ];
+				package: 'Mongo-Core' with: [ spec requires: #('PBKDF2-Core' 'Mongo-Squeak' 'Mongo-BSON') ];
 				package: 'Mongo-Queries';
 				package: 'Mongo-Tests-BSON' with: [ spec requires: #('Mongo-BSON') ];
 				package: 'Mongo-Tests-Core' with: [ spec requires: #('Mongo-Core') ];

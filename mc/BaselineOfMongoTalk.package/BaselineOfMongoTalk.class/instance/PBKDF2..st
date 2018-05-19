@@ -1,9 +1,7 @@
 external projects
 PBKDF2: spec
 	spec
-		project: 'PBKDF2'
+		package: 'PBKDF2-Core'
 		with: [ 
-			spec
-				className: #ConfigurationOfPBKDF2;
-				versionString: #bleedingEdge;
-				repository: 'http://smalltalkhub.com/mc/UdoSchneider/PBKDF2/main' ]
+			spec file:'PBKDF2-Core-UdoSchneider.1'.
+			spec repository: 'http://smalltalkhub.com/mc/UdoSchneider/PBKDF2/main' ]
