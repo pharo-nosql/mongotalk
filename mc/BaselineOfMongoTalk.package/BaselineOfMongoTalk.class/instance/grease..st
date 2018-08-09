@@ -1,7 +1,6 @@
 external projects
 grease: spec 
-	spec project: 'Grease' with: [
-			spec
-				className: #ConfigurationOfGrease;
-				versionString: #'stable';
-				repository: 'http://smalltalkhub.com/mc/Seaside/MetacelloConfigurations/main' ]
+	spec
+		baseline: 'Grease' with: [ 
+			spec 
+				repository: 'github://SeasideSt/Grease:1.3.0/repository' ]
