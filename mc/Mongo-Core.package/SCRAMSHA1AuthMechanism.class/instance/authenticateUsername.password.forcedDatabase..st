@@ -1,7 +1,7 @@
 operations
 authenticateUsername: username password: password forcedDatabase: database
 	| nonce firstBare op resp serverFirst parsed iterations salt rnonce without_proof derivedKey clientKey storedKey authMsg clientSig clientProof clientFinal serverKey serverSig |
-	nonce := (Random new next asString allButFirst: 2) base64Encoded.
+	nonce := (Random new next asString allButFirst: 2) asByteArray base64Encoded.
 	firstBare := 'n=' , username , ',r=' , nonce.
 	op := OrderedIdentityDictionary new
 		add: #saslStart -> 1;
