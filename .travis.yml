@@ -14,7 +14,6 @@ env:
   - MONGODB=4.0
   - MONGODB=3.6
   - MONGODB=3.4
-  - MONGODB=3.0
 
 matrix:
   # Finish the build as soon as one job fails
