@@ -37,6 +37,6 @@ _manual_set_up_
 
 	3. Next times:
 	
-		<MONGOTALK_GIT_DIRECTORY>/scripts/rs-serve.sh  
+		<MONGOTALK_GIT_DIRECTORY>/scripts/rs-serve.sh
 	
 	"
