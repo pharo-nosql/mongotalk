@@ -1,5 +1,5 @@
 operations
-mongo3CollectionNames
+collectionNames
 	"Answer the names of the collections in this database (for MongoDB >= 3.0).
 
 	See more at https://docs.mongodb.com/manual/reference/command/listCollections/"
