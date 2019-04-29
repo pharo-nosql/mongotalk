@@ -1,9 +1,7 @@
 #!/bin/bash
 
-set -e
-
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-$DIR/rs-checkEnvirnomentVariables.sh
+set -ex
+source $(dirname $0)/rs-checkEnvirnomentVariables.sh
 
 scenarioMongoNames=(ZERO A B C)
 
