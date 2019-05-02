@@ -23,16 +23,10 @@ before_install:
 - bash .install_mongodb_on_travis.sh
 - sleep 15  # https://docs.travis-ci.com/user/database-setup/#MongoDB-does-not-immediately-accept-connections
 - mongo --eval 'db.version();'
- 
-install:
-  - pip install --user benchupload
 
 before_script:
   - "mongo test --eval 'db.createUser({ \"user\": \"pharounittest\", \"pwd\": \"test\", roles: [] });'"
 
 # bob-bench xUnit file analysis
-after_success:
-  - benchupload --dir=$SMALLTALK_CI_BUILD
-after_failure:
-  - benchupload --dir=$SMALLTALK_CI_BUILD
-
+after_script:
+  - pip install --user benchupload && benchupload
