@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Mongo-Tests-SDAM-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"client"
+	],
+	"name" : "MongoSDAMClientTest",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+accessing
+roundtripTime
+	^ roundtripTime

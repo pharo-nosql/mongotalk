@@ -1,0 +1,4 @@
+accessing
+defaultReadPreference
+
+	^self shouldBeImplemented 

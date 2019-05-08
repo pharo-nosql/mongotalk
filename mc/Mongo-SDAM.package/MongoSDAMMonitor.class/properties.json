@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Mongo-SDAM-Monitoring",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"client",
+		"process",
+		"mongo",
+		"roundtripTimeCalculator",
+		"urlString"
+	],
+	"name" : "MongoSDAMMonitor",
+	"type" : "normal"
+}

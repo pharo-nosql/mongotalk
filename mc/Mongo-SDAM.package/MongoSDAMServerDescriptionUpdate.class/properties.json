@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Announcement",
+	"category" : "Mongo-SDAM-Announcements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"oldServerDescription",
+		"newServerDescription"
+	],
+	"name" : "MongoSDAMServerDescriptionUpdate",
+	"type" : "normal"
+}

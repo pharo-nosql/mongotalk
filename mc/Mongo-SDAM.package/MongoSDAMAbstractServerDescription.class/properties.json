@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Mongo-SDAM-Topology",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"urlString"
+	],
+	"name" : "MongoSDAMAbstractServerDescription",
+	"type" : "normal"
+}

@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Mongo-SDAM-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"monitors",
+		"topologyUpdateAnnouncer",
+		"mutex",
+		"knownUrlsAsStrings",
+		"mode",
+		"topology"
+	],
+	"name" : "MongoSDAMClient",
+	"type" : "normal"
+}
