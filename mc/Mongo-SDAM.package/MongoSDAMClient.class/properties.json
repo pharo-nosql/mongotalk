@@ -9,9 +9,10 @@
 		"monitors",
 		"topologyUpdateAnnouncer",
 		"mutex",
-		"knownUrlsAsStrings",
-		"mode",
-		"topology"
+		"topology",
+		"connectTimeout",
+		"crisisStateFrequency",
+		"steadyStateFrequency"
 	],
 	"name" : "MongoSDAMClient",
 	"type" : "normal"

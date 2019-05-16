@@ -10,7 +10,8 @@
 		"process",
 		"mongo",
 		"roundtripTimeCalculator",
-		"urlString"
+		"urlString",
+		"nextTimeToCheck"
 	],
 	"name" : "MongoSDAMMonitor",
 	"type" : "normal"

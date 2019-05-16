@@ -10,6 +10,5 @@ testDiscoverSecondary
 	self assert: client topology isTypeUnknown.
 	self assert: client topology servers size equals: 1.
 
-	5 timesRepeat: [
-		10 milliSeconds wait.
-		self assert: client topology servers size equals: 2 ]
+	10 milliSeconds wait.
+	self assert: client topology servers size equals: 2.

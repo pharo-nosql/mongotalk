@@ -1,3 +1,3 @@
-adding
+accessing
 addServerAt: urlString
-	servers add: (MongoSDAMUnknownServerDescription urlString: urlString).
+	serversByUrlString at: urlString put: (MongoSDAMUnknownServerDescription urlString: urlString)

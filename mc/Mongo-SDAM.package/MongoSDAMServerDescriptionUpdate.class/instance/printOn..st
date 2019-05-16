@@ -5,5 +5,5 @@ printOn: aStream
 	super printOn: aStream.
 	aStream
 		nextPut: $(;
-		print: urlString;
-		nextPut: $).
+		print: self urlString;
+		nextPut: $)

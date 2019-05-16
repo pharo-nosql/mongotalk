@@ -1,19 +1,24 @@
 initialization
-initializeBasedOn: anotherMongoSDAMTopology updatedWith: aMongoIsmaster
+initializeBasedOn: anotherMongoSDAMTopology updatedWith: aMongoSDAMServerDescription
 	self initialize.
-	
-	servers := anotherMongoSDAMTopology servers deepCopy.
 
-	aMongoIsmaster isReplicaSet
+	serversByUrlString := anotherMongoSDAMTopology serversByUrlString deepCopy.
+	self updateServer: aMongoSDAMServerDescription.
+
+	aMongoSDAMServerDescription isSuccess ifFalse: [
+		self flag: #todo. "Add some behavior..."
+		^self ].
+
+	aMongoSDAMServerDescription ismaster isReplicaSet
 		ifTrue: [
-			aMongoIsmaster hasPrimary
+			aMongoSDAMServerDescription ismaster hasPrimary
 				ifTrue: [
 					type := MongoSDAMTopologyType replicaSetWithPrimary.
-					primaryUrlString := aMongoIsmaster primaryUrlString.
-					secondaryUrlStrings := aMongoIsmaster hosts asSet ]
+					primaryUrlString := aMongoSDAMServerDescription ismaster primaryUrlString ]
 				ifFalse: [ 
 					type := MongoSDAMTopologyType replicaSetNoPrimary.
-					self shouldBeImplemented ]
+					primaryUrlString := nil ].
+			secondaryUrlStrings := aMongoSDAMServerDescription ismaster hosts asSet.
 		]
 		ifFalse: [ self shouldBeImplemented 
 			"Check https://docs.mongodb.com/v3.4/reference/command/isMaster/" ].

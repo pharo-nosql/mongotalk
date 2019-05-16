@@ -1,5 +1,5 @@
 accessing
-stepDownA: aNumberOfSeconds
+stepDownA: aDuration
 	
 	| mongo |
 	mongo := Mongo 
@@ -8,7 +8,7 @@ stepDownA: aNumberOfSeconds
 
 	mongo open.
 
-	[ mongo replicaSetStepDown: aNumberOfSeconds ]
+	[ mongo replicaSetStepDown: aDuration ]
 		on: Error 
 		do: [:e | "Ignore" ].
 

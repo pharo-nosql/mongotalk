@@ -3,6 +3,8 @@ hasAnythingNew: newServerDescription
 
 	newServerDescription isSuccess ifFalse: [ ^false ].
 
-	primaryUrlString = newServerDescription ismaster primaryUrlString ifFalse: [ ^ true ].
+	self hasPrimary ~= newServerDescription ismaster hasPrimary ifTrue: [ ^true ].
+	(self hasPrimary and: [ self primaryUrlString ~= newServerDescription ismaster primaryUrlString ])
+		ifTrue: [ ^true ].
 
-	^ false.
+	^ false

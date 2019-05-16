@@ -1,3 +1,3 @@
 accessing
 serversUrlStrings
-	^ servers collect: #urlString
+	^ self servers collect: #urlString

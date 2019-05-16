@@ -1,3 +1,3 @@
 accessing
 steadyStateFrequency
-	^ 10 seconds
+	^ steadyStateFrequency ifNil: [ 10 seconds ]

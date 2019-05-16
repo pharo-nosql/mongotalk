@@ -7,9 +7,9 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"type",
-		"servers",
 		"primaryUrlString",
-		"secondaryUrlStrings"
+		"secondaryUrlStrings",
+		"serversByUrlString"
 	],
 	"name" : "MongoSDAMTopology",
 	"type" : "normal"
