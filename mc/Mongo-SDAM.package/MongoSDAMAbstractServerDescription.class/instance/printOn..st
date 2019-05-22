@@ -6,4 +6,5 @@ printOn: aStream
 	aStream
 		nextPut: $(;
 		print: urlString;
+		print: self identityHash;
 		nextPut: $)

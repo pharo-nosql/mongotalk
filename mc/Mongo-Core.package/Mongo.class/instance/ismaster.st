@@ -1,3 +1,3 @@
 operations
-ismaster
-	^ self admin ismaster
+isMaster
+	^ self admin isMaster

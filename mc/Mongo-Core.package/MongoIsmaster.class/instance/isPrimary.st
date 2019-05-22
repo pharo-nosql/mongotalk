@@ -1,3 +1,3 @@
-testing
+testing - replica set
 isPrimary
-	^ (response at: 'ismaster') == true
+	^ (response at: 'ismaster') and: [ self isReplicaSet ]

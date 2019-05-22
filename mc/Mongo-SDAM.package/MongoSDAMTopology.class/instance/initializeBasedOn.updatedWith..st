@@ -9,16 +9,16 @@ initializeBasedOn: anotherMongoSDAMTopology updatedWith: aMongoSDAMServerDescrip
 		self flag: #todo. "Add some behavior..."
 		^self ].
 
-	aMongoSDAMServerDescription ismaster isReplicaSet
+	aMongoSDAMServerDescription isMaster isReplicaSet
 		ifTrue: [
-			aMongoSDAMServerDescription ismaster hasPrimary
+			aMongoSDAMServerDescription isMaster hasPrimary
 				ifTrue: [
 					type := MongoSDAMTopologyType replicaSetWithPrimary.
-					primaryUrlString := aMongoSDAMServerDescription ismaster primaryUrlString ]
+					primaryUrlString := aMongoSDAMServerDescription isMaster primaryUrlString ]
 				ifFalse: [ 
 					type := MongoSDAMTopologyType replicaSetNoPrimary.
 					primaryUrlString := nil ].
-			secondaryUrlStrings := aMongoSDAMServerDescription ismaster hosts asSet.
+			secondaryUrlStrings := aMongoSDAMServerDescription isMaster hosts asSet.
 		]
 		ifFalse: [ self shouldBeImplemented 
 			"Check https://docs.mongodb.com/v3.4/reference/command/isMaster/" ].

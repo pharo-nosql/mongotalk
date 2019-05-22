@@ -5,7 +5,7 @@ checkOnce
 	| ismaster roundtripTime |
 	[ 	[
 		mongo openWithTimeout: client connectTimeout.
-		roundtripTime := [ ismaster := mongo ismaster ] timeToRun ]
+		roundtripTime := [ ismaster := mongo isMaster ] timeToRun ]
 				on: ConnectionTimedOut
 				do: [ :error |
 					roundtripTimeCalculator reset. 

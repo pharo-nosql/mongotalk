@@ -9,7 +9,7 @@ refreshTopologyWith: newServerDescription
 			to: newServerDescription).
 		
 		(topology hasAnythingNew: newServerDescription) ifTrue: [ 
-			self discoverUrlsFrom: newServerDescription ismaster hosts ].
+			self discoverUrlsFrom: newServerDescription isMaster hosts ].
 
 		newTopology := MongoSDAMTopology
 			newBasedOn: topology

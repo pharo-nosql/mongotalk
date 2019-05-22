@@ -8,6 +8,6 @@
 	"instvars" : [
 		"response"
 	],
-	"name" : "MongoIsmaster",
+	"name" : "MongoIsMaster",
 	"type" : "normal"
 }
