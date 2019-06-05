@@ -2,6 +2,7 @@ initialization
 initializeBasedOn: anotherMongoSDAMTopology updatedWith: aMongoSDAMServerDescription
 	self initialize.
 
+	"Base on another's dictionary of servers, but override with the new server description."
 	serversByUrlString := anotherMongoSDAMTopology serversByUrlString deepCopy.
 	self updateServer: aMongoSDAMServerDescription.
 

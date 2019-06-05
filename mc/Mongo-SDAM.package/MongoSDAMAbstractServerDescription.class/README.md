@@ -1,0 +1,1 @@
+I represent the description of a mongodb server. See my subclasses.

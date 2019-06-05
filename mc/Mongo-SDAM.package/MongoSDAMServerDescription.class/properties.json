@@ -1,13 +1,13 @@
 {
-	"commentStamp" : "",
+	"commentStamp" : "MartinDias 6/5/2019 12:35",
 	"super" : "MongoSDAMAbstractServerDescription",
 	"category" : "Mongo-SDAM-Topology",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"ismaster",
-		"roundtripTime"
+		"roundtripTime",
+		"isMaster"
 	],
 	"name" : "MongoSDAMServerDescription",
 	"type" : "normal"

@@ -1,5 +1,5 @@
 initialization
-initializeIsmaster: aMongoIsmaster roundtripTime: aDuration
+initializeIsMaster: aMongoIsmaster roundtripTime: aDuration
 	self initializeUrlString: aMongoIsmaster urlString.
-	ismaster := aMongoIsmaster.
+	isMaster := aMongoIsmaster.
 	roundtripTime := aDuration.

@@ -1,3 +1,3 @@
 accessing
 isMaster
-	^ ismaster
+	^ isMaster

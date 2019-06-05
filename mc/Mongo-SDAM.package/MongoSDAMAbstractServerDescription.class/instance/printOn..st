@@ -3,8 +3,6 @@ printOn: aStream
 	"Append a sequence of characters to aStream that identify the receiver."
 
 	super printOn: aStream.
-	aStream
-		nextPut: $(;
-		print: urlString;
-		print: self identityHash;
-		nextPut: $)
+	aStream nextPut: $(.
+	self printShortDescriptionOn: aStream.
+	aStream nextPut: $)

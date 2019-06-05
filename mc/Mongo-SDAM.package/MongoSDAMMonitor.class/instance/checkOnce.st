@@ -15,5 +15,5 @@ checkOnce
 	roundtripTimeCalculator add: roundtripTime asMilliSeconds.
 
 	^ MongoSDAMServerDescription
-		ismaster: ismaster
+		isMaster: ismaster
 		roundtripTime: roundtripTimeCalculator average

@@ -1,5 +1,5 @@
 instance creation
-ismaster: aMongoIsmaster roundtripTime: aDuration
+isMaster: aMongoIsmaster roundtripTime: aDuration
 	^ self basicNew
-		initializeIsmaster: aMongoIsmaster roundtripTime: aDuration;
+		initializeIsMaster: aMongoIsmaster roundtripTime: aDuration;
 		yourself
