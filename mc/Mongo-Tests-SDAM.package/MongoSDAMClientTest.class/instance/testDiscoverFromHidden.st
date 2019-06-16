@@ -1,4 +1,4 @@
-instance creation
+tests - monitoring
 testDiscoverFromHidden
 	
 	client := MongoSDAMClient withUrls: {

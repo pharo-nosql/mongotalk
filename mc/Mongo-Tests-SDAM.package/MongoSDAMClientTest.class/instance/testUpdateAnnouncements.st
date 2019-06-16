@@ -1,4 +1,4 @@
-instance creation
+tests - monitoring
 testUpdateAnnouncements
 	
 	| serverUpdates topologyUpdates |

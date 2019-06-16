@@ -1,4 +1,4 @@
-instance creation
+tests - monitoring
 testDiscoverSecondary
 	
 	client := MongoSDAMClient withUrls: {
