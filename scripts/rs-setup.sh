@@ -1,7 +1,5 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-$DIR/rs-createDbDirectories.sh
-$DIR/rs-serve.sh
-$DIR/rs-initiateRS.sh
+source $(dirname $0)/rs-createDbDirectories.sh
+source $(dirname $0)/rs-serve.sh
+source $(dirname $0)/rs-initiateRS.sh

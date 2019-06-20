@@ -6,8 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"mongo",
-		"isMongoAvailable"
+		"mongo"
 	],
 	"name" : "MongoReplicationTest",
 	"type" : "normal"

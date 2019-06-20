@@ -1,4 +1,3 @@
 instance creation
 newMongo
-
-	^Mongo host: 'localhost' port: 27031
+	^ Mongo host: 'localhost' port: 27031

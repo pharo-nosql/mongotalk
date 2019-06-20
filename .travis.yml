@@ -26,6 +26,9 @@ before_install:
 
 before_script:
   - "mongo test --eval 'db.createUser({ \"user\": \"pharounittest\", \"pwd\": \"test\", roles: [] });'"
+  - export baseRepositoryPath=$SMALLTALK_CI_BUILD/replicatest/
+  - export replicaSetName=db
+  - ./scripts/rs-setup.sh
 
 # bob-bench xUnit file analysis
 after_script:
