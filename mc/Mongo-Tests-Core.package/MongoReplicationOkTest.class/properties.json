@@ -5,7 +5,10 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
+	"instvars" : [
+		"database",
+		"collection"
+	],
 	"name" : "MongoReplicationOkTest",
 	"type" : "normal"
 }

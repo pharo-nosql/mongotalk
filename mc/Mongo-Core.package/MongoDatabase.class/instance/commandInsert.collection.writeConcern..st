@@ -10,4 +10,4 @@ commandInsert: newDictionary collection: collectionName writeConcern: aConcern
 		} as: OrderedDictionary.
 	aConcern ifNotNil: [
 		dict at: 'writeConcern' put: aConcern concernForCommand].
-	^self command: dict.
+	^self commandAndVerify: dict.
