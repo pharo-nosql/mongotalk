@@ -3,5 +3,6 @@ initializeUrlString: aUrlString client: aMongoSDAMClient
 	self initialize.
 	urlString := aUrlString.
 	client := aMongoSDAMClient.
-	mongo := Mongo url: urlString asMongoUrl.
+	checkMongo := Mongo url: urlString asMongoUrl.
+	pool := MongoPool url: urlString asMongoUrl.
 	roundtripTimeCalculator := MongoMovingAverageCalculator new.

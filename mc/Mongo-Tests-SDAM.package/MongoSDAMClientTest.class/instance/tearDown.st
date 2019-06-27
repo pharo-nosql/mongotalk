@@ -2,4 +2,7 @@ running
 tearDown
 	super tearDown.
 	
-	client ifNotNil: [ client stop ]
+	client ifNotNil: [
+		client
+			mongoDo: [ :mongo | (mongo databaseNamed: self databaseNameForTesting) drop ];
+			stop ]

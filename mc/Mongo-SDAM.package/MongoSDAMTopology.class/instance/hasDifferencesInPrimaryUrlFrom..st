@@ -1,5 +1,5 @@
 testing
-hasAnythingNew: newServerDescription
+hasDifferencesInPrimaryUrlFrom: newServerDescription
 
 	newServerDescription isSuccess ifFalse: [ ^false ].
 

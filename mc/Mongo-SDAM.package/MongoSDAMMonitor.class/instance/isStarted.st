@@ -1,3 +1,3 @@
 accessing
 isStarted
-	^ process notNil
+	^ process notNil and: [ process isTerminated not ]

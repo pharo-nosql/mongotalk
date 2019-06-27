@@ -1,3 +1,4 @@
 accessing
 start
-	monitors do: #start.
+	mutex critical: [
+		monitors valuesDo: #start ].

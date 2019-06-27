@@ -1,11 +1,18 @@
 initialization
 initializeWith: initialUrls
+	| initialUrlStrings |
 	self initialize.
 
+	readPreference := MongoReadPreference primary.
+	serverSelectionTimeoutMS := 3000.
+
 	mutex := Mutex new.
-	topologyUpdateAnnouncer := Announcer new.
-	monitors := #().	
+	announcer := Announcer new.
+	monitors := Dictionary new.
 	topology := MongoSDAMTopology new.
 
-	self addMonitorsForAll: (initialUrls collect: [:each |
-		self canonicalMongoUrlAsString: each ]).
+	initialUrlStrings := initialUrls collect: [:each |
+		self canonicalMongoUrlAsString: each ].
+	self
+		addMonitorsForAll: initialUrlStrings
+		andDo: [].

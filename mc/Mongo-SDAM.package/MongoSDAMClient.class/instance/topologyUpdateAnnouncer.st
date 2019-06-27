@@ -1,3 +1,3 @@
 accessing
 topologyUpdateAnnouncer
-	^ topologyUpdateAnnouncer
+	^ announcer

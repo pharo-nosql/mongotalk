@@ -2,20 +2,21 @@ monitoring
 refreshTopologyWith: newServerDescription
 
 	mutex critical: [
-		| latestServerDescription newTopology |
+		| latestServerDescription oldTopology |
 		latestServerDescription := topology serverAt: newServerDescription urlString.
-		topologyUpdateAnnouncer announce: (MongoSDAMServerDescriptionUpdate
+		announcer announce: (MongoSDAMServerDescriptionUpdate
 			from: latestServerDescription
 			to: newServerDescription).
 		
-		(topology hasAnythingNew: newServerDescription) ifTrue: [ 
-			self discoverUrlsFrom: newServerDescription isMaster hosts ].
-
-		newTopology := MongoSDAMTopology
+		oldTopology := topology.
+		topology := MongoSDAMTopology
 			newBasedOn: topology
 			updatedWith: newServerDescription.
-		topologyUpdateAnnouncer announce: (MongoSDAMTopologyUpdate
-			from: topology
-			to: newTopology).
-		topology := newTopology
+
+		newServerDescription isSuccess ifTrue: [ 
+			self discoverUrlsFrom: newServerDescription isMaster hosts ].
+
+		announcer announce: (MongoSDAMTopologyUpdate
+			from: oldTopology
+			to: topology).
 	].

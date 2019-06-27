@@ -8,10 +8,11 @@
 	"instvars" : [
 		"client",
 		"process",
-		"mongo",
 		"roundtripTimeCalculator",
 		"urlString",
-		"nextTimeToCheck"
+		"nextTimeToCheck",
+		"pool",
+		"checkMongo"
 	],
 	"name" : "MongoSDAMMonitor",
 	"type" : "normal"

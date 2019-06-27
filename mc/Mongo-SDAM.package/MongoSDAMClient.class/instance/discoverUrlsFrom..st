@@ -5,6 +5,4 @@ discoverUrlsFrom: urlsAsStrings
 	Note 2: Caller must ensure in critical region."
 
 	(urlsAsStrings difference: topology serversUrlStrings) ifNotEmpty: [ :newUrlsAsStrings |
-		| newMonitors |
-		newMonitors := self addMonitorsForAll: newUrlsAsStrings.
-		newMonitors do: #start ].
+		self addMonitorsForAll: newUrlsAsStrings andDo: #start ].

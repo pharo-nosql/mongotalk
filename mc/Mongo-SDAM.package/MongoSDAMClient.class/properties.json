@@ -7,12 +7,15 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"monitors",
-		"topologyUpdateAnnouncer",
 		"mutex",
 		"topology",
 		"connectTimeout",
 		"crisisStateFrequency",
-		"steadyStateFrequency"
+		"steadyStateFrequency",
+		"readPreference",
+		"pool",
+		"announcer",
+		"serverSelectionTimeoutMS"
 	],
 	"name" : "MongoSDAMClient",
 	"type" : "normal"

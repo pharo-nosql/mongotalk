@@ -6,4 +6,6 @@ printOn: aStream
 	aStream
 		nextPut: $(;
 		print: urlString;
+		space;
+		print: (self isStarted ifTrue: 'active' ifFalse: 'idle');
 		nextPut: $).

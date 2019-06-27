@@ -22,9 +22,9 @@ testMonitoringStates
 	self assert: topology primaryUrl equals: MongoReplicationTestResources mongoUrlA.
 
 	"Step down server A and force Crisis state in client."
-	MongoReplicationTestResources stepDownA: 10 seconds.
 	MongoReplicationTestResources stepDownB: 1 second.
-	client stop; start.
+	MongoReplicationTestResources stepDownA: 10 seconds.
+	client restart.
 	
 	"There is no primary"
 	1 second wait.

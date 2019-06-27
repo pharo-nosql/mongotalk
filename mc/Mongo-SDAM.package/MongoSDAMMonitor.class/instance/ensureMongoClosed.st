@@ -1,3 +1,3 @@
 private
 ensureMongoClosed
-	(mongo isNotNil and: [ mongo isOpen ]) ifTrue: [ mongo close ]
+	(checkMongo isNotNil and: [ checkMongo isOpen ]) ifTrue: [ checkMongo close ]

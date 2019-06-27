@@ -1,4 +1,4 @@
 accessing
 stop
 	mutex critical: [
-		monitors do: #stop ]
+		monitors valuesDo: #stop ]
