@@ -13,4 +13,4 @@ commandUpdate: origDictionary with: newDictionary collection: collectionName wri
 		} as: OrderedDictionary.
 	aConcern ifNotNil: [
 		dict at: 'writeConcern' put: aConcern concernForCommand].
-	^self command: dict.
+	^self commandAndVerify: dict.
