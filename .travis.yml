@@ -6,9 +6,8 @@ os:
   - linux
 
 smalltalk:
-  - Pharo-7.0
-  - Pharo-6.0
-  - Pharo-5.0
+  - Pharo64-7.0
+  - Pharo32-6.1
 
 env:
   - MONGODB=4.0
