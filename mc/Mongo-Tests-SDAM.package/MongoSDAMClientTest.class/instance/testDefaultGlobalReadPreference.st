@@ -1,6 +1,6 @@
 tests - read preference
 testDefaultGlobalReadPreference
-	
+
 	client := MongoSDAMClient withUrls: {
 		MongoReplicationTestResources mongoUrlA }.
 		

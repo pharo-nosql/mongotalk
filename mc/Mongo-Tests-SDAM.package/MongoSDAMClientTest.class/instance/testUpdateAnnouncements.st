@@ -16,11 +16,11 @@ testUpdateAnnouncements
 		send: #nextPut:
 		to: topologyUpdates.
 		
-	client steadyStateFrequency: 200 milliSeconds.
+	client steadyStateFrequency: 250 milliSeconds.
 	client start.
 
 	"Wait the initial discovery of the 2 servers of the test replica set."
-	50 milliSeconds wait.
+	100 milliSeconds wait.
 
 	"Each monitor check generates an update of both server and topology (with steadyStateFrequency)."
 	1 to: 3 do: [ :each |

@@ -8,7 +8,7 @@ testInstanceCreation
 		should: [
 			client := MongoSDAMClient withUrls: {
 				MongoReplicationTestResources mongoUrlOffline } ]
-		notTakeMoreThan: 1 milliSecond.
+		notTakeMoreThan: 100 milliSeconds.
 
 	self assert: SocketStream allInstances size equals: count.
 	self assert: client topology isTypeUnknown.

@@ -1,8 +1,10 @@
 running
 tearDown
+	| duration |
 	super tearDown.
-	
-	client ifNotNil: [
-		client
-			mongoDo: [ :mongo | (mongo databaseNamed: self databaseNameForTesting) drop ];
-			stop ]
+
+	Transcript cr; show: testSelector; << ' tearDown '; cr.
+	duration := [ self ensureDeleteDatabaseForTesting ] timeToRun.
+	Transcript space; print: duration; cr.
+
+	client ifNotNil: [ client stop ]

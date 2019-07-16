@@ -13,7 +13,6 @@
 		"crisisStateFrequency",
 		"steadyStateFrequency",
 		"readPreference",
-		"pool",
 		"announcer",
 		"serverSelectionTimeoutMS"
 	],

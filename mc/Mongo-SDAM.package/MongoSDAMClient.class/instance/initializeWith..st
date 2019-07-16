@@ -11,8 +11,7 @@ initializeWith: initialUrls
 	monitors := Dictionary new.
 	topology := MongoSDAMTopology new.
 
-	initialUrlStrings := initialUrls collect: [:each |
-		self canonicalMongoUrlAsString: each ].
+	initialUrlStrings := initialUrls collect: [:each | each asMongoUrl asMongoUrlString ].
 	self
 		addMonitorsForAll: initialUrlStrings
 		andDo: [].
