@@ -1,8 +1,8 @@
 tests - read preference
-testGlobalReadPreferencePrimary
+testGlobalReadPreferencePrimaryQuery
 
 	| selected topology |
-	self timeLimit: 5 seconds.
+	self timeLimit: 30 seconds.
 	
 	client := MongoSDAMClient withUrls: {
 		MongoReplicationTestResources mongoUrlA }.
@@ -40,8 +40,8 @@ testGlobalReadPreferencePrimary
 	MongoReplicationTestResources stepDownA: 10 seconds.
 	client restart.
 	1 second wait.
-	
-	"It can't read from the secondary (B)"
+
+	"It can't query from the secondary (B)"
 	self
 		should: [ 
 			client mongoDo: [ :mongo |
@@ -49,4 +49,5 @@ testGlobalReadPreferencePrimary
 				database := mongo databaseNamed: self databaseNameForTesting.
 				collection := database collectionAt: self collectionNameForTesting.
 				selected := collection select: { 'key1' -> 'value1'} asDictionary ] ]
-		raise: MongoQueryError
+		raise: MongoQueryError.
+
