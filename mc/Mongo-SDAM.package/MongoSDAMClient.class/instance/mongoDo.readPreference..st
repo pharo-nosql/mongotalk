@@ -8,8 +8,10 @@ mongoDo: aBlockClosure readPreference: aReadPreference
 
 	^ [[ selectedPool mongoDo: aBlockClosure ]
 			on: MongoCommandError
-			do: [ self notYetImplemented ]]
+			do: [ :error |
+				self handleMongoCommandError: error.
+				error signal ]]
 			on: MongoQueryError
-				do: [ :error |
-					self handleMongoQueryError: error.
-					error signal ]
+			do: [ :error |
+				self handleMongoQueryError: error.
+				error signal ]
