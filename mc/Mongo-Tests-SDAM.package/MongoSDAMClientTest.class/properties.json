@@ -1,15 +1,13 @@
 {
-	"classtraitcomposition" : "TMongoReplicationTestCase classTrait",
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Mongo-Tests-SDAM-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"client"
 	],
 	"name" : "MongoSDAMClientTest",
-	"commentStamp" : "",
-	"super" : "TestCase",
-	"traitcomposition" : "TMongoReplicationTestCase",
-	"type" : "normal",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"category" : "Mongo-Tests-SDAM-Client"
+	"type" : "normal"
 }
