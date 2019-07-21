@@ -6,9 +6,8 @@ os:
   - linux
 
 smalltalk:
-  - Pharo-7.0
-  - Pharo-6.0
-  - Pharo-5.0
+  - Pharo64-7.0
+  - Pharo32-6.1
 
 env:
   - MONGODB=4.0
@@ -23,9 +22,6 @@ before_install:
 - bash .install_mongodb_on_travis.sh
 - sleep 15  # https://docs.travis-ci.com/user/database-setup/#MongoDB-does-not-immediately-accept-connections
 - mongo --eval 'db.version();'
- 
-install:
-  - pip install --user benchupload
 
 before_script:
   - "mongo test --eval 'db.createUser({ \"user\": \"pharounittest\", \"pwd\": \"test\", roles: [] });'"
@@ -34,8 +30,5 @@ before_script:
   - ./scripts/rs-setup.sh
 
 # bob-bench xUnit file analysis
-after_success:
-  - benchupload --dir=$SMALLTALK_CI_BUILD
-after_failure:
-  - benchupload --dir=$SMALLTALK_CI_BUILD
-
+after_script:
+  - pip install --user benchupload && benchupload
