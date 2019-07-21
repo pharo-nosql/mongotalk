@@ -8,13 +8,15 @@ baseline: spec
 				package: 'Mongo-BSON';
 				package: 'Mongo-Squeak' with: [ spec requires: #('Grease' 'Mongo-BSON') ];
 				package: 'Mongo-Core' with: [ spec requires: #('PBKDF2' 'Mongo-Squeak' 'Mongo-BSON') ];
+				package: 'Mongo-SDAM' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Queries';
 				package: 'Mongo-Tests-BSON' with: [ spec requires: #('Mongo-BSON') ];
 				package: 'Mongo-Tests-Core' with: [ spec requires: #('Mongo-Core') ];
+				package: 'Mongo-Tests-SDAM' with: [ spec requires: #('Mongo-Tests-Core' 'Mongo-SDAM') ];
 				package: 'Mongo-Tests-Queries' with: [ spec requires: #('Mongo-Queries') ];
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ].
 			spec
 				group: 'default' with: #('Core' 'Tools' 'Tests');
-				group: 'Core' with: #('Mongo-Core' 'Mongo-Queries');
+				group: 'Core' with: #('Mongo-Core' 'Mongo-SDAM' 'Mongo-Queries');
 				group: 'Tools' with: #('Mongo-Pharo-Tools');
-				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries') ]
+				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-SDAM' 'Mongo-Tests-Queries') ]
