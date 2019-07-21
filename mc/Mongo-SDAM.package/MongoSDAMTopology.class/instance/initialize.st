@@ -4,3 +4,5 @@ initialize
 	
 	type := MongoSDAMTopologyType unknown.
 	serversByUrlString := Dictionary new.
+	secondaryUrlStrings := #().
+	primaryUrlString := nil.

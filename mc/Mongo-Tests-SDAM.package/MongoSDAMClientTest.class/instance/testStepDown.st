@@ -2,7 +2,7 @@ tests - monitoring
 testStepDown
 
 	| topology |
-	self timeLimit: 60 seconds.
+	self timeLimit: 30 seconds.
 	
 	client := MongoSDAMClient withUrls: {
 		MongoReplicationTestResources mongoUrlA.

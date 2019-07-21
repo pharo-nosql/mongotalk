@@ -2,7 +2,7 @@ tests - read preference
 testGlobalReadPreferencePrimaryPreferred
 
 	| selected topology |
-	self timeLimit: 5 seconds.
+	self timeLimit: 30 seconds.
 	
 	client := MongoSDAMClient withUrls: {
 		MongoReplicationTestResources mongoUrlA }.

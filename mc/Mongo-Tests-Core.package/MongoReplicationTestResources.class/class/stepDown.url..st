@@ -12,4 +12,4 @@ stepDown: aDuration url: aZnUrl
 		on: Error 
 		do: [:e | "Ignore" ].
 
-	mongo isOpen ifTrue: [ mongo close ]
+	mongo closeIfOpen

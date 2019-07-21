@@ -1,4 +1,4 @@
-as yet unclassified
+convenience
 waitPrimaryUrlEquals: aZnUrl upTo: aDuration onCompletion: successBlock onTimeout: failBlock
 	| expectedUrlString |
 	expectedUrlString := aZnUrl asMongoUrlString.

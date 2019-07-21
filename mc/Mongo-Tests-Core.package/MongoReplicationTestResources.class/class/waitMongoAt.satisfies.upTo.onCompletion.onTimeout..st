@@ -1,15 +1,14 @@
-as yet unclassified
+convenience
 waitMongoAt: aZnUrl satisfies: conditionBlock upTo: aDuration onCompletion: successBlock onTimeout: failBlock
 
 	| mongo smallDuration end |
-	smallDuration := 50 milliSeconds min: aDuration.
+	smallDuration := 100 milliSeconds.
 	end := DateAndTime now + aDuration.
 
 	[	mongo := Mongo url: aZnUrl.
-	[	mongo open.
-		(conditionBlock value: mongo) 
-			ifTrue: [ ^ successBlock value ] ] 
-			on: Error do: [ :e | e logCr. mongo close ].
+	[[	mongo openWithTimeout: aDuration.
+		(conditionBlock value: mongo) ifTrue: [ ^ successBlock value ]]
+			on: Error do: [ :e | e logCr ]] ensure: [ mongo closeIfOpen ].
 		smallDuration wait.
 	] doWhileFalse: [ DateAndTime now > end ].
 
