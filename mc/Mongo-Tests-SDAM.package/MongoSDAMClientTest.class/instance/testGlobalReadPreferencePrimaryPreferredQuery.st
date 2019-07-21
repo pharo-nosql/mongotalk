@@ -1,5 +1,5 @@
 tests - read preference
-testGlobalReadPreferencePrimaryPreferred
+testGlobalReadPreferencePrimaryPreferredQuery
 
 	| selected topology |
 	self timeLimit: 30 seconds.
