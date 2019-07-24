@@ -1,4 +1,4 @@
 running
 tearDown
-	collection drop.
-	root close
+	database collections do: #drop.
+	root close.

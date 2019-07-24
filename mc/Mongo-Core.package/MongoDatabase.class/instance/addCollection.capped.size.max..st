@@ -15,4 +15,4 @@ addCollection: aString capped: aCapped size: aSize max: aMax
 			error isCollectionAlreadyExists
 				ifTrue: [ (MongoCollectionAlreadyExists new collectionName: aString) signal ]
 				ifFalse: [ error signal ] ].
-	^MongoCollection database: self name: aString
+	^ self collectionAt: aString
