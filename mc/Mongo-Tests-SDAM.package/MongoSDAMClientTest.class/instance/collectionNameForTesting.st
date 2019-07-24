@@ -1,3 +1,3 @@
-tests - read preference
+tests
 collectionNameForTesting
 	^ 'testCollection'

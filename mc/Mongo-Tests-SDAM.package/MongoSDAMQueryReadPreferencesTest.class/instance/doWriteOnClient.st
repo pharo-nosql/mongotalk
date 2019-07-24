@@ -1,5 +1,5 @@
-running
-doQueryWriteOnClient
+hooks
+doWriteOnClient
 	client mongoDo: [ :mongo |
 		| database collection |
 		database := mongo databaseNamed: self databaseNameForTesting.

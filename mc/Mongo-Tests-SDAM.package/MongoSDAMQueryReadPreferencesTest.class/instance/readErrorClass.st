@@ -1,0 +1,3 @@
+hooks
+readErrorClass
+	^ MongoQueryError

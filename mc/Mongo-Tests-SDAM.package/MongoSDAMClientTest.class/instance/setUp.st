@@ -4,5 +4,5 @@ setUp
 	super setUp.
 
 	Transcript cr; cr; show: testSelector; << ' setUp '; cr.
-	duration := [ self ensureDeleteDatabaseForTesting ] timeToRun.
+	duration := [ self ensureTestingScenario ] timeToRun.
 	Transcript space; print: duration; cr.

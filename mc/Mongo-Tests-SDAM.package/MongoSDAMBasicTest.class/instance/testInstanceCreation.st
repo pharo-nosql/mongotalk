@@ -1,4 +1,4 @@
-tests - monitoring
+tests
 testInstanceCreation
 	"SDAM spec explicits that clients shouldn't try to connect on isntance creation."
 	

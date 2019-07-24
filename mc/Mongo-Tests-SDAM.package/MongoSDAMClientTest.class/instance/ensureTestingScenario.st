@@ -1,5 +1,5 @@
 running
-ensureDeleteDatabaseForTesting
+ensureTestingScenario
 	MongoReplicationTestResources
 		waitMongoAt: MongoReplicationTestResources mongoUrlA
 		satisfies: [ :mongo |

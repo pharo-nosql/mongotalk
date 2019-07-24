@@ -1,5 +1,5 @@
-tests - read preference
-testGlobalReadPreferencePrimaryQuery
+tests
+testGlobalReadPreferencePrimary
 
 	| selected topology |
 	self timeLimit: 30 seconds.
@@ -21,10 +21,10 @@ testGlobalReadPreferencePrimaryQuery
 	self assert: topology primaryUrl equals: MongoReplicationTestResources mongoUrlA.
 
 	"It writes to primary (A)"
-	self doQueryWriteOnClient.
+	self doWriteOnClient.
 
 	"It reads from primary (A)"
-	selected := self doQueryReadOnClient.
+	selected := self doReadOnClient.
 	self assert: selected size equals: 1.
 
 	"Step down server A and force Crisis state in client."
@@ -32,8 +32,7 @@ testGlobalReadPreferencePrimaryQuery
 	client restart.
 	1 second wait.
 
-	"It can't query from the secondary (B)"
+	"It can't do a read command from the secondary (B)"
 	self
-		should: [ self doQueryReadOnClient ]
-		raise: MongoQueryError.
-
+		should: [ self doReadOnClient ]
+		raise: self readErrorClass.

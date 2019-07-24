@@ -1,4 +1,4 @@
-tests - read preference
+tests
 testDefaultGlobalReadPreference
 
 	client := MongoSDAMClient withUrls: {

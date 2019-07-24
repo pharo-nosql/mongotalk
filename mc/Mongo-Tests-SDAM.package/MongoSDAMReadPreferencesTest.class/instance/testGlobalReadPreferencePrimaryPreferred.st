@@ -1,5 +1,5 @@
-tests - read preference
-testGlobalReadPreferencePrimaryPreferredCommand
+tests
+testGlobalReadPreferencePrimaryPreferred
 
 	| selected topology |
 	self timeLimit: 30 seconds.
@@ -21,10 +21,10 @@ testGlobalReadPreferencePrimaryPreferredCommand
 	self assert: topology primaryUrl equals: MongoReplicationTestResources mongoUrlA.
 
 	"It writes to primary (A)"
-	self doCommandWriteOnClient.
+	self doWriteOnClient.
 
 	"It reads from primary (A)"
-	selected := self doCommandReadOnClient.
+	selected := self doReadOnClient.
 	self assert: selected size equals: 1.
 
 
@@ -36,6 +36,6 @@ testGlobalReadPreferencePrimaryPreferredCommand
 	
 	"It reads from secondary (B)"
 	selected := nil.
-	selected := self doCommandReadOnClient.
+	selected := self doReadOnClient.
 	self deny: selected isNil.
 	self assert: selected size equals: 1.

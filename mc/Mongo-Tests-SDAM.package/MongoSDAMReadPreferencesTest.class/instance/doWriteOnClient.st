@@ -1,0 +1,3 @@
+hooks
+doWriteOnClient
+	^ self subclassResponsibility

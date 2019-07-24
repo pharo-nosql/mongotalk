@@ -1,0 +1,3 @@
+hooks
+doReadOnClient
+	^ self subclassResponsibility
