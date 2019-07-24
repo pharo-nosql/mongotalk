@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Mongo-Core-Commands",
+	"category" : "Mongo-Core-Responses",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
