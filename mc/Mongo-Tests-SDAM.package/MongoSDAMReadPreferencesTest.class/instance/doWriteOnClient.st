@@ -1,3 +1,7 @@
-hooks
+running
 doWriteOnClient
-	^ self subclassResponsibility
+	client mongoDo: [ :mongo |
+		| database collection |
+		database := mongo databaseNamed: self databaseNameForTesting.
+		collection := database addCollection: self collectionNameForTesting.
+		self doWriteOnCollection: collection ]

@@ -1,3 +1,4 @@
-hooks
+running
 doReadOnClient
-	^ self subclassResponsibility
+	client mongoDo: [ :mongo | ^ self doReadOnMongo: mongo ].
+	^ nil
