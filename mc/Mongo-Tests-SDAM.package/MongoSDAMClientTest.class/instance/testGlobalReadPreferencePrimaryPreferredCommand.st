@@ -21,21 +21,10 @@ testGlobalReadPreferencePrimaryPreferredCommand
 	self assert: topology primaryUrl equals: MongoReplicationTestResources mongoUrlA.
 
 	"It writes to primary (A)"
-	client mongoDo: [ :mongo |
-		| database collection |
-		database := mongo databaseNamed: self databaseNameForTesting.
-		collection := database addCollection: self collectionNameForTesting.
-		collection 
-			commandInsert: (Dictionary new at: 'key1' put: 'value1'; yourself) 
-			writeConcern: self writeConcernForTesting.
-		].
+	self doCommandWriteOnClient.
 
 	"It reads from primary (A)"
-	client mongoDo: [ :mongo |
-		| database collection |
-		database := mongo databaseNamed: self databaseNameForTesting.
-		collection := database collectionAt: self collectionNameForTesting.
-		selected := (collection commandFind: (Dictionary new at: 'key1' put: 'value1'; yourself) readConcern: nil) documents ].
+	selected := self doCommandReadOnClient.
 	self assert: selected size equals: 1.
 
 
@@ -47,10 +36,6 @@ testGlobalReadPreferencePrimaryPreferredCommand
 	
 	"It reads from secondary (B)"
 	selected := nil.
-	client mongoDo: [ :mongo |
-		| database collection |
-		database := mongo databaseNamed: self databaseNameForTesting.
-		collection := database collectionAt: self collectionNameForTesting.
-		selected := (collection commandFind: (Dictionary new at: 'key1' put: 'value1'; yourself) readConcern: nil) documents ].
+	selected := self doCommandReadOnClient.
 	self deny: selected isNil.
 	self assert: selected size equals: 1.

@@ -21,7 +21,7 @@ testStepDown
 
 	"Step down server A and force Crisis state in client."
 	MongoReplicationTestResources stepDownA: 10 seconds.
-	client stop; start.
+	client restart.
 	
 	"There is no primary (election process going on)"
 	1 second wait.
