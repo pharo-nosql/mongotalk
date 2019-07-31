@@ -10,4 +10,4 @@ commandFind: filterDictionary collection: collectionName readConcern: aConcern
 	aConcern ifNotNil: [
 		dict at: 'readConcern' put: aConcern concernForCommand ].
 
-	^ self command: dict
+	^ MongoCommandCursor database: self dictionary: dict

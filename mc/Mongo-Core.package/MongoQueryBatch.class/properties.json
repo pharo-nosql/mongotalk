@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"documents",
-		"cursorIdForNextBatch"
+		"collectionName",
+		"cursorId"
 	],
 	"name" : "MongoQueryBatch",
 	"type" : "normal"

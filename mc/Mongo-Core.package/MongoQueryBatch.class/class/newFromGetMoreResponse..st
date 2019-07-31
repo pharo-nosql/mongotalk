@@ -4,6 +4,7 @@ newFromGetMoreResponse: aDictionary
 	| cursorDictionary |
 	cursorDictionary := aDictionary at: 'cursor'.
 	^ self basicNew
-		initializeWithDocuments: (cursorDictionary at: 'nextBatch')
+		initializeWithCollectionName: (cursorDictionary at: 'ns')
+		documents: (cursorDictionary at: 'nextBatch')
 		cursorId: (cursorDictionary at: 'id');
 		yourself

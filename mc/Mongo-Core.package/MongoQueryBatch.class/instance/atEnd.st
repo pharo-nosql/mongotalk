@@ -1,3 +1,3 @@
 accessing
 atEnd
-	^ self cursorIdForNextBatch = 0
+	^ self cursorId = 0
