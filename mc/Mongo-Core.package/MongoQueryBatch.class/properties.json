@@ -1,13 +1,15 @@
 {
-	"commentStamp" : "MartinDias 5/12/2016 01:32",
+	"commentStamp" : "",
 	"super" : "Object",
 	"category" : "Mongo-Core-Responses",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"status"
+		"documents",
+		"collectionName",
+		"cursorId"
 	],
-	"name" : "MongoReplicaSetStatusMember",
+	"name" : "MongoQueryBatch",
 	"type" : "normal"
 }

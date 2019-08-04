@@ -1,9 +1,16 @@
 operations
 collectionNames
-	"Answer the names of the collections in this database (for MongoDB >= 3.0).
+	"Answer the names of the collections in this database.
 
 	See more at https://docs.mongodb.com/manual/reference/command/listCollections/"
 
-	| reply |
-	reply := self command: {(#listCollections -> 1)} asDictionary.
-	^ ((reply at: 'cursor') at: 'firstBatch') collect: [ :each | each at: 'name' ]
+	| dictionary |
+	dictionary := OrderedIdentityDictionary new
+		at: #listCollections put: 1;
+		at: #nameOnly put: true;
+		yourself.
+
+	^ (MongoCommandCursor
+		database: self
+		dictionary: dictionary)
+		collect: [ :each | each at: 'name' ].

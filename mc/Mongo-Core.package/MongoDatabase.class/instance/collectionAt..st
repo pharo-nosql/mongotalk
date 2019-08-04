@@ -1,7 +1,5 @@
 accessing
 collectionAt: aString 
-	"Answers the collection in this database that has aString as name (or nil)"
+	"Answers a MongoCollection for this database that has aString as name (may not exist)."
 
-	^ self collections 
-		detect:  [ :e | e name = aString ]
-		ifNone: [ nil ]
+	^ MongoCollection database: self name: aString

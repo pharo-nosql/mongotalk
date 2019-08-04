@@ -1,6 +1,5 @@
 tests
 testGetNoneExistingCollection
-	| new |
-	new := database getCollection: 'collection'.
-	[self assert: (database collections contains: [:each | each name = 'collection'])]
-		ensure: [new drop]
+	self deny: (database collectionNames includes: 'collection').
+	database getCollection: 'collection'.
+	self assert: (database collectionNames includes: 'collection').
