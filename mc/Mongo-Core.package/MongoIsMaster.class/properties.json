@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "MartinDias 7/24/2019 12:23",
+	"super" : "Object",
+	"category" : "Mongo-Core-Responses",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"response"
+	],
+	"name" : "MongoIsMaster",
+	"type" : "normal"
+}
