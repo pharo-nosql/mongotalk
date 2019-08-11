@@ -1,0 +1,17 @@
+{
+	"commentStamp" : "MartinDias 7/30/2019 12:47",
+	"super" : "Object",
+	"category" : "Mongo-Core-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"database",
+		"batch",
+		"command",
+		"batchSizeOrNil",
+		"timeoutOrNil"
+	],
+	"name" : "MongoCommandCursor",
+	"type" : "normal"
+}

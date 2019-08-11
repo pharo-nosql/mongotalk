@@ -1,3 +1,3 @@
-accessing - replica set
+replica set
 replicaSetUrls
-	^ self hosts collect: #asMongoUrl
+	^ self replicaSetHosts collect: #asMongoUrl

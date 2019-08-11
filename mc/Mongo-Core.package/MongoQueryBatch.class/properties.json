@@ -1,13 +1,14 @@
 {
 	"commentStamp" : "",
 	"super" : "Object",
-	"category" : "Mongo-Core-Commands",
+	"category" : "Mongo-Core-Responses",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
 		"documents",
-		"cursorIdForNextBatch"
+		"collectionName",
+		"cursorId"
 	],
 	"name" : "MongoQueryBatch",
 	"type" : "normal"

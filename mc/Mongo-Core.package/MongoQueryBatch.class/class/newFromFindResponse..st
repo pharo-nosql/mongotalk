@@ -4,6 +4,7 @@ newFromFindResponse: aDictionary
 	| cursorDictionary |
 	cursorDictionary := aDictionary at: 'cursor'.
 	^ self basicNew
-		initializeWithDocuments: (cursorDictionary at: 'firstBatch')
+		initializeWithCollectionName: (cursorDictionary at: 'ns')
+		documents: (cursorDictionary at: 'firstBatch')
 		cursorId: (cursorDictionary at: 'id');
 		yourself

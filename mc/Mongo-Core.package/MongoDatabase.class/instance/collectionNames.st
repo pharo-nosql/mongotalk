@@ -4,5 +4,13 @@ collectionNames
 
 	See more at https://docs.mongodb.com/manual/reference/command/listCollections/"
 
-	^ ((self listCollections at: 'cursor') at: 'firstBatch')
-			collect: [ :each | each at: 'name' ]
+	| dictionary |
+	dictionary := OrderedIdentityDictionary new
+		at: #listCollections put: 1;
+		at: #nameOnly put: true;
+		yourself.
+
+	^ (MongoCommandCursor
+		database: self
+		dictionary: dictionary)
+		collect: [ :each | each at: 'name' ].

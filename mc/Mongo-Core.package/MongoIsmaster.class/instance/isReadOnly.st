@@ -1,3 +1,3 @@
-accessing - common
+accessing
 isReadOnly
 	^ response at: 'readOnly'

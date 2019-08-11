@@ -1,3 +1,3 @@
-testing - replica set
+replica set
 hasPrimary
 	^ response includesKey: 'primary'

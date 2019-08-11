@@ -1,3 +1,3 @@
-testing - common
+replica set
 isReplicaSet
 	^ response includesKey: 'setName'

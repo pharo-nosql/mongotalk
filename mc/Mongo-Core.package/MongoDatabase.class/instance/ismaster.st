@@ -2,6 +2,6 @@ operations
 isMaster
 
 	| reply |
-	reply := self command: (SmallDictionary new at: #ismaster put: 1; yourself).
+	reply := self command: (OrderedDictionary new at: #ismaster put: 1; yourself).
 
 	^ MongoIsMaster with: reply

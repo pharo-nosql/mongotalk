@@ -1,3 +1,3 @@
-testing - replica set
+replica set
 isSecondary
 	^ response at: 'secondary' ifAbsent: [ false ]

@@ -1,4 +1,4 @@
-accessing - common
+accessing
 isWrittable
 	"A boolean value that reports when this node is writable. If true, then this instance is a primary in a replica set, or a mongos instance, or a standalone mongod.
 

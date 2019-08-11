@@ -1,3 +1,3 @@
-accessing - replica set
+replica set
 primaryUrlString
 	^ response at: 'primary'
