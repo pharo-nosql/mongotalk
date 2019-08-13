@@ -2,18 +2,21 @@ tests - monitoring
 testMonitoringStates
 
 	| topology |
-	self timeLimit: 60 seconds.
+	self timeLimit: 1 minute.
 
 	client := MongoSDAMClient withUrls: {
 		MongoReplicationTestResources mongoUrlA.
 		MongoReplicationTestResources mongoUrlB }.
 
-	client crisisStateFrequency: 0.5 seconds.
-	client steadyStateFrequency: 2 seconds.
+	"Decrease default parameters to hurry up the test"
+	client
+		crisisStateFrequency: 250 milliSeconds;
+		steadyStateFrequency: 2 seconds;
+		serverSelectionTimeout: 100 milliSeconds.
 
 	"Start monitoring and wait a bit until reaching Steady state."
 	client start.
-	100 milliSeconds wait.
+	50 milliSeconds wait.
 	
 	"Server A is the primary."
 	topology := client topology.
