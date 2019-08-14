@@ -5,7 +5,7 @@ printOn: aStream
 	super printOn: aStream.
 	aStream
 		nextPut: $(;
-		print: urlString;
-		space;
-		print: (self isStarted ifTrue: 'active' ifFalse: 'idle');
+		nextPutAll: (self isStarted ifTrue: 'started' ifFalse: 'stopped');
+		nextPutAll: ' - ';
+		nextPutAll: urlString;
 		nextPut: $).
