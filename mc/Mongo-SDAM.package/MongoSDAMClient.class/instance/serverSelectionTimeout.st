@@ -1,3 +1,3 @@
 accessing
 serverSelectionTimeout
-	^ serverSelectionTimeoutMS asDuration
+	^ serverSelectionTimeout ifNil: [ 3 seconds ]

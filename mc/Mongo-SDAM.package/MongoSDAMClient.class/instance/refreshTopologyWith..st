@@ -1,4 +1,4 @@
-monitoring
+private
 refreshTopologyWith: newServerDescription
 
 	mutex critical: [

@@ -1,4 +1,4 @@
-accessing
+private
 detectPoolFor: aReadPreference ifFound: foundBlockClosure ifNone: noneBlockClosure
 		
 	(aReadPreference = MongoReadPreference primary and: [ topology hasPrimary ])

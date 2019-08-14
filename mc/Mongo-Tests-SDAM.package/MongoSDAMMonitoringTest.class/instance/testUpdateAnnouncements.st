@@ -5,13 +5,13 @@ testUpdateAnnouncements
 	client := MongoSDAMClient withUrls: { MongoReplicationTestResources mongoUrlA }.
 
 	serverUpdates := SharedQueue new.
-	client topologyUpdateAnnouncer
+	client announcer
 		when: MongoSDAMServerDescriptionUpdate
 		send: #nextPut:
 		to: serverUpdates.
 
 	topologyUpdates := SharedQueue new.
-	client topologyUpdateAnnouncer
+	client announcer
 		when: MongoSDAMTopologyUpdate
 		send: #nextPut:
 		to: topologyUpdates.

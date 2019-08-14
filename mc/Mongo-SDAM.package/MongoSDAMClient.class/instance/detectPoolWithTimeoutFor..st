@@ -1,10 +1,11 @@
-accessing
+private
 detectPoolWithTimeoutFor: aReadPreference
 
-	| startMS |
+	| startMS serverSelectionTimeoutMS |
 	startMS := Time millisecondClockValue.
+	serverSelectionTimeoutMS := self serverSelectionTimeout asMilliSeconds.
 	[	self
-			detectPoolFor: readPreference
+			detectPoolFor: self readPreference
 			ifFound: [ :aPool | ^ aPool ]
 			ifNone: [
 				self restart.

@@ -1,3 +1,3 @@
 testing
 isStarted
-	^ monitors anySatisfy: #isStarted
+	^ monitors allSatisfy: #isStarted

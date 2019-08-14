@@ -14,7 +14,8 @@
 		"steadyStateFrequency",
 		"readPreference",
 		"announcer",
-		"serverSelectionTimeoutMS"
+		"localThreshold",
+		"serverSelectionTimeout"
 	],
 	"name" : "MongoSDAMClient",
 	"type" : "normal"

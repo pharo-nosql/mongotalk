@@ -1,5 +1,5 @@
-accessing
+API
 mongoDo: aBlockClosure
 	"Use the global read preference."
 	
-	^ self mongoDo: aBlockClosure readPreference: readPreference
+	^ self mongoDo: aBlockClosure readPreference: self readPreference

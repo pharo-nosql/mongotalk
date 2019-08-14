@@ -1,3 +1,3 @@
 accessing
 serverSelectionTimeout: aDuration
-	serverSelectionTimeoutMS := aDuration asMilliSeconds
+	serverSelectionTimeout := aDuration
