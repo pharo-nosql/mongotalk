@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"roundtripTime",
-		"isMaster"
+		"isMaster",
+		"roundtripDurationAverage"
 	],
 	"name" : "MongoSDAMServerDescription",
 	"type" : "normal"

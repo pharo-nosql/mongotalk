@@ -16,4 +16,4 @@ checkOnce
 
 	^ MongoSDAMServerDescription
 		isMaster: isMasterResponse
-		roundtripTime: roundtripTimeCalculator average
+		roundtripTime: self roundtripDurationAverage
