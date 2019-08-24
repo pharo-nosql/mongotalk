@@ -2,10 +2,10 @@ accessing
 checkOnce
 	"A single attempt to call ismaster. Answer a new server description."
 
-	| ismaster roundtripTime |
+	| isMasterResponse roundtripTime |
 	[ 	[
 		checkMongo openWithTimeout: client connectTimeout.
-		roundtripTime := [ ismaster := checkMongo isMaster ] timeToRun ]
+		roundtripTime := [ isMasterResponse := checkMongo isMaster ] timeToRun ]
 				on: ConnectionTimedOut
 				do: [ :error |
 					roundtripTimeCalculator reset. 
@@ -15,5 +15,5 @@ checkOnce
 	roundtripTimeCalculator add: roundtripTime asMilliSeconds.
 
 	^ MongoSDAMServerDescription
-		isMaster: ismaster
+		isMaster: isMasterResponse
 		roundtripTime: roundtripTimeCalculator average
