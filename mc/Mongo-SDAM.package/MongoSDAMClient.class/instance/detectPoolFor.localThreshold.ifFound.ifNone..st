@@ -1,6 +1,6 @@
 private
-detectPoolFor: aReadPreference ifFound: foundBlockClosure ifNone: noneBlockClosure
-		
+detectPoolFor: aReadPreference localThreshold: localThresholdDuration ifFound: foundBlockClosure ifNone: noneBlockClosure
+	
 	(aReadPreference = MongoReadPreference primary and: [ topology hasPrimary ])
 		ifTrue: [ ^ foundBlockClosure value: (monitors at: topology primaryUrlString) pool ].
 
@@ -9,6 +9,7 @@ detectPoolFor: aReadPreference ifFound: foundBlockClosure ifNone: noneBlockClosu
 			ifTrue: [ foundBlockClosure value: (monitors at: topology primaryUrlString) pool ]
 			ifFalse: [ self
 				detectSecondaryPoolFor: aReadPreference
+				localThreshold: localThresholdDuration
 				ifFound: foundBlockClosure
 				ifNone: noneBlockClosure ] ].
 

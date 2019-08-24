@@ -1,10 +1,12 @@
 private
-detectSecondaryPoolFor: aReadPreference ifFound: foundBlockClosure ifNone: noneBlockClosure
+detectSecondaryPoolFor: aReadPreference localThreshold: localThresholdDuration ifFound: foundBlockClosure ifNone: noneBlockClosure
 	"Detect a pool for secondary servers and evaluate the blocks accordingly.
 	
 	Sources: 
 	* https://docs.mongodb.com/manual/core/read-preference-mechanics/
-	* https://www.mongodb.com/blog/post/server-selection-next-generation-mongodb-drivers"
+	* https://www.mongodb.com/blog/post/server-selection-next-generation-mongodb-drivers
+	* https://github.com/mongodb/specifications/blob/master/source/max-staleness/max-staleness.rst#maxstalenessseconds-is-part-of-read-preferences
+	"
 	
 	^ topology secondaryUrlStrings
 		ifEmpty: noneBlockClosure
@@ -15,7 +17,7 @@ detectSecondaryPoolFor: aReadPreference ifFound: foundBlockClosure ifNone: noneB
 			urlsStrings do: [ :each | eligibleMonitors add: (monitors at: each) ].
 
 			"There must be at least 1 monitor. This formula is defined by the Server Selection specifications."
-			latencyWindowUpperBound := eligibleMonitors first roundtripDurationAverage + self localThreshold.
+			latencyWindowUpperBound := eligibleMonitors first roundtripDurationAverage + localThresholdDuration.
 			elegibleMonitorsInLatencyWindow := eligibleMonitors 
 				select: [:each | each roundtripDurationAverage <= latencyWindowUpperBound ].
 

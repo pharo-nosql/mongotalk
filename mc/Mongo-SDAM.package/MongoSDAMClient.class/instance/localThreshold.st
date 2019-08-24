@@ -1,3 +1,3 @@
 accessing
 localThreshold
-	^ localThreshold
+	^ localThreshold ifNil: [ localThreshold := SmallInteger maxVal seconds ]

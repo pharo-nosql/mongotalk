@@ -1,3 +1,0 @@
-accessing
-roundtripTimeAverage
-	^ roundtripTimeCalculator average
