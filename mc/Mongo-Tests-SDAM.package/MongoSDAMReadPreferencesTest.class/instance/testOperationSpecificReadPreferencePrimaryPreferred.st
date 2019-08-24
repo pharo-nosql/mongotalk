@@ -8,7 +8,7 @@ testOperationSpecificReadPreferencePrimaryPreferred
 		MongoReplicationTestResources mongoUrlA }.
 
 	"Ensure the global setting is not the one being tested."
-	client readPreference: MongoReadPreference primary.
+	client readPreference: MongoReadPreference newPrimary.
 
 	"Start monitoring and wait a bit until reaching Steady state."
 	client steadyStateFrequency: 3 seconds.
@@ -36,6 +36,6 @@ testOperationSpecificReadPreferencePrimaryPreferred
 	1 second wait.
 	
 	"It reads from secondary (B)"
-	selected := self doReadOnClient: MongoReadPreference primaryPreferred.
+	selected := self doReadOnClient: MongoReadPreference newPrimaryPreferred.
 	self deny: selected isNil.
 	self assert: selected size equals: 1.

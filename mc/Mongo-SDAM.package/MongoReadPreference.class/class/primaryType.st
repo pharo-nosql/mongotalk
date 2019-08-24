@@ -1,3 +1,3 @@
 instance creation
-primary
+primaryType
 	^ #primary

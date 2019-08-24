@@ -1,3 +1,3 @@
 instance creation
-primaryPreferred
+primaryPreferredType
 	^ #primaryPreferred

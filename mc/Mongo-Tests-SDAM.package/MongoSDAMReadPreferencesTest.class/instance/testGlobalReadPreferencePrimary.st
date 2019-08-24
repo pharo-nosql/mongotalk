@@ -7,7 +7,7 @@ testGlobalReadPreferencePrimary
 	client := MongoSDAMClient withUrls: {
 		MongoReplicationTestResources mongoUrlA }.
 
-	client readPreference: MongoReadPreference primary.
+	client readPreference: MongoReadPreference newPrimary.
 
 	"Start monitoring and wait a bit until reaching Steady state."
 	client steadyStateFrequency: 3 seconds.

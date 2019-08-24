@@ -8,7 +8,7 @@ testOperationSpecificReadPreferencePrimary
 		MongoReplicationTestResources mongoUrlA }.
 
 	"Set another read preference as global."
-	client readPreference: MongoReadPreference primaryPreferred.
+	client readPreference: MongoReadPreference newPrimaryPreferred.
 
 	"Start monitoring and wait a bit until reaching Steady state."
 	client steadyStateFrequency: 3 seconds.
@@ -35,5 +35,5 @@ testOperationSpecificReadPreferencePrimary
 
 	"It can't do a read command from the secondary (B)"
 	self
-		should: [ self doReadOnClient: MongoReadPreference primary ]
+		should: [ self doReadOnClient: MongoReadPreference newPrimary ]
 		raise: self readErrorClass.
