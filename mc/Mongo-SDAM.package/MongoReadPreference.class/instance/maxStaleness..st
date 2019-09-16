@@ -1,3 +1,3 @@
 accessing
-maxStaleness: anObject
-	maxStaleness := anObject
+maxStaleness: aDuration
+	maxStaleness := aDuration

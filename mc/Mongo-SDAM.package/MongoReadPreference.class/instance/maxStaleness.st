@@ -1,3 +1,3 @@
 accessing
 maxStaleness
-	^ maxStaleness ifNil: [ maxStaleness := SmallInteger maxVal seconds ]
+	^ maxStaleness ifNil: [ self maxStalenessNullValue ]

@@ -5,7 +5,6 @@ start
 	process := [
 		| thisProcess |
 		thisProcess := Processor activeProcess.
-		[ self doMonitor ] 
-			doWhileTrue: [ process == thisProcess ].
+		[ self doMonitor ] doWhileTrue: [ process == thisProcess ].
 		self stop.
-		] forkNamed: self className, ' at: ', urlString.
+	] forkNamed: self forkName

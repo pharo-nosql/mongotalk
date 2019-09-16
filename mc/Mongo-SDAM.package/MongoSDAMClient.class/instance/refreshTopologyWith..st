@@ -14,7 +14,7 @@ refreshTopologyWith: newServerDescription
 			updatedWith: newServerDescription.
 
 		newServerDescription isSuccess ifTrue: [ 
-			self discoverUrlsFrom: newServerDescription isMaster hosts ].
+			self discoverUrlsFrom: newServerDescription isMaster replicaSetHosts ].
 
 		announcer announce: (MongoSDAMTopologyUpdate
 			from: oldTopology

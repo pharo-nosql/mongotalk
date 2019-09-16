@@ -19,7 +19,7 @@ initializeBasedOn: anotherMongoSDAMTopology updatedWith: aMongoSDAMServerDescrip
 				ifFalse: [ 
 					type := MongoSDAMTopologyType replicaSetNoPrimary.
 					primaryUrlString := nil ].
-			secondaryUrlStrings := aMongoSDAMServerDescription isMaster hosts asSet.
+			secondaryUrlStrings := aMongoSDAMServerDescription isMaster replicaSetHosts, aMongoSDAMServerDescription isMaster replicaSetPassives.
 		]
 		ifFalse: [ self shouldBeImplemented 
 			"Check https://docs.mongodb.com/v3.4/reference/command/isMaster/" ].

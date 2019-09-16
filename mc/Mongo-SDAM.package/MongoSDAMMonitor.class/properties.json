@@ -12,7 +12,8 @@
 		"urlString",
 		"nextTimeToCheck",
 		"pool",
-		"checkMongo"
+		"checkMongo",
+		"latestServerDescription"
 	],
 	"name" : "MongoSDAMMonitor",
 	"type" : "normal"

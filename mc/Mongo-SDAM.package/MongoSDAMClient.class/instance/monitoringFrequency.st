@@ -1,5 +1,5 @@
 accessing
 monitoringFrequency
-	^ (topology isTypeReplicaSetWithPrimary or: [ topology isTypeSingle ])
+	^ self isMonitoringSteadyState
 		ifTrue: [ self steadyStateFrequency ]
 		ifFalse: [ self crisisStateFrequency ]
