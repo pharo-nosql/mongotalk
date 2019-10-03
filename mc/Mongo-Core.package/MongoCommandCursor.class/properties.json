@@ -10,7 +10,8 @@
 		"batch",
 		"command",
 		"batchSizeOrNil",
-		"timeoutOrNil"
+		"timeoutOrNil",
+		"flags"
 	],
 	"name" : "MongoCommandCursor",
 	"type" : "normal"

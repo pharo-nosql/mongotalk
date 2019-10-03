@@ -1,5 +1,5 @@
 instance creation
-newFromFindResponse: aDictionary
+newFromFirstBatchResponse: aDictionary
 
 	| cursorDictionary |
 	cursorDictionary := aDictionary at: 'cursor'.
