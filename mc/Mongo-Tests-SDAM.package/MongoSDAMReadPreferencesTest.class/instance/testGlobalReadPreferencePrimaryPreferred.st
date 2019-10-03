@@ -1,41 +1,14 @@
 tests
 testGlobalReadPreferencePrimaryPreferred
 
-	| selected topology |
-	self timeLimit: 30 seconds.
-	
-	client := MongoSDAMClient withUrls: {
-		MongoReplicationTestResources mongoUrlA }.
-
+	"Set global readPreference"
 	client readPreference: MongoReadPreference newPrimaryPreferred.
 
-	"Start monitoring and wait a bit until reaching Steady state."
-	client steadyStateFrequency: 3 seconds.
-	client start.
-	100 milliSeconds wait.
+	self startClientAndWait.
 
-	"Server A is the primary."
-	topology := client topology.
-	self assert: topology hasWritableServer.
-	self assert: topology isTypeReplicaSetWithPrimary.
-	self assert: topology primaryUrl equals: MongoReplicationTestResources mongoUrlA.
-
-	"It writes to primary (A)"
-	self doWriteOnClient.
-
-	"It reads from primary (A)"
-	selected := self doReadOnClient.
-	self assert: selected size equals: 1.
-
-
-	"Step down server A and force Crisis state in client."
-	MongoReplicationTestResources stepDownA: 10 seconds.
-	1 second wait.
-	client restart.
-	1 second wait.
+	"Write and read on primary (A)"
+	self writeAndReadFromA.
 	
-	"It reads from secondary (B)"
-	selected := nil.
-	selected := self doReadOnClient.
-	self deny: selected isNil.
-	self assert: selected size equals: 1.
+	"It reads from secondary (C)"
+	self stopAllExceptCAndWait.
+	self doReadOnClient.

@@ -2,7 +2,11 @@ initialization
 initializeUrl: aZnUrl
 	self initialize.
 
-	monitor := Monitor new.
-	connections := LinkedList new.
-
 	url := aZnUrl.
+
+	mutex := Mutex new.
+	connections := LinkedList new.
+	maxConnections := self defaultMaxConnections.
+	connectTimeout := self defaultConnectTimeout.
+	socketTimeout := self defaultSocketTimeout.
+	

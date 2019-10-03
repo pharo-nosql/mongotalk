@@ -3,7 +3,7 @@ initializeWith: initialUrls
 	| initialUrlStrings |
 	self initialize.
 
-	mutex := Mutex new.
+	topologyMutex := Mutex new.
 	announcer := Announcer new.
 	monitors := Dictionary new.
 	topology := MongoSDAMTopology new.

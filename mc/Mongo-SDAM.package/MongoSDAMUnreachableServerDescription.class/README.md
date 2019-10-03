@@ -1,1 +1,0 @@
-I represent the description of a server that had a network error so couldn't connect.

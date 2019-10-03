@@ -1,19 +1,11 @@
-accessing
+private
 checkOnce
-	"A single attempt to call ismaster. Answer a new server description."
+	"Perform a single attempt to call ismaster, and handle either success or failure."
 
-	| isMasterResponse roundtripDuration |
-	[ 	[
-		checkMongo openWithTimeout: client connectTimeout.
-		roundtripDuration := [ isMasterResponse := checkMongo isMaster ] timeToRun ]
-				on: ConnectionTimedOut
-				do: [ :error |
-					roundtripTimeCalculator reset. 
-					^ MongoSDAMUnreachableServerDescription urlString: urlString ]
-		] ensure: [ self ensureMongoClosed ].
-
-	roundtripTimeCalculator add: roundtripDuration asMilliSeconds.
-
-	^ MongoSDAMServerDescription
-		isMaster: isMasterResponse
-		roundtripTime: self roundtripDurationAverage
+	[[	self ensureMongoIsOpened.
+		self doCheckAndHandleSuccess ]
+			on: NetworkError
+			do: [ :error |
+				self ensureMongoIsClosed.
+				self handleNetworkError: error ]
+			]  on: Exception do: [:e | '-----------===' logCr. e logCr.].

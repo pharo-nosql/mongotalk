@@ -1,6 +1,14 @@
 printing
 printOn: aStream
-	"Append a sequence of characters to aStream that identify the receiver."
-
 	super printOn: aStream.
-	self serversUrlStrings printElementsOn: aStream.
+	
+	aStream nextPutAll: ': '; cr.
+	#(type primaryUrlString secondaryUrlStrings) do: [ :each |
+		aStream
+			tab;
+			nextPutAll: each;
+			nextPutAll: ': ';
+			print: (self perform: each);
+			cr ].
+	
+	

@@ -2,7 +2,10 @@ tests - monitoring
 testUpdateAnnouncements
 	
 	| serverUpdates topologyUpdates |
-	client := MongoSDAMClient withUrls: { MongoReplicationTestResources mongoUrlA }.
+	client := self newClient.
+
+	"Set a tiny (unreal) value for heatbeat since default is too long for testing."
+	client heartbeatFrequency: 100 milliSeconds.
 
 	serverUpdates := SharedQueue new.
 	client announcer
@@ -16,16 +19,12 @@ testUpdateAnnouncements
 		send: #nextPut:
 		to: topologyUpdates.
 		
-	client steadyStateFrequency: 250 milliSeconds.
-	client start.
+	self startClientAndWait.
 
-	"Wait the initial discovery of the 2 servers of the test replica set."
-	100 milliSeconds wait.
-
-	"Each monitor check generates an update of both server and topology (with steadyStateFrequency)."
+	"Each monitor check generates an update of both server and topology (with heartbeatFrequency)."
 	1 to: 3 do: [ :each |
-		self assert: client topology servers size equals: 2.
-		self assert: serverUpdates size equals: each * 2.
-		self assert: topologyUpdates size equals: each * 2.
-		client steadyStateFrequency wait.
+		self assert: client topology servers size equals: 3.
+		self assert: serverUpdates size equals: each * 3.
+		self assert: topologyUpdates size equals: each * 3.
+		client heartbeatFrequency wait.
 	]

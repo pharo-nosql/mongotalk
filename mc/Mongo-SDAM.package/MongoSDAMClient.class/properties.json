@@ -7,15 +7,16 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"monitors",
-		"mutex",
 		"topology",
 		"connectTimeout",
-		"crisisStateFrequency",
-		"steadyStateFrequency",
 		"readPreference",
 		"announcer",
 		"localThreshold",
-		"serverSelectionTimeout"
+		"serverSelectionTimeout",
+		"heartbeatFrequency",
+		"serverSelectionRandomGenerator",
+		"topologyMutex",
+		"socketTimeout"
 	],
 	"name" : "MongoSDAMClient",
 	"type" : "normal"

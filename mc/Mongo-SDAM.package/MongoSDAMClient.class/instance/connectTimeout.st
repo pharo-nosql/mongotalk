@@ -1,3 +1,4 @@
 accessing
 connectTimeout
-	^ connectTimeout ifNil: [ 20 seconds ]
+	^ connectTimeout ifNil: [
+		connectTimeout := 10 seconds ]

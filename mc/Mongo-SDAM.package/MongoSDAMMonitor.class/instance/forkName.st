@@ -1,3 +1,5 @@
-printing
+accessing
 forkName
-	^ self className, ' at: ', urlString
+	"Answer the name of the Process that periodically checks the server."
+
+	^ self className , ' at: ' , urlString

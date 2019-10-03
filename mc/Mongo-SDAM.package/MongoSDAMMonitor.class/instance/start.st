@@ -7,4 +7,4 @@ start
 		thisProcess := Processor activeProcess.
 		[ self doMonitor ] doWhileTrue: [ process == thisProcess ].
 		self stop.
-	] forkNamed: self forkName
+	] forkAt: Processor userInterruptPriority named: self forkName

@@ -1,5 +1,5 @@
 accessing
 monitoringFrequency
 	^ self isMonitoringSteadyState
-		ifTrue: [ self steadyStateFrequency ]
-		ifFalse: [ self crisisStateFrequency ]
+		ifTrue: [ self heartbeatFrequency ]
+		ifFalse: [ self minHeartbeatFrequency ]

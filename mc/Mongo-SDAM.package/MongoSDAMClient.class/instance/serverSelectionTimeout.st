@@ -1,3 +1,6 @@
 accessing
 serverSelectionTimeout
-	^ serverSelectionTimeout ifNil: [ 3 seconds ]
+	"See: https://docs.mongodb.com/manual/reference/connection-string/#urioption.serverSelectionTimeoutMS"
+
+	^ serverSelectionTimeout ifNil: [ 
+		serverSelectionTimeout := 30 seconds ]

@@ -1,3 +1,4 @@
 accessing
 readPreference
-	^ readPreference ifNil: [ MongoReadPreference newPrimary ]
+	^ readPreference ifNil: [
+		readPreference := MongoReadPreference newPrimary ]

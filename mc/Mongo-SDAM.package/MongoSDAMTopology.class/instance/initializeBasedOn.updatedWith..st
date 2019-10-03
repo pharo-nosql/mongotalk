@@ -1,25 +1,33 @@
 initialization
 initializeBasedOn: anotherMongoSDAMTopology updatedWith: aMongoSDAMServerDescription
+	| isMaster |
 	self initialize.
 
 	"Base on another's dictionary of servers, but override with the new server description."
 	serversByUrlString := anotherMongoSDAMTopology serversByUrlString deepCopy.
 	self updateServer: aMongoSDAMServerDescription.
 
-	aMongoSDAMServerDescription isSuccess ifFalse: [
-		self flag: #todo. "Add some behavior..."
-		^self ].
+	"Keep type until next success"
+	type := anotherMongoSDAMTopology type.
 
-	aMongoSDAMServerDescription isMaster isReplicaSet
+	aMongoSDAMServerDescription isSuccess ifFalse: [ ^self ].
+
+	isMaster := aMongoSDAMServerDescription isMaster.
+
+	isMaster isReplicaSet
 		ifTrue: [
-			aMongoSDAMServerDescription isMaster hasPrimary
+			isMaster hasPrimary
 				ifTrue: [
 					type := MongoSDAMTopologyType replicaSetWithPrimary.
-					primaryUrlString := aMongoSDAMServerDescription isMaster primaryUrlString ]
+					primaryUrlString := isMaster primaryUrlString ]
 				ifFalse: [ 
 					type := MongoSDAMTopologyType replicaSetNoPrimary.
 					primaryUrlString := nil ].
-			secondaryUrlStrings := aMongoSDAMServerDescription isMaster replicaSetHosts, aMongoSDAMServerDescription isMaster replicaSetPassives.
+			secondaryUrlStrings := Array streamContents: [ :stream |
+				| block |
+				block := [ :each | each = primaryUrlString ifFalse: [ stream nextPut: each ] ].
+				isMaster replicaSetHosts do: block.
+				isMaster replicaSetPassives do: block. ].
 		]
 		ifFalse: [ self shouldBeImplemented 
 			"Check https://docs.mongodb.com/v3.4/reference/command/isMaster/" ].

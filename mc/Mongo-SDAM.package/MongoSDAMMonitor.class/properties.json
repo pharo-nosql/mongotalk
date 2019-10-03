@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "MartinDias 6/5/2019 12:39",
 	"super" : "Object",
-	"category" : "Mongo-SDAM-Monitoring",
+	"category" : "Mongo-SDAM-Client",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
@@ -12,8 +12,8 @@
 		"urlString",
 		"nextTimeToCheck",
 		"pool",
-		"checkMongo",
-		"latestServerDescription"
+		"latestServerDescription",
+		"mongo"
 	],
 	"name" : "MongoSDAMMonitor",
 	"type" : "normal"

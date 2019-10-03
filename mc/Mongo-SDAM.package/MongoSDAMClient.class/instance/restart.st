@@ -1,5 +1,4 @@
 API
 restart
-	mutex critical: [
-		monitors valuesDo: #stop.
-		monitors valuesDo: #start ]
+	monitors valuesDo: #stop.
+	monitors valuesDo: #start.

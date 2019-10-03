@@ -1,5 +1,7 @@
 running
 ensureTestingScenario
+	self continueAllServers.
+
 	MongoReplicationTestResources
 		waitMongoAt: MongoReplicationTestResources mongoUrlA
 		satisfies: [ :mongo |

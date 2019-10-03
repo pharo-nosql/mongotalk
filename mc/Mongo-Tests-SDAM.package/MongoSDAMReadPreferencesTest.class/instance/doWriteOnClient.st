@@ -4,4 +4,5 @@ doWriteOnClient
 		| database collection |
 		database := mongo databaseNamed: self databaseNameForTesting.
 		collection := database addCollection: self collectionNameForTesting.
-		self doWriteOnCollection: collection ]
+		^ self doWriteOnCollection: collection ].
+	self fail.

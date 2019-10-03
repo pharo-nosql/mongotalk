@@ -1,4 +1,3 @@
 API
 stop
-	mutex critical: [
-		monitors valuesDo: #stop ]
+	monitors valuesDo: #stop

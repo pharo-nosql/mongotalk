@@ -1,5 +1,5 @@
 running
 tearDown
 	database drop.
-	pool returnConnection: root.
-	pool flush.
+	pool return: root.
+	pool close.

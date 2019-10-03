@@ -1,7 +1,7 @@
 private
 refreshTopologyWith: newServerDescription
 
-	mutex critical: [
+	topologyMutex critical: [
 		| latestServerDescription oldTopology |
 		latestServerDescription := topology serverAt: newServerDescription urlString.
 		announcer announce: (MongoSDAMServerDescriptionUpdate
@@ -14,7 +14,8 @@ refreshTopologyWith: newServerDescription
 			updatedWith: newServerDescription.
 
 		newServerDescription isSuccess ifTrue: [ 
-			self discoverUrlsFrom: newServerDescription isMaster replicaSetHosts ].
+			self discoverUrlsFrom: newServerDescription isMaster replicaSetHosts.
+			self discoverUrlsFrom: newServerDescription isMaster replicaSetPassives ].
 
 		announcer announce: (MongoSDAMTopologyUpdate
 			from: oldTopology

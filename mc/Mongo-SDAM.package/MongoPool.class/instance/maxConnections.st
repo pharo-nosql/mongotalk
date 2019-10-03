@@ -1,3 +1,3 @@
 accessing
 maxConnections
-	^ maxConnections ifNil: [ self defaultMaxConnections ]
+	^ maxConnections
