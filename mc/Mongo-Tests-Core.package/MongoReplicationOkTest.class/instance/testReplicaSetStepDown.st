@@ -1,5 +1,7 @@
 tests
 testReplicaSetStepDown
+	
+	self timeLimit: 60 seconds.
 
 	"Step down the (prioritary) primary during some seconds"
 	mongo replicaSetStepDown: 10 seconds.
@@ -11,8 +13,7 @@ testReplicaSetStepDown
 	[ 	self addNewCollection.
 		self fail: 'should raise a `not master` error' ]
 			on: MongoCommandError
-			do: [ :error | 
-				self assert: error isNotMaster ].
+			do: [ :error | self assert: error isNotMaster ].
 
 	"When the step down seconds passed, and the election finished, 
 	the former primary server will be the primary again because it has more priority

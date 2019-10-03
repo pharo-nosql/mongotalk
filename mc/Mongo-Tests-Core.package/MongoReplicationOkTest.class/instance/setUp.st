@@ -8,4 +8,4 @@ setUp
 	Transcript space; print: duration; cr.
 
 	database := mongo databaseNamed: 'test'.
-	collection := database addCollection: 'testCollection'.
+	collection := database getCollection: 'testCollection'.
