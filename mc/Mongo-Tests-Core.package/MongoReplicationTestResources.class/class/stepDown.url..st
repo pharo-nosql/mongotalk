@@ -7,9 +7,5 @@ stepDown: aDuration url: aZnUrl
 		port: aZnUrl port.
 
 	mongo open.
-
-	[ mongo replicaSetStepDown: aDuration ]
-		on: Error 
-		do: [:e | "Ignore" ].
-
+	mongo replicaSetStepDown: aDuration.
 	mongo closeIfOpen
