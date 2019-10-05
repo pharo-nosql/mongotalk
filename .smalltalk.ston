@@ -8,8 +8,8 @@ SmalltalkCISpec {
   ],
   #testing : {
     #exclude : {
-      #packages : [ 'Mongo-Tests-SDAM.*' ]
+      #categories : [ 'Mongo-Tests-SDAM.*', 'Mongo-Tests-Core-Replication' ]
     },
-    #hidePassingTests : false
+    #hidePassingTests : true
   }
 }
