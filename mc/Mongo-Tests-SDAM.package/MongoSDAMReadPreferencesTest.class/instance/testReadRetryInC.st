@@ -3,9 +3,7 @@ testReadRetryInC
 
 	client readPreference: MongoReadPreference newPrimaryPreferred.
 
-	self startClientAndWait.
-	self writeAndReadFromA.
-	self stopAllExceptC.
+	self prepareScenarioWhereAllExceptCStopped.
 
 	"First time, it will use A since it was the primary up to now, but will error."
 	client mongoDo: [ :mongo |

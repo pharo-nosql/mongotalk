@@ -1,4 +1,4 @@
-tests
+running
 writeAndReadFromA
 	"Write and read on primary (A)"
 

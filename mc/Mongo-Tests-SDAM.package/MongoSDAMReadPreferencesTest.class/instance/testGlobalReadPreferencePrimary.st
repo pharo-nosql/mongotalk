@@ -6,13 +6,8 @@ testGlobalReadPreferencePrimary
 	"Set global readPreference"
 	client readPreference: MongoReadPreference newPrimary.
 
-	self startClientAndWait.
+	self prepareScenarioWhereAllExceptCStopped.
 
-	"Write and read on primary (A)"
-	self writeAndReadFromA.
-	
-	"It can't do a read command from the only secondary (C)"
-	self stopAllExceptCAndWait.
 	self
 		should: [ self doReadOnClient ]
 		raise: MongoSDAMServerSelectionTimeout.

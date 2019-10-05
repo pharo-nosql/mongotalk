@@ -42,7 +42,7 @@ testInsertWithWriteConcern_error
 			self
 				assert: ex errorMessage
 				equals:
-					'E11000 duplicate key error collection: test.testCollection index: unique_user_id dup key: { : "1" }' ].
+					'E11000 duplicate key error collection: ', collection qualifiedName, ' index: unique_user_id dup key: { : "1" }' ].
 
 	results := collection query: [ :query |  ].
 	self assert: results size equals: 1.

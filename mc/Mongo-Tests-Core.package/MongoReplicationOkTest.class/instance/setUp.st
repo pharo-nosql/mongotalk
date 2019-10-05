@@ -1,11 +1,7 @@
 tests
 setUp
-	| duration |
 	super setUp.
 
-	Transcript cr; cr; show: testSelector; << ' setUp '; cr.
-	duration := [ self ensureTestingScenario ] timeToRun.
-	Transcript space; print: duration; cr.
-
-	database := mongo databaseNamed: 'test'.
+	MongoReplicationTestResources waitTestingScenario.
+	database := mongo databaseNamed: MongoReplicationTestResources databaseName.
 	collection := database getCollection: 'testCollection'.

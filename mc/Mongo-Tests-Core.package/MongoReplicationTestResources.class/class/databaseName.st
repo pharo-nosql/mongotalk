@@ -1,4 +1,3 @@
 accessing
 databaseName
-
-	^ 'Voyage-Tests'
+	^ 'test'

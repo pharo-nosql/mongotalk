@@ -5,13 +5,8 @@ testMaxStaleness
 
 	client readPreference: (MongoReadPreference newPrimaryPreferred maxStaleness: self maxStaleness; yourself).
 
-	self startClientAndWait.
+	self prepareScenarioWhereAllExceptCStopped.
 
-	"Write and read on primary (A)"
-	self writeAndReadFromA.
-
-	"It reads from secondary (C)"
-	self stopAllExceptCAndWait.
 	client mongoDo: [ :mongo |
 		self
 			assert: mongo urlString asMongoUrl

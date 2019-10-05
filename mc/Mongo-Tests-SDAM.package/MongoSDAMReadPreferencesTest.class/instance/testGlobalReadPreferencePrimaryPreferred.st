@@ -4,11 +4,6 @@ testGlobalReadPreferencePrimaryPreferred
 	"Set global readPreference"
 	client readPreference: MongoReadPreference newPrimaryPreferred.
 
-	self startClientAndWait.
+	self prepareScenarioWhereAllExceptCStopped.
 
-	"Write and read on primary (A)"
-	self writeAndReadFromA.
-	
-	"It reads from secondary (C)"
-	self stopAllExceptCAndWait.
 	self doReadOnClient.
