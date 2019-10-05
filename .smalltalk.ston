@@ -6,5 +6,7 @@ SmalltalkCISpec {
       #platforms : [ #pharo ]
     }
   ],
-  #hidePassingTests : false
+  #testing : {
+    #hidePassingTests : false
+  }
 }
