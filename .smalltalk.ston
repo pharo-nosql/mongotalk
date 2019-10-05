@@ -8,8 +8,7 @@ SmalltalkCISpec {
   ],
   #testing : {
     #exclude : {
-      #categories : [ 'Mongo-Tests-Core-Replication' ]
-    },
-    #hidePassingTests : true
+      #categories : [ 'Mongo-Tests-SDAM.*', 'Mongo-Tests-Core-Replication' ]
+    }
   }
 }
