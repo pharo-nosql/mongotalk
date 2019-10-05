@@ -5,14 +5,14 @@ waitTestingScenario
 		signalContinueB;
 		signalContinueC.
 		
-	Transcript << 'waitTestingScenario'.
+	Transcript cr; << 'waitTestingScenario'.
 	Transcript << '. C:'.
 	self
 		waitMongoAt: self mongoUrlC
 		satisfies: [ :mongo | mongo isMaster isSecondary and: [ mongo isMaster isPassive ]  ]
 		upTo: 15 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [ ^ Transcript << 'TIMEOUT' ].
+		onTimeout: [ Transcript << 'TIMEOUT' ].
 
 	Transcript << '. B:'.
 	self
@@ -20,7 +20,7 @@ waitTestingScenario
 		satisfies: [ :mongo | mongo isMaster isSecondary ]
 		upTo: 15 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [ ^ Transcript << 'TIMEOUT' ].
+		onTimeout: [ Transcript << 'TIMEOUT' ].
 
 	Transcript << '. A:'.
 	self
@@ -34,5 +34,5 @@ waitTestingScenario
 					or: [ (mongo databaseNamed: self databaseName) drop. true ] ] ]
 		upTo: 25 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [ ^ Transcript << 'TIMEOUT' ].
+		onTimeout: [ Transcript << 'TIMEOUT' ].
 	Transcript cr.
