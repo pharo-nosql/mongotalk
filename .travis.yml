@@ -10,6 +10,7 @@ smalltalk:
   - Pharo32-6.1
 
 env:
+  - SMALLTALK_CI_TIMEOUT=30
   - MONGODB=4.0
   - MONGODB=3.6
   - MONGODB=3.4
