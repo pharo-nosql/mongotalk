@@ -21,7 +21,7 @@ testMaxStaleness
 			on: MongoSDAMServerSelectionTimeout
 			do: [:e | Transcript << 'expected timeout'; cr ].
 
-	self continueAllServers.
+	MongoReplicationTestResources continueAllServers.
 	self waitMonitorsHeartbeatAndTimeout.
 	
 	"Ensure it reads again from A"

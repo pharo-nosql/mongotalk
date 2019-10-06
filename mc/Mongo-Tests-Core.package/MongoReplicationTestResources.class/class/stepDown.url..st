@@ -1,11 +1,8 @@
-accessing
+stop/continue
 stepDown: aDuration url: aZnUrl
 	
 	| mongo |
-	mongo := Mongo 
-		host: aZnUrl host 
-		port: aZnUrl port.
-
+	mongo := Mongo url: aZnUrl.
 	mongo open.
 	mongo replicaSetStepDown: aDuration.
 	mongo closeIfOpen

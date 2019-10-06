@@ -1,11 +1,11 @@
-accessing
+stop/continue
 waitTestingScenario
-	self
-		signalContinueA;
-		signalContinueB;
-		signalContinueC.
-		
 	Transcript cr; << 'waitTestingScenario'.
+
+	replicaSet
+		ifNil: [ self start ]
+		ifNotNil: [ self continueAllServers ].
+		
 	Transcript << '. C:'.
 	self
 		waitMongoAt: self mongoUrlC

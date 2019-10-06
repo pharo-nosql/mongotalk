@@ -1,5 +1,3 @@
 stop/continue
 signalStopA
-	^ self
-		pkillMongodAt: self mongoUrlA
-		with: self signalNumberForStop
+	^ (replicaSet serverAtUrl: self mongoUrlA) sigstop

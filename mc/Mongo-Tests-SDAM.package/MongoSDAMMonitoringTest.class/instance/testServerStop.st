@@ -20,7 +20,7 @@ testServerStop
 	self assert: topology isTypeReplicaSetWithPrimary.
 	self assert: topology primaryUrl equals: MongoReplicationTestResources mongoUrlB.
 
-	self continueAllServers.
+	MongoReplicationTestResources continueAllServers.
 	self waitMonitorsHeartbeatAndTimeout.
 
 	"A is up again and the new primary (it has higher priority than B)."

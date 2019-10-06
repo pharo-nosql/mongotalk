@@ -1,4 +1,4 @@
-convenience
+stop/continue
 waitMongoAt: aZnUrl satisfies: conditionBlock upTo: aDuration onCompletion: successBlock onTimeout: failBlock
 
 	| mongo retryingDelay end timeout |

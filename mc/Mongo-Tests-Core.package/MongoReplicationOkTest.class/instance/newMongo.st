@@ -1,3 +1,3 @@
 instance creation
 newMongo
-	^ MongoReplicationTestResources newMongoA
+	^ Mongo url: MongoReplicationTestResources mongoUrlA
