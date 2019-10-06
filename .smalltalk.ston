@@ -5,10 +5,5 @@ SmalltalkCISpec {
       #directory : 'mc',
       #platforms : [ #pharo ]
     }
-  ],
-  #testing : {
-    #exclude : {
-      #categories : [ 'Mongo-Tests-SDAM.*', 'Mongo-Tests-Core-Replication' ]
-    }
-  }
+  ]
 }
