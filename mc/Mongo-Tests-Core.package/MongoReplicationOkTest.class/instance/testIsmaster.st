@@ -8,6 +8,7 @@ testIsMaster
 	self deny: response isNil.
 	self deny: response isReadOnly.
 	self assert: response isReplicaSet.
+	self assert: response isMaster.
 	
 	"Replica Set specific API."
 	self assert: response hasPrimary.

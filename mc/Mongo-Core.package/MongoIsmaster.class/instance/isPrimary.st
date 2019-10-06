@@ -1,3 +1,3 @@
 replica set
 isPrimary
-	^ (response at: 'ismaster') and: [ self isReplicaSet ]
+	^ self isMaster and: [ self isReplicaSet ]
