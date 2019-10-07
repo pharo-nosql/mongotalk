@@ -2,4 +2,4 @@ external projects
 osSubprocess: spec
 	spec
 		baseline: 'OSSubprocess'
-		with: [ spec repository: 'github://pharo-contributions/OSSubprocess:v1.0.0' ]
+		with: [ spec repository: 'github://pharo-contributions/OSSubprocess:v1.1/repository' ]
