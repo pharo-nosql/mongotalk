@@ -1,6 +1,6 @@
 stop/continue
 waitTestingScenario
-	Transcript cr; << 'waitTestingScenario'.
+	Transcript << '#waitTestingScenario'.
 
 	replicaSet
 		ifNil: [ self start ]
@@ -12,7 +12,7 @@ waitTestingScenario
 		satisfies: [ :mongo | mongo isMaster isSecondary and: [ mongo isMaster isPassive ]  ]
 		upTo: 15 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [ Transcript << 'TIMEOUT' ].
+		onTimeout: [ self error: 'TIMEOUT' ].
 
 	Transcript << '. B:'.
 	self
@@ -20,7 +20,7 @@ waitTestingScenario
 		satisfies: [ :mongo | mongo isMaster isSecondary ]
 		upTo: 15 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [ Transcript << 'TIMEOUT' ].
+		onTimeout: [  self error: 'TIMEOUT' ].
 
 	Transcript << '. A:'.
 	self
@@ -34,5 +34,5 @@ waitTestingScenario
 					or: [ (mongo databaseNamed: self databaseName) drop. true ] ] ]
 		upTo: 25 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [ Transcript << 'TIMEOUT' ].
+		onTimeout: [  self error: 'TIMEOUT' ].
 	Transcript cr.
