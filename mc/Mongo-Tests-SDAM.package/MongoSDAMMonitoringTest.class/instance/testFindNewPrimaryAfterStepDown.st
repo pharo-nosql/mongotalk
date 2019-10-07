@@ -1,5 +1,5 @@
 tests - monitoring
-testStepDown
+testFindNewPrimaryAfterStepDown
 
 	| topology |
 	client := self newClient.
@@ -20,12 +20,3 @@ testStepDown
 	self assert: topology hasWritableServer.
 	self assert: topology isTypeReplicaSetWithPrimary.
 	self assert: topology primaryUrl equals: MongoReplicationTestResources mongoUrlB.
-
-	"Now, wait a bit and then check A is up again and the new primary (it has higher priority than B)."
-	MongoReplicationTestResources signalStopB.
-	self waitMonitorsHeartbeatAndTimeout.
-	
-	topology := client topology.
-	self assert: topology hasWritableServer.
-	self assert: topology isTypeReplicaSetWithPrimary.
-	self assert: topology primaryUrl equals: MongoReplicationTestResources mongoUrlA.
