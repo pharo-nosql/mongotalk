@@ -2,10 +2,10 @@ running
 writeAndReadFromA
 	"Write and read on primary (A)"
 
-	self doWriteOnClient.
-	
-	client mongoDo: [ :mongo | 
-		self
-			assert: mongo urlString asMongoUrl
-			equals: MongoReplicationTestResources mongoUrlA.
-		self doReadOnMongo: mongo ].
+	self assert: client topology isTypeReplicaSetWithPrimary.
+	self
+		assert: client topology primaryUrl
+		equals: MongoReplicationTestResources mongoUrlA.
+	self
+		doWriteOnClient;
+		doReadOnClient
