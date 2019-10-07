@@ -4,7 +4,6 @@ writeAndReadFromA
 
 	self doWriteOnClient.
 	
-	self flag: #todo. "Improve this assert"
 	client mongoDo: [ :mongo | 
 		self
 			assert: mongo urlString asMongoUrl

@@ -1,7 +1,7 @@
 tests
 testMaxStaleness
 
-	self timeLimit: self maxStaleness + 90 seconds.
+	self timeLimit: self defaultTimeLimit + self maxStaleness.
 
 	client readPreference: (MongoReadPreference newPrimaryPreferred maxStaleness: self maxStaleness; yourself).
 

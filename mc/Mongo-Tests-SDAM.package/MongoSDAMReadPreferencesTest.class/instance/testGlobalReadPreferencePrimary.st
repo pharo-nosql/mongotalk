@@ -1,8 +1,6 @@
 tests
 testGlobalReadPreferencePrimary
 
-	self timeLimit: (30 seconds + client serverSelectionTimeout).
-
 	"Set global readPreference"
 	client readPreference: MongoReadPreference newPrimary.
 

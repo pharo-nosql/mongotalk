@@ -1,3 +1,3 @@
-tests
+running
 readErrorClass
 	^ self subclassResponsibility

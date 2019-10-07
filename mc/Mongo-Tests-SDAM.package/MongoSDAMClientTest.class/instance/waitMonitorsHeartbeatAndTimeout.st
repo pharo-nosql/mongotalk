@@ -1,3 +1,3 @@
 running
 waitMonitorsHeartbeatAndTimeout
-	35 seconds wait
+	40 seconds wait
