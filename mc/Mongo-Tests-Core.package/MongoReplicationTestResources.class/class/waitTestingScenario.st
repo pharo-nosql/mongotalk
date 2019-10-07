@@ -25,14 +25,13 @@ waitTestingScenario
 	Transcript << '. A:'.
 	self
 		waitMongoAt: self mongoUrlA
-		satisfies: [ :mongo |
-			| isMasterResponse |
-			isMasterResponse := mongo isMaster.
-			(isMasterResponse hasPrimary
-				and: [ isMasterResponse primaryUrlString = mongo urlString ])
-				and: [ (mongo databaseNames includes: self databaseName) not 
-					or: [ (mongo databaseNamed: self databaseName) drop. true ] ] ]
-		upTo: 25 seconds
+		satisfies: [ :mongo | mongo isMaster isPrimary ]
+		upTo: 15 seconds
 		onCompletion: [ Transcript << 'OK' ]
 		onTimeout: [  self error: 'TIMEOUT' ].
 	Transcript cr.
+
+	"Ensure there is no test database remaining from previous tests."
+	(replicaSet serverAtUrl: self mongoUrlA) mongoDo: [ :mongo |
+		(mongo databaseNames includes: self databaseName) ifTrue: [ 
+			(mongo databaseNamed: self databaseName) drop ] ].
