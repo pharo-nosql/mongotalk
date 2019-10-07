@@ -1,3 +1,3 @@
 accessing
 defaultTimeLimit
-	^ 90 seconds
+	^ 100 seconds
