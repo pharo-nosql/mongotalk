@@ -1,4 +1,4 @@
 operations
 terminateAll
-	servers do: #terminate.
+	servers do: #ensureTerminated.
 	servers := nil.

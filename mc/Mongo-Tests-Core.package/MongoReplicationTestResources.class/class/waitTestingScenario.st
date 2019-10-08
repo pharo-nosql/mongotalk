@@ -12,7 +12,7 @@ waitTestingScenario
 		satisfies: [ :mongo | mongo isMaster isSecondary and: [ mongo isMaster isPassive ]  ]
 		upTo: 15 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [ self error: 'TIMEOUT' ].
+		onTimeout: [ self error: 'C: TIMEOUT' ].
 
 	Transcript << '. B:'.
 	self
@@ -20,15 +20,15 @@ waitTestingScenario
 		satisfies: [ :mongo | mongo isMaster isSecondary ]
 		upTo: 15 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [  self error: 'TIMEOUT' ].
+		onTimeout: [  self error: 'B: TIMEOUT' ].
 
 	Transcript << '. A:'.
 	self
 		waitMongoAt: self mongoUrlA
 		satisfies: [ :mongo | mongo isMaster isPrimary ]
-		upTo: 15 seconds
+		upTo: 25 seconds
 		onCompletion: [ Transcript << 'OK' ]
-		onTimeout: [  self error: 'TIMEOUT' ].
+		onTimeout: [  self error: 'A: TIMEOUT' ].
 	Transcript cr.
 
 	"Ensure there is no test database remaining from previous tests."
