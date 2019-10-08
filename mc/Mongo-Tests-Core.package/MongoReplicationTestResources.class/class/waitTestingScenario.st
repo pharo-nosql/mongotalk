@@ -2,9 +2,7 @@ stop/continue
 waitTestingScenario
 	Transcript << '#waitTestingScenario'.
 
-	replicaSet
-		ifNil: [ self start ]
-		ifNotNil: [ self continueAllServers ].
+	self ensureStarted.
 		
 	Transcript << '. C:'.
 	self
