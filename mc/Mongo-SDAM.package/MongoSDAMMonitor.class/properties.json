@@ -7,13 +7,13 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"client",
-		"process",
 		"roundtripTimeCalculator",
 		"urlString",
 		"nextTimeToCheck",
 		"pool",
 		"latestServerDescription",
-		"mongo"
+		"mongo",
+		"checkProcess"
 	],
 	"name" : "MongoSDAMMonitor",
 	"type" : "normal"
