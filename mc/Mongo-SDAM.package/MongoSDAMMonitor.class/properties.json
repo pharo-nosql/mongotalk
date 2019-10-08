@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "MartinDias 6/5/2019 12:39",
-	"super" : "Object",
+	"super" : "TKTService",
 	"category" : "Mongo-SDAM-Client",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -12,8 +12,7 @@
 		"nextTimeToCheck",
 		"pool",
 		"latestServerDescription",
-		"mongo",
-		"checkProcess"
+		"mongo"
 	],
 	"name" : "MongoSDAMMonitor",
 	"type" : "normal"

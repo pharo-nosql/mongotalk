@@ -1,0 +1,3 @@
+accessing
+tearDown
+	self ensureMongoIsClosed.
