@@ -1,8 +1,9 @@
 start/stop
 mongoDo: aBlock
-	| mongo |
+	| mongo timeout |
+	timeout := 3 seconds.
 	mongo := Mongo host: 'localhost' port: self port.
-	mongo openWithTimeout: 1 second.
-	mongo socketTimeout: 1 second.
-	[ ^ aBlock value: mongo ]
+	mongo openWithTimeout: timeout.
+	mongo socketTimeout: timeout.
+	^ [ aBlock value: mongo ]
 		ensure: [ mongo closeIfOpen ]
