@@ -2,8 +2,6 @@ stop/continue
 waitTestingScenario
 
 	| retryingDelay end |
-	Transcript << '#waitTestingScenario '.
-
 	retryingDelay := 500 milliSeconds.
 	end := DateAndTime now + 40 seconds.
 
