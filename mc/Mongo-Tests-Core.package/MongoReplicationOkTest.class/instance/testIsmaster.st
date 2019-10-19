@@ -20,3 +20,4 @@ testIsMaster
 	self assert: response replicaSetHosts equals: #('localhost:27031' 'localhost:27032').
 	self assert: response replicaSetPassives equals: #('localhost:27033').
 	self assert: response lastWriteDateAndTime notNil.
+	self assert: response staleness > 0 milliseconds.
