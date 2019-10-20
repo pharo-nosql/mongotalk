@@ -13,11 +13,19 @@ waitTestingScenario
 
 			self assert: ((replicaSet
 				serverAtUrl: self mongoUrlB)
-				mongoDo: [ :mongo | mongo isMaster isSecondary ]).
+				mongoDo: [ :mongo |
+					| response |
+					response := mongo isMaster.
+					response isSecondary and: [ response staleness < 10 seconds ] ]).
 
 			self assert: ((replicaSet
 				serverAtUrl: self mongoUrlC)
-				mongoDo: [ :mongo | mongo isMaster isSecondary and: [ mongo isMaster isPassive ] ]).
+				mongoDo: [ :mongo |
+					| response |
+					response := mongo isMaster.
+					response isSecondary and: [ 
+						response isPassive and: [ 
+						response staleness < 10 seconds ] ]]).
 
 			"Ensure there is no test database remaining from previous tests."
 			(replicaSet serverAtUrl: self mongoUrlA) mongoDo: [ :mongo |

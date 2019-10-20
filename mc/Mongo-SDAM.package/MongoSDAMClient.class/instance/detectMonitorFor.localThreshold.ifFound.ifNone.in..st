@@ -11,6 +11,8 @@ detectMonitorFor: aReadPreference localThreshold: localThresholdDuration ifFound
 		eligibleMonitors := eligibleMonitors select: [ :each |
 			each staleness <= aReadPreference maxStaleness ] ].
 
+	eligibleMonitors ifEmpty: [ ^ noneBlockClosure value ].
+
 	"Filter by latency window"
 	latencyWindowLowerBound := (eligibleMonitors collect: [ :each | each roundtripDurationAverage ]) min.
 	latencyWindowUpperBound := latencyWindowLowerBound + localThresholdDuration.
