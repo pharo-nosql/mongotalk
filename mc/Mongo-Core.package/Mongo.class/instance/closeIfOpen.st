@@ -1,3 +1,3 @@
 operations
 closeIfOpen
-	self isOpen ifTrue: [ self close ]
+	stream ifNotNil: [ self close ]
