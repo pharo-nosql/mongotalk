@@ -3,7 +3,7 @@ waitTestingScenario
 
 	| retryingDelay end |
 	retryingDelay := 500 milliSeconds.
-	end := DateAndTime now + 40 seconds.
+	end := DateAndTime now + 1 minute.
 
 	self ensureStarted.
 
