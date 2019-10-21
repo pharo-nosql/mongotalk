@@ -22,6 +22,6 @@ testUpdateAnnouncements
 	(1 to: 3)
 		do: [ :each |
 			self assert: client topology servers size equals: 3.
-			self assert: serverUpdates size equals: each * 3.
-			self assert: topologyUpdates size equals: each * 3 ]
+			self assert: serverUpdates size >= each * 3.
+			self assert: topologyUpdates size >= each * 3 ]
 		separatedBy: [ client heartbeatFrequency wait ]
