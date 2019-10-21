@@ -7,8 +7,8 @@ testFindPrimaryAfterStepDown
 
 	MongoReplicationTestResources stepDownA: 10 seconds.
 	
-	"Wait enough time (it should be enough to wait client's heartbeatFrequency)"
-	8 seconds wait.
+	"Wait a bit (client's heartbeatFrequency should be enough)"
+	9.5 seconds wait.
 
 	"Server B is elected as primary (the only electable, since C has zero priority)"
 	topology := client topology.
