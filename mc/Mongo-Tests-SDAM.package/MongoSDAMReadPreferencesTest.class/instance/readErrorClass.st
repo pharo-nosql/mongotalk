@@ -1,3 +1,0 @@
-running
-readErrorClass
-	^ self subclassResponsibility
