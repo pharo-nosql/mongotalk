@@ -1,3 +1,3 @@
 API
 stop
-	monitors valuesDo: #stop
+	monitors valuesDo: [ :each | each isRunning ifTrue: [ each stop ] ]
