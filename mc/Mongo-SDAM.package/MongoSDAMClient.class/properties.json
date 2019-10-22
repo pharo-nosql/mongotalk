@@ -16,7 +16,8 @@
 		"heartbeatFrequency",
 		"serverSelectionRandomGenerator",
 		"topologyMutex",
-		"socketTimeout"
+		"socketTimeout",
+		"maxConnections"
 	],
 	"name" : "MongoSDAMClient",
 	"type" : "normal"

@@ -1,3 +1,0 @@
-accessing
-defaultMaxConnections
-	^ 25
