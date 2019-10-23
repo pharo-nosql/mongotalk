@@ -13,7 +13,7 @@ refreshTopologyWith: newServerDescription
 			newBasedOn: topology
 			updatedWith: newServerDescription.
 
-		newServerDescription isSuccess ifTrue: [ 
+		(newServerDescription isSuccess and: [ newServerDescription isMaster isReplicaSet ]) ifTrue: [ 
 			self discoverUrlsFrom: newServerDescription isMaster replicaSetHosts.
 			self discoverUrlsFrom: newServerDescription isMaster replicaSetPassives ].
 

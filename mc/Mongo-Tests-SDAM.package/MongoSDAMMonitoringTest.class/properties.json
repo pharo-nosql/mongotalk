@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "",
-	"super" : "MongoSDAMClientTest",
+	"super" : "MongoSDAMClientReplicaSetTest",
 	"category" : "Mongo-Tests-SDAM-Client",
 	"classinstvars" : [ ],
 	"pools" : [ ],

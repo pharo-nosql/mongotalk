@@ -3,7 +3,12 @@ updateWithIsMasterResponseFrom: aMongoSDAMServerDescription
 	| isMaster |
 	isMaster := aMongoSDAMServerDescription isMaster.
 
-	isMaster isReplicaSet ifFalse: [ self shouldBeImplemented ].
+	isMaster isSharded ifTrue: [ self shouldBeImplemented ].
+
+	isMaster isReplicaSet ifFalse: [
+		type := MongoSDAMTopologyType single.
+		primaryUrlString := aMongoSDAMServerDescription urlString.
+		^ self ].
 
 	isMaster hasPrimary
 		ifTrue: [

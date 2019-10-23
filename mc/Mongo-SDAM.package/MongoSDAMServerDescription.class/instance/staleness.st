@@ -1,3 +1,5 @@
 accessing
 staleness
-	^ isMaster staleness
+	^ isMaster isReplicaSet
+		ifTrue: [ isMaster staleness ]
+		ifFalse: [ 0 seconds ]
