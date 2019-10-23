@@ -10,4 +10,4 @@ handleMongoQueryOrCommandError: aMongoQueryOrCommandError on: selectedMonitor
 					urlString: aMongoQueryOrCommandError signaler urlString
 					errorDescription: aMongoQueryOrCommandError description) ].
 
-	aMongoQueryOrCommandError signal
+	aMongoQueryOrCommandError pass
