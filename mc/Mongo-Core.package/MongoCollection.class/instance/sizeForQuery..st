@@ -1,4 +1,4 @@
-private-operations
+operations
 sizeForQuery: aDictionary
 	"Answer the count the number of matching documents in this collection.
 
