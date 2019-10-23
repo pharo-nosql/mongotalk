@@ -11,4 +11,4 @@ mongoDo: aBlockClosure
 		mongo := self next.
 		^ [ aBlockClosure value: mongo ] ensure: [ self return: mongo ] ]
 			on: NetworkError
-			do: [ :e | self close. e signal ]
+			do: [ :e | self close. e pass ]
