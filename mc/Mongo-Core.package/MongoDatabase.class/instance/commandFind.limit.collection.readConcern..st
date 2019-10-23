@@ -1,10 +1,11 @@
 operations
-commandFind: filterDictionary collection: collectionName readConcern: aConcern
+commandFind: filterDictionary limit: aLimit collection: collectionName readConcern: aConcern
 
 	| dict |
 	dict := {
 		'find' -> collectionName.
 		'filter' -> filterDictionary.
+		'limit' -> aLimit.
 		} as: OrderedDictionary.
 
 	aConcern ifNotNil: [
