@@ -1,18 +1,19 @@
 examples
 workspaceCode
-	| server |
-	server := MongoTestServer new
-				port: 27092;
-				yourself.
-	server start; waitIsWrittable.
+	| example |
 
-	[[ 	[| isMaster |
-		isMaster := server mongoDo: [ :mongo | mongo isMaster ].
-		Transcript cr; show: isMaster localTime; cr]
-			on: Error do: [ :e | e logCr ].
-		1 second wait.
-		] doWhileTrue: [ server isStarted ] ] fork.
+	"Start"
+	example := MongoSDAMExample new. 
+	example start.
+	MongoReplicationTestResources waitTestingScenario.
+	Transcript open; clear.
 
-	server sigstop. "pause server"
-	server sigcont. "unpause it"
-	server ensureTerminated. "finish server process"
+	"Play with mongod servers"
+	MongoReplicationTestResources signalStopA.
+	MongoReplicationTestResources signalStopB.
+	MongoReplicationTestResources continueAllServers.
+	MongoReplicationTestResources stepDownA: 30 seconds.
+	MongoReplicationTestResources stepDownB: 30 seconds.
+
+	"Stop"
+	example stop.
