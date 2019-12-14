@@ -17,7 +17,8 @@
 		"serverSelectionRandomGenerator",
 		"topologyMutex",
 		"socketTimeout",
-		"maxConnections"
+		"maxConnections",
+		"monitorStopTimeout"
 	],
 	"name" : "MongoSDAMClient",
 	"type" : "normal"
