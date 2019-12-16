@@ -4,4 +4,4 @@ close
 	
 	mutex critical: [
 		[ connections isEmpty ] whileFalse: [
-			connections removeLast closeIfOpen ]]
+			self ensureCloseMongo: connections removeLast ]]

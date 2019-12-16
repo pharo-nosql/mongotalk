@@ -1,5 +1,5 @@
 private
 return: mongo
 	connections size >= self maxConnections
-		ifTrue: [ mongo closeIfOpen ]
+		ifTrue: [ self ensureCloseMongo: mongo ]
 		ifFalse: [ mutex critical: [ connections add: mongo ] ]
