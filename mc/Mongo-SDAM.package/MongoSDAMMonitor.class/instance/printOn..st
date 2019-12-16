@@ -6,4 +6,6 @@ printOn: aStream
 	aStream
 		nextPut: $(;
 		nextPutAll: urlString;
+		space;
+		print: self isStarted;
 		nextPut: $).

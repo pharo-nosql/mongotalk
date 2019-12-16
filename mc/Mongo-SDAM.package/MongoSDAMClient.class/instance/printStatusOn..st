@@ -9,4 +9,4 @@ printStatusOn: aStream
 		nextPutAll: 'ON:';
 		print: numberOfStartedMonitors;
 		nextPutAll: ';OFF:';
-		print: totalServers.
+		print: totalServers - numberOfStartedMonitors.
