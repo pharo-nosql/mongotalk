@@ -5,6 +5,8 @@ waitTestingScenario
 	retryingDelay := 500 milliSeconds.
 	end := DateAndTime now + 1 minute.
 
+	self cleanupSockets.
+
 	self ensureStarted.
 
 	[	[	self assert: ((replicaSet
