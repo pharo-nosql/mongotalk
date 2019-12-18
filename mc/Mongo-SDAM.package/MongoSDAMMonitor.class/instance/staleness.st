@@ -1,5 +1,5 @@
 accessing
 staleness
-	^ (latestServerDescription isNil or: [ latestServerDescription isSuccess not ])
-		ifTrue: [ self error: 'Cannot know' ]
-		ifFalse: [ latestServerDescription staleness ]
+	^ latestServerDescription isSuccess
+		ifTrue: [ latestServerDescription staleness ]
+		ifFalse: [ self error: 'Cannot know' ]

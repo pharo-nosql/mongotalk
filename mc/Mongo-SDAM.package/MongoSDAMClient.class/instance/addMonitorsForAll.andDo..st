@@ -1,8 +1,10 @@
 private
 addMonitorsForAll: newUrlStrings andDo: aBlockClosure
 	newUrlStrings do: [ :each |
-		| newMonitor |
-		topology addServerAt: each.
+		| newMonitor initialServerDescription |
+		initialServerDescription := MongoSDAMUnknownServerDescription urlString: each.
+		topology basicServerAt: each put: initialServerDescription.
 		newMonitor := MongoSDAMMonitor urlString: each client: self.
+		newMonitor latestServerDescription: initialServerDescription.
 		monitors at: each put: newMonitor.
 		aBlockClosure cull: newMonitor ]
