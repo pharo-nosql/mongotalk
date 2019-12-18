@@ -1,6 +1,6 @@
 tests
 testOperationReadPreferenceNearest
-	| servers nearestServer |
+	| servers minLatency nearestServerUrls |
 	self startClientAndWait.
 	self writeAndReadFromA.
 	servers := client topology servers.
@@ -10,10 +10,13 @@ testOperationReadPreferenceNearest
 		assert: (servers collect: #roundtripDurationAverage as: Set) size
 		equals: 3."
 
-	nearestServer := servers detectMin: #roundtripDurationAverage.
+	minLatency := (servers collect: #roundtripDurationAverage) min.
+	nearestServerUrls := servers
+		select: [:each | each roundtripDurationAverage = minLatency ]
+		thenCollect: #urlString.
 	client
 		mongoDo: [ :mongo |
-			self assert: mongo urlString = nearestServer urlString.
+			self assert: (nearestServerUrls includes: mongo urlString).
 			self doReadOnMongo: mongo ]
 		readPreference: MongoReadPreference newNearest
 		localThreshold: 0 milliseconds
