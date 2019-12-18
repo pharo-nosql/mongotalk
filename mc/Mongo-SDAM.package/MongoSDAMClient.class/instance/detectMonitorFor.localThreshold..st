@@ -10,14 +10,16 @@ detectMonitorFor: aReadPreference localThreshold: localThresholdDuration
 	* https://github.com/mongodb/specifications/blob/master/source/max-staleness/max-staleness.rst#maxstalenessseconds-is-part-of-read-preferences
 	"
 	
-	| startMS serverSelectionTimeoutMS |
+	| startMS |
 	startMS := Time millisecondClockValue.
-	serverSelectionTimeoutMS := self serverSelectionTimeout asMilliSeconds.
-	[	self
+	[
+		self
 			detectMonitorFor: aReadPreference
 			localThreshold: localThresholdDuration
 			ifFound: [ :found | ^ found ]
 			ifNone: [ self minHeartbeatFrequency wait ].
-	] doWhileTrue: [ (Time millisecondsSince: startMS) < serverSelectionTimeoutMS ].
 
-	^ MongoSDAMServerSelectionTimeout signal
+		(Time millisecondsSince: startMS) >= self serverSelectionTimeout asMilliSeconds
+			ifTrue: [ ^ MongoSDAMServerSelectionTimeout signal ]
+
+	] repeat

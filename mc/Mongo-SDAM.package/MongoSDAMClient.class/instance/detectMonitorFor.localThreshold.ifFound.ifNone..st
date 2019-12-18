@@ -10,25 +10,19 @@ detectMonitorFor: aReadPreference localThreshold: localThresholdDuration ifFound
 			ifTrue: [
 				foundBlockClosure value: (monitors at: topology primaryUrlString) ]
 			ifFalse: [
-				| successfulSecondaryMonitors |
-				successfulSecondaryMonitors := topology successfulSecondaryServers
-					collect: [ :each | monitors at: each urlString ].
 				self
 					detectMonitorFor: aReadPreference
 					localThreshold: localThresholdDuration
 					ifFound: foundBlockClosure
 					ifNone: noneBlockClosure
-					in: successfulSecondaryMonitors ] ].
+					in: self successfulSecondaryMonitors ] ].
 
 	aReadPreference isTypeNearest ifTrue: [
-		| successfulMonitors |
-		successfulMonitors := topology successfulServers
-			collect: [ :each | monitors at: each urlString ].
 		^ self
 			detectMonitorFor: aReadPreference
 			localThreshold: localThresholdDuration
 			ifFound: foundBlockClosure
 			ifNone: noneBlockClosure
-			in: successfulMonitors ].
+			in: self successfulMonitors ].
 
 	^ noneBlockClosure value
