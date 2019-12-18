@@ -1,3 +1,4 @@
 private
 ensureMongoIsClosed
-	mongo isNotNil ifTrue: [ mongo closeIfOpen ]
+	mongo isOpen ifTrue: [
+		mongo closeWithTimeout: client connectTimeout ]
