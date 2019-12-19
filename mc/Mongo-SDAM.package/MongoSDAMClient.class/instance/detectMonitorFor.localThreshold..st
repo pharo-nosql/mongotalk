@@ -17,7 +17,9 @@ detectMonitorFor: aReadPreference localThreshold: localThresholdDuration
 			detectMonitorFor: aReadPreference
 			localThreshold: localThresholdDuration
 			ifFound: [ :found | ^ found ]
-			ifNone: [ self minHeartbeatFrequency wait ].
+			ifNone: [].
+
+		self minHeartbeatFrequency wait.
 
 		(Time millisecondsSince: startMS) >= self serverSelectionTimeout asMilliSeconds
 			ifTrue: [ ^ MongoSDAMServerSelectionTimeout signal ]
