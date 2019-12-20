@@ -17,6 +17,7 @@ baseline: spec
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ].
 			spec
 				group: 'default' with: #('Core' 'Tools' 'Tests');
-				group: 'Core' with: #('Mongo-Core' 'Mongo-SDAM' 'Mongo-Queries');
+				group: 'Core' with: #('Mongo-Core' 'Mongo-Queries');
 				group: 'Tools' with: #('Mongo-Pharo-Tools');
-				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-SDAM' 'Mongo-Tests-Queries') ]
+				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
+				group: 'SDAM' with: #('default' 'Mongo-SDAM' 'Mongo-Tests-SDAM') ]
