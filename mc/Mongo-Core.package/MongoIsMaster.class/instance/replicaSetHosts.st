@@ -1,3 +1,3 @@
 replica set
 replicaSetHosts
-	^ response at: #hosts
+	^ response at: 'hosts'

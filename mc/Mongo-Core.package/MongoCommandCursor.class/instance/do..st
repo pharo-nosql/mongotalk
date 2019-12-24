@@ -1,6 +1,6 @@
 enumerating
 do: aBlockClosure 
-	batch := MongoQueryBatch newFromFindResponse: (database command: command).
+	batch := self firstBatch.
 
 	[	batch documents do: aBlockClosure.
 		batch atEnd ifTrue: [ ^self ].

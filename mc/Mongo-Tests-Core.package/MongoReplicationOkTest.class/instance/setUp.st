@@ -1,5 +1,6 @@
 tests
 setUp
 	super setUp.
-	database := mongo databaseNamed: 'test'.
-	collection := database addCollection: 'testCollection'.
+
+	database := mongo databaseNamed: MongoReplicationTestResources databaseName.
+	collection := database getCollection: 'testCollection'.

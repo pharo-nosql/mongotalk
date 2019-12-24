@@ -1,4 +1,4 @@
 running
 tearDown
-	database drop.
-	root close
+	database ifNotNil: [ database drop ].
+	root closeIfOpen
