@@ -1,4 +1,4 @@
-*Mongo-Pharo-Tools
+operations
 openWithTimeout: aDuration
 	| addr |
 	"Waits the specified number of seconds to open the connection."

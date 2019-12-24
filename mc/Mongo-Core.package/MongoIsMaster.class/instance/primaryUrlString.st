@@ -1,3 +1,3 @@
 replica set
 primaryUrlString
-	^ response at: 'primary'
+	^ response at: 'primary' ifAbsent: [ '' ]

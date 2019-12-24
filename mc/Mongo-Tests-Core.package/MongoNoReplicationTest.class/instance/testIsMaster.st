@@ -5,6 +5,7 @@ testIsMaster
 	response := mongo isMaster.
 	
 	"Common API is short."
+	self assert: response isMaster.
 	self deny: response isNil.
 	self deny: response isReadOnly.
 	self deny: response isReplicaSet.

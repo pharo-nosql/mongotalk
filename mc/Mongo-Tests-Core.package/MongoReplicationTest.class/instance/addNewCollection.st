@@ -1,4 +1,4 @@
 running
 addNewCollection
-			
-	(mongo databaseNamed: 'test') addCollection: 'testReplicaSetStepDown', UUID new asString36
+	(mongo databaseNamed: MongoReplicationTestResources databaseName)
+		addCollection: 'testReplicaSetStepDown', UUID new asString36
