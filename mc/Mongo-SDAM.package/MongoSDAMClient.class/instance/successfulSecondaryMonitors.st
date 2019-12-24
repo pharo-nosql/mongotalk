@@ -1,4 +1,4 @@
-private
+accessing
 successfulSecondaryMonitors
 	^ monitors select: [ :each |
 		each latestServerDescription isSuccess and: [

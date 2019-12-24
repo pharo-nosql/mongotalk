@@ -2,20 +2,20 @@ private - server selection
 detectMonitorFor: aReadPreference localThreshold: localThresholdDuration ifFound: foundBlockClosure ifNone: noneBlockClosure
 	"Detect a monitor for the received arguments, and evaluate the received blocks accordingly to the detection result."
 	
-	(aReadPreference isTypePrimary and: [ topology hasPrimary ]) ifTrue: [
-		^ foundBlockClosure value: (monitors at: topology primaryUrlString) ].
+	(aReadPreference isTypePrimary and: [ client topology hasPrimary ]) ifTrue: [
+		^ foundBlockClosure value: client primaryMonitor ].
 
 	aReadPreference isTypePrimaryPreferred ifTrue: [
-		^ topology hasPrimary
+		^ client topology hasPrimary
 			ifTrue: [
-				foundBlockClosure value: (monitors at: topology primaryUrlString) ]
+				foundBlockClosure value: client primaryMonitor ]
 			ifFalse: [
 				self
 					detectMonitorFor: aReadPreference
 					localThreshold: localThresholdDuration
 					ifFound: foundBlockClosure
 					ifNone: noneBlockClosure
-					in: self successfulSecondaryMonitors ] ].
+					in: client successfulSecondaryMonitors ] ].
 
 	aReadPreference isTypeNearest ifTrue: [
 		^ self
@@ -23,6 +23,6 @@ detectMonitorFor: aReadPreference localThreshold: localThresholdDuration ifFound
 			localThreshold: localThresholdDuration
 			ifFound: foundBlockClosure
 			ifNone: noneBlockClosure
-			in: self successfulMonitors ].
+			in: client successfulMonitors ].
 
 	^ noneBlockClosure value

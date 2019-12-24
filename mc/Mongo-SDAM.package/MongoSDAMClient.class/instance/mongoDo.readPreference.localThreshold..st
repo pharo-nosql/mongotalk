@@ -4,7 +4,7 @@ mongoDo: aBlockClosure readPreference: aReadPreference localThreshold: localThre
 	Source: https://docs.mongodb.com/manual/core/read-preference-mechanics/"
 
 	| selectedMonitor |
-	selectedMonitor := self
+	selectedMonitor := serverSelectionStrategy
 		detectMonitorFor: aReadPreference
 		localThreshold: localThresholdDuration.
 

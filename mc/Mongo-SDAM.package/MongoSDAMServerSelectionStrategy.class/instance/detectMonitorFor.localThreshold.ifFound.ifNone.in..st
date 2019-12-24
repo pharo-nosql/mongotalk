@@ -21,4 +21,4 @@ detectMonitorFor: aReadPreference localThreshold: localThresholdDuration ifFound
 
 	^ eligibleMonitors
 		ifEmpty: noneBlockClosure
-		ifNotEmpty: [ foundBlockClosure value: (eligibleMonitors atRandom: self serverSelectionRandomGenerator) ]
+		ifNotEmpty: [ foundBlockClosure value: (eligibleMonitors atRandom: client serverSelectionRandomGenerator) ]
