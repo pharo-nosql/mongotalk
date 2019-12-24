@@ -1,16 +1,16 @@
 private
-randomlyChooseEligibleMonitorIn: someMonitors
+randomEligibleMonitorOrNilIn: someMonitors
 	"Detect a monitor that satisfy the readPreference and localThreshold."
 	
 	| eligibleMonitors latencyWindowLowerBound latencyWindowUpperBound |
 	eligibleMonitors := someMonitors.
-	eligibleMonitors ifEmpty: [ ^ self ].
+	eligibleMonitors ifEmpty: [ ^ nil ].
 
 	"Filter by staleness"
 	readPreference hasMaxStalenessValue ifTrue: [
 		eligibleMonitors := eligibleMonitors select: [ :each |
 			each staleness <= readPreference maxStaleness ] ].
-	eligibleMonitors ifEmpty: [ ^ self ].
+	eligibleMonitors ifEmpty: [ ^ nil ].
 
 	"TODO: filter by tag set (https://docs.mongodb.com/v4.0/core/read-preference/#tag-set)"
 
@@ -19,6 +19,7 @@ randomlyChooseEligibleMonitorIn: someMonitors
 	latencyWindowUpperBound := latencyWindowLowerBound + localThreshold.
 	eligibleMonitors := eligibleMonitors select: [ :each |
 		each roundtripDurationAverage <= latencyWindowUpperBound ].
+	eligibleMonitors ifEmpty: [ ^ nil ].
 
-	eligibleMonitors ifNotEmpty: [
-		chosenMonitor := eligibleMonitors atRandom: client serverSelectionRandomGenerator ]
+	"Finally, choose one."
+	^ eligibleMonitors atRandom: client serverSelectionRandomGenerator

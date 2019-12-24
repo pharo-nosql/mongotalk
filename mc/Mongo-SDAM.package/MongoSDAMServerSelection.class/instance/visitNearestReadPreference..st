@@ -1,3 +1,3 @@
 visiting
 visitNearestReadPreference: aReadPreference
-	self randomlyChooseEligibleMonitorIn: client successfulMonitors
+	^ self randomEligibleMonitorOrNilIn: client successfulMonitors

@@ -1,5 +1,5 @@
 visiting
 visitPrimaryPreferedReadPreference: aReadPreference
-	client topology hasPrimary
+	^ client topology hasPrimary
 		ifTrue: [ client primaryMonitor ]
-		ifFalse: [ self randomlyChooseEligibleMonitorIn: client successfulSecondaryMonitors ]
+		ifFalse: [ self randomEligibleMonitorOrNilIn: client successfulSecondaryMonitors ]

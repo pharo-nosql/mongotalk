@@ -5,7 +5,8 @@ detectMonitorWithTimeout: aDuration
 	| startMS |
 	startMS := Time millisecondClockValue.
 	[
-		readPreference accept: self.
+		"TODO: don't use nil as answer..."
+		chosenMonitor := readPreference accept: self.
 		chosenMonitor ifNotNil: [ :found | ^ found ].
 
 		client minHeartbeatFrequency wait.

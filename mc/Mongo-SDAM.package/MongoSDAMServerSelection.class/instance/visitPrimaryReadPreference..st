@@ -1,4 +1,5 @@
 visiting
 visitPrimaryReadPreference: aReadPreference
-	client topology hasPrimary
+	^ client topology hasPrimary
 		ifTrue: [ client primaryMonitor ]
+		ifFalse: [ nil ]
