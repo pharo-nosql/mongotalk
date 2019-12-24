@@ -6,8 +6,11 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"client"
+		"client",
+		"readPreference",
+		"localThreshold",
+		"chosenMonitor"
 	],
-	"name" : "MongoSDAMServerSelectionStrategy",
+	"name" : "MongoSDAMServerSelection",
 	"type" : "normal"
 }

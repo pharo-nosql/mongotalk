@@ -18,8 +18,7 @@
 		"topologyMutex",
 		"socketTimeout",
 		"maxConnections",
-		"monitorStopTimeout",
-		"serverSelectionStrategy"
+		"monitorStopTimeout"
 	],
 	"name" : "MongoSDAMClient",
 	"type" : "normal"

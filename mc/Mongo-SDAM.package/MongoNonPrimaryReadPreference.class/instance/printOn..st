@@ -4,11 +4,7 @@ printOn: aStream
 
 	super printOn: aStream.
 	aStream
-		nextPut: $(;
-		nextPutAll: type.
-		
-	aStream
-		nextPutAll: ' maxStaleness: ';
+		nextPutAll: '(maxStaleness: ';
 		print: maxStaleness;
 		nextPut: $).
 

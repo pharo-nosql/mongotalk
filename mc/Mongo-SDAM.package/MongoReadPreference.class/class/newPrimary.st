@@ -1,3 +1,3 @@
 instance creation
 newPrimary
-	^ self newWithType: self primaryType
+	^ MongoPrimaryReadPreference new

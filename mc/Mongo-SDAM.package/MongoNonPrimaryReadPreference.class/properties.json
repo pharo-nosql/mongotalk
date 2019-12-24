@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "MartinDias 12/24/2019 07:20",
+	"super" : "MongoReadPreference",
+	"category" : "Mongo-SDAM-ReadPreferences",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"maxStaleness"
+	],
+	"name" : "MongoNonPrimaryReadPreference",
+	"type" : "normal"
+}

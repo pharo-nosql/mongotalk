@@ -7,7 +7,6 @@ initializeWith: initialUrls
 	announcer := Announcer new.
 	monitors := Dictionary new.
 	topology := MongoSDAMTopology new.
-	serverSelectionStrategy := MongoSDAMServerSelectionStrategy for: self.
 
 	initialUrlStrings := initialUrls collect: [:each | each asMongoUrl asMongoUrlString ].
 	self

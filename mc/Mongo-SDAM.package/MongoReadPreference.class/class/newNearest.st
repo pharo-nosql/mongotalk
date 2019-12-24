@@ -1,3 +1,3 @@
 instance creation
 newNearest
-	^ self newWithType: self nearestType
+	^ MongoNearestReadPreference new
