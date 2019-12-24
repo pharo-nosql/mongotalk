@@ -1,0 +1,3 @@
+testing
+hasReplicaSetName
+	^ replicaSetName isNotNil
