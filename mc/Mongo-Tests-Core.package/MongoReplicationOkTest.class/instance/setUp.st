@@ -1,5 +1,7 @@
 tests
 setUp
+	MongoReplicationTestResources waitTestingScenario.
+
 	super setUp.
 
 	database := mongo databaseNamed: MongoReplicationTestResources databaseName.
