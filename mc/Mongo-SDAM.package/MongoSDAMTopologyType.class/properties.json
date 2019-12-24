@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "MartinDias 6/5/2019 12:32",
+	"super" : "Object",
+	"category" : "Mongo-SDAM-Topology",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoSDAMTopologyType",
+	"type" : "normal"
+}

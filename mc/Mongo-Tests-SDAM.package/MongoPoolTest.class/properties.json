@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "MongoTest",
+	"category" : "Mongo-Tests-SDAM-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"pool"
+	],
+	"name" : "MongoPoolTest",
+	"type" : "normal"
+}

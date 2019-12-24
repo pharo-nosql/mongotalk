@@ -1,0 +1,3 @@
+tests
+collectionNameForTesting
+	^ 'testCollection'

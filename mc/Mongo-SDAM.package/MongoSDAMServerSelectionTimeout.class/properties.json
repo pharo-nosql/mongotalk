@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "MartinDias 12/19/2019 17:09",
+	"super" : "Error",
+	"category" : "Mongo-SDAM-Errors",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoSDAMServerSelectionTimeout",
+	"type" : "normal"
+}

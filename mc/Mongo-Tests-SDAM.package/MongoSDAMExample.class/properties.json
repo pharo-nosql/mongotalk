@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "MartinDias 10/2/2019 21:50",
+	"super" : "Object",
+	"category" : "Mongo-Tests-SDAM",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"client",
+		"readingLoopEnabled"
+	],
+	"name" : "MongoSDAMExample",
+	"type" : "normal"
+}

@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "MartinDias 6/5/2019 12:39",
+	"super" : "TKTService",
+	"category" : "Mongo-SDAM-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"client",
+		"roundtripTimeCalculator",
+		"urlString",
+		"nextTimeToCheck",
+		"pool",
+		"latestServerDescription",
+		"mongo"
+	],
+	"name" : "MongoSDAMMonitor",
+	"type" : "normal"
+}

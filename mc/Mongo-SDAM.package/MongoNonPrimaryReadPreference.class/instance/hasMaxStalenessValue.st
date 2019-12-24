@@ -1,0 +1,3 @@
+testing
+hasMaxStalenessValue
+	^ maxStaleness notNil

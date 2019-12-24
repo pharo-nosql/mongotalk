@@ -1,0 +1,3 @@
+instance creation
+single
+	^ #single
