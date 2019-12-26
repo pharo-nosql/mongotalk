@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "MartinDias 12/24/2019 05:34",
+	"super" : "Object",
+	"category" : "Mongo-SDAM-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"client",
+		"readPreference",
+		"localThreshold",
+		"chosenMonitor"
+	],
+	"name" : "MongoServerSelection",
+	"type" : "normal"
+}

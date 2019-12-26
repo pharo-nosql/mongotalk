@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MongoClientReplicaSetTest",
+	"category" : "Mongo-Tests-SDAM-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoMonitoringTest",
+	"type" : "normal"
+}

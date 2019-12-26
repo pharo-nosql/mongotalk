@@ -1,3 +1,0 @@
-accessing
-isTypeReplicaSetWithPrimary
-	^ type = MongoSDAMTopologyType replicaSetWithPrimary

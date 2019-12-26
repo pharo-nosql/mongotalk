@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "MartinDias 12/19/2019 17:11",
+	"super" : "Announcement",
+	"category" : "Mongo-SDAM-Announcements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"oldTopology",
+		"newTopology"
+	],
+	"name" : "MongoTopologyUpdate",
+	"type" : "normal"
+}
