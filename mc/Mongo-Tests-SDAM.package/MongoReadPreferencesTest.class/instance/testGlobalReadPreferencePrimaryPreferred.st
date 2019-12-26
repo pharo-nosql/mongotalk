@@ -6,4 +6,9 @@ testGlobalReadPreferencePrimaryPreferred
 
 	self prepareScenarioWhereAllExceptCStopped.
 
-	self doReadOnClient.
+	"It will read from C"
+	client mongoDo: [ :mongo |
+		self
+			assert: mongo urlString asMongoUrl
+			equals: MongoReplicationTestResources mongoUrlC.
+		self doReadOnMongo: mongo ].

@@ -25,4 +25,4 @@ testMaxStaleness
 	self waitMonitorsHeartbeatAndTimeout.
 	
 	"Ensure it reads again"
-	self doReadOnClient.
+	self doRead.

@@ -1,13 +1,13 @@
 private
 writeWithRetry
-	[ 	self writeToPrimary.
+	[ 	self oneShotWriteToPrimary.
 		Transcript show: '-> write done'; cr.
 	] 	on: Error
 		do: [ :firstError |
 			"second try"
 			Transcript show: '-> retry write ('; print: firstError; show: ')'; cr.
 			[ 
-				self writeToPrimary.
+				self oneShotWriteToPrimary.
 				Transcript show: '---> retry write success'; cr 
 			]	on: Error
 				do: [ :secondError |

@@ -1,13 +1,13 @@
 private
 readWithRetry
-	[ 	self read.
+	[ 	self oneShotReadSlaveOk.
 		Transcript show: '-> read done'; cr.
 	] 	on: Error
 		do: [ :firstError |
 			"second try"
 			Transcript show: '-> retry read ('; print: firstError; show: ')'; cr.
 			[ 
-				self read.
+				self oneShotReadSlaveOk.
 				Transcript show: '---> retry read success'; cr 
 			]	on: Error
 				do: [ :secondError |

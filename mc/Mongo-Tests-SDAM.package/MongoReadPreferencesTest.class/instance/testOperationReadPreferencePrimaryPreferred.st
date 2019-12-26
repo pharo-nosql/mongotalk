@@ -7,4 +7,4 @@ testOperationReadPreferencePrimaryPreferred
 	self prepareScenarioWhereAllExceptCStopped.
 	
 	"It reads from secondary (C)"
-	self doReadOnClient: MongoReadPreference newPrimaryPreferred.
+	self doReadWith: MongoReadPreference newPrimaryPreferred.

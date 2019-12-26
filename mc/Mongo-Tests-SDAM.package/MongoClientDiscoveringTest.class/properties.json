@@ -6,6 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "MongoMonitoringTest",
+	"name" : "MongoClientDiscoveringTest",
 	"type" : "normal"
 }

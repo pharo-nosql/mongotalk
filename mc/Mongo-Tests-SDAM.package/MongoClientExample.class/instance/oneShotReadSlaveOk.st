@@ -1,5 +1,5 @@
 public API
-read 
+oneShotReadSlaveOk 
 	^ client
 		mongoDo: [ :mongo |
 			| database collection |

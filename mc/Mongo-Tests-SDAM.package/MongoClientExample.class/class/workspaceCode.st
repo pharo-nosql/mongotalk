@@ -3,8 +3,8 @@ workspaceCode
 	| example |
 
 	"Start"
-	example := MongoExample new. 
-	example start.
+	example := MongoClientExample new. 
+	example startClientAndLoopReadingAndWriting.
 	MongoReplicationTestResources waitTestingScenario.
 
 	"Play with mongod servers"
@@ -15,4 +15,4 @@ workspaceCode
 	MongoReplicationTestResources stepDownB: 30 seconds.
 
 	"Stop"
-	example stop.
+	example stopClient.

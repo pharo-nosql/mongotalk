@@ -1,4 +1,4 @@
-tests - monitoring
+tests
 testUpdateAnnouncements
 	
 	| serverUpdates topologyUpdates |

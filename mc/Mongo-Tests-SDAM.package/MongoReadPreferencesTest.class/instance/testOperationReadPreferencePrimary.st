@@ -8,5 +8,5 @@ testOperationReadPreferencePrimary
 	
 	"It can't do a read command from the secondary (B)"
 	self
-		should: [ self doReadOnClient: MongoReadPreference newPrimary ]
+		should: [ self doReadWith: MongoReadPreference newPrimary ]
 		raise: MongoServerSelectionTimeout.

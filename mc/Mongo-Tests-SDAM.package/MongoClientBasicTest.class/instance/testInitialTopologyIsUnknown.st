@@ -1,4 +1,4 @@
-tests - discovering
+tests
 testInitialTopologyIsUnknown
 
 	client := self newClient.

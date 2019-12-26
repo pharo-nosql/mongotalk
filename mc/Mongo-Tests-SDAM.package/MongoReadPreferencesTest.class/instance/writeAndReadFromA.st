@@ -4,7 +4,7 @@ writeAndReadFromA
 
 	MongoReplicationTestResources waitTestingScenario.
 	
-	self doWriteOnClient.
+	self doWrite.
 
 	client mongoDo: [ :mongo | 
 		self

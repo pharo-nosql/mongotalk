@@ -1,5 +1,5 @@
 running
-doReadOnClient: aMongoReadPreference
+doReadWith: aMongoReadPreference
 	client
 		mongoDo: [ :mongo | ^ self doReadOnMongo: mongo ]
 		readPreference: aMongoReadPreference.

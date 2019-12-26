@@ -1,5 +1,5 @@
 running
-doWriteOnClient
+doWrite
 	client
 		mongoDo: [ :mongo |
 			| database collection |

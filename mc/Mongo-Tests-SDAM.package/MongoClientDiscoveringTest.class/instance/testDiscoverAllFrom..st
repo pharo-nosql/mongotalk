@@ -1,4 +1,4 @@
-tests - discovering
+tests
 testDiscoverAllFrom: aCollectionOfZnUrls
 	
 	client := MongoClient withUrls: aCollectionOfZnUrls.

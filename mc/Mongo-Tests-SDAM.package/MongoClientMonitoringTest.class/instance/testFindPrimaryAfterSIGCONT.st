@@ -1,4 +1,4 @@
-tests - monitoring
+tests
 testFindPrimaryAfterSIGCONT
 
 	| topology |

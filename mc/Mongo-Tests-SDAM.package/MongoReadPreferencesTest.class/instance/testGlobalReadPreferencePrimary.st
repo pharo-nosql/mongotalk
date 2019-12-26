@@ -7,5 +7,5 @@ testGlobalReadPreferencePrimary
 	self prepareScenarioWhereAllExceptCStopped.
 
 	self
-		should: [ self doReadOnClient ]
+		should: [ self doRead ]
 		raise: MongoServerSelectionTimeout.

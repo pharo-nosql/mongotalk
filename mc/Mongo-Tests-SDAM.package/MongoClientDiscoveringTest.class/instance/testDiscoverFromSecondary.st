@@ -1,4 +1,4 @@
-tests - discovering
+tests
 testDiscoverFromSecondary
 	
 	self testDiscoverAllFrom: { MongoReplicationTestResources mongoUrlB }

@@ -1,5 +1,5 @@
 public API
-writeToPrimary
+oneShotWriteToPrimary
 	"Do a write operation (insert) to the database."
 	
 	^ client
