@@ -1,8 +1,8 @@
 API
 mongoDo: aBlockClosure
-	"Use the global read preference."
+	"Evaluate aBlockClosure with a Mongo instance selected according to the SDAM specification.
+	Use the default parameters."
 
 	^ self
 		mongoDo: aBlockClosure
-		readPreference: self readPreference
-		localThreshold: self localThreshold
+		serverSelection: self newServerSelection

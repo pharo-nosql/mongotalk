@@ -1,6 +1,5 @@
 tests
 setUp
-	Transcript << self asString; << ' setUp '.
 	MongoReplicationTestResources waitTestingScenario.
 
 	super setUp.

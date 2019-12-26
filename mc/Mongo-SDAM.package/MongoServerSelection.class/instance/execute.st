@@ -1,16 +1,16 @@
 public
-detectMonitorWithTimeout: aDuration
+execute
 	"Detect a monitor that satisfy the readPreference and localThreshold, signalling MongoSDAMServerSelectionTimeout if none is found."
 	
 	| startMS |
 	startMS := Time millisecondClockValue.
 	[
 		"TODO: don't use nil as answer..."
-		chosenMonitor := readPreference accept: self.
-		chosenMonitor ifNotNil: [ :found | ^ found ].
+		selectedMonitor := readPreference accept: self.
+		selectedMonitor ifNotNil: [ :monitor | ^ monitor ].
 
 		client minHeartbeatFrequency wait.
-		(Time millisecondsSince: startMS) >= aDuration asMilliSeconds
+		(Time millisecondsSince: startMS) >= self timeoutMilliSeconds
 			ifTrue: [ ^ MongoServerSelectionTimeout signal ]
 
 	] repeat

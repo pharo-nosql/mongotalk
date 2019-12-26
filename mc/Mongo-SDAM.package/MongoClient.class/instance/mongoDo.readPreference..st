@@ -1,9 +1,10 @@
 API
 mongoDo: aBlockClosure readPreference: aReadPreference
-	"Evaluate a block closure with a Mongo instance, which selects according to the 'Server Selection Algorithm'. 
-	Source: https://docs.mongodb.com/manual/core/read-preference-mechanics/"
+	"Evaluate aBlockClosure with a Mongo instance selected according to the SDAM specification.
+	Use aReadPreference instead of the default parameter."
 
 	^ self
 		mongoDo: aBlockClosure
-		readPreference: aReadPreference
-		localThreshold: self localThreshold
+		serverSelection: (self newServerSelection
+			readPreference: aReadPreference;
+			yourself)

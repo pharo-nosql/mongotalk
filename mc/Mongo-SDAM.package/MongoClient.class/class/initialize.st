@@ -1,0 +1,3 @@
+class initialization
+initialize
+	PRIMARY_READ_PREFERENCE := MongoReadPreference newPrimary

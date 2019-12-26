@@ -4,7 +4,9 @@
 	"category" : "Mongo-SDAM-Client",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"PRIMARY_READ_PREFERENCE"
+	],
 	"instvars" : [
 		"monitors",
 		"topology",

@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "MartinDias 12/24/2019 05:34",
+	"commentStamp" : "MartinDias 12/26/2019 16:58",
 	"super" : "Object",
 	"category" : "Mongo-SDAM-Client",
 	"classinstvars" : [ ],
@@ -9,7 +9,8 @@
 		"client",
 		"readPreference",
 		"localThreshold",
-		"chosenMonitor"
+		"selectedMonitor",
+		"timeoutMilliSeconds"
 	],
 	"name" : "MongoServerSelection",
 	"type" : "normal"
