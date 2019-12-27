@@ -5,5 +5,4 @@ newOsProcess
 		arguments: self mongodArguments;
 		redirectStdout;
 		redirectStderr;
-		terminateOnShutdown;
 		yourself
