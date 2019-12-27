@@ -7,16 +7,16 @@ randomEligibleMonitorOrNilIn: someMonitors
 	eligibleMonitors ifEmpty: [ ^ nil ].
 
 	"Filter by staleness"
-	readPreference hasMaxStalenessValue ifTrue: [
+	self readPreference hasMaxStalenessValue ifTrue: [
 		eligibleMonitors := eligibleMonitors select: [ :each |
-			each staleness <= readPreference maxStaleness ] ].
+			each staleness <= self readPreference maxStaleness ] ].
 	eligibleMonitors ifEmpty: [ ^ nil ].
 
 	"TODO: filter by tag set (https://docs.mongodb.com/v4.0/core/read-preference/#tag-set)"
 
 	"Filter by latency window"
 	latencyWindowLowerBound := (eligibleMonitors collect: [ :each | each roundtripDurationAverage ]) min.
-	latencyWindowUpperBound := latencyWindowLowerBound + localThreshold.
+	latencyWindowUpperBound := latencyWindowLowerBound + self localThreshold.
 	eligibleMonitors := eligibleMonitors select: [ :each |
 		each roundtripDurationAverage <= latencyWindowUpperBound ].
 	eligibleMonitors ifEmpty: [ ^ nil ].

@@ -6,7 +6,7 @@ execute
 	startMS := Time millisecondClockValue.
 	[
 		"TODO: don't use nil as answer..."
-		selectedMonitor := readPreference accept: self.
+		selectedMonitor := self readPreference accept: self.
 		selectedMonitor ifNotNil: [ :monitor | ^ monitor ].
 
 		client minHeartbeatFrequency wait.
