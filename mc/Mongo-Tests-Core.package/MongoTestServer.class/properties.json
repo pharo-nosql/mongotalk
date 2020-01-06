@@ -11,7 +11,8 @@
 		"osProcess",
 		"port",
 		"replicaSetName",
-		"useSyslog"
+		"useSyslog",
+		"timeout"
 	],
 	"name" : "MongoTestServer",
 	"type" : "normal"

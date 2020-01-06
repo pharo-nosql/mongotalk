@@ -1,7 +1,7 @@
 operations
 waitIsWrittable
 	| timeout retryDelay |
-	timeout := DateAndTime now + 5 seconds.
+	timeout := DateAndTime now + self timeout.
 	retryDelay := 250 milliSeconds.
 	
 	[ 	[ self mongoDo: [ :mongo | ^ mongo isMaster ] ] 
