@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "MartinDias 10/6/2019 19:32",
+	"super" : "Object",
+	"category" : "Mongo-Tests-Core-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"servers",
+		"members"
+	],
+	"name" : "MongoTestReplicaSet",
+	"type" : "normal"
+}

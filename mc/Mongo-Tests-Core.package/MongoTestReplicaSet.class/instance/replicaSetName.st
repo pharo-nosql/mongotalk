@@ -1,0 +1,3 @@
+accessing
+replicaSetName
+	^ 'rs-test'
