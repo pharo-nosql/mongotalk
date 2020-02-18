@@ -4,7 +4,7 @@ checkOnce
 
 	[ self ensureMongoIsOpened.
 	self doCheckAndHandleSuccess ]
-		on: NetworkError
+		on: NetworkError, MongoWireProtocolError
 		do: [ :error | 
 			self ensureMongoIsClosed.
-			self handleNetworkError: error ]
+			self handleConnectionError: error ]

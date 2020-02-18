@@ -9,5 +9,5 @@ mongoDo: aBlockClosure serverSelection: aMongoServerSelection
 	^ [ [ selectedMonitor pool mongoDo: aBlockClosure ]
 		on: MongoCommandError, MongoQueryError do: [ :error |
 			self handleMongoQueryOrCommandError: error on: selectedMonitor ] ]
-		on: NetworkError do: [ :error |
-			self handleNetworkError: error on: selectedMonitor ]
+		on: NetworkError, MongoWireProtocolError do: [ :error |
+			self handleConnectionError: error on: selectedMonitor ]

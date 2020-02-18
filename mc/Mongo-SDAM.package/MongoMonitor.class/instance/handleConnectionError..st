@@ -1,7 +1,7 @@
 accessing
-handleNetworkError: aNetworkError
+handleConnectionError: anError
 	roundtripTimeCalculator reset.
 	self latestServerDescription:
 		(MongoErrorServerDescription
 			urlString: urlString
-			errorDescription: aNetworkError description)
+			errorDescription: anError description)
