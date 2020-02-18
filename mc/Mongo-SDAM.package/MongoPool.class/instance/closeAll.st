@@ -1,5 +1,5 @@
 accessing
-close
+closeAll
 	"Remove and close all connections."
 	
 	mutex critical: [
