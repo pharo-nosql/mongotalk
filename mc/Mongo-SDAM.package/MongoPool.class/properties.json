@@ -1,7 +1,7 @@
 {
-	"commentStamp" : "MartinDias 9/29/2019 16:49",
+	"commentStamp" : "MartinDias 2/19/2020 11:01",
 	"super" : "Object",
-	"category" : "Mongo-SDAM-Utilities",
+	"category" : "Mongo-SDAM-Client",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
@@ -11,7 +11,9 @@
 		"maxConnections",
 		"connectTimeout",
 		"mutex",
-		"socketTimeout"
+		"socketTimeout",
+		"connectionsSemaphore",
+		"acquireConnectionTimeout"
 	],
 	"name" : "MongoPool",
 	"type" : "normal"

@@ -20,7 +20,8 @@
 		"topologyMutex",
 		"socketTimeout",
 		"maxConnections",
-		"monitorStopTimeout"
+		"monitorStopTimeout",
+		"acquireConnectionTimeout"
 	],
 	"name" : "MongoClient",
 	"type" : "normal"

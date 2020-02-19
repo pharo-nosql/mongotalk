@@ -7,10 +7,14 @@ mongoDo: aBlockClosure
 	Source: https://github.com/mongodb/specifications/blob/573b1f58a129056d651781ad99317b6c656e050e/source/server-discovery-and-monitoring/server-discovery-and-monitoring-summary.rst#id9
 	"
 
-	[	| mongo result |
-		mongo := self next.
+	| mongo result |
+	[	mongo := self next.
 		result := aBlockClosure value: mongo.
 		self return: mongo.
 		^ result ]
 			on: NetworkError, MongoWireProtocolError
-			do: [ :e | self closeAll. e pass ]
+			do: [ :error |
+				mongo ifNotNil: [
+					self ensureCloseMongo: mongo ]
+				self resetAll.
+				error pass ]

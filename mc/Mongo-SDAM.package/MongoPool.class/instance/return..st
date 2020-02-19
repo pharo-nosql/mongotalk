@@ -1,7 +1,11 @@
 private
 return: mongo
-	"Return to this pool an instance of Mongo. Such instance should be open and ready to be answered by #next on a new operation."
+	"Release to this pool an instance of Mongo previously obtained via #next. Ideally, such Mongo instance should be open and ready to be answered by #next on a new operation."
 
-	connections size >= self maxConnections
-		ifTrue: [ self ensureCloseMongo: mongo ]
-		ifFalse: [ mutex critical: [ connections add: mongo ] ]
+	mutex critical: [
+		connectionsSemaphore signal.
+
+		"Normally shouldn't happens, but let's ensure it."
+		connections size >= self maxConnections
+			ifTrue: [ self ensureCloseMongo: mongo ]
+			ifFalse: [ connections add: mongo ] ]

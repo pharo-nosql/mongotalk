@@ -1,4 +1,4 @@
 accessing
 tearDown
 	self ensureMongoIsClosed.
-	pool closeAll.
+	pool resetAll.
