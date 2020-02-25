@@ -4,8 +4,7 @@ setUp
 		url: 'localhost' asMongoUrl
 		maxConnections: 5
 		connectTimeout: 10 seconds
-		socketTimeout: 5 seconds
-		acquireConnectionTimeout: nil.
+		socketTimeout: 5 seconds.
 	
 	root := pool next.
 

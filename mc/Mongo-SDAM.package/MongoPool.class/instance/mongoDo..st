@@ -14,7 +14,6 @@ mongoDo: aBlockClosure
 		^ result ]
 			on: NetworkError, MongoWireProtocolError
 			do: [ :error |
-				mongo ifNotNil: [
-					self ensureCloseMongo: mongo ]
+				self ensureCloseMongo: mongo.
 				self resetAll.
 				error pass ]

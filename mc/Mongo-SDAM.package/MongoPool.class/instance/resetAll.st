@@ -4,8 +4,4 @@ resetAll
 	
 	mutex critical: [
 		[ connections isEmpty ] whileFalse: [
-			self ensureCloseMongo: connections removeLast ].
-
-		connectionsSemaphore consumeAllSignals.
-		maxConnections timesRepeat: [ connectionsSemaphore signal ].
-		]
+			self ensureCloseMongo: connections removeLast ] ]

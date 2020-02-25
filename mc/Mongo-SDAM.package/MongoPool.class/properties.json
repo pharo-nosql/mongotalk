@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "MartinDias 2/19/2020 11:01",
+	"commentStamp" : "MartinDias 2/24/2020 17:48",
 	"super" : "Object",
 	"category" : "Mongo-SDAM-Client",
 	"classinstvars" : [ ],
@@ -8,12 +8,10 @@
 	"instvars" : [
 		"connections",
 		"url",
+		"mutex",
 		"maxConnections",
 		"connectTimeout",
-		"mutex",
-		"socketTimeout",
-		"connectionsSemaphore",
-		"acquireConnectionTimeout"
+		"socketTimeout"
 	],
 	"name" : "MongoPool",
 	"type" : "normal"

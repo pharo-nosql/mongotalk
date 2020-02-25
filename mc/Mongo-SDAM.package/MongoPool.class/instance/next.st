@@ -1,15 +1,16 @@
 private
 next
-	"Answer an instance of Mongo that is open (and then ready to be used).
+	"Answer an instance of Mongo that is open (and then ready to be used). The instance may be either one cached from from the pool or a new one if there isn't any cached.
 	
-	IMPORTANT: When caller is done with the Mongo instance, it must either release it to this pool (see #return:) or close it (since it references an open Socket... else the Pharo image can run out of external semaphores).
+	IMPORTANT: When caller is done with the Mongo instance, it must either release it to this pool (see #return:) or close it (since it references an open Socket... else the Pharo image can run out of external semaphores)."
 
-	Wait up to acquireConnectionTimeout if we would exceed the max number of acquired connections.
-	Signal MongoAcquireConnectionTimeout if such wait was too long."
+	| mongo |
+	mutex critical: [
+		mongo := connections
+			ifEmpty: [ Mongo url: url ]
+			ifNotEmpty: [ connections removeFirst ] ].
 
-	acquireConnectionTimeout ifNotNil: [ 
-		| timedout |
-		timedout := connectionsSemaphore wait: acquireConnectionTimeout.
-		timedout ifTrue: [ MongoAcquireConnectionTimeout signal ] ].
+	"Caller assumes it's open."
+	self ensureOpenMongo: mongo.
 
-	^ self basicNext
+	^ mongo
