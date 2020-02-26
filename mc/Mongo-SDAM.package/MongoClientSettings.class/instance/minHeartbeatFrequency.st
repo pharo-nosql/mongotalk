@@ -1,4 +1,4 @@
-accessing
+accessing - monitor
 minHeartbeatFrequency
 	"If a client frequently rechecks a server, it MUST wait at least minHeartbeatFrequencyMS milliseconds since the previous check ended, to avoid pointless effort. This value MUST be 500 ms, and it MUST NOT be configurable. 
 
