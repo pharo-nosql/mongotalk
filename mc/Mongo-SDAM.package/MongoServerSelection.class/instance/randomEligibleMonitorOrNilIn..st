@@ -22,4 +22,4 @@ randomEligibleMonitorOrNilIn: someMonitors
 	eligibleMonitors ifEmpty: [ ^ nil ].
 
 	"Finally, choose one."
-	^ eligibleMonitors atRandom: client serverSelectionRandomGenerator
+	^ eligibleMonitors atRandom: client settings serverSelectionRandomGenerator

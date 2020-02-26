@@ -9,9 +9,7 @@
 		"connections",
 		"url",
 		"mutex",
-		"maxConnections",
-		"connectTimeout",
-		"socketTimeout"
+		"settings"
 	],
 	"name" : "MongoPool",
 	"type" : "normal"

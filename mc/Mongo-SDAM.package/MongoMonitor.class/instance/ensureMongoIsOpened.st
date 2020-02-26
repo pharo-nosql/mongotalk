@@ -4,5 +4,5 @@ ensureMongoIsOpened
 
 	mongo isOpen ifFalse: [
 		mongo
-			openWithTimeout: client connectTimeout;
-			socketTimeout: client connectTimeout ]
+			openWithTimeout: client settings connectTimeout;
+			socketTimeout: client settings connectTimeout ]

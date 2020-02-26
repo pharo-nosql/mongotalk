@@ -9,7 +9,7 @@ execute
 		selectedMonitor := self readPreference accept: self.
 		selectedMonitor ifNotNil: [ :monitor | ^ monitor ].
 
-		client minHeartbeatFrequency wait.
+		client settings minHeartbeatFrequency wait.
 		(Time millisecondsSince: startMS) >= self timeoutMilliSeconds
 			ifTrue: [ ^ MongoServerSelectionTimeout signal ]
 

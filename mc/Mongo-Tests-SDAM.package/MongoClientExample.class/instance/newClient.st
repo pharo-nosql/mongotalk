@@ -1,6 +1,7 @@
 private
 newClient
-	^ (MongoClient withUrls: MongoReplicationTestResources allMongoUrls)
+	client := MongoClient withUrls: MongoReplicationTestResources allMongoUrls.
+	client settings
 		connectTimeout: 5 seconds;
-		readPreference: self readPreference;
-		yourself
+		readPreference: self readPreference.
+	^ client

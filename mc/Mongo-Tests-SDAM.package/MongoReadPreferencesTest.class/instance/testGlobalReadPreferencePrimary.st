@@ -2,7 +2,7 @@ tests
 testGlobalReadPreferencePrimary
 
 	"Set global readPreference"
-	client readPreference: MongoReadPreference newPrimary.
+	client settings readPreference: MongoReadPreference newPrimary.
 
 	self prepareScenarioWhereAllExceptCStopped.
 

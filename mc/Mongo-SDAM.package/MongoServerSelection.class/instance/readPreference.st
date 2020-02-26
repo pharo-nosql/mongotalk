@@ -1,3 +1,3 @@
 accessing
 readPreference
-	^ readPreference ifNil: [ readPreference := client readPreference ]
+	^ readPreference ifNil: [ readPreference := client settings readPreference ]

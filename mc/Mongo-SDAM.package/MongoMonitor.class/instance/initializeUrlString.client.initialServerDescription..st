@@ -9,9 +9,7 @@ initializeUrlString: aUrlString client: aMongoSDAMClient initialServerDescriptio
 
 	pool := MongoPool
 		url: urlString asMongoUrl
-		maxConnections: client maxConnections
-		connectTimeout: client connectTimeout
-		socketTimeout: client socketTimeout.
+		settings: client settings.
 
 	"Spec: 'Servers are monitored with dedicated sockets'"
 	mongo := Mongo url: urlString asMongoUrl.

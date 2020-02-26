@@ -10,17 +10,9 @@
 	"instvars" : [
 		"monitors",
 		"topology",
-		"connectTimeout",
-		"readPreference",
 		"announcer",
-		"localThreshold",
-		"serverSelectionTimeout",
-		"heartbeatFrequency",
-		"serverSelectionRandomGenerator",
 		"topologyMutex",
-		"socketTimeout",
-		"maxConnections",
-		"monitorStopTimeout"
+		"settings"
 	],
 	"name" : "MongoClient",
 	"type" : "normal"

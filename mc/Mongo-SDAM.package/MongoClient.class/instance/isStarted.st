@@ -1,3 +1,3 @@
 testing
 isStarted
-	^ monitors allSatisfy: #isStarted
+	^ monitors allSatisfy: [ :each | each isStarted ]

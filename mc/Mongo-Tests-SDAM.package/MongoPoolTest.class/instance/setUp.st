@@ -1,10 +1,16 @@
 running
 setUp
+	| settings |
+	settings :=
+		MongoClientSettings new 
+			maxConnections: 5;
+			connectTimeout: 10 seconds;
+			socketTimeout: 5 seconds;
+			yourself.
+
 	pool := MongoPool
 		url: 'localhost' asMongoUrl
-		maxConnections: 5
-		connectTimeout: 10 seconds
-		socketTimeout: 5 seconds.
+		settings: settings.
 	
 	root := pool next.
 

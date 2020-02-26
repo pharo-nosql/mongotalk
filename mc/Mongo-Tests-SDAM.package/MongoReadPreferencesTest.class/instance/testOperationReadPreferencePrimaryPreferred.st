@@ -2,7 +2,7 @@ tests
 testOperationReadPreferencePrimaryPreferred
 
 	"Ensure the global setting is not the one being tested."
-	client readPreference: MongoReadPreference newPrimary.
+	client settings readPreference: MongoReadPreference newPrimary.
 
 	self prepareScenarioWhereAllExceptCStopped.
 	

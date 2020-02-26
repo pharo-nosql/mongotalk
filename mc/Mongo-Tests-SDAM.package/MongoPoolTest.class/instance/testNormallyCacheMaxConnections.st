@@ -1,10 +1,10 @@
 tests
 testNormallyCacheMaxConnections
 	| usedMongoConnections |
-	pool maxConnections: 5.
+	pool settings maxConnections: 5.
 
 	usedMongoConnections := SharedQueue new.
-	pool maxConnections + 1 timesRepeat: [ [
+	pool settings maxConnections + 1 timesRepeat: [ [
 		pool mongoDo: [ :mongo |
 			usedMongoConnections nextPut: mongo.
 			self smallLapse wait ] ] fork ].
@@ -14,10 +14,10 @@ testNormallyCacheMaxConnections
 	
 	self
 		assert: usedMongoConnections contents asIdentitySet size
-		equals: pool maxConnections + 1.
+		equals: pool settings maxConnections + 1.
 	
 	"The pool keeps #maxConnection open connections and
 	closes the exceeding one when returned."
 	self
 		assert: (usedMongoConnections contents count: [:each | each isOpen ])
-		equals: pool maxConnections.
+		equals: pool settings maxConnections.

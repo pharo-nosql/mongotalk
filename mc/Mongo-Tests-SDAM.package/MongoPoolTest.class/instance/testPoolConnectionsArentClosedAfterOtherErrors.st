@@ -1,14 +1,14 @@
 tests
 testPoolConnectionsArentClosedAfterOtherErrors
 	| usedMongoConnections |
-	pool maxConnections: 5.
+	pool settings maxConnections: 5.
 
 	usedMongoConnections := SharedQueue new.
 
 	"Produce an error on each forked process. 
 	The pool should do nothing on cached Mongo connections but
 	pass the error for external handlers."
-	pool maxConnections timesRepeat: [ [
+	pool settings maxConnections timesRepeat: [ [
 		self
 			should: [
 				pool mongoDo: [ :mongo |
@@ -22,7 +22,7 @@ testPoolConnectionsArentClosedAfterOtherErrors
 	
 	self
 		assert: usedMongoConnections contents asIdentitySet size
-		equals: pool maxConnections.
+		equals: pool settings maxConnections.
 	
 	"The pool kept all connections open in cache."
 	self assert: (usedMongoConnections contents allSatisfy: [ :each | each isOpen ]).

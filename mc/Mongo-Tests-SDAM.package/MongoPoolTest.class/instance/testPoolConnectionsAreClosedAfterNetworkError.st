@@ -1,10 +1,10 @@
 tests
 testPoolConnectionsAreClosedAfterNetworkError
 	| usedMongoConnections |
-	pool maxConnections: 5.
+	pool settings maxConnections: 5.
 
 	usedMongoConnections := SharedQueue new.
-	pool maxConnections timesRepeat: [ [
+	pool settings maxConnections timesRepeat: [ [
 		pool mongoDo: [ :mongo |
 			usedMongoConnections nextPut: mongo.
 			self smallLapse wait ] ] fork ].
@@ -21,7 +21,7 @@ testPoolConnectionsAreClosedAfterNetworkError
 	
 	self
 		assert: usedMongoConnections contents asIdentitySet size
-		equals: pool maxConnections.
+		equals: pool settings maxConnections.
 	
 	"The pool closed all connections."
 	self assert: (usedMongoConnections contents noneSatisfy: [:each | each isOpen ]).

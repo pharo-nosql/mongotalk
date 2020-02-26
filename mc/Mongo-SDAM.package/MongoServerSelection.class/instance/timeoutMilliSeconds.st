@@ -1,4 +1,4 @@
 accessing
 timeoutMilliSeconds
 	^ timeoutMilliSeconds
-		ifNil: [ client serverSelectionTimeout asMilliSeconds ]
+		ifNil: [ client settings serverSelectionTimeout asMilliSeconds ]

@@ -1,1 +1,1 @@
-I am a monitor in the SDAM specification.
+I am a monitor in the SDAM specification. I track the status of one mongodb server.

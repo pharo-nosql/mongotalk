@@ -1,9 +1,14 @@
 tests
 testMaxStaleness
 
+	| readPreferenceWithMaxStaleness |
 	self timeLimit: self defaultTimeLimit + self maxStaleness.
 
-	client readPreference: (MongoReadPreference newPrimaryPreferred maxStaleness: self maxStaleness; yourself).
+	readPreferenceWithMaxStaleness :=
+		MongoReadPreference newPrimaryPreferred
+			maxStaleness: self maxStaleness;
+			yourself.
+	client settings readPreference: readPreferenceWithMaxStaleness.
 
 	self prepareScenarioWhereAllExceptCStopped.
 

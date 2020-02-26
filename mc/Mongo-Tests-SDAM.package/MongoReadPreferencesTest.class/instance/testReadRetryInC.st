@@ -1,7 +1,7 @@
 tests
 testReadRetryInC
 
-	client readPreference: MongoReadPreference newPrimaryPreferred.
+	client settings readPreference: MongoReadPreference newPrimaryPreferred.
 
 	self startClientAndWait.
 	self writeAndReadFromA.

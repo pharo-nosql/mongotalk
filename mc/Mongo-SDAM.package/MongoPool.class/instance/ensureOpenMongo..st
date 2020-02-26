@@ -1,5 +1,5 @@
 private
 ensureOpenMongo: mongo
 	mongo isOpen ifTrue: [ ^ self ].
-	mongo openWithTimeout: self connectTimeout.
-	mongo socketTimeout: self socketTimeout.
+	mongo openWithTimeout: settings connectTimeout.
+	mongo socketTimeout: settings socketTimeout.
