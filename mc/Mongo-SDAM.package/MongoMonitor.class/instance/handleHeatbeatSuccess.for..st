@@ -1,6 +1,13 @@
 accessing
-handleSuccessfulIsMaster: isMasterResponse for: roundtripDuration
+handleHeatbeatSuccess: isMasterResponse for: roundtripDuration
+	client announceIfNeeded: [
+		MongoHeartbeatSucceeded 
+			urlString: urlString
+			roundtripTimeDuraton: roundtripDuration
+			isMaster: isMasterResponse ].
+
 	roundtripTimeCalculator add: roundtripDuration asMilliSeconds.
+
 	self latestServerDescription:
 		(MongoServerDescription
 			urlString: urlString

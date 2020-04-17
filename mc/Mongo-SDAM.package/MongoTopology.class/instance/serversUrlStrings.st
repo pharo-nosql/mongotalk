@@ -1,3 +1,3 @@
 accessing
 serversUrlStrings
-	^ self servers collect: #urlString
+	^ serversByUrlString keys

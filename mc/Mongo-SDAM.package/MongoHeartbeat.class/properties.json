@@ -1,14 +1,13 @@
 {
-	"commentStamp" : "MartinDias 12/19/2019 17:11",
+	"commentStamp" : "MartinDias 4/17/2020 15:34",
 	"super" : "MongoClientAnnouncement",
 	"category" : "Mongo-SDAM-Announcements",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"oldServerDescription",
-		"newServerDescription"
+		"urlString"
 	],
-	"name" : "MongoServerDescriptionUpdate",
+	"name" : "MongoHeartbeat",
 	"type" : "normal"
 }

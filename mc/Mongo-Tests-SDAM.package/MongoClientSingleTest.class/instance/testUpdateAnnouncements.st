@@ -1,8 +1,21 @@
 tests - monitoring
 testUpdateAnnouncements
 	
-	| serverUpdates topologyUpdates |
+	| serverUpdates topologyUpdates heartbeatSucceeded heartbeatStarted numberOfServers |
 	client := self newClient.
+	numberOfServers := 1.
+
+	heartbeatStarted := SharedQueue new.
+	client announcer
+		when: MongoHeartbeatStarted
+		send: #nextPut:
+		to: heartbeatStarted.
+
+	heartbeatSucceeded := SharedQueue new.
+	client announcer
+		when: MongoHeartbeatSucceeded
+		send: #nextPut:
+		to: heartbeatSucceeded.
 
 	serverUpdates := SharedQueue new.
 	client announcer
@@ -15,13 +28,14 @@ testUpdateAnnouncements
 		when: MongoTopologyUpdate
 		send: #nextPut:
 		to: topologyUpdates.
-		
+	
 	self startClientAndWait.
 
-	"Each monitor check generates an update of both server and topology (with heartbeatFrequency)."
-	(1 to: 3)
+	(1 to: 4)
 		do: [ :each |
-			self assert: client topology servers size equals: 1.
-			self assert: serverUpdates size >= each.
-			self assert: topologyUpdates size >= each ]
+			self assert: client topology servers size equals: numberOfServers.
+			self assert: heartbeatStarted size >= (each * numberOfServers).
+			self assert: heartbeatSucceeded size >= (each * numberOfServers).
+			self assert: serverUpdates size equals: numberOfServers.
+			self assert: topologyUpdates size equals: 1 ]
 		separatedBy: [ client settings heartbeatFrequency wait ]

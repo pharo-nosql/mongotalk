@@ -3,7 +3,7 @@ printStatusOn: aStream
 
 	| numberOfStartedMonitors totalServers |
 	numberOfStartedMonitors := monitors count: #isStarted.
-	totalServers := topology serversUrlStrings size.
+	totalServers := topology numberOfServers.
 	
 	aStream
 		nextPutAll: 'ON:';

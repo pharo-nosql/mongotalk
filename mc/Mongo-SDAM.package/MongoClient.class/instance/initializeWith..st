@@ -4,7 +4,6 @@ initializeWith: initialUrls
 	self initialize.
 
 	topologyMutex := Mutex new.
-	announcer := Announcer new.
 	monitors := Dictionary new.
 	topology := MongoTopology new.
 	settings := MongoClientSettings for: self.

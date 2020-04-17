@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "MartinDias 12/19/2019 17:11",
-	"super" : "Announcement",
+	"super" : "MongoClientAnnouncement",
 	"category" : "Mongo-SDAM-Announcements",
 	"classinstvars" : [ ],
 	"pools" : [ ],

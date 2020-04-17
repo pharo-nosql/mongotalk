@@ -1,3 +1,0 @@
-testing
-hasRelevantChanges
-	^ newServerDescription hasDifferenceWith: oldServerDescription

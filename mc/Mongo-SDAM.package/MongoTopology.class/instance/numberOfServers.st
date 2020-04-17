@@ -1,0 +1,3 @@
+accessing
+numberOfServers
+	^ serversByUrlString size

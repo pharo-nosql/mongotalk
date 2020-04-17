@@ -1,3 +1,3 @@
 accessing
 announcer
-	^ announcer
+	^ announcer ifNil: [ announcer := Announcer new ]
