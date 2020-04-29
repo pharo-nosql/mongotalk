@@ -3,8 +3,7 @@ mongodArguments
 	^ Array streamContents: [ :stream |
 		stream
 			nextPut: '--port'; nextPut: self portString;
-			nextPut: '--dbpath'; nextPut: self directoryString;
-			nextPut: '--bind_ip 127.0.0.1'.
+			nextPut: '--dbpath'; nextPut: self directoryString.
 		self useSyslog ifTrue: [ 
 			stream nextPut: '--syslog' ].
 		self hasReplicaSetName ifTrue: [ 
