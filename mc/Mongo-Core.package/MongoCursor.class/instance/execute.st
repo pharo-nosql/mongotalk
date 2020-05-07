@@ -17,7 +17,7 @@ execute
 				chunkSize: query chunkSize ].
 	reply := (ReplyOperation stream: root stream) read.
 	reply responseTo = requestId ifFalse: [
-		^self error: 'Unexpected responseTo in response' ].
+		^ MongoWireProtocolError signal: 'Unexpected responseTo in response' ].
 	reply do: [:each |
 		numberReturned < limit ifTrue: [
 			query doBlock value: each.

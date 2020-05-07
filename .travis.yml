@@ -14,6 +14,10 @@ env:
   - MONGODB=4.0
   - MONGODB=3.6
 
+smalltalk_config:
+  - .smalltalk.ston
+  - .smalltalk-sdam.ston
+
 matrix:
   # Finish the build as soon as one job fails
   fast_finish: true

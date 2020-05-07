@@ -1,0 +1,1 @@
+Error signalled for failures related to the wire protocol.

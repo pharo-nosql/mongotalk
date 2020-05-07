@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "MartinDias 4/17/2020 15:37",
+	"super" : "MongoHeartbeat",
+	"category" : "Mongo-SDAM-Announcements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"isMaster",
+		"roundTripTimeDuraton"
+	],
+	"name" : "MongoHeartbeatSucceeded",
+	"type" : "normal"
+}

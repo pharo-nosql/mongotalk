@@ -1,0 +1,4 @@
+accessing
+latestServerDescription: aServerDescription
+	latestServerDescription := aServerDescription.
+	client refreshTopologyWith: latestServerDescription

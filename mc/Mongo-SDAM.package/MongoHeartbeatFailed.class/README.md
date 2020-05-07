@@ -1,0 +1,1 @@
+I'm announced by a SDAM client just after a monitor failed to get the isMaster response from a mongodb server. I match with a previous MongoHeartbeatStarted announcement.
