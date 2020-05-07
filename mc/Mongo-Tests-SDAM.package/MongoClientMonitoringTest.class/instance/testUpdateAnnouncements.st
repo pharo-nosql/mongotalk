@@ -35,6 +35,6 @@ testUpdateAnnouncements
 			self assert: client topology servers size equals: 3.
 			self assert: heartbeatStarted size >= (each * 3).
 			self assert: heartbeatSucceeded size >= (each * 3).
-			self assert: serverUpdates size equals: 3.
-			self assert: topologyUpdates size equals: 1 ]
+			self assert: serverUpdates size >= 3.
+			self assert: topologyUpdates size >= 1 ]
 		separatedBy: [ client settings heartbeatFrequency wait ]
