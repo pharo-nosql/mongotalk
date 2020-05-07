@@ -68,7 +68,7 @@ Until more documentation is available, you have these options to learn about thi
 Browse the class hierarchy of `MongoClientTest` where you can see diverse tests, setUps, and tearDowns.
 
 * **Visual Monitor.**
-You can check [this repository](https://github.com/tinchodias/pharo-mongo-client-monitor) which watches the events announced by a `MongoClient` to better understand them via visualizations.
+You can check [this repository](https://github.com/ObjectProfile/pharo-mongo-client-monitor), which watches the events announced by a `MongoClient` to help to better understand them via visualizations.
 
 ## Install MongoClient
 
@@ -84,7 +84,7 @@ Metacello new
 # The MongoDB specification
 
 The MongoDB core team proposes a [specification](https://github.com/mongodb/specifications) with suggested and required  behavior for drivers (clients).
-Although this Pharo driver implements partially is The next subsections describe a part of such specification and links to this implementation in Pharo.
+Although this Pharo driver implements only partially such specification, in next subsections we describe its key elements and link them this Pharo implementation.
 
 ## Server Discovery And Monitoring
 
@@ -129,8 +129,7 @@ client
 	localThreshold: 100 milliseconds
 ```
 
-
-## Connection Pooling
+## Connection Pooling
 
 The MongoDB specification makes some suggestions and requirements for drivers on this connection pooling characteristics on [this document](https://github.com/mongodb/specifications/blob/master/source/connection-monitoring-and-pooling/connection-monitoring-and-pooling.rst).
 You can find our implementation of this specification in the `MongoPool` class, which is customizable via `connectTimeout:`, `maxConnections:` and `socketTimeout:` in the `MongoClientSettings` instance (accessed via `MongoClient>>settings`).
