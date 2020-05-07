@@ -1,13 +1,13 @@
 operations
 waitIsWrittable
-	| timeout retryDelay |
-	timeout := DateAndTime now + self timeout.
-	retryDelay := 250 milliSeconds.
+	| deadline retryDelay |
+	deadline := DateAndTime now + self timeout.
+	retryDelay := 250 milliSeconds asDelay.
 	
 	[ 	[ self mongoDo: [ :mongo | ^ mongo isMaster ] ] 
 			on: Error
 			do: [ Transcript << '.' ].
 		retryDelay wait.
-	] doWhileTrue: [ DateAndTime now < timeout ].
+	] doWhileTrue: [ DateAndTime now < deadline ].
 
 	self error: 'timeout'.
