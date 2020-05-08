@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MongoReadPreferencesTest",
+	"category" : "Mongo-Client-Tests-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoCommandReadPreferencesTest",
+	"type" : "normal"
+}

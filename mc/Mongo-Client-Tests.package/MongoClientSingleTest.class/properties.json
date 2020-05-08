@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MongoClientTest",
+	"category" : "Mongo-Client-Tests-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoClientSingleTest",
+	"type" : "normal"
+}

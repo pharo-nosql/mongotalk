@@ -1,0 +1,22 @@
+{
+	"commentStamp" : "MartinDias 2/25/2020 15:28",
+	"super" : "Object",
+	"category" : "Mongo-Client-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"connectTimeout",
+		"readPreference",
+		"localThreshold",
+		"serverSelectionTimeout",
+		"heartbeatFrequency",
+		"serverSelectionRandomGenerator",
+		"socketTimeout",
+		"maxConnections",
+		"monitorStopTimeout",
+		"client"
+	],
+	"name" : "MongoClientSettings",
+	"type" : "normal"
+}

@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "MartinDias 2/24/2020 17:48",
+	"super" : "Object",
+	"category" : "Mongo-Client-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"connections",
+		"url",
+		"mutex",
+		"settings"
+	],
+	"name" : "MongoPool",
+	"type" : "normal"
+}

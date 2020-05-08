@@ -1,0 +1,3 @@
+testing
+isSecondary
+	^ isMaster isSecondary

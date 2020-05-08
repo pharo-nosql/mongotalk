@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "MartinDias 10/2/2019 15:33",
+	"super" : "MongoAbstractServerDescription",
+	"category" : "Mongo-Client-Topology",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"errorDescription"
+	],
+	"name" : "MongoErrorServerDescription",
+	"type" : "normal"
+}

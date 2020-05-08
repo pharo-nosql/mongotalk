@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "MartinDias 6/5/2019 12:37",
+	"super" : "Object",
+	"category" : "Mongo-Client-Topology",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"urlString",
+		"dateAndTime"
+	],
+	"name" : "MongoAbstractServerDescription",
+	"type" : "normal"
+}

@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "MartinDias 2/25/2020 17:24",
+	"super" : "TKTService",
+	"category" : "Mongo-Client-Client",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"client",
+		"roundtripTimeCalculator",
+		"urlString",
+		"nextTimeToCheck",
+		"pool",
+		"latestServerDescription",
+		"mongo"
+	],
+	"name" : "MongoMonitor",
+	"type" : "normal"
+}
