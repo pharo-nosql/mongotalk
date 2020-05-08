@@ -1,5 +1,5 @@
 operations
-commandFind: filterDictionary limit: aLimit collection: collectionName readConcern: aConcern
+commandFind: filterDictionary limit: aLimit collection: collectionName readConcern: aMongoReadConcern
 	"Answer a MongoCommandCursor that will perform a find using Mongo command.
 	
 	All parameters are optional (nil), except collectionName.
@@ -13,7 +13,7 @@ commandFind: filterDictionary limit: aLimit collection: collectionName readConce
 		dict at: 'filter' put: filterDictionary ].
 	aLimit ifNotNil: [
 		dict at: 'limit' put: aLimit ].
-	aConcern ifNotNil: [
-		dict at: 'readConcern' put: aConcern concernForCommand ].
+	aMongoReadConcern ifNotNil: [
+		dict at: 'readConcern' put: aMongoReadConcern concernForCommand ].
 
 	^ MongoCommandCursor database: self dictionary: dict

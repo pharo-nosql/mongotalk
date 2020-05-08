@@ -1,0 +1,19 @@
+{
+	"commentStamp" : "MartinDias 5/7/2020 18:38",
+	"super" : "Object",
+	"category" : "Mongo-Core-Utilities",
+	"classinstvars" : [
+		"local",
+		"available",
+		"majority",
+		"linearizable",
+		"snapshot"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"dictionary"
+	],
+	"name" : "MongoReadConcern",
+	"type" : "normal"
+}

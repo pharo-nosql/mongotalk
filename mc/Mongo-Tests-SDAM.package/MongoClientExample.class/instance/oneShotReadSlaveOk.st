@@ -1,11 +1,17 @@
 public API
-oneShotReadSlaveOk 
+oneShotReadSlaveOk
 	^ client
-		mongoDo: [ :mongo |
+		mongoDo: [ :mongo | 
 			| database collection |
-			Transcript show: 'reading - '; show: mongo urlString; cr.
+			Transcript
+				show: 'reading - ';
+				show: mongo urlString;
+				cr.
 			database := mongo databaseNamed: 'x'.
 			collection := database collectionAt: 'y'.
-			(collection commandFind: Dictionary new limit: 0 readConcern: nil)
-				setFlagSlaveOk;
-				contents ]
+			(collection
+				commandFind: Dictionary new
+				limit: 10
+				readConcern: MongoReadConcern available)
+					setFlagSlaveOk;
+					contents ]
