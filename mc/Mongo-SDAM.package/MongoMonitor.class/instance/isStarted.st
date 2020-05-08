@@ -1,3 +1,0 @@
-testing
-isStarted
-	^ self isRunning

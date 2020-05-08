@@ -1,3 +1,0 @@
-accessing
-roundtripDurationAverage
-	^ roundtripTimeCalculator average milliSeconds

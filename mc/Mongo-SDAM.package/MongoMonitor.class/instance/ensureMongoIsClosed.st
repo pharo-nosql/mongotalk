@@ -1,3 +1,0 @@
-private
-ensureMongoIsClosed
-	mongo closeIfOpen

@@ -1,3 +1,0 @@
-running
-urlsToTest
-	^ { self urlToTest }

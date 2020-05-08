@@ -1,3 +1,0 @@
-accessing
-writingLoopInterval
-	^ self readingLoopInterval
