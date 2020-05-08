@@ -2,4 +2,4 @@ stop/continue
 ensureStarted
 	replicaSet
 		ifNil: [ self start ]
-		ifNotNil: [ replicaSet servers do: #ensureStarted ]
+		ifNotNil: [ replicaSet ensureAllServersStarted ]

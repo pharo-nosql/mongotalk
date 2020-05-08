@@ -2,4 +2,7 @@ initialization
 initialize
 	super initialize.
 	
-	members := OrderedCollection new.
+	replicaSetName := 'rs-test'.
+	memberDescriptions := OrderedCollection new.
+	servers := OrderedCollection new.
+	settingsDictionary := Dictionary new.

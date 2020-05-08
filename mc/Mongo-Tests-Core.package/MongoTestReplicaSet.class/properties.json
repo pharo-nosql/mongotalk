@@ -7,7 +7,9 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"servers",
-		"members"
+		"memberDescriptions",
+		"settingsDictionary",
+		"replicaSetName"
 	],
 	"name" : "MongoTestReplicaSet",
 	"type" : "normal"

@@ -1,3 +1,3 @@
 accessing
 replicaSetName
-	^ 'rs-test'
+	^ replicaSetName
