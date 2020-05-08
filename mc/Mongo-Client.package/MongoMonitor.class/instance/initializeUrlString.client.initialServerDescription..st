@@ -1,10 +1,10 @@
 initialization
-initializeUrlString: aUrlString client: aMongoSDAMClient initialServerDescription: aMongoSDAMServerDescription
+initializeUrlString: aUrlString client: aMongoClient initialServerDescription: aMongoServerDescription
 	self initialize.
 
 	urlString := aUrlString.
-	client := aMongoSDAMClient.
-	latestServerDescription := aMongoSDAMServerDescription.
+	client := aMongoClient.
+	latestServerDescription := aMongoServerDescription.
 	roundtripTimeCalculator := MongoMovingAverageCalculator new.
 
 	pool := MongoPool

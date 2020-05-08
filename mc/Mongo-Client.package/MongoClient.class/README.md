@@ -1,4 +1,3 @@
-I am a client in the SDAM specification.
+I am a client inspired in the MongoDB specification.
 
-Source:
-https://github.com/mongodb/specifications/blob/master/source/server-selection/server-selection.rst
+See: https://github.com/mongodb/specifications/

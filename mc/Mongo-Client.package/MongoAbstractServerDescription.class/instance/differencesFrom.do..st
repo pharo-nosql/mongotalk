@@ -1,6 +1,6 @@
 accessing
-differencesFrom: anotherMongoSDAMServerDescription do: aBlockClosure
-	self class = anotherMongoSDAMServerDescription class ifFalse: [
+differencesFrom: anotherMongoServerDescription do: aBlockClosure
+	self class = anotherMongoServerDescription class ifFalse: [
 		aBlockClosure
 			cull: #class
-			cull: anotherMongoSDAMServerDescription class -> self class ]
+			cull: anotherMongoServerDescription class -> self class ]

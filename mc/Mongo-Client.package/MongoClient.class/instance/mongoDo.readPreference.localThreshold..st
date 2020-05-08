@@ -1,7 +1,6 @@
 API
 mongoDo: aBlockClosure readPreference: aReadPreference localThreshold: localThresholdDuration
-	"Evaluate aBlockClosure with a Mongo instance selected according to the SDAM specification.
-	Use aReadPreference and localThresholdDuration instead of the default parameters."
+	"Evaluate aBlockClosure with a Mongo instance selected using aReadPreference and localThresholdDuration instead of the default parameters."
 
 	^ self
 		mongoDo: aBlockClosure

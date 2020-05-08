@@ -1,4 +1,4 @@
 initialization
-initializeWithClient: aSDAMClient
+initializeWithClient: aMongoClient
 	self initialize.
-	client := aSDAMClient.
+	client := aMongoClient.

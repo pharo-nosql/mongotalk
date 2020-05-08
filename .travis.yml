@@ -16,7 +16,7 @@ env:
 
 smalltalk_config:
   - .smalltalk.ston
-  - .smalltalk-sdam.ston
+  - .smalltalk-client.ston
 
 matrix:
   # Finish the build as soon as one job fails

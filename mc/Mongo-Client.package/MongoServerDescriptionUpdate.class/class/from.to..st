@@ -1,6 +1,6 @@
 instance creation
-from: aMongoSDAMServerDescription to: anotherMongoSDAMServerDescription
+from: aMongoServerDescription to: anotherMongoServerDescription
 	^ self basicNew
-		initializeFrom: aMongoSDAMServerDescription
-			to: anotherMongoSDAMServerDescription;
+		initializeFrom: aMongoServerDescription
+			to: anotherMongoServerDescription;
 		yourself

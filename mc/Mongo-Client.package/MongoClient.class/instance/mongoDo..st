@@ -1,7 +1,6 @@
 API
 mongoDo: aBlockClosure
-	"Evaluate aBlockClosure with a Mongo instance selected according to the SDAM specification.
-	Use the default parameters."
+	"Evaluate aBlockClosure with a Mongo instance selected using the default parameters."
 
 	^ self
 		mongoDo: aBlockClosure

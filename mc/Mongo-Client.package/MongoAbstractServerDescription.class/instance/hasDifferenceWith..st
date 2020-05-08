@@ -1,4 +1,4 @@
 testing
-hasDifferenceWith: anotherMongoSDAMServerDescription
-	self differencesFrom: anotherMongoSDAMServerDescription do: [ ^ true ].
+hasDifferenceWith: anotherMongoServerDescription
+	self differencesFrom: anotherMongoServerDescription do: [ ^ true ].
 	^ false

@@ -1,5 +1,5 @@
 initialization
-initializeFrom: aMongoSDAMTopology to: anotherMongoSDAMTopology
+initializeFrom: aMongoTopology to: anotherMongoTopology
 	self initialize.
-	oldTopology := aMongoSDAMTopology.
-	newTopology := anotherMongoSDAMTopology.
+	oldTopology := aMongoTopology.
+	newTopology := anotherMongoTopology.

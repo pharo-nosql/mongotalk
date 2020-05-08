@@ -1,5 +1,5 @@
 initialization
-initializeFrom: aMongoSDAMServerDescription to: anotherMongoSDAMServerDescription 
+initializeFrom: aMongoServerDescription to: anotherMongoServerDescription 
 	self initialize.	
-	oldServerDescription := aMongoSDAMServerDescription.
-	newServerDescription := anotherMongoSDAMServerDescription.
+	oldServerDescription := aMongoServerDescription.
+	newServerDescription := anotherMongoServerDescription.

@@ -1,6 +1,6 @@
 tests
 testInstanceCreation
-	"SDAM spec explicits that clients shouldn't try to connect on instance creation."
+	"MongoDB specs explicits that clients shouldn't try to connect on instance creation."
 	
 	| count |
 	count := SocketStream allInstances size.

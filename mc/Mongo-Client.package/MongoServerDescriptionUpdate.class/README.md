@@ -1,1 +1,1 @@
-I'm an announced by a SDAM client when the topology has news from a server.
+I'm an announced by a MongoClient when the topology has news from a server.

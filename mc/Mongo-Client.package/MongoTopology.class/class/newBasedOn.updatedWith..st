@@ -1,6 +1,6 @@
 instance creation
-newBasedOn: aMongoSDAMTopology updatedWith: aMongoSDAMServerDescription
+newBasedOn: aMongoTopology updatedWith: aMongoServerDescription
 	^ self basicNew
-		initializeBasedOn: aMongoSDAMTopology
-			updatedWith: aMongoSDAMServerDescription;
+		initializeBasedOn: aMongoTopology
+			updatedWith: aMongoServerDescription;
 		yourself

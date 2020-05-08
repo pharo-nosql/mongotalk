@@ -1,7 +1,6 @@
 API
 mongoDo: aBlockClosure serverSelection: aMongoServerSelection
-	"Evaluate aBlockClosure with a Mongo instance selected according to the SDAM specification.
-	Use the parameters setted in aMongoServerSelection."
+	"Evaluate aBlockClosure with a Mongo instance selected using the parameters setted in aMongoServerSelection."
 
 	| selectedMonitor |
 	selectedMonitor := aMongoServerSelection execute; selectedMonitor.

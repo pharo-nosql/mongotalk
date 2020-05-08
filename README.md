@@ -76,7 +76,7 @@ You can check [this repository](https://github.com/ObjectProfile/pharo-mongo-cli
 Metacello new
 	repository: 'github://pharo-nosql/mongotalk/mc';
 	baseline: 'MongoTalk';
-	load: #(SDAM)
+	load: #(Client)
 ```
 
 ---
@@ -88,7 +88,7 @@ Although this Pharo driver implements only partially such specification, in next
 
 ## Server Discovery And Monitoring
 
-You can have an introduction to the [Server Discovery And Monitoring Specification](http://emptysqua.re/server-discovery-and-monitoring.html) (SDAM) in a [blog post](https://www.mongodb.com/blog/post/server-discovery-and-monitoring-next-generation-mongodb-drivers) and in [this talk](https://www.mongodb.com/presentations/mongodb-drivers-and-high-availability-deep-dive).
+You can have an introduction to the [Server Discovery And Monitoring Specification](http://emptysqua.re/server-discovery-and-monitoring.html) in a [blog post](https://www.mongodb.com/blog/post/server-discovery-and-monitoring-next-generation-mongodb-drivers) and in [this talk](https://www.mongodb.com/presentations/mongodb-drivers-and-high-availability-deep-dive).
 
 ***Discovery.*** The `MongoClient` receives a *seed list* of URLs when instantiated, which is the initial list of server addresses.
 After `#start`, the client starts to *ping* the seed addresses to discover replica set data.

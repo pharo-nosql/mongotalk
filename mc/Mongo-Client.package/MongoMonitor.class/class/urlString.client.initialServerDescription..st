@@ -1,7 +1,7 @@
 instance creation
-urlString: urlString client: aMongoSDAMClient initialServerDescription: aMongoSDAMServerDescription
+urlString: urlString client: aMongoClient initialServerDescription: aMongoServerDescription
 	^ self basicNew
 		initializeUrlString: urlString
-			client: aMongoSDAMClient
-			initialServerDescription: aMongoSDAMServerDescription;
+			client: aMongoClient
+			initialServerDescription: aMongoServerDescription;
 		yourself

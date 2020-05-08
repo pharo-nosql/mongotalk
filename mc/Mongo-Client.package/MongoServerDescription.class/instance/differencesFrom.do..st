@@ -1,11 +1,11 @@
 accessing
-differencesFrom: anotherMongoSDAMServerDescription do: aBlockClosure
+differencesFrom: anotherMongoServerDescription do: aBlockClosure
 
 	"If there is a diff in super, stop here."
-	super differencesFrom: anotherMongoSDAMServerDescription do: [:selector :diff |
+	super differencesFrom: anotherMongoServerDescription do: [:selector :diff |
 		^ aBlockClosure cull: selector cull: diff ].
 
 	"Then, check diff in isMaster response."
 	self isMaster
-		differencesFrom: anotherMongoSDAMServerDescription isMaster
+		differencesFrom: anotherMongoServerDescription isMaster
 		do: aBlockClosure

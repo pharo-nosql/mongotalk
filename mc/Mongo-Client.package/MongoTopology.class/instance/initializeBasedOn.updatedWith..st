@@ -1,12 +1,12 @@
 initialization
-initializeBasedOn: anotherMongoSDAMTopology updatedWith: aMongoSDAMServerDescription
+initializeBasedOn: anotherMongoTopology updatedWith: aMongoServerDescription
 
 	"Never loose some information from past topologies."
-	serversByUrlString := anotherMongoSDAMTopology serversByUrlString deepCopy.
+	serversByUrlString := anotherMongoTopology serversByUrlString deepCopy.
 	serversByUrlString
-		at: aMongoSDAMServerDescription urlString
-		put: aMongoSDAMServerDescription.
+		at: aMongoServerDescription urlString
+		put: aMongoServerDescription.
 
-	aMongoSDAMServerDescription isSuccess
-		ifTrue: [ self updateWithIsMasterResponseFrom: aMongoSDAMServerDescription ]
-		ifFalse: [ self overcomeErrorBasedOn: anotherMongoSDAMTopology updatedWith: aMongoSDAMServerDescription ]
+	aMongoServerDescription isSuccess
+		ifTrue: [ self updateWithIsMasterResponseFrom: aMongoServerDescription ]
+		ifFalse: [ self overcomeErrorBasedOn: anotherMongoTopology updatedWith: aMongoServerDescription ]

@@ -1,5 +1,5 @@
 instance creation
-client: aSDAMClient
+client: aClient
 	^ self basicNew
-		initializeWithClient: aSDAMClient;
+		initializeWithClient: aClient;
 		yourself
