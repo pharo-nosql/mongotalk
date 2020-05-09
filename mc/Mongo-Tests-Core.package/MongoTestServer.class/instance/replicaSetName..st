@@ -1,3 +1,3 @@
 accessing
-replicaSetName: anObject
-	replicaSetName := anObject
+replicaSetName: aString
+	replicaSetName := aString
