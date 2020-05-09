@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "MartinDias 12/19/2019 17:11",
+	"super" : "MongoClientAnnouncement",
+	"category" : "Mongo-Client-Announcements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"oldServerDescription",
+		"newServerDescription"
+	],
+	"name" : "MongoServerDescriptionUpdate",
+	"type" : "normal"
+}

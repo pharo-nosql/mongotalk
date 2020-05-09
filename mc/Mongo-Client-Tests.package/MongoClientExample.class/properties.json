@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "MartinDias 10/2/2019 21:50",
+	"super" : "Object",
+	"category" : "Mongo-Client-Tests-Examples",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"client",
+		"readingLoopEnabled"
+	],
+	"name" : "MongoClientExample",
+	"type" : "normal"
+}

@@ -1,1 +1,0 @@
-I'm an announced by a SDAM client when it's topology was updated (replaced).

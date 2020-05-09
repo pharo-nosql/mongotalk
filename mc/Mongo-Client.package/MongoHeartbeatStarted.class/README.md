@@ -1,0 +1,1 @@
+I'm announced by a MongoClient just before a monitor sends a isMaster command to check the status of a mongodb server.

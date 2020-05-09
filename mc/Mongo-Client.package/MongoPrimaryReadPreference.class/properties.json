@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "MartinDias 12/24/2019 07:05",
+	"super" : "MongoReadPreference",
+	"category" : "Mongo-Client-ReadPreferences",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MongoPrimaryReadPreference",
+	"type" : "normal"
+}

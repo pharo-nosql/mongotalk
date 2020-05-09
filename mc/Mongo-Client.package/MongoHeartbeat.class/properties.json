@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "MartinDias 4/17/2020 15:34",
+	"super" : "MongoClientAnnouncement",
+	"category" : "Mongo-Client-Announcements",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"urlString"
+	],
+	"name" : "MongoHeartbeat",
+	"type" : "normal"
+}

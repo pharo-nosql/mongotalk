@@ -1,0 +1,1 @@
+I'm an announced by a MongoClient when it's topology was updated (replaced).

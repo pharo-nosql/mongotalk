@@ -1,1 +1,0 @@
-I'm announced by a SDAM client just before a monitor sends a isMaster command to check the status of a mongodb server.

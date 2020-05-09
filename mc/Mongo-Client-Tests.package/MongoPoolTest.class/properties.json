@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "MongoTest",
+	"category" : "Mongo-Client-Tests-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"pool"
+	],
+	"name" : "MongoPoolTest",
+	"type" : "normal"
+}

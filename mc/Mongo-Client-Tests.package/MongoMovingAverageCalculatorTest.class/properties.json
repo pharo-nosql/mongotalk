@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Mongo-Client-Tests-Utilities",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"calculator"
+	],
+	"name" : "MongoMovingAverageCalculatorTest",
+	"type" : "normal"
+}
