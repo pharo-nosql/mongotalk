@@ -2,4 +2,4 @@ external projects
 taskIt: spec
 	spec
 		baseline: 'TaskIt'
-		with: [ spec repository: 'github://sbragagnolo/taskit:v1.1.0' ]
+		with: [ spec repository: 'github://pharo-contributions/taskit:v1.1.0' ]
