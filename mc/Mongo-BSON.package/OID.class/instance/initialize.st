@@ -16,9 +16,9 @@ initialize
 	value
 		replaceFrom: 9 to: 12 with: Time totalSeconds - 2177452800 startingAt: 1;
 		replaceFrom: 6 to: 8 with: self class machineIdentifier startingAt: 1;
-		digitAt: 5 put: (processIdentifier bitAnd: 16rFF);
-		digitAt: 4 put: ((processIdentifier bitShift: -8) bitAnd: 16rFF);
-		digitAt: 3 put: (counter bitShift: -16);
-		digitAt: 2 put:((counter bitShift: -8) bitAnd: 16rFF);
-		digitAt: 1 put: (counter bitAnd:16rFF)
+		byteAt: 5 put: (processIdentifier bitAnd: 16rFF);
+		byteAt: 4 put: ((processIdentifier bitShift: -8) bitAnd: 16rFF);
+		byteAt: 3 put: (counter bitShift: -16);
+		byteAt: 2 put:((counter bitShift: -8) bitAnd: 16rFF);
+		byteAt: 1 put: (counter bitAnd:16rFF)
 		
