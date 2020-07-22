@@ -4,4 +4,4 @@ nextOIDPut: anOID
 	| value |
 	value := anOID value.
 	12 to: 1 by: -1 do: [:digitIndex |
-		stream nextBytePut: (value digitAt: digitIndex)]
+		stream nextBytePut: (value byteAt: digitIndex)]
