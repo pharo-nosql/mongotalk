@@ -1,3 +1,3 @@
 accessing
-authMechanism: anObject
-	authMechanism := anObject
+authMechanism: aMongoAuthMechanism
+	authMechanism := aMongoAuthMechanism

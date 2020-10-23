@@ -1,1 +1,1 @@
-Common superclass for Mongo auth mechanisms implementations
+Common superclass for Mongo authentication mechanisms.
