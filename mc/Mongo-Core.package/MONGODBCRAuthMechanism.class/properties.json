@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "mikefilonov 6/11/2017 12:24",
+	"commentStamp" : "MartinDias 10/23/2020 07:49",
 	"super" : "MongoAuthMechanism",
 	"category" : "Mongo-Core-Auth",
 	"classinstvars" : [ ],
