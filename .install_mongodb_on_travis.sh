@@ -13,7 +13,7 @@ if [ "$MONGODB" = "4.0" ]; then
 elif [ "$MONGODB" = "4.4" ]; then
     echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
     sudo apt-get update
-    sudo apt-get install mongodb-org-server=4.4.1 mongodb-org-shell=4.4.1
+    sudo apt-get install mongodb-org-server=$MONGODB mongodb-org-shell=$MONGODB
 else
     echo "Invalid MongoDB version"
     exit 1
