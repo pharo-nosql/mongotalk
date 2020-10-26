@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "TorstenBergmann 3/4/2015 09:36",
 	"super" : "Object",
-	"category" : "Mongo-Core-Collections",
+	"category" : "Mongo-Core-Base",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
