@@ -39,10 +39,8 @@ testInsertWithWriteConcern_error
 		raise: MongoCommandError
 		withExceptionDo: [ :ex | 
 			self assert: ex code equals: 11000.
-			self
-				assert: ex errorMessage
-				equals:
-					'E11000 duplicate key error collection: ', collection qualifiedName, ' index: unique_user_id dup key: { : "1" }' ].
+			self assert: (ex errorMessage beginsWith: 
+				'E11000 duplicate key error collection: ', collection qualifiedName) ].
 
 	results := collection query: [ :query |  ].
 	self assert: results size equals: 1.
