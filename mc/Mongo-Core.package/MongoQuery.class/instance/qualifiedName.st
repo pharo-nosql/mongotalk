@@ -1,3 +1,3 @@
 accessing
 qualifiedName
-	^database name , '.' , collection name
+	^ database name, '.', collection name

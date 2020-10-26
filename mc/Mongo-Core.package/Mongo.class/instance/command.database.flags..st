@@ -3,7 +3,7 @@ command: anOrderedDictionary database: aDatabase flags: flags
 	| query reply |
 	query := MongoQuery new
 		database: aDatabase;
-		collection: (MongoMetaCollection name: '$cmd');
+		collection: MongoCollection cmdVirtualCollection;
 		where: anOrderedDictionary;
 		operation: CommandOperation;
 		flags: flags;
