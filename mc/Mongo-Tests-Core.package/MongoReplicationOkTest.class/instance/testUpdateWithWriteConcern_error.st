@@ -12,9 +12,10 @@ testUpdateWithWriteConcern_error
 	self
 		should: [ collection commandUpdate: old with: new writeConcern: concern ]
 		raise: MongoCommandError
-		withExceptionDo: [ :ex | 
+		withExceptionDo: [ :ex |
+			self assert: ex errorMessage equals: 'Not enough data-bearing nodes'.
 			self assert: ex code equals: 100.
-			self assert: ex errorMessage equals: 'Not enough data-bearing nodes' ].
+			].
 	result := collection query: [ :query |  ].
 	self assert: result size equals: 1.
 	self assert: (result first at: 'key') equals: 'new value'
