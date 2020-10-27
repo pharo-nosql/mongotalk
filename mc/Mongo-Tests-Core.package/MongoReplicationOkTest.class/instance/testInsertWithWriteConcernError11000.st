@@ -1,27 +1,24 @@
 tests
-testInsertWithWriteConcern_error
-	| results concern |
+testInsertWithWriteConcernError11000
 	"Inserts two documents and verifies that inserting the second document
-	violates a unique key constraint. Verify the document has not changed."
-	concern := MongoWriteConcern new
-		w: 1;
-		yourself.
+	violates a unique key constraint. Verify the document has NOT changed."
+
+	| results concern |
+	concern := MongoWriteConcern new w: 1; yourself.
 
 	"Create an index with a unique key constraint."
-	database
-		command:
-			({('createIndexes' -> collection name).
-			('indexes'
-				->
-					{({('key' -> {('user_id' -> 1)} asDictionary).
-					('unique' -> true).
-					('name' -> 'unique_user_id')} as: OrderedDictionary)})}
-				as: OrderedDictionary).
+	database command: ({
+		'createIndexes' -> collection name.
+		'indexes' -> {
+			{	'key' -> { 'user_id' -> 1 } asDictionary.
+				'unique' -> true.
+				'name' -> 'unique_user_id'
+			} as: OrderedDictionary }
+		} as: OrderedDictionary).
+
+	"Insert a valid value and assert it was added."
 	collection
-		commandInsert:
-			(Dictionary new
-				at: 'user_id' put: '1';
-				yourself)
+		commandInsert: { 'user_id' -> '1' } asDictionary
 		writeConcern: concern.
 	results := collection query: [ :query |  ].
 	self assert: results size equals: 1.
@@ -29,7 +26,8 @@ testInsertWithWriteConcern_error
 
 	"Attempt to insert with a duplicate key"
 	self
-		should: [ collection
+		should: [
+			collection
 				commandInsert:
 					(Dictionary new
 						at: 'user_id' put: '1';
@@ -42,6 +40,7 @@ testInsertWithWriteConcern_error
 			self assert: (ex errorMessage beginsWith: 
 				'E11000 duplicate key error collection: ', collection qualifiedName) ].
 
+	"Assert the insert was not performed"
 	results := collection query: [ :query |  ].
 	self assert: results size equals: 1.
 	self deny: (results first includesKey: 'other')
