@@ -8,12 +8,11 @@ os:
 smalltalk:
   - Pharo64-9.0
   - Pharo64-8.0
-  - Pharo64-7.0
 
 env:
+  - MONGODB=4.4
   - MONGODB=4.0
-  - MONGODB=3.6
-
+ 
 smalltalk_config:
   - .smalltalk.ston
   - .smalltalk-client.ston
