@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MongoAuthMechanism",
+	"category" : "Mongo-Core-Auth",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "NoAuthMechanism",
+	"type" : "normal"
+}

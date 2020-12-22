@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
 	"commentStamp" : "MartinDias 10/23/2020 07:50",
 	"super" : "MongoAuthMechanism",
+=======
+	"commentStamp" : "",
+	"super" : "SCRAMAuthMechanism",
+>>>>>>> 6b4c9f4... Minor refactoring to allow SCRAM-SHA-256.
 	"category" : "Mongo-Core-Auth",
 	"classinstvars" : [ ],
 	"pools" : [ ],

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "SCRAMAuthMechanism",
+	"category" : "Mongo-Core-Auth",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SCRAMSHA256AuthMechanism",
+	"type" : "normal"
+}
