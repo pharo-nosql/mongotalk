@@ -1,0 +1,1 @@
+I implement SCRAM-SHA1 auth mechanism
