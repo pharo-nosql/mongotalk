@@ -5,7 +5,7 @@ authenticateUsername: username password: password forcedDatabase: database
 	firstBare := 'n=' , username , ',r=' , nonce.
 	op := OrderedIdentityDictionary new
 		add: #saslStart -> 1;
-		add: #mechanism -> 'SCRAM-SHA-1';
+		add: #mechanism -> self mechanismName;
 		add: #payload -> ('n,,' , firstBare) asByteArray;
 		add: #autoAuthorize -> 1;
 		yourself.
@@ -21,16 +21,16 @@ authenticateUsername: username password: password forcedDatabase: database
 		ifFalse: [ ^ false	"Server returned an invalid nonce." ].
 	without_proof := 'c=biws,r=' , rnonce.
 	derivedKey := PBKDF2 new
-		hashFunction: SHA1;
+		hashFunction: self hashFunction;
 		password: (self digestUsername: username password: password);
 		salt: salt base64Decoded;
 		iterations: iterations asInteger;
 		length: 20;
 		deriveKey.
-	clientKey := (HMAC on: SHA1 new)
+	clientKey := (HMAC on: self hashFunction new)
 		key: derivedKey;
 		digestMessage: 'Client Key'.
-	storedKey := SHA1 hashMessage: clientKey.
+	storedKey := self hashFunction hashMessage: clientKey.
 	authMsg := ','
 		join:
 			{firstBare.
@@ -53,10 +53,10 @@ authenticateUsername: username password: password forcedDatabase: database
 		on: MongoCommandError
 		do: [ ^ false ].
 	parsed := self parseScramResponse: (resp at: #payload).
-	serverKey := (HMAC on: SHA1 new)
+	serverKey := (HMAC on: self hashFunction new)
 		key: derivedKey;
 		digestMessage: 'Server Key'.
-	serverSig := ((HMAC on: SHA1 new)
+	serverSig := ((HMAC on: self hashFunction new)
 		key: serverKey;
 		digestMessage: authMsg) base64Encoded.
 	(parsed at: #v) = serverSig
