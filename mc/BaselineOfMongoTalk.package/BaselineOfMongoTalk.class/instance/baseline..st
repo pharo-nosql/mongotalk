@@ -3,7 +3,7 @@ baseline: spec
 	<baseline>
 	spec
 		for: #common
-		do: [ self grease: spec. self PBKDF2: spec. self osSubprocess: spec.
+		do: [ self grease: spec. self PBKDF2: spec. self osSubprocess: spec. self taskIt: spec.
 			spec
 				package: 'Mongo-BSON';
 				package: 'Mongo-Squeak' with: [ spec requires: #('Grease' 'Mongo-BSON') ];
@@ -11,7 +11,7 @@ baseline: spec
 				package: 'Mongo-Client' with: [ spec requires: #('TaskIt' 'Mongo-Core') ];
 				package: 'Mongo-Queries';
 				package: 'Mongo-Tests-BSON' with: [ spec requires: #('Mongo-BSON') ];
-				package: 'Mongo-Tests-Core' with: [ spec requires: #('Mongo-Core' 'OSProcess') ];
+				package: 'Mongo-Tests-Core' with: [ spec requires: #('Mongo-Core' 'OSSubprocess') ];
 				package: 'Mongo-Client-Tests' with: [ spec requires: #('Mongo-Tests-Core' 'Mongo-Client') ];
 				package: 'Mongo-Tests-Queries' with: [ spec requires: #('Mongo-Queries') ];
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ].
