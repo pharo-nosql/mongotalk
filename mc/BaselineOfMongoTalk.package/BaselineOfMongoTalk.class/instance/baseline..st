@@ -3,7 +3,7 @@ baseline: spec
 	<baseline>
 	spec
 		for: #common
-		do: [ self grease: spec. self PBKDF2: spec. self osProcess: spec. self taskIt: spec.
+		do: [ self grease: spec. self PBKDF2: spec. self osSubprocess: spec.
 			spec
 				package: 'Mongo-BSON';
 				package: 'Mongo-Squeak' with: [ spec requires: #('Grease' 'Mongo-BSON') ];
