@@ -8,6 +8,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
+		"osProcess",
 		"process",
 		"port",
 		"replicaSetName",
