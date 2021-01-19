@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "MartinDias 10/6/2019 18:57",
 	"super" : "Object",
-	"category" : "Mongo-Tests-ReplicaSet",
+	"category" : "Mongo-Tests-Core-Utilities",
 	"classinstvars" : [
 		"mongodPathString"
 	],

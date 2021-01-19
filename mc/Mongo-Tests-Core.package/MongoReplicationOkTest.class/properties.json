@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "MartinDias 12/24/2019 08:37",
 	"super" : "MongoReplicationTest",
-	"category" : "Mongo-Tests-ReplicaSet",
+	"category" : "Mongo-Tests-Core-Replication",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],

@@ -11,9 +11,8 @@ baseline: spec
 				package: 'Mongo-Client' with: [ spec requires: #('TaskIt' 'Mongo-Core') ];
 				package: 'Mongo-Queries';
 				package: 'Mongo-Tests-BSON' with: [ spec requires: #('Mongo-BSON') ];
-				package: 'Mongo-Tests-Core' with: [ spec requires: #('Mongo-Core') ];
-				package: 'Mongo-Tests-ReplicaSet' with: [ spec requires: #('Mongo-Core' 'OSSubprocess') ];
-				package: 'Mongo-Client-Tests' with: [ spec requires: #('Mongo-Tests-Core' 'Mongo-Tests-ReplicaSet' 'Mongo-Client') ];
+				package: 'Mongo-Tests-Core' with: [ spec requires: #('Mongo-Core' 'OSSubprocess') ];
+				package: 'Mongo-Client-Tests' with: [ spec requires: #('Mongo-Tests-Core' 'Mongo-Client') ];
 				package: 'Mongo-Tests-Queries' with: [ spec requires: #('Mongo-Queries') ];
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ].
 			spec
@@ -23,7 +22,6 @@ baseline: spec
 				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
 				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests') ].
 	
-	"Pharo 9 already comes with TaskIt"
 	spec
 		for: #'pharo9.x'
 		do: [  spec package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ] ].
