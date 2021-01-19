@@ -3,7 +3,8 @@ SmalltalkCISpec {
     SCIMetacelloLoadSpec {
       #baseline : 'MongoTalk',
       #directory : 'mc',
-      #platforms : [ #pharo ]
+      #platforms : [ #pharo ],
+      #load : [ 'Tests + ReplicaSet Tests' ]
     }
   ]
 }
