@@ -9,6 +9,7 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"osProcess",
+		"process",
 		"port",
 		"replicaSetName",
 		"useSyslog",
