@@ -6,8 +6,7 @@ testInstanceCreation
 	count := SocketStream allInstances size.
 	self
 		should: [
-			client := MongoClient withUrls: {
-				MongoReplicationTestResources mongoUrlOffline } ]
+			client := MongoClient withUrls: { MongoTestResources mongoUrlOffline } ]
 		notTakeMoreThan: 100 milliSeconds.
 
 	self assert: SocketStream allInstances size equals: count.

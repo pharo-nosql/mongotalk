@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "MongoClientTest",
-	"category" : "Mongo-Client-Tests-Client",
+	"super" : "MongoClientReplicaSetTest",
+	"category" : "Mongo-Client-ReplicaSet-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "MongoClientReplicaSetTest",
+	"name" : "MongoClientBasicTest",
 	"type" : "normal"
 }
