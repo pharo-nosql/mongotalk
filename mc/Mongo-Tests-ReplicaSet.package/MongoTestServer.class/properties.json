@@ -1,0 +1,20 @@
+{
+	"commentStamp" : "MartinDias 10/6/2019 18:57",
+	"super" : "Object",
+	"category" : "Mongo-Tests-ReplicaSet",
+	"classinstvars" : [
+		"mongodPathString"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"osProcess",
+		"process",
+		"port",
+		"replicaSetName",
+		"useSyslog",
+		"timeout"
+	],
+	"name" : "MongoTestServer",
+	"type" : "normal"
+}
