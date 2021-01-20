@@ -12,7 +12,7 @@ baseline: spec
 				package: 'Mongo-Squeak' with: [ spec requires: #('Grease' 'Mongo-BSON') ];
 				package: 'Mongo-Core' with: [ spec requires: #('PBKDF2' 'Mongo-Squeak' 'Mongo-BSON') ];
 				package: 'Mongo-Client' with: [ spec requires: #('TaskIt' 'Mongo-Core') ];
-				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries');
+				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ];
 
  				"Tests that are unrelated to Replica Set."
 				package: 'Mongo-Tests-Queries' with: [ spec requires: #('Mongo-Queries') ];
@@ -23,7 +23,7 @@ baseline: spec
 				"Tests for Replica Set."
 				package: 'Mongo-Tests-ReplicaSet' with: [ spec requires: #('Mongo-Core' 'OSSubprocess') ];
 				package: 'Mongo-Client-ReplicaSet-Tests' with: [
-					spec requires: #('Mongo-Tests-ReplicaSet' 'Mongo-Client-Tests') ] ].
+					spec requires: #('Mongo-Tests-ReplicaSet' 'Mongo-Client-Tests') ].
 
 			spec
 				group: 'default' with: #('Core' 'Tools' 'Tests');
