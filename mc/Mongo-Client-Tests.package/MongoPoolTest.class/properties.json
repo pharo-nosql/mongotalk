@@ -1,7 +1,7 @@
 {
 	"commentStamp" : "",
 	"super" : "MongoTest",
-	"category" : "Mongo-Client-Tests-Utilities",
+	"category" : "Mongo-Client-Tests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
