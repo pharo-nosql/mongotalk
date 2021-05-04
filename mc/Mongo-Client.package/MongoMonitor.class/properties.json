@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "MartinDias 2/25/2020 17:24",
-	"super" : "TKTService",
+	"super" : "Object",
 	"category" : "Mongo-Client-Client",
 	"classinstvars" : [ ],
 	"pools" : [ ],
@@ -9,10 +9,10 @@
 		"client",
 		"roundtripTimeCalculator",
 		"urlString",
-		"nextTimeToCheck",
 		"pool",
 		"latestServerDescription",
-		"mongo"
+		"mongo",
+		"process"
 	],
 	"name" : "MongoMonitor",
 	"type" : "normal"

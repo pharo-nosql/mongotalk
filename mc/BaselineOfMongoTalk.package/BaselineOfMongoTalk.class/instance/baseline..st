@@ -3,7 +3,7 @@ baseline: spec
 	<baseline>
 	spec
 		for: #common
-		do: [ self grease: spec. self PBKDF2: spec. self osSubprocess: spec. self taskIt: spec.
+		do: [ self grease: spec. self PBKDF2: spec. self osSubprocess: spec.
 			spec
 
 				"Core and Client, without any test."
@@ -11,7 +11,7 @@ baseline: spec
 				package: 'Mongo-Queries';
 				package: 'Mongo-Squeak' with: [ spec requires: #('Grease' 'Mongo-BSON') ];
 				package: 'Mongo-Core' with: [ spec requires: #('PBKDF2' 'Mongo-Squeak' 'Mongo-BSON') ];
-				package: 'Mongo-Client' with: [ spec requires: #('TaskIt' 'Mongo-Core') ];
+				package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ];
 
  				"Tests that are unrelated to Replica Set."
@@ -33,7 +33,3 @@ baseline: spec
 				group: 'Tests + ReplicaSet Tests' with: #(Tests 'Mongo-Tests-ReplicaSet');
 				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests');
 				group: 'Client + ReplicaSet Tests' with: #('Client' 'Mongo-Client-ReplicaSet-Tests') ].
-	
-	spec
-		for: #'pharo9.x'
-		do: [  spec package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ] ].
