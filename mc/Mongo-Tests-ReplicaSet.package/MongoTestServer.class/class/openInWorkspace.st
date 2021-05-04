@@ -5,4 +5,4 @@ openInWorkspace
 	code := Character cr
 		join: ((self class sourceCodeAt: #workspaceCode) lines allButFirst: 2).
 	workspace := Smalltalk tools workspace openContents: code.
-	workspace label: 'Example'
+	workspace title: 'Example'
