@@ -9,8 +9,12 @@ mongoDo: aBlockClosure
 
 	| mongo result |
 	[	mongo := self next.
-		result := aBlockClosure value: mongo.
-		self return: mongo.
+		result := [ aBlockClosure value: mongo]
+			ensure: [ 
+				"Use ensurce block here because the block above could have a non local 
+				return which would skip returning the connection. In the error case the 
+				pool will get resetted so this should not have any impact"
+				self return: mongo ].
 		^ result ]
 			on: NetworkError, MongoWireProtocolError
 			do: [ :error |
