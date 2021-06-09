@@ -10,7 +10,7 @@ workspaceCode
 	[[ 	[| isMaster |
 		isMaster := server mongoDo: [ :mongo | mongo isMaster ].
 		Transcript cr; show: isMaster localTime; cr]
-			on: Error do: [ :e | e logCr ].
+			on: Error do: [ :e | e traceCr ].
 		1 second wait.
 		] doWhileTrue: [ server isStarted ] ] fork.
 

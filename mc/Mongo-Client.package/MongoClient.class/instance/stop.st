@@ -1,5 +1,6 @@
 API
 stop
-	monitors valuesDo: [ :each |
-		each isRunning ifTrue: [
-			each stop waitForCompletion: settings monitorStopTimeout ] ].
+	monitors valuesDo: [ :each | 
+		[	each isStarted ifTrue: [ each stop ] ] 
+			valueWithin: settings monitorStopTimeout
+			onTimeout: [ self error: 'Timeout waiting stop of: ', each asString ] ]  
