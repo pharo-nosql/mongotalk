@@ -1,3 +1,3 @@
 *Mongo-BSON
 bsonTypeCode
-	^14
+	^ 2
