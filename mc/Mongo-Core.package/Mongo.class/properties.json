@@ -15,7 +15,8 @@
 		"stream",
 		"requestID",
 		"authMechanism",
-		"authCache"
+		"authCache",
+		"tls"
 	],
 	"name" : "Mongo",
 	"type" : "normal"
