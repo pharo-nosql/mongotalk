@@ -1,4 +1,9 @@
-# MongoTalk [![Build Status](https://travis-ci.org/pharo-nosql/mongotalk.png)](http://travis-ci.org/pharo-nosql/mongotalk) [![Test Status](https://api.bob-bench.org/v1/badgeByUrl?branch=master&hosting=github&ci=travis-ci&repo=pharo-nosql%2Fmongotalk)](https://bob-bench.org/r/gh/pharo-nosql/mongotalk)
+# MongoTalk 
+
+[![Tests](https://github.com/pharo-nosql/mongotalk/actions/workflows/tests.yml/badge.svg)](https://github.com/pharo-nosql/mongotalk/actions/workflows/tests.yml)
+[![Test Status](https://api.bob-bench.org/v1/badgeByUrl?branch=master&hosting=github&ci=travis-ci&repo=pharo-nosql%2Fmongotalk)](https://bob-bench.org/r/gh/pharo-nosql/mongotalk)
+
+
 
 A Pharo driver for [MongoDB](https://www.mongodb.com/).
 
