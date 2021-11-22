@@ -8,11 +8,11 @@ jobs:
       matrix:
         pharo-version: [ Pharo64-8.0, Pharo64-9.0 ]
         ston: [ .smalltalk.ston, .smalltalk-client.ston ]
-        mongodb-version: ['4.0', '4.4']
+        mongodb-version: [ '4.0', '4.4']
         os: [ ubuntu-latest ]
 
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.pharo-version }} on ${{ matrix.mongodb-version }}
+    name: ${{ matrix.ston }}, ${{ matrix.pharo-version }}, ${{ matrix.mongodb-version }}
     steps:
       - uses: actions/checkout@v2
 
@@ -35,4 +35,4 @@ jobs:
       - name: Get Pharo and Run Tests
         run: smalltalkci -s ${{ matrix.pharo-version }} ${{ matrix.ston }}
         shell: bash
-        timeout-minutes: 20
+        timeout-minutes: 40
