@@ -6,9 +6,9 @@ jobs:
   test:
     strategy:
       matrix:
-        pharo-version: [ Pharo64-8.0, Pharo64-9.0, Pharo64-10 ]
+        pharo-version: [ Pharo64-8.0, Pharo64-9.0 ]
         ston: [ .smalltalk.ston, .smalltalk-client.ston ]
-        mongodb-version: ['4.2', '4.4']
+        mongodb-version: ['4.0', '4.4']
         os: [ ubuntu-latest ]
 
     runs-on: ${{ matrix.os }}
