@@ -1,0 +1,38 @@
+name: Tests
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        pharo-version: [ Pharo64-8.0, Pharo64-9.0 ]
+        ston: [ .smalltalk.ston, .smalltalk-client.ston ]
+        mongodb-version: [ '4.0', '4.4']
+        os: [ ubuntu-latest ]
+
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.ston }}, ${{ matrix.pharo-version }}, ${{ matrix.mongodb-version }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+
+      - name: Log mongodb Version
+        run: mongo --eval 'db.version();'
+
+      - name: Create test user
+        run: "mongo test --eval 'db.createUser({ \"user\": \"pharounittest\", \"pwd\": \"test\", roles: [] });'"
+
+      - name: Setup SmalltalkCI
+        uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-image: ${{ matrix.pharo-version }}
+
+      - name: Get Pharo and Run Tests
+        run: smalltalkci -s ${{ matrix.pharo-version }} ${{ matrix.ston }}
+        shell: bash
+        timeout-minutes: 40
