@@ -3,4 +3,4 @@ grease: spec
 	spec
 		baseline: 'Grease' with: [ 
 			spec 
-				repository: 'github://SeasideSt/Grease:v1.5.x/repository' ]
+				repository: 'github://SeasideSt/Grease:v1.8.x/repository' ]
