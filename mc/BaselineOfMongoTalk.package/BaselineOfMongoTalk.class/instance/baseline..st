@@ -3,7 +3,7 @@ baseline: spec
 	<baseline>
 	spec
 		for: #common
-		do: [ self grease: spec. self PBKDF2: spec. self osSubprocess: spec. self taskIt: spec.
+		do: [ self grease: spec. self PBKDF2: spec. self osSubprocess: spec. .
 			spec
 
 				"Core and Client, without any test."
@@ -36,7 +36,8 @@ baseline: spec
 	
 	spec
 		for: #(#'pharo7.x' #'pharo8.x' )
-		do: [  
+		do: [ 
+			self taskIt: spec.
 			spec 
 				package: 'Mongo-Client' with: [ spec requires: #('TaskIt') ].
 			spec
