@@ -1,3 +1,3 @@
 writing
 encode: aString
-	^(GratuitousIncompatibilities encodeString: aString) asByteArray
+	^ ZnUTF8Encoder default encodeString: aString
