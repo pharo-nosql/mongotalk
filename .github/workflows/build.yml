@@ -20,6 +20,8 @@ jobs:
     strategy:
       matrix:
         smalltalk: [ Pharo64-9.0, Pharo64-8.0 ]
+        mongodb-version: [ 4.4 ]
+
     name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v2
@@ -27,6 +29,10 @@ jobs:
         id: smalltalkci
         with:
           smalltalk-image: ${{ matrix.smalltalk }}
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
       - run: smalltalkci -s ${{ matrix.smalltalk }}
         shell: bash
         timeout-minutes: 15
