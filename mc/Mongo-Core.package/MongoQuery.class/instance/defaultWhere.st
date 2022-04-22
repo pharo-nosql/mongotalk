@@ -1,3 +1,0 @@
-default
-defaultWhere
-	^Dictionary new

@@ -1,9 +1,0 @@
-SystemOrganization addCategory: #'Mongo-Core'!
-SystemOrganization addCategory: #'Mongo-Core-Auth'!
-SystemOrganization addCategory: #'Mongo-Core-Base'!
-SystemOrganization addCategory: #'Mongo-Core-Collections'!
-SystemOrganization addCategory: #'Mongo-Core-Commands'!
-SystemOrganization addCategory: #'Mongo-Core-Errors'!
-SystemOrganization addCategory: #'Mongo-Core-Operations'!
-SystemOrganization addCategory: #'Mongo-Core-Replication'!
-SystemOrganization addCategory: #'Mongo-Core-Utilities'!

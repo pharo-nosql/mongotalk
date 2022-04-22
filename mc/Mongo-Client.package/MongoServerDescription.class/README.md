@@ -1,1 +1,0 @@
-I represent the description of a mongodb server. The main information I provide is extracted from a mongodb's ismaster command, but I also know the roundtrip time to get such answer from the server.

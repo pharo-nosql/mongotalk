@@ -1,3 +1,0 @@
-running
-waitMonitorsHeartbeatAndTimeout
-	60 seconds wait

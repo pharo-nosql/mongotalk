@@ -1,1 +1,0 @@
-Tracks an exponentially-weighted moving average.

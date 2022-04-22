@@ -1,3 +1,0 @@
-accessing
-authShouldFail
-	succeedAuth := false

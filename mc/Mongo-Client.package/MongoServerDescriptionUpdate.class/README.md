@@ -1,1 +1,0 @@
-I'm an announced by a MongoClient when the topology has news from a server.

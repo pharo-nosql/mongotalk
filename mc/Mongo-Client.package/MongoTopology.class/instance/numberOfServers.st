@@ -1,3 +1,0 @@
-accessing
-numberOfServers
-	^ serversByUrlString size

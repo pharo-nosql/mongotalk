@@ -1,3 +1,0 @@
-accessing - common
-response
-	^ response

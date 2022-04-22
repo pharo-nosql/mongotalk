@@ -1,3 +1,0 @@
-writing
-fixedHeaderSize
-	^ 20

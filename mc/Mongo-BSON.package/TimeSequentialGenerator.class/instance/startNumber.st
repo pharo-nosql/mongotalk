@@ -1,3 +1,0 @@
-private
-startNumber 
-	^ Time millisecondClockValue.

@@ -1,3 +1,0 @@
-hooks
-doWriteOnCollection: collection
-	self subclassResponsibility

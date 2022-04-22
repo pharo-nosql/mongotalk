@@ -1,3 +1,0 @@
-acccessing
-nextNumber 
-	^ self subclassResponsibility

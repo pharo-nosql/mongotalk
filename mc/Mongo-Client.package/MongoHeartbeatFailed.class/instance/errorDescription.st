@@ -1,3 +1,0 @@
-accessing
-errorDescription
-	^ errorDescription
