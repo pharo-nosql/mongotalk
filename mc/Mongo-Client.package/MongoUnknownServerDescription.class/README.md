@@ -1,1 +1,0 @@
-I represent the description of a server that has never connected yet. (Kind of Null Object design pattern implementation).

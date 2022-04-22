@@ -1,3 +1,0 @@
-reading
-nextNil
-	^nil

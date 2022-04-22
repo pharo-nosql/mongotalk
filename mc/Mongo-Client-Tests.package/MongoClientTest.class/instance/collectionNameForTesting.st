@@ -1,3 +1,0 @@
-tests
-collectionNameForTesting
-	^ 'testCollection'

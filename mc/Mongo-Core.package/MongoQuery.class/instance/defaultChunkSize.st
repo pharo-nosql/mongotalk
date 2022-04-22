@@ -1,3 +1,0 @@
-default
-defaultChunkSize
-	^0

@@ -1,3 +1,0 @@
-converting
-concernForCommand
-	^ dictionary

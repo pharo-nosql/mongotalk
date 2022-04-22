@@ -1,3 +1,0 @@
-running
-urlsToTest
-	^ MongoReplicationTestResources allMongoUrls

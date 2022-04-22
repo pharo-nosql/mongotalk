@@ -1,1 +1,0 @@
-A mongo query node

@@ -1,3 +1,0 @@
-defaults
-defaultStartNumber
-	^ 0

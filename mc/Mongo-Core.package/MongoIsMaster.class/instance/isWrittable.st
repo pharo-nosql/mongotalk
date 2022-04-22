@@ -1,3 +1,0 @@
-accessing
-isWrittable
-	^ self isMaster

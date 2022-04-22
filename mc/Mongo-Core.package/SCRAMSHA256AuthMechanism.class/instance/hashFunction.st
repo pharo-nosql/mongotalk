@@ -1,3 +1,0 @@
-operations
-hashFunction
-	^ SHA256

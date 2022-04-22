@@ -1,3 +1,0 @@
-reading
-nextKey
-	^stream nextString

@@ -1,3 +1,0 @@
-operations
-mechanismName
-    ^ self subclassResponsibility

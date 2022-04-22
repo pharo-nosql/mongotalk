@@ -1,3 +1,0 @@
-accessing - server selection
-serverSelectionRandomGenerator: aRandomGenerator
-	serverSelectionRandomGenerator := aRandomGenerator

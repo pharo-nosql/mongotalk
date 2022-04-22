@@ -1,1 +1,0 @@
-I represent  an error ocurred in a Mongo $cmd operation.

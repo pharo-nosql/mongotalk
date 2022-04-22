@@ -1,1 +1,0 @@
-Tests for Mongo Replica Set support. My subclasses represent basic scenarios.

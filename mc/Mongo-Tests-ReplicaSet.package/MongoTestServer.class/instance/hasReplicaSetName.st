@@ -1,3 +1,0 @@
-testing
-hasReplicaSetName
-	^ replicaSetName isNotNil

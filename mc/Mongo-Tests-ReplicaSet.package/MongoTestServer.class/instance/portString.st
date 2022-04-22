@@ -1,3 +1,0 @@
-accessing
-portString
-	^ port asString

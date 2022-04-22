@@ -1,1 +1,0 @@
-I represent commands can be sent to $cmd collection. I'm almost a "query operation" except for simpler format of request.

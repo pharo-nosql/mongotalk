@@ -1,9 +1,0 @@
-accessing - diff
-basicDifferencesFrom: anotherMongoIsMaster do: aBlockClosure
-	"Evaluate a block closure on each of the differences found between self and another IsMaster response (potentially from a different server in a replica set)."
-
-	#(isWrittable isReplicaSet) do: [ :each | 
-		| mine theirs |
-		mine := self perform: each.
-		theirs := anotherMongoIsMaster perform: each.
-		mine = theirs ifFalse: [ aBlockClosure cull: each cull: theirs -> mine ] ]

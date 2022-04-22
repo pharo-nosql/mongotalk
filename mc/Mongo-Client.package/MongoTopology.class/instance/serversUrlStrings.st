@@ -1,3 +1,0 @@
-accessing
-serversUrlStrings
-	^ serversByUrlString keys

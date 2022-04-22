@@ -1,3 +1,0 @@
-visiting
-visitObject: anObject
-	^ anObject

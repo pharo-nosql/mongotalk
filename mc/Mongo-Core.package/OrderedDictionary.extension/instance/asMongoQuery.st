@@ -1,3 +1,0 @@
-*mongo-core
-asMongoQuery
-	^ self

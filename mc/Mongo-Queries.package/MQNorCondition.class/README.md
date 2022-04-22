@@ -1,1 +1,0 @@
-A NOR condition
