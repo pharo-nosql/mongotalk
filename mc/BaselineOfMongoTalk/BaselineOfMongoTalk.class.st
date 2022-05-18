@@ -43,7 +43,7 @@ BaselineOfMongoTalk >> baseline: spec [
 					spec requires: #('Mongo-Tests-ReplicaSet' 'Mongo-Client-Tests') ].
 
 			spec
-				group: 'default' with: #('Core' 'Tools' 'Tests');
+				group: 'default' with: #('Core' 'Tests');
 				group: 'Core' with: #('Mongo-Core' 'Mongo-Queries');
 				group: 'Tools' with: #('Mongo-Pharo-Tools');
 				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
