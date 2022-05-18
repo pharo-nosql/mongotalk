@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfMongoTalk,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfMongoTalk'
+	#category : #BaselineOfMongoTalk
 }
 
 { #category : #'external projects' }
@@ -20,15 +20,15 @@ BaselineOfMongoTalk >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [ self grease: spec. self PBKDF2: spec. self osSubprocess: spec. self taskIt: spec.
+		do: [ self PBKDF2: spec. self osSubprocess: spec.
 			spec
 
 				"Core and Client, without any test."
 				package: 'Mongo-BSON';
 				package: 'Mongo-Queries';
-				package: 'Mongo-Squeak' with: [ spec requires: #('Grease' 'Mongo-BSON') ];
+				package: 'Mongo-Squeak' with: [ spec requires: #('Mongo-BSON') ];
 				package: 'Mongo-Core' with: [ spec requires: #('PBKDF2' 'Mongo-Squeak' 'Mongo-BSON') ];
-				package: 'Mongo-Client' with: [ spec requires: #('TaskIt' 'Mongo-Core') ];
+				package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ];
 
  				"Tests that are unrelated to Replica Set."
@@ -43,16 +43,23 @@ BaselineOfMongoTalk >> baseline: spec [
 					spec requires: #('Mongo-Tests-ReplicaSet' 'Mongo-Client-Tests') ].
 
 			spec
-				group: 'default' with: #('Core' 'Tools' 'Tests');
+				group: 'default' with: #('Core' 'Tests');
 				group: 'Core' with: #('Mongo-Core' 'Mongo-Queries');
 				group: 'Tools' with: #('Mongo-Pharo-Tools');
 				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
 				group: 'Tests + ReplicaSet Tests' with: #(Tests 'Mongo-Tests-ReplicaSet');
 				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests');
 				group: 'Client + ReplicaSet Tests' with: #('Client' 'Mongo-Client-ReplicaSet-Tests') ].
-	
 	spec
-		for: #'pharo9.x'
+		for: #(#'pharo7.x' #'pharo8.x' )
+		do: [ 
+			self taskIt: spec.
+			spec 
+				package: 'Mongo-Client' with: [ spec requires: #('TaskIt') ].
+			spec
+				group: 'default' with: #('Tools') ].
+	spec
+		for: #(#'pharo9.x' #'pharo10.x')
 		do: [  spec package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ] ].
 
 ]
