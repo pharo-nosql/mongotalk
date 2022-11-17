@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#category : 'Mongo-BSON-Utilities'
+	#category : #'Mongo-BSON-Utilities'
 }
 
 { #category : #'instance creation' }
@@ -110,17 +110,19 @@ LittleEndianStream >> nextSizedStringPut: aString [
 
 { #category : #reading }
 LittleEndianStream >> nextString [
-	| string  |
-	string := (stream upTo: 0) asString.
-	^GratuitousIncompatibilities utf8Codec decode: string.
+	| bytes |
+
+	bytes := stream upTo: 0.
+	^ bytes utf8Decoded asString
 ]
 
 { #category : #reading }
 LittleEndianStream >> nextString: aNumber [
-	| string  |
-	string := (stream next: (aNumber - 1)) asString.
+	| string |
+
+	string := stream next: (aNumber - 1).
 	stream skip: 1.
-	^GratuitousIncompatibilities utf8Codec decode: string.
+	^ string utf8Decoded
 ]
 
 { #category : #writing }

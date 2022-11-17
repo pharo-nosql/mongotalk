@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#category : 'Mongo-BSON-Base'
+	#category : #'Mongo-BSON-Base'
 }
 
 { #category : #codec }
@@ -140,22 +140,24 @@ BSON >> nextByteArrayPut: aByteArray [
 
 { #category : #reading }
 BSON >> nextDate [
-	^(GratuitousIncompatibilities intToDate: stream nextInt64)
+
+	^ stream nextInt64 asBSONDate
 ]
 
 { #category : #reading }
 BSON >> nextDateAndTime [
-	^(GratuitousIncompatibilities intToDateAndTime: stream nextInt64)
+	
+	^ stream nextInt64 asBSONDateAndTime
 ]
 
 { #category : #writing }
 BSON >> nextDateAndTimePut: aDateAndTime [
-	stream nextInt64Put: (GratuitousIncompatibilities dateAndTimeToMilliseconds: aDateAndTime)
+	stream nextInt64Put: aDateAndTime asBSONMilliSeconds
 ]
 
 { #category : #writing }
 BSON >> nextDatePut: aDate [ 
-	stream nextInt64Put: (GratuitousIncompatibilities dateToMilliseconds: aDate)
+	stream nextInt64Put: aDate asBSONMilliSeconds
 ]
 
 { #category : #reading }
@@ -182,12 +184,26 @@ BSON >> nextDictionaryPut: aDictionary [
 
 { #category : #reading }
 BSON >> nextDouble [
-	^GratuitousIncompatibilities readDoubleFrom: stream
+	| result |
+	
+	result := Float new: 2.
+	result basicAt: 2 put: stream nextUInt32.
+	result basicAt: 1 put: stream nextUInt32.
+	
+	^result
 ]
 
 { #category : #writing }
 BSON >> nextDoublePut: aDouble [ 
-	stream nextBytesPut: (GratuitousIncompatibilities doubleToBytes: aDouble)
+	| writer lowWord highWord |
+
+	writer := LittleEndianStream on: (ByteArray new: 8) writeStream.
+	lowWord := aDouble basicAt: 2.
+	writer nextInt32Put: lowWord.
+	highWord := aDouble basicAt: 1.
+	writer nextInt32Put: highWord.
+
+	stream nextBytesPut: writer contents
 ]
 
 { #category : #reading }
@@ -231,7 +247,7 @@ BSON >> nextOID [
 	value := LargePositiveInteger basicNew: 12.
 	12 timesRepeat: [
 		value := (value bitShift: 8) bitOr: stream nextByte ].
-	^OID value: (GratuitousIncompatibilities compressLargeInteger: value)
+	^OID value: value normalize
 ]
 
 { #category : #writing }
