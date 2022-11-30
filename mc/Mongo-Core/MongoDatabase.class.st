@@ -19,7 +19,7 @@ Class {
 		'root',
 		'name'
 	],
-	#category : 'Mongo-Core-Base'
+	#category : #'Mongo-Core-Base'
 }
 
 { #category : #'instance creation' }
@@ -98,7 +98,11 @@ MongoDatabase >> command: anOrderedDictionary [
 
 { #category : #operations }
 MongoDatabase >> command: anOrderedDictionary flags: flags [
-	^ root command: anOrderedDictionary database: self flags: flags
+
+	^ root 
+		command: anOrderedDictionary 
+		database: self 
+		flags: flags
 ]
 
 { #category : #operations }
@@ -277,6 +281,14 @@ MongoDatabase >> name [
 	^name
 ]
 
+{ #category : #factory }
+MongoDatabase >> newQuery [
+
+	^ root newQuery
+		database: self;
+		yourself
+]
+
 { #category : #printing }
 MongoDatabase >> printOn: aStream [
 
@@ -290,8 +302,9 @@ MongoDatabase >> qualifiedName [
 
 { #category : #operations }
 MongoDatabase >> query: aMongoQuery [
+	
 	aMongoQuery database: self.
-	^root query: aMongoQuery
+	^ root query: aMongoQuery
 ]
 
 { #category : #operations }

@@ -33,7 +33,8 @@ Class {
 		'stream',
 		'requestID',
 		'authMechanism',
-		'authCache'
+		'authCache',
+		'driver'
 	],
 	#classVars : [
 		'Default'
@@ -41,7 +42,7 @@ Class {
 	#classInstVars : [
 		'defaultAuthMechanismClass'
 	],
-	#category : 'Mongo-Core-Base'
+	#category : #'Mongo-Core-Base'
 }
 
 { #category : #constants }
@@ -131,7 +132,11 @@ Mongo >> authMechanism: aMongoAuthMechanism [
 
 { #category : #operations }
 Mongo >> authenticateUsername: user password: pass database: aDatabase [
-	^self authMechanism authenticateUsername: user password: pass database: aDatabase
+
+	^self authMechanism 
+		authenticateUsername: user 
+		password: pass 
+		database: aDatabase
 ]
 
 { #category : #operations }
@@ -152,19 +157,16 @@ Mongo >> command: anOrderedDictionary database: aDatabase [
 { #category : #operations }
 Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	| query reply |
-	query := MongoQuery new
-		database: aDatabase;
-		collection: MongoCollection cmdVirtualCollection;
-		where: anOrderedDictionary;
-		operation: CommandOperation;
-		flags: flags;
-		yourself.
 
+	query := self
+		newCommand: anOrderedDictionary 
+		database: aDatabase
+		flags: flags.
 	reply := self queryOne: query.
 
 	(reply at: 'ok' ifAbsent: [ self error ]) = 1.0 
 		ifFalse: [ MongoCommandError signalFor: reply ].
-		
+
 	^ reply
 ]
 
@@ -204,6 +206,12 @@ Mongo >> delete: aDictionary collection: aString [
 		stream: stream 
 		query: aDictionary)
 			write
+]
+
+{ #category : #private }
+Mongo >> driver [
+
+	^ driver ifNil: [ driver := MongoDriver default ]
 ]
 
 { #category : #'private-communicating' }
@@ -271,15 +279,35 @@ Mongo >> majorVersion [
 	^ (self version splitOn: '.') first asInteger
 ]
 
+{ #category : #factory }
+Mongo >> newCommand: anOrderedDictionary  database: aDatabase flags: flags [
+	
+	^ self driver 
+		newCommand: anOrderedDictionary 
+		database: aDatabase
+		flags: flags
+]
+
+{ #category : #factory }
+Mongo >> newQuery [
+
+	^ self driver newQuery
+]
+
 { #category : #private }
 Mongo >> nextRequestID [
-	^requestID := requestID + 1 bitAnd: 16r3FFFFFFF
+
+	^ requestID := requestID + 1 bitAnd: 16r3FFFFFFF
 ]
 
 { #category : #operations }
 Mongo >> open [
-	stream := GratuitousIncompatibilities socketStreamHost: host port: port.
-	stream socket setOption: 'TCP_NODELAY' value: 1.
+
+	stream := SocketStream openConnectionToHostNamed: host port: port.
+	stream binary.
+	stream socket 
+		setOption: 'TCP_NODELAY' 
+		value: 1.
 	authCache := nil
 ]
 
@@ -296,7 +324,8 @@ Mongo >> openWithTimeout: aDuration [
 
 { #category : #accessing }
 Mongo >> port [
-	^port
+
+	^ port
 ]
 
 { #category : #printing }
@@ -313,27 +342,35 @@ Mongo >> printOn: aStream [
 { #category : #operations }
 Mongo >> query: aMongoQuery [
 	| results |
+	
 	results := OrderedCollection new.
-	aMongoQuery doBlock isNil ifTrue: [
+	aMongoQuery doBlock ifNil: [
 		aMongoQuery doBlock: [:each | results add: each]].
-	(MongoCursor root: self query: aMongoQuery ) execute.
+	
+	(MongoCursor root: self query: aMongoQuery) execute.
+	
 	(results isNotEmpty and: [ results first includesKey: '$err' ])
 		ifTrue: [ ^ MongoQueryError signalFor: results first ].
+	
 	^ results
 ]
 
 { #category : #operations }
 Mongo >> queryOne: aMongoQuery [
+
 	aMongoQuery doBlock: [:each | 
-		^(each includesKey: '$err')
+		^ (each includesKey: '$err')
 			ifTrue: [ MongoQueryError signalFor: each ]
 			ifFalse: [ each ] ].
+		
 	aMongoQuery chunkSize: 1.
-	(MongoCursor new
+	
+	MongoCursor new
 		root: self;
 		query: aMongoQuery;
-		execute).
-	^nil
+		execute.
+		
+	^ nil
 ]
 
 { #category : #operations }
@@ -383,12 +420,14 @@ Mongo >> socketTimeout: aDuration [
 
 { #category : #accessing }
 Mongo >> stream [
-	^stream
+
+	^ stream
 ]
 
 { #category : #accessing }
-Mongo >> stream: anObject [
-	stream := anObject.
+Mongo >> stream: aStream [
+
+	stream := aStream.
 	authCache := nil
 ]
 
@@ -414,6 +453,12 @@ Mongo >> urlString [
 	^ host asString, ':', port asString
 ]
 
+{ #category : #accessing }
+Mongo >> useDriver: aDriver [
+
+	driver := aDriver
+]
+
 { #category : #operations }
 Mongo >> username: aUserString password: aPasswordString database: aDatabase [
 	"authenticate a user for a database. MongoDB needs authentication only once 
@@ -435,9 +480,8 @@ Mongo >> username: aUserString password: aPasswordString database: aDatabase [
 Mongo >> version [
 	"Get the mongodb instance vrsion. The result is obtained via `buildInfo` command. 
 	See more: https://docs.mongodb.com/manual/reference/command/buildInfo/"
-
 	| buildInfo |
-	buildInfo := self admin command: {'buildInfo' -> 1.0} asDictionary.
 	
+	buildInfo := self admin command: {'buildInfo' -> 1.0} asDictionary.
 	^ buildInfo at: 'version'
 ]

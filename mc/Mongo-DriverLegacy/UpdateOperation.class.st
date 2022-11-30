@@ -10,7 +10,7 @@ Class {
 		'dataBytes',
 		'flags'
 	],
-	#category : 'Mongo-Core-Operations'
+	#category : #'Mongo-DriverLegacy-Operations'
 }
 
 { #category : #'instance creation' }

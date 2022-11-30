@@ -18,7 +18,7 @@ Class {
 		'timeoutOrNil',
 		'flags'
 	],
-	#category : 'Mongo-Core-Utilities'
+	#category : #'Mongo-Core-Utilities'
 }
 
 { #category : #'instance creation' }
@@ -74,7 +74,10 @@ MongoCommandCursor >> do: aBlockClosure [
 
 { #category : #enumerating }
 MongoCommandCursor >> firstBatch [
-	^ MongoQueryBatch newFromFirstBatchResponse: (database command: command flags: self flags)
+
+	^ MongoQueryBatch newFromFirstBatchResponse: (database 
+		command: command 
+		flags: self flags)
 ]
 
 { #category : #accessing }

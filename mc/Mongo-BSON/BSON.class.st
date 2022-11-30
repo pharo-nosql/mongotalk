@@ -20,7 +20,8 @@ BSON class >> read: aStream [
 ]
 
 { #category : #codec }
-BSON class >> write: aDictionary [ 
+BSON class >> write: aDictionary [
+ 
 	^self writer 
 		nextDictionaryPut: aDictionary; 
 		contents
@@ -49,6 +50,7 @@ BSON >> addObjectType: anInteger to: aDictionary [
 { #category : #writing }
 BSON >> basicNextDictionaryPut: aCollection [
 	| start end |
+	
 	start := stream position.
 	stream nextInt32Put: 0.	"Just to make space"
 	aCollection do: [:each | each writeBSONOn: self].
@@ -290,7 +292,7 @@ BSON >> nextSizedStringPut: aString [
 	| encoded |
 	encoded := stream encode: aString.
 	stream nextInt32Put: encoded size + 1.	"For terminating null"
-	stream nextBytesPut: encoded asByteArray.
+	stream nextBytesPut: encoded.
 	stream null
 ]
 

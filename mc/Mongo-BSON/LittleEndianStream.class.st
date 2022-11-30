@@ -24,6 +24,7 @@ LittleEndianStream >> contents [
 
 { #category : #writing }
 LittleEndianStream >> encode: aString [
+
 	^ ZnUTF8Encoder default encodeString: aString
 ]
 
@@ -51,7 +52,8 @@ LittleEndianStream >> nextBytes: anInteger [
 ]
 
 { #category : #writing }
-LittleEndianStream >> nextBytesPut: aByteArray [ 
+LittleEndianStream >> nextBytesPut: aByteArray [
+
 	stream nextPutAll: aByteArray
 ]
 

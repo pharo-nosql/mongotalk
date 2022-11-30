@@ -19,7 +19,7 @@ Class {
 		'database',
 		'name'
 	],
-	#category : 'Mongo-Core-Base'
+	#category : #'Mongo-Core-Base'
 }
 
 { #category : #convenience }
@@ -193,12 +193,12 @@ MongoCollection >> name [
 	^name
 ]
 
-{ #category : #queries }
+{ #category : #'private - factory' }
 MongoCollection >> newQuery [
-	^MongoQuery new
+	
+	^ self database newQuery
 		collection: self;
-		yourself.
-		
+		yourself
 ]
 
 { #category : #testing }
@@ -206,8 +206,9 @@ MongoCollection >> occurrencesOf: aDictionary [
 	^(self select: aDictionary) size
 ]
 
-{ #category : #queries }
+{ #category : #private }
 MongoCollection >> performQuery: aMongoQuery [
+
 	^ database query: aMongoQuery
 ]
 

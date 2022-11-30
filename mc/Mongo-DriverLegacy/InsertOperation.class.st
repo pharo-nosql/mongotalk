@@ -8,7 +8,7 @@ Class {
 		'objects',
 		'dataBytes'
 	],
-	#category : 'Mongo-Core-Operations'
+	#category : #'Mongo-DriverLegacy-Operations'
 }
 
 { #category : #'instance creation' }

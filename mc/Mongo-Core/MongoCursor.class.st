@@ -20,7 +20,7 @@ Class {
 		'query',
 		'queryOperationFlags'
 	],
-	#category : 'Mongo-Core-Utilities'
+	#category : #'Mongo-Core-Utilities'
 }
 
 { #category : #'instance creation' }
@@ -33,28 +33,36 @@ MongoCursor class >> root: aMongo query: aMongoQuery [
 { #category : #executing }
 MongoCursor >> execute [
 	| limit reply numberReturned requestId |
+	
 	numberReturned := 0.
 	limit := query limit.
 	limit = 0 
-		ifTrue: [limit := Float infinity ].
+		ifTrue: [ limit := Float infinity ].
 	limit < query chunkSize 
 		ifTrue: [ query chunkSize: limit ].
+	
 	reply := nil.
-	[reply isNil
-		ifTrue: [ requestId := root cursorQuery: query ]
-		ifFalse:
-			[ requestId := root
-				getMore: reply cursorId
-				collection: query collection qualifiedName
-				chunkSize: query chunkSize ].
-	reply := (ReplyOperation stream: root stream) read.
-	reply responseTo = requestId ifFalse: [
-		^ MongoWireProtocolError signal: 'Unexpected responseTo in response' ].
-	reply do: [:each |
-		numberReturned < limit ifTrue: [
-			query doBlock value: each.
-			numberReturned := numberReturned + 1]].
-	reply isFinished or: [ numberReturned >= limit] ] whileFalse
+	[
+		requestId := reply
+			ifNotNil:[ 
+				root
+					getMore: reply cursorId
+					collection: query collection qualifiedName
+					chunkSize: query chunkSize ]
+			ifNil: [ 
+				root cursorQuery: query ].
+
+		reply := OpMsgReply fromStream: root stream.
+		reply responseTo = requestId 
+			ifFalse: [ ^ MongoWireProtocolError signal: 'Unexpected responseTo in response' ].
+		
+		reply do: [:each |
+			numberReturned < limit ifTrue: [
+				query doBlock value: each.
+				numberReturned := numberReturned + 1 ] ].
+		reply isFinished or: [ numberReturned >= limit ] 
+	]
+	whileFalse
 ]
 
 { #category : #accessing }
@@ -64,6 +72,7 @@ MongoCursor >> query [
 
 { #category : #accessing }
 MongoCursor >> query: anObject [
+
 	query := anObject
 ]
 

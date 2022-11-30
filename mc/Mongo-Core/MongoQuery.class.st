@@ -19,7 +19,7 @@ Class {
 		'flags',
 		'operation'
 	],
-	#category : 'Mongo-Core-Base'
+	#category : #'Mongo-Core-Base'
 }
 
 { #category : #accessing }
@@ -139,7 +139,8 @@ MongoQuery >> offset: anInteger [
 
 { #category : #accessing }
 MongoQuery >> operation [
-	^ operation ifNil: [ QueryOperation  ]
+
+	^ operation
 ]
 
 { #category : #accessing }
