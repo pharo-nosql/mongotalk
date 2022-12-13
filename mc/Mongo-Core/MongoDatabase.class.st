@@ -80,7 +80,6 @@ MongoDatabase >> collectionNames [
 	^ (MongoCommandCursor
 		database: self
 		dictionary: dictionary)
-		setFlagSlaveOk;
 		collect: [ :each | each at: 'name' ].
 ]
 

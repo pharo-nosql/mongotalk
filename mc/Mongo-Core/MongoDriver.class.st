@@ -5,24 +5,39 @@ My children are the real drivers, see there.
 Class {
 	#name : #MongoDriver,
 	#superclass : #Object,
+	#classVars : [
+		'Default'
+	],
 	#category : #'Mongo-Core-Base'
 }
 
 { #category : #'instance creation' }
 MongoDriver class >> default [
 
-	^ (self allSubclasses 
-		detect: [ :each | each isDefault ]
-		ifNone: [ 
-			"just pick one"
-			self allSubclasses first ])
-		new
+	Default ifNil: [ Default := self obtainDefaultDriver ].
+	^ Default new
+]
+
+{ #category : #accessing }
+MongoDriver class >> default: aClass [ 
+	
+	Default := aClass
 ]
 
 { #category : #testing }
 MongoDriver class >> isDefault [
 	
 	^ false
+]
+
+{ #category : #private }
+MongoDriver class >> obtainDefaultDriver [
+
+	^ self allSubclasses 
+		detect: [ :each | each isDefault ]
+		ifNone: [ 
+			"just pick one"
+			self allSubclasses first ]
 ]
 
 { #category : #factory }

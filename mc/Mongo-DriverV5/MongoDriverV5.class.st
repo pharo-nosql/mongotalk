@@ -16,9 +16,9 @@ MongoDriverV5 class >> isDefault [
 { #category : #factory }
 MongoDriverV5 >> newCommand: anOrderedDictionary database: aDatabase flags: flags [
 
-	^ self newQuery
+	^ MongoQuery new
+		operation: OpMsgCommand;
 		database: aDatabase;
-		collection: MongoCollection cmdVirtualCollection;
 		where: anOrderedDictionary;
 		flags: flags;
 		yourself

@@ -165,6 +165,8 @@ MongoQuery >> perform [
 
 { #category : #accessing }
 MongoQuery >> qualifiedName [
+
+	collection ifNil: [ ^ nil ].	
 	^ database name, '.', collection name
 ]
 

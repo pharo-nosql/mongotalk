@@ -150,11 +150,11 @@ MongoCollection >> do: aBlock [
 
 { #category : #operations }
 MongoCollection >> drop [
-	database
-		command:
-			(OrderedIdentityDictionary new
-				at: #drop put: name;
-				yourself)	"check return value"
+
+	database command: (OrderedIdentityDictionary new
+		at: #drop put: name;
+		yourself)	
+	"check return value"
 ]
 
 { #category : #convenience }
