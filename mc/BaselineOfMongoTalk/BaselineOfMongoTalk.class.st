@@ -59,7 +59,7 @@ BaselineOfMongoTalk >> baseline: spec [
 			spec
 				group: 'default' with: #('Tools') ].
 	spec
-		for: #(#'pharo9.x' #'pharo10.x')
+		for: #(#'pharo9.x' #'pharo10.x' #'pharo11.x')
 		do: [  spec package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ] ].
 
 ]
