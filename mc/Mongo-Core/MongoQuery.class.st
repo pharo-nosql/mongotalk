@@ -29,7 +29,8 @@ MongoQuery >> chunkSize [
 
 { #category : #accessing }
 MongoQuery >> chunkSize: anInteger [
-	^chunkSize := anInteger
+
+	^ chunkSize := anInteger
 ]
 
 { #category : #accessing }
@@ -84,7 +85,8 @@ MongoQuery >> doBlock [
 
 { #category : #accessing }
 MongoQuery >> doBlock: aBlock [
-	doBlock := aBlock.
+
+	doBlock := aBlock
 ]
 
 { #category : #accessing }

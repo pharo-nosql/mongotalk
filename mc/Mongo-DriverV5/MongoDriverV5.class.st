@@ -1,5 +1,7 @@
 "
-A driver from mongo wire protocol from v5.0 and later
+A driver from mongo wire protocol from v5.0 and later.
+
+https://www.mongodb.com/docs/manual/reference/mongodb-wire-protocol/
 "
 Class {
 	#name : #MongoDriverV5,

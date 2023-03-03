@@ -41,10 +41,10 @@ MongoCommandCursor >> batchSizeOrNil: anObject [
 ]
 
 { #category : #enumerating }
-MongoCommandCursor >> collect: aBlockClosure [ 
-	^ Array streamContents: [ :stream |
-		self do: [ :each | stream nextPut: (aBlockClosure value: each) ] ]
+MongoCommandCursor >> collect: aBlock [
 
+	^ Array streamContents: [ :stream |
+		self do: [ :each | stream nextPut: (aBlock value: each) ] ]
 ]
 
 { #category : #accessing }
@@ -63,13 +63,17 @@ MongoCommandCursor >> database [
 ]
 
 { #category : #enumerating }
-MongoCommandCursor >> do: aBlockClosure [ 
-	batch := self firstBatch.
+MongoCommandCursor >> do: aBlock [
 
-	[	batch documents do: aBlockClosure.
+	batch := self firstBatch.
+	[
+		batch documents do: aBlock.
 		batch atEnd ifTrue: [ ^self ].
-		batch := (database collectionAt: batch collectionName) commandGetMore: batch cursorId batchSize: self batchSizeOrNil timeout: self timeoutOrNil
-		] repeat
+		batch := (database collectionAt: batch collectionName)
+			commandGetMore: batch cursorId
+			batchSize: self batchSizeOrNil
+			timeout: self timeoutOrNil
+	] repeat
 ]
 
 { #category : #enumerating }
@@ -93,11 +97,11 @@ MongoCommandCursor >> flags: flagsAsInteger [
 ]
 
 { #category : #initialization }
-MongoCommandCursor >> initializeDatabase: aMongoDatabase command: aCollection [ 
+MongoCommandCursor >> initializeDatabase: aMongoDatabase command: aCollection [
+
 	self initialize.
-	
 	database := aMongoDatabase.
-	command := aCollection.
+	command := aCollection
 ]
 
 { #category : #convenience }

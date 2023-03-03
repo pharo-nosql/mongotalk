@@ -35,8 +35,11 @@ MongoCollection class >> cmdVirtualCollection [
 ]
 
 { #category : #'instance creation' }
-MongoCollection class >> database: aMongoDatabase name: aString [ 
-	^self new setDatabase: aMongoDatabase name: aString
+MongoCollection class >> database: aMongoDatabase name: aString [
+
+	^self new
+		setDatabase: aMongoDatabase
+		name: aString
 ]
 
 { #category : #adding }
@@ -150,11 +153,13 @@ MongoCollection >> do: aBlock [
 
 { #category : #operations }
 MongoCollection >> drop [
+	| result |
 
-	database command: (OrderedIdentityDictionary new
+	result := database command: (OrderedIdentityDictionary new
 		at: #drop put: name;
-		yourself)	
-	"check return value"
+		yourself).
+	(result at: 'ok') = 1.0
+		ifFalse: [ self error: 'I can''t drop the collection!' ]
 ]
 
 { #category : #convenience }
@@ -299,6 +304,7 @@ MongoCollection >> select: aDictionary limit: limit offset: offset order: orderD
 
 { #category : #private }
 MongoCollection >> setDatabase: aMongoDatabase name: aString [
+
 	database := aMongoDatabase.
 	name := aString
 ]
