@@ -9,8 +9,8 @@ Class {
 
 { #category : #private }
 OpMsgSectionType1 >> computeSize [
-	
-	^ self bytes size + 1 "type" + self id size + 1 "null"
+
+	^ self bytes size + TYPE_SIZE + self id size + NULL_SIZE
 ]
 
 { #category : #initialization }

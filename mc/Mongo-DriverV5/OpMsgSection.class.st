@@ -14,6 +14,10 @@ Class {
 		'size',
 		'document'
 	],
+	#classVars : [
+		'NULL_SIZE',
+		'TYPE_SIZE'
+	],
 	#category : #'Mongo-DriverV5-Operations'
 }
 
@@ -23,6 +27,13 @@ OpMsgSection class >> fromStream: stream size: size [
 	^ (self sectionClass: stream nextByte) new
 		fromStream: stream size: size - 1;
 		yourself
+]
+
+{ #category : #'class initialization' }
+OpMsgSection class >> initialize [
+
+	TYPE_SIZE := 1.
+	NULL_SIZE := 1
 ]
 
 { #category : #private }

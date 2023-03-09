@@ -18,12 +18,31 @@ OpMsgReply class >> fromStream: aStream [
 	^ self new fromStream: aStream
 ]
 
+{ #category : #accessing }
+OpMsgReply >> cursorId [
+
+	^ self firstSection document at: 'id'
+]
+
 { #category : #enumerating }
 OpMsgReply >> do: aBlock [
 
 	sections 
 		collect: [ :each | each document ]
 		thenDo: aBlock
+]
+
+{ #category : #accessing }
+OpMsgReply >> documents [
+
+	^ Array streamContents: [ :stream |
+		self do: [ :each | stream nextPut: each ] ]
+]
+
+{ #category : #private }
+OpMsgReply >> firstSection [
+
+	^ sections first
 ]
 
 { #category : #initialization }
@@ -53,8 +72,14 @@ OpMsgReply >> fromStream: aStream [
 
 { #category : #testing }
 OpMsgReply >> isFinished [
-	
-	^ (sections first document at: 'cursor' at: 'id') = 0
+
+	^ (self firstSection document at: 'cursor' at: 'id') = 0
+]
+
+{ #category : #testing }
+OpMsgReply >> isOk [
+
+	^ (sections first document at: 'ok') = 1.0
 ]
 
 { #category : #private }

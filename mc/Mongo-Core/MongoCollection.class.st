@@ -43,7 +43,8 @@ MongoCollection class >> database: aMongoDatabase name: aString [
 ]
 
 { #category : #adding }
-MongoCollection >> add: aDictionary [ 
+MongoCollection >> add: aDictionary [
+
 	self insert: (Array with: aDictionary)
 ]
 
@@ -184,8 +185,11 @@ MongoCollection >> inject: anObject into: aBlock [
 ]
 
 { #category : #operations }
-MongoCollection >> insert: aCollection [
-	database insert: aCollection collection: name
+MongoCollection >> insert: aDocument [
+
+	database
+		insert: aDocument
+		inCollection: self
 ]
 
 { #category : #testing }
@@ -227,7 +231,8 @@ MongoCollection >> printOn: aStream [
 
 { #category : #accessing }
 MongoCollection >> qualifiedName [
-	^database qualifiedName , '.' , name
+
+	^ database qualifiedName , '.' , name
 ]
 
 { #category : #queries }
@@ -322,12 +327,11 @@ MongoCollection >> sizeForQuery: aDictionary [
 
 	| reply |
 	reply := database
-		command:
-			(OrderedIdentityDictionary new
-				at: #count put: name;
-				at: #query put: aDictionary;
-				yourself)
-		flags: QueryOperation flagSlaveOk.
+		command: (OrderedIdentityDictionary new
+			at: #count put: name;
+			at: #query put: aDictionary;
+			yourself)
+		flags: 0.
 
 	^ (reply at: 'n') asInteger	"Why in the world is it a double?"
 ]

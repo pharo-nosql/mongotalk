@@ -227,8 +227,18 @@ MongoDatabase >> hasCollectionNamed: aString [
 ]
 
 { #category : #operations }
-MongoDatabase >> insert: aCollection collection: aString [ 
-	root insert: aCollection collection: name , '.' , aString
+MongoDatabase >> insert: aCollection collection: aString [
+
+	self halt. "Do not use it anymore"
+]
+
+{ #category : #operations }
+MongoDatabase >> insert: aDocument inCollection: aMongoCollection [
+
+	root
+		insert: aDocument
+		inCollection: aMongoCollection
+		inDatabase: self
 ]
 
 { #category : #operations }

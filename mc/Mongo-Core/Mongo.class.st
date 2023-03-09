@@ -159,12 +159,12 @@ Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	| query reply |
 
 	query := self
-		newCommand: anOrderedDictionary 
+		newCommand: anOrderedDictionary
 		database: aDatabase
 		flags: flags.
-	reply := self queryOne: query.
+	reply := self driver executeCommand: query.
 
-	(reply at: 'ok' ifAbsent: [ self error ]) = 1.0 
+	(reply at: 'ok' ifAbsent: [ self error ]) = 1.0
 		ifFalse: [ MongoCommandError signalFor: reply ].
 
 	^ reply
@@ -211,7 +211,10 @@ Mongo >> delete: aDictionary collection: aString [
 { #category : #private }
 Mongo >> driver [
 
-	^ driver ifNil: [ driver := MongoDriver default ]
+	^ driver ifNil: [
+		(driver := MongoDriver newDefault)
+			root: self;
+			yourself ]
 ]
 
 { #category : #'private-communicating' }
@@ -234,13 +237,18 @@ Mongo >> host [
 ]
 
 { #category : #'private-communicating' }
-Mongo >> insert: aCollection collection: aString [
-	(InsertOperation
-		collection: aString
-		id: self nextRequestID
-		stream: stream 
-		objects: aCollection)
-			write
+Mongo >> insert: aCollection collection: aName [
+
+	self halt. "Do not use it anymore"
+]
+
+{ #category : #'private-communicating' }
+Mongo >> insert: aDocument inCollection: aMongoCollection inDatabase: aMongoDatabase [
+
+	self driver
+		insert: aDocument
+		inCollection: aMongoCollection
+		inDatabase: aMongoDatabase
 ]
 
 { #category : #testing }
@@ -341,36 +349,14 @@ Mongo >> printOn: aStream [
 
 { #category : #operations }
 Mongo >> query: aMongoQuery [
-	| results |
-	
-	results := OrderedCollection new.
-	aMongoQuery doBlock ifNil: [
-		aMongoQuery doBlock: [:each | results add: each]].
-	
-	(MongoCursor root: self query: aMongoQuery) execute.
-	
-	(results isNotEmpty and: [ results first includesKey: '$err' ])
-		ifTrue: [ ^ MongoQueryError signalFor: results first ].
-	
-	^ results
+
+	^ self driver query: aMongoQuery
 ]
 
 { #category : #operations }
 Mongo >> queryOne: aMongoQuery [
 
-	aMongoQuery doBlock: [:each | 
-		^ (each includesKey: '$err')
-			ifTrue: [ MongoQueryError signalFor: each ]
-			ifFalse: [ each ] ].
-		
-	aMongoQuery chunkSize: 1.
-	
-	MongoCursor new
-		root: self;
-		query: aMongoQuery;
-		execute.
-		
-	^ nil
+	^ self driver queryOne: aMongoQuery
 ]
 
 { #category : #operations }
@@ -456,7 +442,8 @@ Mongo >> urlString [
 { #category : #accessing }
 Mongo >> useDriver: aDriver [
 
-	driver := aDriver
+	driver := aDriver.
+	aDriver connection: self
 ]
 
 { #category : #operations }

@@ -12,6 +12,9 @@ See:
 Class {
 	#name : #OpMSG,
 	#superclass : #MongoOperation,
+	#classVars : [
+		'FLAGS_SIZE'
+	],
 	#category : #'Mongo-DriverV5-Operations'
 }
 
@@ -79,9 +82,16 @@ OpMSG class >> id: idInteger stream: aStream query: aMongoQuery [
 			mongoQuery: aMongoQuery
 ]
 
+{ #category : #'class initialization' }
+OpMSG class >> initialize [
+
+	FLAGS_SIZE := 4
+]
+
 { #category : #private }
 OpMSG >> fixedHeaderSize [
 
+	self flag: #TODO. "Add explanation of what is the header"
 	^ "28"16
 ]
 

@@ -13,8 +13,10 @@ OpMsgSectionForCommand class >> fromQuery: aMongoQuery [
 { #category : #private }
 OpMsgSectionForCommand >> fromQuery: aQuery [
 
-	"commands are tobe sent 'as is'"
-	document := aQuery where copy
+	"commands are tobe sent 'as is'.
+	 but there need to be in order (and $db can't be the first).
+	So we send it as an OrderedDictionary"
+	document := aQuery where asOrderedDictionary
 		at: '$db' put: aQuery database name;
 		yourself.
 

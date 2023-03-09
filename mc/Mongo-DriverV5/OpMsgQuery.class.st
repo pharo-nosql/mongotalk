@@ -20,7 +20,7 @@ Class {
 { #category : #private }
 OpMsgQuery >> bodySize [
 
-	^ 4 "flags size" + self sectionsSize
+	^ self sectionsSize + FLAGS_SIZE
 ]
 
 { #category : #accessing }

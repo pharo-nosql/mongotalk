@@ -6,7 +6,7 @@ Class {
 		'root',
 		'database'
 	],
-	#category : 'Mongo-Tests-Core-Tests'
+	#category : #'Mongo-Tests-Core-Tests'
 }
 
 { #category : #running }
@@ -21,11 +21,11 @@ MongoTest >> aWriteConcern [
 
 { #category : #running }
 MongoTest >> setUp [
+
 	root := Mongo default.
 	root open.
 	database := root databaseNamed: 'test'.
-	collection := database getCollection: 'testCollection'.
-
+	collection := database getCollection: 'testCollection'
 ]
 
 { #category : #running }
@@ -37,6 +37,7 @@ MongoTest >> tearDown [
 { #category : #tests }
 MongoTest >> testAdd [
 	| data |
+
 	data := Dictionary new at: 'key' put: 'value'; yourself.
 	collection add: data.
 	self assert: (collection includes: data)
@@ -97,6 +98,7 @@ MongoTest >> testCollections [
 { #category : #tests }
 MongoTest >> testCursor [
 	| count data |
+
 	self assert: collection size equals: 0.
 	data := Dictionary new at: 'key' put: 'value'; yourself.
 	4 timesRepeat: [collection add: data].
@@ -116,24 +118,28 @@ MongoTest >> testCursor [
 { #category : #tests }
 MongoTest >> testDatabaseCollectionNames [
 	| names |
+
 	names := database collectionNames.
 	self assert: (names includes: 'testCollection').
-	self deny: (names includes: 'testCollection42').
+	self deny: (names includes: 'testCollection42')
 ]
 
 { #category : #tests }
 MongoTest >> testDatabaseHasCollectionNamed [
+
 	self assert: (database hasCollectionNamed: 'testCollection').
 	self deny: (database hasCollectionNamed: 'testCollection42')
 ]
 
 { #category : #tests }
 MongoTest >> testDatabaseNames [
+
 	self assert: (root databaseNames includes: 'test')
 ]
 
 { #category : #tests }
 MongoTest >> testDatabases [
+
 	self assert: (root databases contains: [:each | each name = 'test'])
 ]
 

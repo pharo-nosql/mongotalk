@@ -1,10 +1,13 @@
+"
+Implementation of OP_MSG for commands.
+
+"
 Class {
 	#name : #OpMsgCommand,
 	#superclass : #OpMSG,
 	#instVars : [
 		'mongoQuery',
 		'flags',
-		'section',
 		'sections'
 	],
 	#category : #'Mongo-DriverV5-Operations'
@@ -13,7 +16,7 @@ Class {
 { #category : #private }
 OpMsgCommand >> bodySize [
 
-	^ 4 "flags size" + self sectionsSize
+	^ self sectionsSize + FLAGS_SIZE
 ]
 
 { #category : #accessing }
