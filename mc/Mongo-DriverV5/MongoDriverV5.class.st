@@ -15,14 +15,27 @@ MongoDriverV5 class >> isDefault [
 	^ true
 ]
 
+{ #category : #accessing }
+MongoDriverV5 >> commandClass [
+
+	^ MongoCursorCommand
+]
+
+{ #category : #accessing }
+MongoDriverV5 >> commandQueryClass [
+
+	^ MongoCursorQuery
+]
+
 { #category : #operations }
 MongoDriverV5 >> executeCommand: command [
 	| result |
 
+	"https://www.mongodb.com/docs/manual/reference/command/"
 	result := OrderedCollection new.
-	command doBlock: [:each | result :=each ].
+	command doBlock: [:each | result := each ].
 
-	(MongoCommand root: self root query: command) execute.
+	(self newCommand: command) execute.
 
 	(result notNil and: [ result includesKey: '$err' ])
 		ifTrue: [ ^ MongoQueryError signalFor: result ].
@@ -31,29 +44,34 @@ MongoDriverV5 >> executeCommand: command [
 ]
 
 { #category : #operations }
-MongoDriverV5 >> insert: aDocument inCollection: aMongoCollection inDatabase: aMongoDatabase [
+MongoDriverV5 >> insert: aDocument collection: aMongoCollection [
 	| command |
 
 	"https://www.mongodb.com/docs/manual/reference/command/insert/#mongodb-dbcommand-dbcmd.insert"
-	command := self newCommand: (OrderedDictionary newFromPairs: {
+	command := self
+		newQueryCommand: (OrderedDictionary newFromPairs: {
 			'insert'. 		aMongoCollection name.
-			'documents'.		aDocument
-		})
-		database: aMongoDatabase
+			'documents'.		aDocument })
+		database: aMongoCollection database
 		flags: 0.
 
 	^ self executeCommand: command
 ]
 
-{ #category : #factory }
-MongoDriverV5 >> newCommand: anOrderedDictionary database: aDatabase flags: flags [
+{ #category : #'private - factory' }
+MongoDriverV5 >> newCommand: aQuery [
 
-	^ MongoQuery new
-		operation: OpMsgCommand;
-		database: aDatabase;
-		where: anOrderedDictionary;
-		flags: flags;
-		yourself
+	^ self commandClass
+		root: self
+		query: aQuery
+]
+
+{ #category : #'private - factory' }
+MongoDriverV5 >> newCommandQuery: aQuery [
+
+	^ self commandQueryClass
+		root: self root
+		query: aQuery
 ]
 
 { #category : #factory }
@@ -64,15 +82,27 @@ MongoDriverV5 >> newQuery [
 		yourself
 ]
 
+{ #category : #factory }
+MongoDriverV5 >> newQueryCommand: anOrderedDictionary database: aDatabase flags: flags [
+
+	^ MongoQuery new
+		operation: OpMsgCommand;
+		database: aDatabase;
+		where: anOrderedDictionary;
+		flags: flags;
+		yourself
+]
+
 { #category : #operations }
 MongoDriverV5 >> query: aMongoQuery [
 	| results |
 
+	"https://www.mongodb.com/docs/manual/reference/command/find/#mongodb-dbcommand-dbcmd.find"
 	results := OrderedCollection new.
 	aMongoQuery doBlock ifNil: [
 		aMongoQuery doBlock: [:each | results add: each]].
 
-	(MongoCursor root: self query: aMongoQuery) execute.
+	(self newCommandQuery: aMongoQuery) execute.
 
 	(results isNotEmpty and: [ results first includesKey: '$err' ])
 		ifTrue: [ ^ MongoQueryError signalFor: results first ].
@@ -90,10 +120,7 @@ MongoDriverV5 >> queryOne: aMongoQuery [
 
 	aMongoQuery chunkSize: 1.
 
-	MongoCursor new
-		root: self;
-		query: aMongoQuery;
-		execute.
+	(self newCommandQuery: aMongoQuery) execute.
 
 	^ nil
 ]

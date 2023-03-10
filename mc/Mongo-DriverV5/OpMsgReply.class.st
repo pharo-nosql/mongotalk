@@ -18,18 +18,17 @@ OpMsgReply class >> fromStream: aStream [
 	^ self new fromStream: aStream
 ]
 
+{ #category : #enumerating }
+OpMsgReply >> batchDo: aBlock [
+
+	sections do: [ :each |
+		each batchDocuments do: aBlock ]
+]
+
 { #category : #accessing }
 OpMsgReply >> cursorId [
 
-	^ self firstSection document at: 'id'
-]
-
-{ #category : #enumerating }
-OpMsgReply >> do: aBlock [
-
-	sections 
-		collect: [ :each | each document ]
-		thenDo: aBlock
+	^ self firstDocument at: 'cursor' at: 'id'
 ]
 
 { #category : #accessing }
@@ -37,6 +36,12 @@ OpMsgReply >> documents [
 
 	^ Array streamContents: [ :stream |
 		self do: [ :each | stream nextPut: each ] ]
+]
+
+{ #category : #private }
+OpMsgReply >> firstDocument [
+
+	^ self firstSection document
 ]
 
 { #category : #private }
@@ -71,15 +76,21 @@ OpMsgReply >> fromStream: aStream [
 ]
 
 { #category : #testing }
+OpMsgReply >> isBatch [
+
+	^ self firstDocument includesKey: #cursor
+]
+
+{ #category : #testing }
 OpMsgReply >> isFinished [
 
-	^ (self firstSection document at: 'cursor' at: 'id') = 0
+	^ (self firstDocument at: 'cursor' at: 'id') = 0
 ]
 
 { #category : #testing }
 OpMsgReply >> isOk [
 
-	^ (sections first document at: 'ok') = 1.0
+	^ (self firstDocument at: 'ok') = 1.0
 ]
 
 { #category : #private }

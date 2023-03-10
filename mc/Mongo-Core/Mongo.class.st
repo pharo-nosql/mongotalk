@@ -159,7 +159,7 @@ Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	| query reply |
 
 	query := self
-		newCommand: anOrderedDictionary
+		newQueryCommand: anOrderedDictionary
 		database: aDatabase
 		flags: flags.
 	reply := self driver executeCommand: query.
@@ -168,19 +168,6 @@ Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 		ifFalse: [ MongoCommandError signalFor: reply ].
 
 	^ reply
-]
-
-{ #category : #'private-communicating' }
-Mongo >> cursorQuery: aQuery [
-	| id |
-	id := self nextRequestID.
-	(aQuery operation 
-		id: id
-		stream: stream
-		query: aQuery)
-			flags: aQuery flags;
-			write.
-	^id
 ]
 
 { #category : #operations }
@@ -198,12 +185,12 @@ Mongo >> databases [
 	^ self databaseNames collect: [ :each | self databaseNamed: each ]
 ]
 
-{ #category : #'private-communicating' }
+{ #category : #'private - communicating' }
 Mongo >> delete: aDictionary collection: aString [
 	(DeleteOperation
-		collection: aString 
-		id: self nextRequestID 
-		stream: stream 
+		collection: aString
+		id: self nextRequestID
+		stream: stream
 		query: aDictionary)
 			write
 ]
@@ -217,38 +204,17 @@ Mongo >> driver [
 			yourself ]
 ]
 
-{ #category : #'private-communicating' }
-Mongo >> getMore: idInteger collection: aString chunkSize: countInteger [
-	| id |
-	id := self nextRequestID.
-	(GetMoreOperation
-		collection: aString 
-		id: id 
-		stream: stream 
-		cursorId: idInteger 
-		returnCount: countInteger)
-			write.
-	^id
-]
-
 { #category : #accessing }
 Mongo >> host [
 	^host
 ]
 
-{ #category : #'private-communicating' }
-Mongo >> insert: aCollection collection: aName [
-
-	self halt. "Do not use it anymore"
-]
-
-{ #category : #'private-communicating' }
-Mongo >> insert: aDocument inCollection: aMongoCollection inDatabase: aMongoDatabase [
+{ #category : #'private - communicating' }
+Mongo >> insert: aDocument collection: aMongoCollection [
 
 	self driver
 		insert: aDocument
-		inCollection: aMongoCollection
-		inDatabase: aMongoDatabase
+		collection: aMongoCollection
 ]
 
 { #category : #testing }
@@ -288,18 +254,18 @@ Mongo >> majorVersion [
 ]
 
 { #category : #factory }
-Mongo >> newCommand: anOrderedDictionary  database: aDatabase flags: flags [
-	
-	^ self driver 
-		newCommand: anOrderedDictionary 
-		database: aDatabase
-		flags: flags
-]
-
-{ #category : #factory }
 Mongo >> newQuery [
 
 	^ self driver newQuery
+]
+
+{ #category : #factory }
+Mongo >> newQueryCommand: anOrderedDictionary  database: aDatabase flags: flags [
+
+	^ self driver
+		newQueryCommand: anOrderedDictionary
+		database: aDatabase
+		flags: flags
 ]
 
 { #category : #private }
@@ -417,18 +383,18 @@ Mongo >> stream: aStream [
 	authCache := nil
 ]
 
-{ #category : #'private-communicating' }
+{ #category : #'private - communicating' }
 Mongo >> update: origDictionary with: newDictionary collection: aString [
 	^self update: origDictionary with: newDictionary collection: aString flags: 0
 ]
 
-{ #category : #'private-communicating' }
+{ #category : #'private - communicating' }
 Mongo >> update: origDictionary with: newDictionary collection: aString flags: aFlag [
 	(UpdateOperation
 		collection: aString
 		id: self nextRequestID
 		stream: stream
-		originalObject: origDictionary 
+		originalObject: origDictionary
 		newObject: newDictionary)
 			flags: aFlag;
 			write

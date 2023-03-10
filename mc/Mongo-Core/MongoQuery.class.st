@@ -162,7 +162,8 @@ MongoQuery >> order: anArrayOfAssociation [
 
 { #category : #'perform query' }
 MongoQuery >> perform [
-	^collection performQuery: self.
+
+	^ collection performQuery: self
 ]
 
 { #category : #accessing }

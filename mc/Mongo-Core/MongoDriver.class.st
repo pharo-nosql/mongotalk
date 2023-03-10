@@ -48,19 +48,40 @@ MongoDriver class >> obtainDefaultDriver [
 			self allSubclasses first ]
 ]
 
-{ #category : #'as yet unclassified' }
-MongoDriver >> executeCommand: command [ 
+{ #category : #accessing }
+MongoDriver >> commandClass [
+
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+MongoDriver >> commandQueryClass [
+
 	^ self subclassResponsibility
 ]
 
 { #category : #operations }
-MongoDriver >> insert: aDocument inCollection: aMongoCollection inDatabase: aMongoDatabase [
+MongoDriver >> cursorQuery: aQuery [
+	| id |
 
-	self subclassResponsibility
+	id := self nextRequestID.
+	(aQuery operation
+		id: id
+			stream: self stream
+			query: aQuery)
+		flags: aQuery flags;
+		write.
+
+	^ id
 ]
 
-{ #category : #factory }
-MongoDriver >> newCommand: anOrderedDictionary database: aDatabase flags: flags [
+{ #category : #operations }
+MongoDriver >> executeCommand: command [
+	^ self subclassResponsibility
+]
+
+{ #category : #operations }
+MongoDriver >> insert: aDocument collection: aMongoCollection [
 
 	self subclassResponsibility
 ]
@@ -71,8 +92,20 @@ MongoDriver >> newQuery [
 	^ MongoQuery new
 ]
 
-{ #category : #'as yet unclassified' }
-MongoDriver >> query: aMongoQuery [ 
+{ #category : #factory }
+MongoDriver >> newQueryCommand: anOrderedDictionary database: aDatabase flags: flags [
+
+	self subclassResponsibility
+]
+
+{ #category : #private }
+MongoDriver >> nextRequestID [
+
+	^ self root nextRequestID
+]
+
+{ #category : #operations }
+MongoDriver >> query: aMongoQuery [
 	^ self subclassResponsibility
 ]
 
@@ -86,4 +119,10 @@ MongoDriver >> root [
 MongoDriver >> root: aMongo [
 
 	root := aMongo
+]
+
+{ #category : #private }
+MongoDriver >> stream [
+
+	^ self root stream
 ]

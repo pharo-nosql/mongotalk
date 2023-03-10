@@ -30,8 +30,11 @@ MongoTest >> setUp [
 
 { #category : #running }
 MongoTest >> tearDown [
+
 	database ifNotNil: [ database collections do: #drop ].
-	root closeIfOpen
+	root closeIfOpen.
+
+	super tearDown
 ]
 
 { #category : #tests }
@@ -97,21 +100,25 @@ MongoTest >> testCollections [
 
 { #category : #tests }
 MongoTest >> testCursor [
-	| count data |
+	| count data query commandQuery |
 
 	self assert: collection size equals: 0.
 	data := Dictionary new at: 'key' put: 'value'; yourself.
 	4 timesRepeat: [collection add: data].
 	self assert: collection size equals: 4.
 	count := 0.
-	(MongoCursor root: root query: (
-		MongoQuery new
-			database: database;
-			collection: collection;
-			where: data;
-			doBlock: [:each | count := count + 1 ];
-			chunkSize: 2;
-			yourself)) execute.
+
+	query := root driver newQuery
+		database: database;
+		collection: collection;
+		where: data;
+		doBlock: [:each | count := count + 1 ];
+		chunkSize: 2;
+		yourself.
+
+	commandQuery := root driver newCommandQuery: query.
+	commandQuery execute.
+
 	self assert: count equals: 4
 ]
 
@@ -158,10 +165,13 @@ MongoTest >> testDelete [
 { #category : #tests }
 MongoTest >> testDo [
 	| count |
+
 	collection add: (Dictionary new at: 'key' put: 'value'; yourself).
 	collection add: (Dictionary new at: 'key' put: 'value'; yourself).
 	count := 0.
-	collection do: [:each | self assert: (each at: 'key') = 'value'. count := count + 1].
+	collection do: [ :each |
+		self assert: (each at: 'key') equals: 'value'.
+		count := count + 1 ].
 	self assert: count equals: 2
 ]
 

@@ -46,6 +46,16 @@ OpMsgSection class >> sectionClass: type [
 ]
 
 { #category : #accessing }
+OpMsgSection >> batchDocuments [
+	"used to traverse batched answers"
+
+	^ self document
+		at: #cursor
+		ifPresent: [ :cursor | cursor at: #firstBatch ifAbsent: [ cursor at: #nextBatch ] ]
+		ifAbsent: [ { self document } ]
+]
+
+{ #category : #accessing }
 OpMsgSection >> bytes [
 
 	^ bytes

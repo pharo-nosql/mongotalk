@@ -24,7 +24,7 @@ OpMsgSectionForQuery >> fromQuery: aQuery [
 		yourself.
 
 	aQuery limit > 0 ifTrue: [  document at: 'limit' put: aQuery limit ].
-	aQuery chunkSize > 0 ifTrue: [ document at: 'limit' put: aQuery chunkSize ].
+	aQuery chunkSize > 0 ifTrue: [ document at: 'batchSize' put: aQuery chunkSize ].
 	aQuery order ifNotNil: [ document at: 'sort' put: aQuery order ].
 
 	bytes := BSON writer

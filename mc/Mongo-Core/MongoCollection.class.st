@@ -189,7 +189,7 @@ MongoCollection >> insert: aDocument [
 
 	database
 		insert: aDocument
-		inCollection: self
+		collection: self
 ]
 
 { #category : #testing }

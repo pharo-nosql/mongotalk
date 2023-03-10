@@ -7,6 +7,18 @@ Class {
 	#category : #'Mongo-DriverLegacy-Base'
 }
 
+{ #category : #accessing }
+MongoLegacyDriver >> commandClass [
+
+	^ self commandQueryClass
+]
+
+{ #category : #accessing }
+MongoLegacyDriver >> commandQueryClass [
+
+	^ MongoCursorLegacy
+]
+
 { #category : #operations }
 MongoLegacyDriver >> executeCommand: query [
 
@@ -14,27 +26,14 @@ MongoLegacyDriver >> executeCommand: query [
 ]
 
 { #category : #operations }
-MongoLegacyDriver >> insert: aDocument inCollection: aMongoCollection inDatabase: aMongoDatabase [
-
+MongoLegacyDriver >> insert: aDocument collection: aMongoCollection [
 
 	(InsertOperation
 		collection: aMongoCollection qualifiedName
-			id: self root nextRequestID
-			stream: self root stream
+			id: self nextRequestID
+			stream: self stream
 			objects: aDocument)
 		write
-]
-
-{ #category : #factory }
-MongoLegacyDriver >> newCommand: anOrderedDictionary database: aDatabase flags: flags [
-
-	^ MongoQuery new
-		operation: CommandOperation;
-		database: aDatabase;
-		collection: MongoCollection cmdVirtualCollection;
-		where: anOrderedDictionary;
-		flags: flags;
-		yourself
 ]
 
 { #category : #factory }
@@ -42,6 +41,18 @@ MongoLegacyDriver >> newQuery [
 
 	^ super newQuery
 		operation: QueryOperation;
+		yourself
+]
+
+{ #category : #factory }
+MongoLegacyDriver >> newQueryCommand: anOrderedDictionary database: aDatabase flags: flags [
+
+	^ MongoQuery new
+		operation: CommandOperation;
+		database: aDatabase;
+		collection: MongoCollection cmdVirtualCollection;
+		where: anOrderedDictionary;
+		flags: flags;
 		yourself
 ]
 
@@ -53,7 +64,10 @@ MongoLegacyDriver >> query: aMongoQuery [
 	aMongoQuery doBlock ifNil: [
 		aMongoQuery doBlock: [:each | results add: each]].
 
-	(MongoCursor root: self query: aMongoQuery) execute.
+	(self commandQueryClass
+		root: self
+		query: aMongoQuery)
+		execute.
 
 	(results isNotEmpty and: [ results first includesKey: '$err' ])
 		ifTrue: [ ^ MongoQueryError signalFor: results first ].
@@ -71,7 +85,7 @@ MongoLegacyDriver >> queryOne: aMongoQuery [
 
 	aMongoQuery chunkSize: 1.
 
-	MongoCursor new
+	self commandQueryClass new
 		root: self;
 		query: aMongoQuery;
 		execute.

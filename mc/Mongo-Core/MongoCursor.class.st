@@ -30,39 +30,25 @@ MongoCursor class >> root: aMongo query: aMongoQuery [
 		query: aMongoQuery.
 ]
 
+{ #category : #private }
+MongoCursor >> cursorQuery: aQuery [
+	| id |
+
+	id := self root nextRequestID.
+	(aQuery operation
+		id: id
+			stream: self root stream
+			query: aQuery)
+		flags: aQuery flags;
+		write.
+
+	^ id
+]
+
 { #category : #executing }
 MongoCursor >> execute [
-	| limit reply numberReturned requestId |
-	
-	numberReturned := 0.
-	limit := query limit.
-	limit = 0 
-		ifTrue: [ limit := Float infinity ].
-	limit < query chunkSize 
-		ifTrue: [ query chunkSize: limit ].
-	
-	reply := nil.
-	[
-		requestId := reply
-			ifNotNil:[ 
-				root
-					getMore: reply cursorId
-					collection: query collection qualifiedName
-					chunkSize: query chunkSize ]
-			ifNil: [ 
-				root cursorQuery: query ].
 
-		reply := OpMsgReply fromStream: root stream.
-		reply responseTo = requestId 
-			ifFalse: [ ^ MongoWireProtocolError signal: 'Unexpected responseTo in response' ].
-		
-		reply do: [:each |
-			numberReturned < limit ifTrue: [
-				query doBlock value: each.
-				numberReturned := numberReturned + 1 ] ].
-		reply isFinished or: [ numberReturned >= limit ] 
-	]
-	whileFalse
+	self subclassResponsibility
 ]
 
 { #category : #accessing }
