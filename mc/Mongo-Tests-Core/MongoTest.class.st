@@ -314,13 +314,15 @@ MongoTest >> testOrderBy [
 	collection add: (Dictionary new at: 'key' put: 'b'; yourself).
 	collection add: (Dictionary new at: 'key' put: 'a'; yourself).
 	collection add: (Dictionary new at: 'key' put: 'b'; yourself).
-	query := MongoQuery new
+
+	query := root driver newQuery
 		database: database;
 		collection: collection;
 		where: Dictionary new;
 		order: { 'key' -> Mongo ascending} asDictionary.
 	results := query perform.
-	self assert: (results first at: 'key') equals: 'a'.
+
+	self assert: (results first at: 'key') equals: 'a'
 ]
 
 { #category : #tests }
@@ -395,14 +397,17 @@ MongoTest >> testSelect [
 { #category : #tests }
 MongoTest >> testSelectWithLimit [
 	| selected query |
+
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
 	collection add: (Dictionary new at: 'key2' put: 'value2'; yourself).
 	collection add: (Dictionary new at: 'key3' put: 'value3'; yourself).
-	query := MongoQuery new
+
+	query := root driver newQuery
 		database: database;
 		collection: collection;
 		limit: 2.
 	selected := query perform.
+
 	self assert: selected size equals: 2
 ]
 
