@@ -28,6 +28,23 @@ MongoDriverV5 >> commandQueryClass [
 ]
 
 { #category : #operations }
+MongoDriverV5 >> delete: aDocument collection: aMongoCollection [
+	| command |
+
+	"https://www.mongodb.com/docs/manual/reference/command/delete"
+	command := self
+		newQueryCommand: (OrderedDictionary newFromPairs: {
+			'delete'. 		aMongoCollection name.
+			'deletes'.		{ OrderedDictionary newFromPairs: {
+				'q'. 				aDocument.
+				'limit'. 			1 } } })
+		database: aMongoCollection database
+		flags: 0.
+
+	^ self executeCommand: command
+]
+
+{ #category : #operations }
 MongoDriverV5 >> executeCommand: command [
 	| result |
 
@@ -47,7 +64,7 @@ MongoDriverV5 >> executeCommand: command [
 MongoDriverV5 >> insert: aDocument collection: aMongoCollection [
 	| command |
 
-	"https://www.mongodb.com/docs/manual/reference/command/insert/#mongodb-dbcommand-dbcmd.insert"
+	"https://www.mongodb.com/docs/manual/reference/command/insert"
 	command := self
 		newQueryCommand: (OrderedDictionary newFromPairs: {
 			'insert'. 		aMongoCollection name.

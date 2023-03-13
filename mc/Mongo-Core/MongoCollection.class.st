@@ -136,8 +136,11 @@ MongoCollection >> database [
 ]
 
 { #category : #operations }
-MongoCollection >> delete: aDictionary [ 
-	database delete: aDictionary collection: name
+MongoCollection >> delete: aDictionary [
+
+	database
+		delete: aDictionary
+		collection: self
 ]
 
 { #category : #enumerating }
@@ -252,8 +255,11 @@ MongoCollection >> queryOne: aBlock [
 ]
 
 { #category : #removing }
-MongoCollection >> remove: aDictionary [ 
-	database delete: aDictionary collection: name
+MongoCollection >> remove: aDictionary [
+
+	database
+		delete: aDictionary
+		collection: self
 ]
 
 { #category : #removing }

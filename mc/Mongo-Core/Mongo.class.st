@@ -186,13 +186,11 @@ Mongo >> databases [
 ]
 
 { #category : #'private - communicating' }
-Mongo >> delete: aDictionary collection: aString [
-	(DeleteOperation
-		collection: aString
-		id: self nextRequestID
-		stream: stream
-		query: aDictionary)
-			write
+Mongo >> delete: aDictionary collection: aCollection [
+
+	self driver
+		delete: aDictionary
+		collection: aCollection
 ]
 
 { #category : #private }

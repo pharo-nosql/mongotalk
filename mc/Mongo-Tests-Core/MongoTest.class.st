@@ -153,6 +153,7 @@ MongoTest >> testDatabases [
 { #category : #tests }
 MongoTest >> testDelete [
 	| results data |
+
 	data := (Dictionary new)
 				at: 'key' put: 'value';
 				yourself.

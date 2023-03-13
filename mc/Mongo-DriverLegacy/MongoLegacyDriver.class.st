@@ -20,6 +20,17 @@ MongoLegacyDriver >> commandQueryClass [
 ]
 
 { #category : #operations }
+MongoLegacyDriver >> delete: aDocument collection: aMongoCollection [
+
+	(DeleteOperation
+		collection: aMongoCollection qualifiedName
+			id: self nextRequestID
+			stream: self stream
+			query: aDocument)
+		write
+]
+
+{ #category : #operations }
 MongoLegacyDriver >> executeCommand: query [
 
 	^ self queryOne: query

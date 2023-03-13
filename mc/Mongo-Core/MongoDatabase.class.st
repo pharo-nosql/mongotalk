@@ -193,8 +193,11 @@ MongoDatabase >> commandUpdate: origDictionary with: newDictionary collection: c
 ]
 
 { #category : #operations }
-MongoDatabase >> delete: aDictionary collection: aString [ 
-	root delete: aDictionary collection: name , '.' , aString
+MongoDatabase >> delete: aDictionary collection: aMongoCollection [
+
+	root
+		delete: aDictionary
+		collection: aMongoCollection
 ]
 
 { #category : #actions }

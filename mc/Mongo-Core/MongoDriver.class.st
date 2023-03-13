@@ -76,6 +76,12 @@ MongoDriver >> cursorQuery: aQuery [
 ]
 
 { #category : #operations }
+MongoDriver >> delete: aDocument collection: aMongoCollection [
+
+	self subclassResponsibility
+]
+
+{ #category : #operations }
 MongoDriver >> executeCommand: command [
 	^ self subclassResponsibility
 ]
