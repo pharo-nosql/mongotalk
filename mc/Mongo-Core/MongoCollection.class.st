@@ -127,7 +127,11 @@ MongoCollection >> commandUpdate: origDictionary with: newDictionary writeConcer
 	"Update using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/update/"
 
-	^database commandUpdate: origDictionary with: newDictionary collection: name writeConcern: aConcern
+	^ database
+		commandUpdate: origDictionary
+		with: newDictionary
+		collection: name
+		writeConcern: aConcern
 ]
 
 { #category : #accessing }
@@ -241,9 +245,10 @@ MongoCollection >> qualifiedName [
 { #category : #queries }
 MongoCollection >> query: aBlock [
 	| query |
+
 	query := self newQuery.
 	aBlock value: query.
-	^self performQuery: query
+	 ^self performQuery: query
 ]
 
 { #category : #queries }
@@ -344,12 +349,22 @@ MongoCollection >> sizeForQuery: aDictionary [
 
 { #category : #operations }
 MongoCollection >> update: origDictionary with: newDictionary [
-	database update: origDictionary with: newDictionary collection: name
+
+	database
+		update: origDictionary
+		with: newDictionary
+		collection: self
 ]
 
 { #category : #operations }
-MongoCollection >> update: origDictionary with: newDictionary flags: aFlag [
-	database update: origDictionary with: newDictionary collection: name flags: aFlag
+MongoCollection >> update: origDictionary with: newDictionary upsert: upsertBoolean multi: multiBoolean [
+
+	database
+		update: origDictionary
+		with: newDictionary
+		collection: self
+		upsert: upsertBoolean
+		multi: multiBoolean
 ]
 
 { #category : #operations }

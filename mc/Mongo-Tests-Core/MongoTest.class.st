@@ -155,11 +155,12 @@ MongoTest >> testDelete [
 	| results data |
 
 	data := (Dictionary new)
-				at: 'key' put: 'value';
-				yourself.
+		at: 'key' put: 'value';
+		yourself.
 	collection add: data.
 	collection delete: data.
 	results := collection query: [ :query | ].
+
 	self assert: results isEmpty
 ]
 
@@ -431,18 +432,19 @@ MongoTest >> testSelectWithLimitAndNumberToSkip [
 ]
 
 { #category : #tests }
-MongoTest >> testUpdateWithFlags [
+MongoTest >> testUpdateWithUpsert [
 	| result old new |
+
 	old := { 'key' -> 'value' } asDictionary.
 	new := { 'key' -> 'new value' } asDictionary.
 
 	"Check that a normal update will not create anything"
 	collection update: old with: new.
-	result := collection query: [:query | ].
+	result := collection query: [ :query | ].
 	self assert: result size equals: 0.
 
 	"Check that an upsert will create the record"
-	collection update: old with: new flags: UpdateOperation flagUpsert.
+	collection update: old with: new upsert: true multi: false.
 	result := collection query: [:query | ].
 	self assert: result size equals: 1.
 	self assert: (result first at: 'key') equals: 'new value'.
@@ -454,10 +456,10 @@ MongoTest >> testUpdateWithFlags [
 	self assert: (result first at: 'key') equals: 'value'.
 
 	"And forward again"
-	collection update: old with: new flags: UpdateOperation flagUpsert.
+	collection update: old with: new  upsert: true multi: false.
 	result := collection query: [:query | ].
 	self assert: result size equals: 1.
-	self assert: (result first at: 'key') equals: 'new value'.
+	self assert: (result first at: 'key') equals: 'new value'
 ]
 
 { #category : #tests }

@@ -37,7 +37,7 @@ MongoDriverV5 >> delete: aDocument collection: aMongoCollection [
 			'delete'. 		aMongoCollection name.
 			'deletes'.		{ OrderedDictionary newFromPairs: {
 				'q'. 				aDocument.
-				'limit'. 			1 } } })
+				'limit'. 			0 } } })
 		database: aMongoCollection database
 		flags: 0.
 
@@ -114,7 +114,7 @@ MongoDriverV5 >> newQueryCommand: anOrderedDictionary database: aDatabase flags:
 MongoDriverV5 >> query: aMongoQuery [
 	| results |
 
-	"https://www.mongodb.com/docs/manual/reference/command/find/#mongodb-dbcommand-dbcmd.find"
+	"https://www.mongodb.com/docs/manual/reference/command/find"
 	results := OrderedCollection new.
 	aMongoQuery doBlock ifNil: [
 		aMongoQuery doBlock: [:each | results add: each]].
@@ -140,4 +140,23 @@ MongoDriverV5 >> queryOne: aMongoQuery [
 	(self newCommandQuery: aMongoQuery) execute.
 
 	^ nil
+]
+
+{ #category : #operations }
+MongoDriverV5 >> update: aDocument with: newDocument collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
+	| command |
+
+	"https://www.mongodb.com/docs/manual/reference/command/delete"
+	command := self
+		newQueryCommand: (OrderedDictionary newFromPairs: {
+			'update'. 		aMongoCollection name.
+			'updates'.		{ OrderedDictionary newFromPairs: {
+				'q'. 				aDocument.
+				'u'. 				newDocument.
+				'upsert'.			upsertBoolean.
+				'multi'.			multiBoolean } } })
+		database: aMongoCollection database
+		flags: 0.
+
+	^ self executeCommand: command
 ]

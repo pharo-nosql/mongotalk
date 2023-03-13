@@ -50,6 +50,7 @@ MongoQuery >> database [
 
 { #category : #accessing }
 MongoQuery >> database: aMongoDatabase [
+
 	database := aMongoDatabase
 ]
 

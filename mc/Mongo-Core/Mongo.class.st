@@ -151,7 +151,11 @@ Mongo >> closeIfOpen [
 
 { #category : #operations }
 Mongo >> command: anOrderedDictionary database: aDatabase [
-	^ self command: anOrderedDictionary database: aDatabase flags: 0
+
+	^ self
+		command: anOrderedDictionary
+		database: aDatabase
+		flags: 0
 ]
 
 { #category : #operations }
@@ -382,20 +386,25 @@ Mongo >> stream: aStream [
 ]
 
 { #category : #'private - communicating' }
-Mongo >> update: origDictionary with: newDictionary collection: aString [
-	^self update: origDictionary with: newDictionary collection: aString flags: 0
+Mongo >> update: origDictionary with: newDictionary collection: aMongoCollection [
+
+	^ self
+		update: origDictionary
+		with: newDictionary
+		collection: aMongoCollection
+		upsert: false
+		multi: false
 ]
 
 { #category : #'private - communicating' }
-Mongo >> update: origDictionary with: newDictionary collection: aString flags: aFlag [
-	(UpdateOperation
-		collection: aString
-		id: self nextRequestID
-		stream: stream
-		originalObject: origDictionary
-		newObject: newDictionary)
-			flags: aFlag;
-			write
+Mongo >> update: origDictionary with: newDictionary collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
+
+	self driver
+		update: origDictionary
+		with: newDictionary
+		collection: aMongoCollection
+		upsert: upsertBoolean
+		multi: multiBoolean
 ]
 
 { #category : #accessing }

@@ -364,13 +364,23 @@ MongoDatabase >> setRoot: aMongo name: aString [
 ]
 
 { #category : #operations }
-MongoDatabase >> update: origDictionary with: newDictionary collection: aString [ 
-	root update: origDictionary with: newDictionary collection: name , '.' , aString
+MongoDatabase >> update: origDictionary with: newDictionary collection: aMongoCollection [
+
+	root
+		update: origDictionary
+		with: newDictionary
+		collection: aMongoCollection
 ]
 
 { #category : #operations }
-MongoDatabase >> update: origDictionary with: newDictionary collection: aString flags: aFlag [
-	root update: origDictionary with: newDictionary collection: name , '.' , aString flags: aFlag
+MongoDatabase >> update: origDictionary with: newDictionary collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
+
+	root
+		update: origDictionary
+		with: newDictionary
+		collection: aMongoCollection
+		upsert: upsertBoolean
+		multi: multiBoolean
 ]
 
 { #category : #operations }

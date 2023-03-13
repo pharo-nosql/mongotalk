@@ -132,3 +132,9 @@ MongoDriver >> stream [
 
 	^ self root stream
 ]
+
+{ #category : #operations }
+MongoDriver >> update: origDictionary with: newDictionary collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
+
+	self subclassResponsibility
+]

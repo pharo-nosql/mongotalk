@@ -103,3 +103,20 @@ MongoLegacyDriver >> queryOne: aMongoQuery [
 
 	^ nil
 ]
+
+{ #category : #operations }
+MongoLegacyDriver >> update: aDocument with: newDocument collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
+	| flags |
+
+	upsertBoolean ifTrue: [ flags := UpdateOperation flagUpsert ].
+	multiBoolean ifTrue: [ flags := UpdateOperation flagMultiUpdate ].
+
+	(UpdateOperation
+		collection: aMongoCollection qualifiedName
+			id: self nextRequestID
+			stream: self stream
+			originalObject: aDocument
+			newObject: newDocument)
+		flags: flags;
+		write
+]
