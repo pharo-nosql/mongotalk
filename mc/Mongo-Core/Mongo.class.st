@@ -174,6 +174,35 @@ Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	^ reply
 ]
 
+{ #category : #'operations - writeconcern' }
+Mongo >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
+
+	^ self driver
+		commandDelete: aDocument
+		limit: aLimit
+		collection: collectionName
+		writeConcern: aConcern
+]
+
+{ #category : #'operations - writeconcern' }
+Mongo >> commandInsert: newDictionary collection: aMongoCollection writeConcern: aConcern [
+
+	^ self driver
+		commandInsert: newDictionary
+		collection: aMongoCollection
+		writeConcern: aConcern
+]
+
+{ #category : #'operations - writeconcern' }
+Mongo >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
+
+	^ self driver
+		commandUpdate: aDocument
+		with: newDocument
+		collection: aMongoCollection
+		writeConcern: aConcern
+]
+
 { #category : #operations }
 Mongo >> databaseNamed: aString [
 	^MongoDatabase root: self name: aString

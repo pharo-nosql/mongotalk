@@ -54,10 +54,10 @@ MongoCursorQuery >> execute [
 MongoCursorQuery >> fetchMoreCursorId: cursorId chunkSize: count collection: aMongoCollection [
 
 	^ self cursorQuery: (self driver
-		newQueryCommand: (OrderedDictionary newFromPairs: {
-			'getMore'. 		cursorId.
-			'collection'. 	aMongoCollection name.
-			'batchSize'. 	count })
+		newQueryCommandWith: [ :spec | spec
+			at: 'getMore' put: cursorId;
+			at: 'collection' put: aMongoCollection name;
+			at: 'batchSize' put: count ]
 		database: aMongoCollection database
 		flags: 0)
 ]

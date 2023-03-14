@@ -54,10 +54,84 @@ MongoDriver >> commandClass [
 	^ self subclassResponsibility
 ]
 
+{ #category : #operations }
+MongoDriver >> commandDelete: aDocument limit: aLimit collection: aMongoCollection writeConcern: aConcern [
+	"Delete using Mongo command. Answer the output of the command.
+	See more on https://docs.mongodb.com/manual/reference/command/delete/"
+	| commandSpec command |
+
+	commandSpec := OrderedDictionary new
+		at: 'delete' put: aMongoCollection name;
+		at: 'deletes' put: {
+			OrderedDictionary new
+				at: 'q' put: aDocument;
+				at: 'limit' put: aLimit;
+				yourself
+			};
+		yourself.
+
+	aConcern ifNotNil: [
+		commandSpec at: 'writeConcern' put: aConcern asConcernForCommand].
+
+	command := self
+		newQueryCommand: commandSpec
+		database: aMongoCollection database
+		flags: 0.
+
+	^ self executeCommandAndVerify: command
+]
+
+{ #category : #operations }
+MongoDriver >> commandInsert: aDocument collection: aMongoCollection writeConcern: aConcern [
+	"Insert using Mongo command. Answer the output of the command.
+	See more on https://docs.mongodb.com/manual/reference/command/insert/"
+	| command commandSpec |
+
+	commandSpec := OrderedDictionary new
+		at: 'insert' put: aMongoCollection name;
+		at: 'documents' put: { aDocument };
+		yourself.
+
+	aConcern ifNotNil: [
+		commandSpec at: 'writeConcern' put: aConcern asConcernForCommand ].
+
+	command := self
+		newQueryCommand: commandSpec
+		database: aMongoCollection database
+		flags: 0.
+
+	^ self executeCommandAndVerify: command
+]
+
 { #category : #accessing }
 MongoDriver >> commandQueryClass [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #operations }
+MongoDriver >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
+	"Update using Mongo command. Answer the output of the command.
+	See more on https://docs.mongodb.com/manual/reference/command/update/"
+	| commandSpec command |
+
+	commandSpec := OrderedDictionary new
+		at: 'update' put: aMongoCollection name;
+		at: 'updates' put: { OrderedDictionary new
+			at: 'q' put: aDocument;
+			at: 'u'put: newDocument;
+			yourself };
+		yourself.
+
+	aConcern ifNotNil: [
+		commandSpec at: 'writeConcern' put: aConcern asConcernForCommand ].
+
+	command := self
+		newQueryCommand: commandSpec
+		database: aMongoCollection database
+		flags: 0.
+
+	^ self executeCommandAndVerify: command
 ]
 
 { #category : #operations }
@@ -86,6 +160,19 @@ MongoDriver >> executeCommand: command [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'private - operations' }
+MongoDriver >> executeCommandAndVerify: aCommand [
+	| result |
+
+	result := self executeCommand: aCommand.
+	result at: 'writeConcernError' ifPresent: [:err |
+		MongoCommandError signalFor: err].
+	result at: 'writeErrors' ifPresent: [:errors |
+		MongoCommandError signalFor: errors last].
+
+	^ result
+]
+
 { #category : #operations }
 MongoDriver >> insert: aDocument collection: aMongoCollection [
 
@@ -102,6 +189,19 @@ MongoDriver >> newQuery [
 MongoDriver >> newQueryCommand: anOrderedDictionary database: aDatabase flags: flags [
 
 	self subclassResponsibility
+]
+
+{ #category : #factory }
+MongoDriver >> newQueryCommandWith: aBlock database: aDatabase flags: flags [
+	| spec |
+
+	spec := OrderedDictionary new.
+	aBlock value: spec.
+
+	^ self
+		newQueryCommand: spec
+		database: aDatabase
+		flags: flags
 ]
 
 { #category : #private }
@@ -134,7 +234,7 @@ MongoDriver >> stream [
 ]
 
 { #category : #operations }
-MongoDriver >> update: origDictionary with: newDictionary collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
+MongoDriver >> update: aDocument with: newDocument collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
 
 	self subclassResponsibility
 ]

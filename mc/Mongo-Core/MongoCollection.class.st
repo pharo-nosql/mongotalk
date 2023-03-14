@@ -54,11 +54,15 @@ MongoCollection >> addAll: aCollection [
 ]
 
 { #category : #operations }
-MongoCollection >> commandDelete: origDictionary limit: aLimit writeConcern: aConcern [
+MongoCollection >> commandDelete: aDocument limit: aLimit writeConcern: aConcern [
 	"Delete using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/delete/"
 
-	^database commandDelete: origDictionary limit: aLimit collection: name writeConcern: aConcern
+	^ database
+		commandDelete: aDocument
+		limit: aLimit
+		collection: self
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
@@ -111,26 +115,32 @@ MongoCollection >> commandInsert: newDictionary writeConcern: aConcern [
 	"Insert using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/insert/"
 
-	^database commandInsert: newDictionary collection: name writeConcern: aConcern
+	^ database
+		commandInsert: newDictionary
+		collection: self
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
-MongoCollection >> commandUpdate: origDictionary with: newDictionary [
-	"Update using Mongo command. Answer the output of the command.
-	See more on https://docs.mongodb.com/manual/reference/command/update/"
-
-	^database commandUpdate: origDictionary with: newDictionary collection: name
-]
-
-{ #category : #operations }
-MongoCollection >> commandUpdate: origDictionary with: newDictionary writeConcern: aConcern [
+MongoCollection >> commandUpdate: aDocument with: newDocument [
 	"Update using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/update/"
 
 	^ database
-		commandUpdate: origDictionary
-		with: newDictionary
-		collection: name
+		commandUpdate: aDocument
+		with: newDocument
+		collection: self
+]
+
+{ #category : #operations }
+MongoCollection >> commandUpdate: aDocument with: newDocument writeConcern: aConcern [
+	"Update using Mongo command. Answer the output of the command.
+	See more on https://docs.mongodb.com/manual/reference/command/update/"
+
+	^ database
+		commandUpdate: aDocument
+		with: newDocument
+		collection: self
 		writeConcern: aConcern
 ]
 
@@ -172,6 +182,7 @@ MongoCollection >> drop [
 
 { #category : #convenience }
 MongoCollection >> ensureAdded [
+
 	[ database addCollection: name ]
 		on: MongoCollectionAlreadyExists
 		do: [ :error | ]

@@ -116,29 +116,21 @@ MongoDatabase >> commandAndVerify: anOrderedDictionary [
 ]
 
 { #category : #operations }
-MongoDatabase >> commandDelete: origDictionary limit: aLimit collection: collectionName writeConcern: aConcern [
-	"Delete using Mongo command. Answer the output of the command.
-	See more on https://docs.mongodb.com/manual/reference/command/delete/"
+MongoDatabase >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
 
-	| dict |
-	dict := {
-		'delete'->collectionName.
-		'deletes'->{{
-			'q'->origDictionary.
-			'limit'->aLimit.
-			} as: OrderedDictionary}.
-		} as: OrderedDictionary.
-	aConcern ifNotNil: [
-		dict at: 'writeConcern' put: aConcern concernForCommand].
-	^self commandAndVerify: dict.
+	^ self root
+		commandDelete: aDocument
+		limit: aLimit
+		collection: collectionName
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
 MongoDatabase >> commandFind: filterDictionary limit: aLimit collection: collectionName readConcern: aMongoReadConcern [
 	"Answer a MongoCommandCursor that will perform a find using Mongo command.
-	
+
 	All parameters are optional (nil), except collectionName.
-	
+
 	See more on https://docs.mongodb.com/v4.0/reference/command/find/"
 
 	| dict |
@@ -149,47 +141,40 @@ MongoDatabase >> commandFind: filterDictionary limit: aLimit collection: collect
 	aLimit ifNotNil: [
 		dict at: 'limit' put: aLimit ].
 	aMongoReadConcern ifNotNil: [
-		dict at: 'readConcern' put: aMongoReadConcern concernForCommand ].
+		dict at: 'readConcern' put: aMongoReadConcern asConcernForCommand ].
 
 	^ MongoCommandCursor database: self dictionary: dict
 ]
 
 { #category : #operations }
-MongoDatabase >> commandInsert: newDictionary collection: collectionName writeConcern: aConcern [
+MongoDatabase >> commandInsert: newDictionary collection: aMongoCollection writeConcern: aConcern [
 	"Insert using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/insert/"
 
-	| dict |
-	dict := {
-		'insert'->collectionName.
-		'documents'->{newDictionary}.
-		} as: OrderedDictionary.
-	aConcern ifNotNil: [
-		dict at: 'writeConcern' put: aConcern concernForCommand].
-	^self commandAndVerify: dict.
+	self root
+		commandInsert: newDictionary
+		collection: aMongoCollection
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
-MongoDatabase >> commandUpdate: origDictionary with: newDictionary collection: collectionName [ 
-	^self commandUpdate: origDictionary with: newDictionary collection: collectionName writeConcern: nil.
+MongoDatabase >> commandUpdate: aDocument with: newDocument collection: aMongoCollection [
+
+	^ self
+		commandUpdate: aDocument
+		with: newDocument
+		collection: aMongoCollection
+		writeConcern: nil
 ]
 
 { #category : #operations }
-MongoDatabase >> commandUpdate: origDictionary with: newDictionary collection: collectionName writeConcern: aConcern [
-	"Update using Mongo command. Answer the output of the command.
-	See more on https://docs.mongodb.com/manual/reference/command/update/"
+MongoDatabase >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
 
-	| dict |
-	dict := {
-		'update'->collectionName.
-		'updates'->{{
-			'q'->origDictionary.
-			'u'->newDictionary.
-			} as: OrderedDictionary}.
-		} as: OrderedDictionary.
-	aConcern ifNotNil: [
-		dict at: 'writeConcern' put: aConcern concernForCommand].
-	^self commandAndVerify: dict.
+	^ self root
+		commandUpdate: aDocument
+		with: newDocument
+		collection: aMongoCollection
+		writeConcern: aConcern
 ]
 
 { #category : #operations }

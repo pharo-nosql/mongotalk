@@ -9,10 +9,10 @@ Class {
 	#category : #'Mongo-Tests-Core-Tests'
 }
 
-{ #category : #running }
+{ #category : #private }
 MongoTest >> aWriteConcern [
 
-	^MongoWriteConcern new
+	^ MongoWriteConcern new
 		w: 1;
 		j: false;
 		wtimeout: 500;
@@ -257,6 +257,18 @@ MongoTest >> testInsertTwoAndQuery [
 ]
 
 { #category : #tests }
+MongoTest >> testInsertWithWriteConcern [
+	| result new |
+
+	new := { 'key' -> 'new value' } asDictionary.
+
+	collection commandInsert: new writeConcern: self aWriteConcern.
+	result := collection query: [:query | ].
+	self assert: result size equals: 1.
+	self assert: (result first at: 'key') equals: 'new value'
+]
+
+{ #category : #tests }
 MongoTest >> testInsertWithWriteConcernAndQuery [
 	| results |
 	collection 
@@ -274,24 +286,6 @@ MongoTest >> testIsEmpty [
 	self assert: collection isEmpty.
 	collection add: data.
 	self deny: collection isEmpty
-]
-
-{ #category : #tests }
-MongoTest >> testLastError [
-	| data |
-	data := Dictionary new at: 'key' put: 'value'; yourself.
-	collection add: data.
-	
-	self assert: database lastError ok
-]
-
-{ #category : #tests }
-MongoTest >> testLastErrorWithWriteConcern [
-	| data |
-	data := Dictionary new at: 'key' put: 'value'; yourself.
-	collection add: data.
-	
-	self assert: (database lastError: self aWriteConcern) ok
 ]
 
 { #category : #tests }
@@ -465,6 +459,7 @@ MongoTest >> testUpdateWithUpsert [
 { #category : #tests }
 MongoTest >> testUpdateWithWriteConcern [
 	| result old new |
+
 	old := { 'key' -> 'value' } asDictionary.
 	new := { 'key' -> 'new value' } asDictionary.
 
@@ -472,8 +467,7 @@ MongoTest >> testUpdateWithWriteConcern [
 	collection commandUpdate: old with: new writeConcern: self aWriteConcern.
 	result := collection query: [:query | ].
 	self assert: result size equals: 1.
-	self assert: (result first at: 'key') equals: 'new value'.
-
+	self assert: (result first at: 'key') equals: 'new value'
 ]
 
 { #category : #tests }

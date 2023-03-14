@@ -33,11 +33,13 @@ MongoDriverV5 >> delete: aDocument collection: aMongoCollection [
 
 	"https://www.mongodb.com/docs/manual/reference/command/delete"
 	command := self
-		newQueryCommand: (OrderedDictionary newFromPairs: {
-			'delete'. 		aMongoCollection name.
-			'deletes'.		{ OrderedDictionary newFromPairs: {
-				'q'. 				aDocument.
-				'limit'. 			0 } } })
+		newQueryCommandWith: [ :spec | spec
+			at: 'delete' put: aMongoCollection name;
+			at: 'deletes' put: {
+				OrderedDictionary new
+					at: 'q' put: aDocument;
+					at: 'limit' put: 0;
+					yourself } ]
 		database: aMongoCollection database
 		flags: 0.
 
@@ -66,9 +68,9 @@ MongoDriverV5 >> insert: aDocument collection: aMongoCollection [
 
 	"https://www.mongodb.com/docs/manual/reference/command/insert"
 	command := self
-		newQueryCommand: (OrderedDictionary newFromPairs: {
-			'insert'. 		aMongoCollection name.
-			'documents'.		aDocument })
+		newQueryCommandWith: [ :spec | spec
+			at: 'insert' put: aMongoCollection name;
+			at: 'documents' put: aDocument ]
 		database: aMongoCollection database
 		flags: 0.
 
@@ -148,13 +150,15 @@ MongoDriverV5 >> update: aDocument with: newDocument collection: aMongoCollectio
 
 	"https://www.mongodb.com/docs/manual/reference/command/delete"
 	command := self
-		newQueryCommand: (OrderedDictionary newFromPairs: {
-			'update'. 		aMongoCollection name.
-			'updates'.		{ OrderedDictionary newFromPairs: {
-				'q'. 				aDocument.
-				'u'. 				newDocument.
-				'upsert'.			upsertBoolean.
-				'multi'.			multiBoolean } } })
+		newQueryCommandWith: [ :spec | spec
+			at: 'update' put: aMongoCollection name;
+			at: 'updates' put: {
+				OrderedDictionary new
+					at: 'q' put: aDocument;
+					at: 'u' put: newDocument;
+					at: 'upsert' put: upsertBoolean;
+					at: 'multi' put: multiBoolean;
+					yourself } ]
 		database: aMongoCollection database
 		flags: 0.
 

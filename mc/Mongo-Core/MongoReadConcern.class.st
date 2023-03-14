@@ -30,7 +30,7 @@ Class {
 		'linearizable',
 		'snapshot'
 	],
-	#category : 'Mongo-Core-Utilities'
+	#category : #'Mongo-Core-Utilities'
 }
 
 { #category : #accessing }
@@ -66,7 +66,7 @@ MongoReadConcern class >> snapshot [
 ]
 
 { #category : #converting }
-MongoReadConcern >> concernForCommand [
+MongoReadConcern >> asConcernForCommand [
 	^ dictionary
 ]
 
