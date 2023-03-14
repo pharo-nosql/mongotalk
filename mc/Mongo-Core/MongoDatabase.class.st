@@ -126,24 +126,13 @@ MongoDatabase >> commandDelete: aDocument limit: aLimit collection: collectionNa
 ]
 
 { #category : #operations }
-MongoDatabase >> commandFind: filterDictionary limit: aLimit collection: collectionName readConcern: aMongoReadConcern [
-	"Answer a MongoCommandCursor that will perform a find using Mongo command.
+MongoDatabase >> commandFind: filterDictionary limit: aLimit collection: aMongoCollection readConcern: aMongoReadConcern [
 
-	All parameters are optional (nil), except collectionName.
-
-	See more on https://docs.mongodb.com/v4.0/reference/command/find/"
-
-	| dict |
-	dict := OrderedDictionary new.
-	dict at: 'find' put: collectionName.
-	filterDictionary ifNotNil: [
-		dict at: 'filter' put: filterDictionary ].
-	aLimit ifNotNil: [
-		dict at: 'limit' put: aLimit ].
-	aMongoReadConcern ifNotNil: [
-		dict at: 'readConcern' put: aMongoReadConcern asConcernForCommand ].
-
-	^ MongoCommandCursor database: self dictionary: dict
+	^ self root
+		commandFind: filterDictionary
+		limit: aLimit
+		collection: aMongoCollection
+		readConcern: aMongoReadConcern
 ]
 
 { #category : #operations }

@@ -22,12 +22,11 @@ Class {
 }
 
 { #category : #'instance creation' }
-MongoCommandCursor class >> database: aMongoDatabase dictionary: aCollection [ 
-	^ self basicNew
-		initializeDatabase: aMongoDatabase
-		command: aCollection;
-		yourself.
+MongoCommandCursor class >> database: aMongoDatabase dictionary: aCollection [
 
+	^ self basicNew
+		initializeDatabase: aMongoDatabase command: aCollection;
+		yourself
 ]
 
 { #category : #accessing }
@@ -54,7 +53,8 @@ MongoCommandCursor >> command [
 
 { #category : #enumerating }
 MongoCommandCursor >> contents [
-	^ self collect: #yourself
+
+	^ self collect: [ :each | each ]
 ]
 
 { #category : #accessing }
@@ -79,9 +79,9 @@ MongoCommandCursor >> do: aBlock [
 { #category : #enumerating }
 MongoCommandCursor >> firstBatch [
 
-	^ MongoQueryBatch newFromFirstBatchResponse: (database 
-		command: command 
-		flags: self flags)
+	^ MongoQueryBatch newFromFirstBatchResponse: (database
+		command: command
+		flags: 0)
 ]
 
 { #category : #accessing }

@@ -76,7 +76,7 @@ MongoCollection >> commandFind: filterDictionary limit: aLimit readConcern: aMon
 	^ database
 		commandFind: filterDictionary
 		limit: aLimit
-		collection: name
+		collection: self
 		readConcern: aMongoReadConcern
 ]
 

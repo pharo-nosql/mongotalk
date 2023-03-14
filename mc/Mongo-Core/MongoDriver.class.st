@@ -82,6 +82,29 @@ MongoDriver >> commandDelete: aDocument limit: aLimit collection: aMongoCollecti
 ]
 
 { #category : #operations }
+MongoDriver >> commandFind: filterDictionary limit: aLimit collection: aMongoCollection readConcern: aMongoReadConcern [
+	"Answer a MongoCommandCursor that will perform a find using Mongo command.
+
+	All parameters are optional (nil), except collectionName.
+
+	See more on https://docs.mongodb.com/v4.0/reference/command/find/"
+	| commandSpec |
+
+	commandSpec := OrderedDictionary new.
+	commandSpec at: 'find' put: aMongoCollection name.
+	filterDictionary ifNotNil: [
+		commandSpec at: 'filter' put: filterDictionary ].
+	aLimit ifNotNil: [
+		commandSpec at: 'limit' put: aLimit ].
+	aMongoReadConcern ifNotNil: [
+		commandSpec at: 'readConcern' put: aMongoReadConcern asConcernForCommand ].
+
+	^ MongoCommandCursor
+		database: aMongoCollection database
+		dictionary: commandSpec
+]
+
+{ #category : #operations }
 MongoDriver >> commandInsert: aDocument collection: aMongoCollection writeConcern: aConcern [
 	"Insert using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/insert/"

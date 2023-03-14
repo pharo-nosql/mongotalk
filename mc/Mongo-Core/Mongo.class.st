@@ -174,7 +174,7 @@ Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	^ reply
 ]
 
-{ #category : #'operations - writeconcern' }
+{ #category : #'operations - concern' }
 Mongo >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
 
 	^ self driver
@@ -184,7 +184,17 @@ Mongo >> commandDelete: aDocument limit: aLimit collection: collectionName write
 		writeConcern: aConcern
 ]
 
-{ #category : #'operations - writeconcern' }
+{ #category : #'operations - concern' }
+Mongo >> commandFind: filterDictionary limit: aLimit collection: aMongoCollection readConcern: aMongoReadConcern [
+
+	^ self driver
+		commandFind: filterDictionary
+		limit: aLimit
+		collection: aMongoCollection
+		readConcern: aMongoReadConcern
+]
+
+{ #category : #'operations - concern' }
 Mongo >> commandInsert: newDictionary collection: aMongoCollection writeConcern: aConcern [
 
 	^ self driver
@@ -193,7 +203,7 @@ Mongo >> commandInsert: newDictionary collection: aMongoCollection writeConcern:
 		writeConcern: aConcern
 ]
 
-{ #category : #'operations - writeconcern' }
+{ #category : #'operations - concern' }
 Mongo >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
 
 	^ self driver

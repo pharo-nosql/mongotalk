@@ -11,7 +11,7 @@ Class {
 	#classInstVars : [
 		'authAgainstAdmin'
 	],
-	#category : 'Mongo-Core-Auth'
+	#category : #'Mongo-Core-Auth'
 }
 
 { #category : #accessing }
@@ -43,14 +43,17 @@ MongoAuthMechanism class >> isAbstract [
 MongoAuthMechanism class >> root: root [
 	|mech|
 	mech := self new root: root.
-	self authAgainstAdmin ifTrue: [ mech  forceDatabase: root admin].
+	self authAgainstAdmin ifTrue: [ mech forceDatabase: root admin].
 	^ mech
-		
 ]
 
 { #category : #operations }
 MongoAuthMechanism >> authenticateUsername: user password: pass database: aDatabase [
-	^self authenticateUsername: user password: pass forcedDatabase: (self forceDatabase ifNil: [ aDatabase ])
+
+	^self
+		authenticateUsername: user
+		password: pass
+		forcedDatabase: (self forceDatabase ifNil: [ aDatabase ])
 ]
 
 { #category : #operations }
