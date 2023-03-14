@@ -8,7 +8,7 @@ jobs:
       matrix:
         pharo-version: [ Pharo64-11 ]
         ston: [ .smalltalk.ston, .smalltalk-client.ston ]
-        mongodb-version: [ '6.1' ]
+        mongodb-version: [ '6.0' ]
         os: [ ubuntu-latest ]
 
     runs-on: ${{ matrix.os }}
