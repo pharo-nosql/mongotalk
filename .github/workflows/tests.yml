@@ -6,7 +6,7 @@ jobs:
   test:
     strategy:
       matrix:
-        pharo-version: [ Pharo64-11, Pharo64-12 ]
+        pharo-version: [ Pharo64-12 ]
         ston: [ .smalltalk.ston ]
         mongodb-version: [ latest ]
         os: [ ubuntu-latest ]
@@ -20,8 +20,10 @@ jobs:
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
 
-      - name: Log mongodb Version
-        run: mongo --eval 'db.version();'
+#      - name: Test mongodb
+#        run: curl http://localhost:27017
+#      - name: Log mongodb Version
+#        run: mongo --eval 'db.version();'
 #      - name: Create test user
 #        run: "mongo test --eval 'db.createUser({ \"user\": \"pharounittest\", \"pwd\": \"test\", roles: [] });'"
 
