@@ -5,7 +5,7 @@ Class {
 		'root',
 		'database'
 	],
-	#category : 'Mongo-Tests-Core-Tests'
+	#category : #'Mongo-Tests-Core-Tests'
 }
 
 { #category : #running }
@@ -34,6 +34,9 @@ MongoAuthTest >> testSCRAMSHA1AuthMechanism [
 	=> Run in command-line:
 	mongo test --eval 'db.createUser({ ""user"": ""pharounittest"", ""pwd"": ""test"", roles: [] });'
 	"
+	
+	self skip.
+	
 	root authMechanism: (SCRAMSHA1AuthMechanism root: root).
 
 	self assert: (root authenticateUsername: 'pharounittest' password: 'test' database: database).
