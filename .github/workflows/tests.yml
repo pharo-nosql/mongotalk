@@ -13,12 +13,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.ston }}, ${{ matrix.pharo-version }}, ${{ matrix.mongodb-version }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.9.0
+        uses: supercharge/mongodb-github-action@1.8.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-port: 27017
 
 #      - name: Test mongodb
 #        run: curl http://localhost:27017
