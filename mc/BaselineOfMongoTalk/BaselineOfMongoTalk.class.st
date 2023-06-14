@@ -27,6 +27,7 @@ BaselineOfMongoTalk >> baseline: spec [
 
 			spec
 				"Core and Client, without any test."
+				package: 'Mongo-Pharo11';
 				package: 'Mongo-BSON';
 				package: 'Mongo-Queries';
 				package: 'Mongo-Squeak' with: [ spec requires: #('Mongo-BSON') ];
