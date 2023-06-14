@@ -53,18 +53,14 @@ BaselineOfMongoTalk >> baseline: spec [
 				group: 'Tests + ReplicaSet Tests' with: #(Tests 'Mongo-Tests-ReplicaSet');
 				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests');
 				group: 'Client + ReplicaSet Tests' with: #('Client' 'Mongo-Client-ReplicaSet-Tests') ].
+
 	spec
-		for: #(#'pharo7.x' #'pharo8.x' )
-		do: [ 
-			self taskIt: spec.
-			spec 
-				package: 'Mongo-Client' with: [ spec requires: #('TaskIt') ].
-			spec
-				group: 'default' with: #('Tools') ].
-	spec
-		for: #(#'pharo9.x' #'pharo10.x' #'pharo11.x' #'pharo12.x')
+		for: #(#'pharo10.x' #'pharo11.x' #'pharo12.x')
 		do: [  spec package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ] ].
 
+	spec 
+		for: #(#'pharo10.x' #'pharo11.x')
+		do: [ spec package: 'Mongo-BSON' with: [ spec requires: #('Mongo-Pharo11') ] ]
 ]
 
 { #category : #'external projects' }
