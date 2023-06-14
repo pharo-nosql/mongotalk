@@ -49,7 +49,7 @@ BaselineOfMongoTalk >> baseline: spec [
 				group: 'default' with: #('Core' 'Tests');
 				group: 'Core' with: #('Mongo-Core' 'Mongo-Queries' 'Mongo-DriverV5');
 				group: 'Tools' with: #('Mongo-Pharo-Tools');
-				group: 'Tests' with: #('Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
+				group: 'Tests' with: #('Core' 'Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
 				group: 'Tests + ReplicaSet Tests' with: #(Tests 'Mongo-Tests-ReplicaSet');
 				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests');
 				group: 'Client + ReplicaSet Tests' with: #('Client' 'Mongo-Client-ReplicaSet-Tests') ].
