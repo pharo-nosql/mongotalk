@@ -15,12 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.8.0
-        with:
-          mongodb-version: ${{ matrix.mongodb-version }}
-          mongodb-port: 27017
-
+      - name: Create mongoDB Docker container      
+        run: sudo docker run -d -p 27017:27017 mongo:latest
+      
 #      - name: Test mongodb
 #        run: curl http://localhost:27017
 #      - name: Log mongodb Version
