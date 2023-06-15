@@ -4,7 +4,7 @@ I implement SCRAM-SHA1 auth mechanism
 Class {
 	#name : #SCRAMAuthMechanism,
 	#superclass : #MongoAuthMechanism,
-	#category : 'Mongo-Core-Auth'
+	#category : #'Mongo-Core-Auth'
 }
 
 { #category : #testing }
@@ -34,7 +34,7 @@ SCRAMAuthMechanism >> authenticateUsername: username password: password forcedDa
 	(rnonce beginsWith: nonce)
 		ifFalse: [ ^ false	"Server returned an invalid nonce." ].
 	without_proof := 'c=biws,r=' , rnonce.
-	derivedKey := PBKDF2 new
+	derivedKey := MongoPBKDF2 new
 		hashFunction: self hashFunction;
 		password: (self digestUsername: username password: password);
 		salt: salt base64Decoded;
