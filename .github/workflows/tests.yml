@@ -6,7 +6,7 @@ jobs:
   test:
     strategy:
       matrix:
-        pharo-version: [ Pharo64-11, Pharo64-12 ]
+        pharo-version: [ Pharo64-10, Pharo64-11, Pharo64-12 ]
         ston: [ .smalltalk.ston ]
         mongodb-version: [ latest ]
         os: [ ubuntu-latest ]
@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Create mongoDB Docker container      
-        run: sudo docker run -d -p 27017:27017 mongo:latest
-      
+        run: sudo docker run -d -p 27017:27017 mongo:${{ matrix.mongodb-version }}
+     
 #      - name: Test mongodb
 #        run: curl http://localhost:27017
 #      - name: Log mongodb Version
