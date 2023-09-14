@@ -28,7 +28,7 @@ Metacello new
 ---
 # Client for Replica Sets
 
-**IMPORTANT: ** ReplicaSet support is not included in current V5 driver!
+**IMPORTANT:** ReplicaSet support is not included in current V5 driver!
 
 ## Introduction
 
