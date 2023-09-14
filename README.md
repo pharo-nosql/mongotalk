@@ -28,6 +28,8 @@ Metacello new
 ---
 # Client for Replica Sets
 
+**IMPORTANT: ** ReplicaSet support is not included in current V5 driver!
+
 ## Introduction
 
 The driver described above is enough in a [MongoDB standalone server](https://docs.mongodb.com/manual/reference/glossary/#term-standalone) configuration where there only one server can execute the operations.
