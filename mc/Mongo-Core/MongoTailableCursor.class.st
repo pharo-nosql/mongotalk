@@ -9,7 +9,7 @@ Class {
 		'query',
 		'cursorId'
 	],
-	#category : 'Mongo-Core-Utilities'
+	#category : #'Mongo-Core-Utilities'
 }
 
 { #category : #'as yet unclassified' }
@@ -56,7 +56,11 @@ MongoTailableCursor >> readNext [
 
 { #category : #'as yet unclassified' }
 MongoTailableCursor >> requestNext [
-	root getMore: cursorId collection: query collection qualifiedName chunkSize: query chunkSize.
+
+	root
+		getMore: cursorId
+		collection: query collection
+		chunkSize: query chunkSize
 ]
 
 { #category : #'as yet unclassified' }

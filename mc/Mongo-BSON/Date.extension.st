@@ -1,6 +1,12 @@
 Extension { #name : #Date }
 
 { #category : #'*Mongo-BSON' }
+Date >> asBSONMilliSeconds [
+
+	^ (self - DateAndTime unixEpoch) asMilliSeconds
+]
+
+{ #category : #'*Mongo-BSON' }
 Date >> bsonTypeCode [ 
 	^9
 ]

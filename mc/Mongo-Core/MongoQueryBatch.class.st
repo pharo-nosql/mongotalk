@@ -6,13 +6,13 @@ Class {
 		'collectionName',
 		'cursorId'
 	],
-	#category : 'Mongo-Core-Responses'
+	#category : #'Mongo-Core-Responses'
 }
 
 { #category : #'instance creation' }
 MongoQueryBatch class >> newFromFirstBatchResponse: aDictionary [
-
 	| cursorDictionary |
+
 	cursorDictionary := aDictionary at: 'cursor'.
 	^ self basicNew
 		initializeWithCollectionName: (cursorDictionary at: 'ns')
@@ -55,10 +55,10 @@ MongoQueryBatch >> documents [
 
 { #category : #initialization }
 MongoQueryBatch >> initializeWithCollectionName: aString documents: aCollection cursorId: anInteger [
-	self initialize.
 
-	self flag: #todo. "This code removes the db name, and it's a bit strange to have it here."	
+	self initialize.
+	self flag: #todo. "This code removes the db name, and it's a bit strange to have it here."
 	collectionName := aString readStream upTo: $.; upToEnd.
 	documents := aCollection.
-	cursorId := anInteger.
+	cursorId := anInteger
 ]

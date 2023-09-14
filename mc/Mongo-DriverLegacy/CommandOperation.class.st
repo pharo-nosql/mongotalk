@@ -4,7 +4,7 @@ I represent commands can be sent to $cmd collection. I'm almost a ""query operat
 Class {
 	#name : #CommandOperation,
 	#superclass : #QueryOperation,
-	#category : 'Mongo-Core-Operations'
+	#category : #'Mongo-DriverLegacy-Operations'
 }
 
 { #category : #writing }

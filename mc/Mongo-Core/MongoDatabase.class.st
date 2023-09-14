@@ -19,7 +19,7 @@ Class {
 		'root',
 		'name'
 	],
-	#category : 'Mongo-Core-Base'
+	#category : #'Mongo-Core-Base'
 }
 
 { #category : #'instance creation' }
@@ -80,7 +80,6 @@ MongoDatabase >> collectionNames [
 	^ (MongoCommandCursor
 		database: self
 		dictionary: dictionary)
-		setFlagSlaveOk;
 		collect: [ :each | each at: 'name' ].
 ]
 
@@ -98,7 +97,11 @@ MongoDatabase >> command: anOrderedDictionary [
 
 { #category : #operations }
 MongoDatabase >> command: anOrderedDictionary flags: flags [
-	^ root command: anOrderedDictionary database: self flags: flags
+
+	^ root 
+		command: anOrderedDictionary 
+		database: self 
+		flags: flags
 ]
 
 { #category : #operations }
@@ -113,85 +116,62 @@ MongoDatabase >> commandAndVerify: anOrderedDictionary [
 ]
 
 { #category : #operations }
-MongoDatabase >> commandDelete: origDictionary limit: aLimit collection: collectionName writeConcern: aConcern [
-	"Delete using Mongo command. Answer the output of the command.
-	See more on https://docs.mongodb.com/manual/reference/command/delete/"
+MongoDatabase >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
 
-	| dict |
-	dict := {
-		'delete'->collectionName.
-		'deletes'->{{
-			'q'->origDictionary.
-			'limit'->aLimit.
-			} as: OrderedDictionary}.
-		} as: OrderedDictionary.
-	aConcern ifNotNil: [
-		dict at: 'writeConcern' put: aConcern concernForCommand].
-	^self commandAndVerify: dict.
+	^ self root
+		commandDelete: aDocument
+		limit: aLimit
+		collection: collectionName
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
-MongoDatabase >> commandFind: filterDictionary limit: aLimit collection: collectionName readConcern: aMongoReadConcern [
-	"Answer a MongoCommandCursor that will perform a find using Mongo command.
-	
-	All parameters are optional (nil), except collectionName.
-	
-	See more on https://docs.mongodb.com/v4.0/reference/command/find/"
+MongoDatabase >> commandFind: filterDictionary limit: aLimit collection: aMongoCollection readConcern: aMongoReadConcern [
 
-	| dict |
-	dict := OrderedDictionary new.
-	dict at: 'find' put: collectionName.
-	filterDictionary ifNotNil: [
-		dict at: 'filter' put: filterDictionary ].
-	aLimit ifNotNil: [
-		dict at: 'limit' put: aLimit ].
-	aMongoReadConcern ifNotNil: [
-		dict at: 'readConcern' put: aMongoReadConcern concernForCommand ].
-
-	^ MongoCommandCursor database: self dictionary: dict
+	^ self root
+		commandFind: filterDictionary
+		limit: aLimit
+		collection: aMongoCollection
+		readConcern: aMongoReadConcern
 ]
 
 { #category : #operations }
-MongoDatabase >> commandInsert: newDictionary collection: collectionName writeConcern: aConcern [
+MongoDatabase >> commandInsert: newDictionary collection: aMongoCollection writeConcern: aConcern [
 	"Insert using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/insert/"
 
-	| dict |
-	dict := {
-		'insert'->collectionName.
-		'documents'->{newDictionary}.
-		} as: OrderedDictionary.
-	aConcern ifNotNil: [
-		dict at: 'writeConcern' put: aConcern concernForCommand].
-	^self commandAndVerify: dict.
+	self root
+		commandInsert: newDictionary
+		collection: aMongoCollection
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
-MongoDatabase >> commandUpdate: origDictionary with: newDictionary collection: collectionName [ 
-	^self commandUpdate: origDictionary with: newDictionary collection: collectionName writeConcern: nil.
+MongoDatabase >> commandUpdate: aDocument with: newDocument collection: aMongoCollection [
+
+	^ self
+		commandUpdate: aDocument
+		with: newDocument
+		collection: aMongoCollection
+		writeConcern: nil
 ]
 
 { #category : #operations }
-MongoDatabase >> commandUpdate: origDictionary with: newDictionary collection: collectionName writeConcern: aConcern [
-	"Update using Mongo command. Answer the output of the command.
-	See more on https://docs.mongodb.com/manual/reference/command/update/"
+MongoDatabase >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
 
-	| dict |
-	dict := {
-		'update'->collectionName.
-		'updates'->{{
-			'q'->origDictionary.
-			'u'->newDictionary.
-			} as: OrderedDictionary}.
-		} as: OrderedDictionary.
-	aConcern ifNotNil: [
-		dict at: 'writeConcern' put: aConcern concernForCommand].
-	^self commandAndVerify: dict.
+	^ self root
+		commandUpdate: aDocument
+		with: newDocument
+		collection: aMongoCollection
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
-MongoDatabase >> delete: aDictionary collection: aString [ 
-	root delete: aDictionary collection: name , '.' , aString
+MongoDatabase >> delete: aDictionary collection: aMongoCollection [
+
+	root
+		delete: aDictionary
+		collection: aMongoCollection
 ]
 
 { #category : #actions }
@@ -224,8 +204,11 @@ MongoDatabase >> hasCollectionNamed: aString [
 ]
 
 { #category : #operations }
-MongoDatabase >> insert: aCollection collection: aString [ 
-	root insert: aCollection collection: name , '.' , aString
+MongoDatabase >> insert: aDocument collection: aMongoCollection [
+
+	root
+		insert: aDocument
+		collection: aMongoCollection
 ]
 
 { #category : #operations }
@@ -277,6 +260,14 @@ MongoDatabase >> name [
 	^name
 ]
 
+{ #category : #factory }
+MongoDatabase >> newQuery [
+
+	^ root newQuery
+		database: self;
+		yourself
+]
+
 { #category : #printing }
 MongoDatabase >> printOn: aStream [
 
@@ -290,8 +281,9 @@ MongoDatabase >> qualifiedName [
 
 { #category : #operations }
 MongoDatabase >> query: aMongoQuery [
+	
 	aMongoQuery database: self.
-	^root query: aMongoQuery
+	^ root query: aMongoQuery
 ]
 
 { #category : #operations }
@@ -346,13 +338,23 @@ MongoDatabase >> setRoot: aMongo name: aString [
 ]
 
 { #category : #operations }
-MongoDatabase >> update: origDictionary with: newDictionary collection: aString [ 
-	root update: origDictionary with: newDictionary collection: name , '.' , aString
+MongoDatabase >> update: origDictionary with: newDictionary collection: aMongoCollection [
+
+	root
+		update: origDictionary
+		with: newDictionary
+		collection: aMongoCollection
 ]
 
 { #category : #operations }
-MongoDatabase >> update: origDictionary with: newDictionary collection: aString flags: aFlag [
-	root update: origDictionary with: newDictionary collection: name , '.' , aString flags: aFlag
+MongoDatabase >> update: origDictionary with: newDictionary collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
+
+	root
+		update: origDictionary
+		with: newDictionary
+		collection: aMongoCollection
+		upsert: upsertBoolean
+		multi: multiBoolean
 ]
 
 { #category : #operations }

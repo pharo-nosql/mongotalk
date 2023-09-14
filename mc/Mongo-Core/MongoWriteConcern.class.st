@@ -14,7 +14,7 @@ Class {
 		'j',
 		'wtimeout'
 	],
-	#category : 'Mongo-Core-Utilities'
+	#category : #'Mongo-Core-Utilities'
 }
 
 { #category : #accessing }
@@ -23,20 +23,22 @@ MongoWriteConcern class >> majority [
 ]
 
 { #category : #converting }
-MongoWriteConcern >> asKeysAndValuesInto: aDictionary [
-	self j ifNotNil: [:value | aDictionary at: 'j' put: value ].
-	self w ifNotNil: [:value | aDictionary at: 'w' put: value ].
-	self wtimeout ifNotNil: [:value | aDictionary at: 'wtimeout' put: value ]
+MongoWriteConcern >> asConcernForCommand [
+	| dict |
+
+	dict := Dictionary new.
+	self asKeysAndValuesInto: dict.
+	^ dict isEmpty
+		ifTrue: [ nil ]
+		ifFalse: [ dict ]
 ]
 
 { #category : #converting }
-MongoWriteConcern >> concernForCommand [
-	| dict |
-	dict := Dictionary new.
-	self asKeysAndValuesInto: dict.
-	^dict isEmpty
-		ifTrue: [ nil ]
-		ifFalse: [ dict ]
+MongoWriteConcern >> asKeysAndValuesInto: aDictionary [
+
+	self j ifNotNil: [:value | aDictionary at: 'j' put: value ].
+	self w ifNotNil: [:value | aDictionary at: 'w' put: value ].
+	self wtimeout ifNotNil: [:value | aDictionary at: 'wtimeout' put: value ]
 ]
 
 { #category : #accessing }

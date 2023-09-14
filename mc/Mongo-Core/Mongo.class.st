@@ -33,7 +33,8 @@ Class {
 		'stream',
 		'requestID',
 		'authMechanism',
-		'authCache'
+		'authCache',
+		'driver'
 	],
 	#classVars : [
 		'Default'
@@ -41,7 +42,7 @@ Class {
 	#classInstVars : [
 		'defaultAuthMechanismClass'
 	],
-	#category : 'Mongo-Core-Base'
+	#category : #'Mongo-Core-Base'
 }
 
 { #category : #constants }
@@ -131,7 +132,11 @@ Mongo >> authMechanism: aMongoAuthMechanism [
 
 { #category : #operations }
 Mongo >> authenticateUsername: user password: pass database: aDatabase [
-	^self authMechanism authenticateUsername: user password: pass database: aDatabase
+
+	^self authMechanism 
+		authenticateUsername: user 
+		password: pass 
+		database: aDatabase
 ]
 
 { #category : #operations }
@@ -146,39 +151,66 @@ Mongo >> closeIfOpen [
 
 { #category : #operations }
 Mongo >> command: anOrderedDictionary database: aDatabase [
-	^ self command: anOrderedDictionary database: aDatabase flags: 0
+
+	^ self
+		command: anOrderedDictionary
+		database: aDatabase
+		flags: 0
 ]
 
 { #category : #operations }
 Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	| query reply |
-	query := MongoQuery new
-		database: aDatabase;
-		collection: MongoCollection cmdVirtualCollection;
-		where: anOrderedDictionary;
-		operation: CommandOperation;
-		flags: flags;
-		yourself.
 
-	reply := self queryOne: query.
+	query := self
+		newQueryCommand: anOrderedDictionary
+		database: aDatabase
+		flags: flags.
+	reply := self driver executeCommand: query.
 
-	(reply at: 'ok' ifAbsent: [ self error ]) = 1.0 
+	(reply at: 'ok' ifAbsent: [ self error ]) = 1.0
 		ifFalse: [ MongoCommandError signalFor: reply ].
-		
+
 	^ reply
 ]
 
-{ #category : #'private-communicating' }
-Mongo >> cursorQuery: aQuery [
-	| id |
-	id := self nextRequestID.
-	(aQuery operation 
-		id: id
-		stream: stream
-		query: aQuery)
-			flags: aQuery flags;
-			write.
-	^id
+{ #category : #'operations - concern' }
+Mongo >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
+
+	^ self driver
+		commandDelete: aDocument
+		limit: aLimit
+		collection: collectionName
+		writeConcern: aConcern
+]
+
+{ #category : #'operations - concern' }
+Mongo >> commandFind: filterDictionary limit: aLimit collection: aMongoCollection readConcern: aMongoReadConcern [
+
+	^ self driver
+		commandFind: filterDictionary
+		limit: aLimit
+		collection: aMongoCollection
+		readConcern: aMongoReadConcern
+]
+
+{ #category : #'operations - concern' }
+Mongo >> commandInsert: newDictionary collection: aMongoCollection writeConcern: aConcern [
+
+	^ self driver
+		commandInsert: newDictionary
+		collection: aMongoCollection
+		writeConcern: aConcern
+]
+
+{ #category : #'operations - concern' }
+Mongo >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
+
+	^ self driver
+		commandUpdate: aDocument
+		with: newDocument
+		collection: aMongoCollection
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
@@ -196,28 +228,21 @@ Mongo >> databases [
 	^ self databaseNames collect: [ :each | self databaseNamed: each ]
 ]
 
-{ #category : #'private-communicating' }
-Mongo >> delete: aDictionary collection: aString [
-	(DeleteOperation
-		collection: aString 
-		id: self nextRequestID 
-		stream: stream 
-		query: aDictionary)
-			write
+{ #category : #'private - communicating' }
+Mongo >> delete: aDictionary collection: aCollection [
+
+	self driver
+		delete: aDictionary
+		collection: aCollection
 ]
 
-{ #category : #'private-communicating' }
-Mongo >> getMore: idInteger collection: aString chunkSize: countInteger [
-	| id |
-	id := self nextRequestID.
-	(GetMoreOperation
-		collection: aString 
-		id: id 
-		stream: stream 
-		cursorId: idInteger 
-		returnCount: countInteger)
-			write.
-	^id
+{ #category : #private }
+Mongo >> driver [
+
+	^ driver ifNil: [
+		(driver := MongoDriver newDefault)
+			root: self;
+			yourself ]
 ]
 
 { #category : #accessing }
@@ -225,14 +250,12 @@ Mongo >> host [
 	^host
 ]
 
-{ #category : #'private-communicating' }
-Mongo >> insert: aCollection collection: aString [
-	(InsertOperation
-		collection: aString
-		id: self nextRequestID
-		stream: stream 
-		objects: aCollection)
-			write
+{ #category : #'private - communicating' }
+Mongo >> insert: aDocument collection: aMongoCollection [
+
+	self driver
+		insert: aDocument
+		collection: aMongoCollection
 ]
 
 { #category : #testing }
@@ -271,15 +294,35 @@ Mongo >> majorVersion [
 	^ (self version splitOn: '.') first asInteger
 ]
 
+{ #category : #factory }
+Mongo >> newQuery [
+
+	^ self driver newQuery
+]
+
+{ #category : #factory }
+Mongo >> newQueryCommand: anOrderedDictionary  database: aDatabase flags: flags [
+
+	^ self driver
+		newQueryCommand: anOrderedDictionary
+		database: aDatabase
+		flags: flags
+]
+
 { #category : #private }
 Mongo >> nextRequestID [
-	^requestID := requestID + 1 bitAnd: 16r3FFFFFFF
+
+	^ requestID := requestID + 1 bitAnd: 16r3FFFFFFF
 ]
 
 { #category : #operations }
 Mongo >> open [
-	stream := GratuitousIncompatibilities socketStreamHost: host port: port.
-	stream socket setOption: 'TCP_NODELAY' value: 1.
+
+	stream := SocketStream openConnectionToHostNamed: host port: port.
+	stream binary.
+	stream socket 
+		setOption: 'TCP_NODELAY' 
+		value: 1.
 	authCache := nil
 ]
 
@@ -296,7 +339,8 @@ Mongo >> openWithTimeout: aDuration [
 
 { #category : #accessing }
 Mongo >> port [
-	^port
+
+	^ port
 ]
 
 { #category : #printing }
@@ -312,28 +356,14 @@ Mongo >> printOn: aStream [
 
 { #category : #operations }
 Mongo >> query: aMongoQuery [
-	| results |
-	results := OrderedCollection new.
-	aMongoQuery doBlock isNil ifTrue: [
-		aMongoQuery doBlock: [:each | results add: each]].
-	(MongoCursor root: self query: aMongoQuery ) execute.
-	(results isNotEmpty and: [ results first includesKey: '$err' ])
-		ifTrue: [ ^ MongoQueryError signalFor: results first ].
-	^ results
+
+	^ self driver query: aMongoQuery
 ]
 
 { #category : #operations }
 Mongo >> queryOne: aMongoQuery [
-	aMongoQuery doBlock: [:each | 
-		^(each includesKey: '$err')
-			ifTrue: [ MongoQueryError signalFor: each ]
-			ifFalse: [ each ] ].
-	aMongoQuery chunkSize: 1.
-	(MongoCursor new
-		root: self;
-		query: aMongoQuery;
-		execute).
-	^nil
+
+	^ self driver queryOne: aMongoQuery
 ]
 
 { #category : #operations }
@@ -383,35 +413,49 @@ Mongo >> socketTimeout: aDuration [
 
 { #category : #accessing }
 Mongo >> stream [
-	^stream
+
+	^ stream
 ]
 
 { #category : #accessing }
-Mongo >> stream: anObject [
-	stream := anObject.
+Mongo >> stream: aStream [
+
+	stream := aStream.
 	authCache := nil
 ]
 
-{ #category : #'private-communicating' }
-Mongo >> update: origDictionary with: newDictionary collection: aString [
-	^self update: origDictionary with: newDictionary collection: aString flags: 0
+{ #category : #'private - communicating' }
+Mongo >> update: origDictionary with: newDictionary collection: aMongoCollection [
+
+	^ self
+		update: origDictionary
+		with: newDictionary
+		collection: aMongoCollection
+		upsert: false
+		multi: false
 ]
 
-{ #category : #'private-communicating' }
-Mongo >> update: origDictionary with: newDictionary collection: aString flags: aFlag [
-	(UpdateOperation
-		collection: aString
-		id: self nextRequestID
-		stream: stream
-		originalObject: origDictionary 
-		newObject: newDictionary)
-			flags: aFlag;
-			write
+{ #category : #'private - communicating' }
+Mongo >> update: origDictionary with: newDictionary collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
+
+	self driver
+		update: origDictionary
+		with: newDictionary
+		collection: aMongoCollection
+		upsert: upsertBoolean
+		multi: multiBoolean
 ]
 
 { #category : #accessing }
 Mongo >> urlString [
 	^ host asString, ':', port asString
+]
+
+{ #category : #accessing }
+Mongo >> useDriver: aDriver [
+
+	driver := aDriver.
+	aDriver connection: self
 ]
 
 { #category : #operations }
@@ -435,9 +479,8 @@ Mongo >> username: aUserString password: aPasswordString database: aDatabase [
 Mongo >> version [
 	"Get the mongodb instance vrsion. The result is obtained via `buildInfo` command. 
 	See more: https://docs.mongodb.com/manual/reference/command/buildInfo/"
-
 	| buildInfo |
-	buildInfo := self admin command: {'buildInfo' -> 1.0} asDictionary.
 	
+	buildInfo := self admin command: {'buildInfo' -> 1.0} asDictionary.
 	^ buildInfo at: 'version'
 ]

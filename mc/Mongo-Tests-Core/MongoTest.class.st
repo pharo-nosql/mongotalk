@@ -6,13 +6,13 @@ Class {
 		'root',
 		'database'
 	],
-	#category : 'Mongo-Tests-Core-Tests'
+	#category : #'Mongo-Tests-Core-Tests'
 }
 
-{ #category : #running }
+{ #category : #private }
 MongoTest >> aWriteConcern [
 
-	^MongoWriteConcern new
+	^ MongoWriteConcern new
 		w: 1;
 		j: false;
 		wtimeout: 500;
@@ -21,22 +21,26 @@ MongoTest >> aWriteConcern [
 
 { #category : #running }
 MongoTest >> setUp [
+
 	root := Mongo default.
 	root open.
 	database := root databaseNamed: 'test'.
-	collection := database getCollection: 'testCollection'.
-
+	collection := database getCollection: 'testCollection'
 ]
 
 { #category : #running }
 MongoTest >> tearDown [
+
 	database ifNotNil: [ database collections do: #drop ].
-	root closeIfOpen
+	root closeIfOpen.
+
+	super tearDown
 ]
 
 { #category : #tests }
 MongoTest >> testAdd [
 	| data |
+
 	data := Dictionary new at: 'key' put: 'value'; yourself.
 	collection add: data.
 	self assert: (collection includes: data)
@@ -96,66 +100,80 @@ MongoTest >> testCollections [
 
 { #category : #tests }
 MongoTest >> testCursor [
-	| count data |
+	| count data query commandQuery |
+
 	self assert: collection size equals: 0.
 	data := Dictionary new at: 'key' put: 'value'; yourself.
 	4 timesRepeat: [collection add: data].
 	self assert: collection size equals: 4.
 	count := 0.
-	(MongoCursor root: root query: (
-		MongoQuery new
-			database: database;
-			collection: collection;
-			where: data;
-			doBlock: [:each | count := count + 1 ];
-			chunkSize: 2;
-			yourself)) execute.
+
+	query := root driver newQuery
+		database: database;
+		collection: collection;
+		where: data;
+		doBlock: [:each | count := count + 1 ];
+		chunkSize: 2;
+		yourself.
+
+	commandQuery := root driver newCommandQuery: query.
+	commandQuery execute.
+
 	self assert: count equals: 4
 ]
 
 { #category : #tests }
 MongoTest >> testDatabaseCollectionNames [
 	| names |
+
 	names := database collectionNames.
 	self assert: (names includes: 'testCollection').
-	self deny: (names includes: 'testCollection42').
+	self deny: (names includes: 'testCollection42')
 ]
 
 { #category : #tests }
 MongoTest >> testDatabaseHasCollectionNamed [
+
 	self assert: (database hasCollectionNamed: 'testCollection').
 	self deny: (database hasCollectionNamed: 'testCollection42')
 ]
 
 { #category : #tests }
 MongoTest >> testDatabaseNames [
+
 	self assert: (root databaseNames includes: 'test')
 ]
 
 { #category : #tests }
 MongoTest >> testDatabases [
+
 	self assert: (root databases contains: [:each | each name = 'test'])
 ]
 
 { #category : #tests }
 MongoTest >> testDelete [
 	| results data |
+
 	data := (Dictionary new)
-				at: 'key' put: 'value';
-				yourself.
+		at: 'key' put: 'value';
+		yourself.
 	collection add: data.
 	collection delete: data.
 	results := collection query: [ :query | ].
+
 	self assert: results isEmpty
 ]
 
 { #category : #tests }
 MongoTest >> testDo [
 	| count |
+
 	collection add: (Dictionary new at: 'key' put: 'value'; yourself).
 	collection add: (Dictionary new at: 'key' put: 'value'; yourself).
 	count := 0.
-	collection do: [:each | self assert: (each at: 'key') = 'value'. count := count + 1].
+	collection do: [ :each |
+		self assert: (each at: 'key') equals: 'value'.
+		count := count + 1 ].
 	self assert: count equals: 2
 ]
 
@@ -239,6 +257,18 @@ MongoTest >> testInsertTwoAndQuery [
 ]
 
 { #category : #tests }
+MongoTest >> testInsertWithWriteConcern [
+	| result new |
+
+	new := { 'key' -> 'new value' } asDictionary.
+
+	collection commandInsert: new writeConcern: self aWriteConcern.
+	result := collection query: [:query | ].
+	self assert: result size equals: 1.
+	self assert: (result first at: 'key') equals: 'new value'
+]
+
+{ #category : #tests }
 MongoTest >> testInsertWithWriteConcernAndQuery [
 	| results |
 	collection 
@@ -256,24 +286,6 @@ MongoTest >> testIsEmpty [
 	self assert: collection isEmpty.
 	collection add: data.
 	self deny: collection isEmpty
-]
-
-{ #category : #tests }
-MongoTest >> testLastError [
-	| data |
-	data := Dictionary new at: 'key' put: 'value'; yourself.
-	collection add: data.
-	
-	self assert: database lastError ok
-]
-
-{ #category : #tests }
-MongoTest >> testLastErrorWithWriteConcern [
-	| data |
-	data := Dictionary new at: 'key' put: 'value'; yourself.
-	collection add: data.
-	
-	self assert: (database lastError: self aWriteConcern) ok
 ]
 
 { #category : #tests }
@@ -298,13 +310,15 @@ MongoTest >> testOrderBy [
 	collection add: (Dictionary new at: 'key' put: 'b'; yourself).
 	collection add: (Dictionary new at: 'key' put: 'a'; yourself).
 	collection add: (Dictionary new at: 'key' put: 'b'; yourself).
-	query := MongoQuery new
+
+	query := root driver newQuery
 		database: database;
 		collection: collection;
 		where: Dictionary new;
 		order: { 'key' -> Mongo ascending} asDictionary.
 	results := query perform.
-	self assert: (results first at: 'key') equals: 'a'.
+
+	self assert: (results first at: 'key') equals: 'a'
 ]
 
 { #category : #tests }
@@ -379,14 +393,17 @@ MongoTest >> testSelect [
 { #category : #tests }
 MongoTest >> testSelectWithLimit [
 	| selected query |
+
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
 	collection add: (Dictionary new at: 'key2' put: 'value2'; yourself).
 	collection add: (Dictionary new at: 'key3' put: 'value3'; yourself).
-	query := MongoQuery new
+
+	query := root driver newQuery
 		database: database;
 		collection: collection;
 		limit: 2.
 	selected := query perform.
+
 	self assert: selected size equals: 2
 ]
 
@@ -409,18 +426,19 @@ MongoTest >> testSelectWithLimitAndNumberToSkip [
 ]
 
 { #category : #tests }
-MongoTest >> testUpdateWithFlags [
+MongoTest >> testUpdateWithUpsert [
 	| result old new |
+
 	old := { 'key' -> 'value' } asDictionary.
 	new := { 'key' -> 'new value' } asDictionary.
 
 	"Check that a normal update will not create anything"
 	collection update: old with: new.
-	result := collection query: [:query | ].
+	result := collection query: [ :query | ].
 	self assert: result size equals: 0.
 
 	"Check that an upsert will create the record"
-	collection update: old with: new flags: UpdateOperation flagUpsert.
+	collection update: old with: new upsert: true multi: false.
 	result := collection query: [:query | ].
 	self assert: result size equals: 1.
 	self assert: (result first at: 'key') equals: 'new value'.
@@ -432,15 +450,16 @@ MongoTest >> testUpdateWithFlags [
 	self assert: (result first at: 'key') equals: 'value'.
 
 	"And forward again"
-	collection update: old with: new flags: UpdateOperation flagUpsert.
+	collection update: old with: new  upsert: true multi: false.
 	result := collection query: [:query | ].
 	self assert: result size equals: 1.
-	self assert: (result first at: 'key') equals: 'new value'.
+	self assert: (result first at: 'key') equals: 'new value'
 ]
 
 { #category : #tests }
 MongoTest >> testUpdateWithWriteConcern [
 	| result old new |
+
 	old := { 'key' -> 'value' } asDictionary.
 	new := { 'key' -> 'new value' } asDictionary.
 
@@ -448,8 +467,7 @@ MongoTest >> testUpdateWithWriteConcern [
 	collection commandUpdate: old with: new writeConcern: self aWriteConcern.
 	result := collection query: [:query | ].
 	self assert: result size equals: 1.
-	self assert: (result first at: 'key') equals: 'new value'.
-
+	self assert: (result first at: 'key') equals: 'new value'
 ]
 
 { #category : #tests }

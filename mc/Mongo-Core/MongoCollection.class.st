@@ -19,7 +19,7 @@ Class {
 		'database',
 		'name'
 	],
-	#category : 'Mongo-Core-Base'
+	#category : #'Mongo-Core-Base'
 }
 
 { #category : #convenience }
@@ -35,12 +35,16 @@ MongoCollection class >> cmdVirtualCollection [
 ]
 
 { #category : #'instance creation' }
-MongoCollection class >> database: aMongoDatabase name: aString [ 
-	^self new setDatabase: aMongoDatabase name: aString
+MongoCollection class >> database: aMongoDatabase name: aString [
+
+	^self new
+		setDatabase: aMongoDatabase
+		name: aString
 ]
 
 { #category : #adding }
-MongoCollection >> add: aDictionary [ 
+MongoCollection >> add: aDictionary [
+
 	self insert: (Array with: aDictionary)
 ]
 
@@ -50,11 +54,15 @@ MongoCollection >> addAll: aCollection [
 ]
 
 { #category : #operations }
-MongoCollection >> commandDelete: origDictionary limit: aLimit writeConcern: aConcern [
+MongoCollection >> commandDelete: aDocument limit: aLimit writeConcern: aConcern [
 	"Delete using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/delete/"
 
-	^database commandDelete: origDictionary limit: aLimit collection: name writeConcern: aConcern
+	^ database
+		commandDelete: aDocument
+		limit: aLimit
+		collection: self
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
@@ -68,7 +76,7 @@ MongoCollection >> commandFind: filterDictionary limit: aLimit readConcern: aMon
 	^ database
 		commandFind: filterDictionary
 		limit: aLimit
-		collection: name
+		collection: self
 		readConcern: aMongoReadConcern
 ]
 
@@ -107,23 +115,33 @@ MongoCollection >> commandInsert: newDictionary writeConcern: aConcern [
 	"Insert using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/insert/"
 
-	^database commandInsert: newDictionary collection: name writeConcern: aConcern
+	^ database
+		commandInsert: newDictionary
+		collection: self
+		writeConcern: aConcern
 ]
 
 { #category : #operations }
-MongoCollection >> commandUpdate: origDictionary with: newDictionary [
+MongoCollection >> commandUpdate: aDocument with: newDocument [
 	"Update using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/update/"
 
-	^database commandUpdate: origDictionary with: newDictionary collection: name
+	^ database
+		commandUpdate: aDocument
+		with: newDocument
+		collection: self
 ]
 
 { #category : #operations }
-MongoCollection >> commandUpdate: origDictionary with: newDictionary writeConcern: aConcern [
+MongoCollection >> commandUpdate: aDocument with: newDocument writeConcern: aConcern [
 	"Update using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/update/"
 
-	^database commandUpdate: origDictionary with: newDictionary collection: name writeConcern: aConcern
+	^ database
+		commandUpdate: aDocument
+		with: newDocument
+		collection: self
+		writeConcern: aConcern
 ]
 
 { #category : #accessing }
@@ -132,8 +150,11 @@ MongoCollection >> database [
 ]
 
 { #category : #operations }
-MongoCollection >> delete: aDictionary [ 
-	database delete: aDictionary collection: name
+MongoCollection >> delete: aDictionary [
+
+	database
+		delete: aDictionary
+		collection: self
 ]
 
 { #category : #enumerating }
@@ -150,15 +171,18 @@ MongoCollection >> do: aBlock [
 
 { #category : #operations }
 MongoCollection >> drop [
-	database
-		command:
-			(OrderedIdentityDictionary new
-				at: #drop put: name;
-				yourself)	"check return value"
+	| result |
+
+	result := database command: (OrderedIdentityDictionary new
+		at: #drop put: name;
+		yourself).
+	(result at: 'ok') = 1.0
+		ifFalse: [ self error: 'I can''t drop the collection!' ]
 ]
 
 { #category : #convenience }
 MongoCollection >> ensureAdded [
+
 	[ database addCollection: name ]
 		on: MongoCollectionAlreadyExists
 		do: [ :error | ]
@@ -179,8 +203,11 @@ MongoCollection >> inject: anObject into: aBlock [
 ]
 
 { #category : #operations }
-MongoCollection >> insert: aCollection [
-	database insert: aCollection collection: name
+MongoCollection >> insert: aDocument [
+
+	database
+		insert: aDocument
+		collection: self
 ]
 
 { #category : #testing }
@@ -193,12 +220,12 @@ MongoCollection >> name [
 	^name
 ]
 
-{ #category : #queries }
+{ #category : #'private - factory' }
 MongoCollection >> newQuery [
-	^MongoQuery new
+	
+	^ self database newQuery
 		collection: self;
-		yourself.
-		
+		yourself
 ]
 
 { #category : #testing }
@@ -206,8 +233,9 @@ MongoCollection >> occurrencesOf: aDictionary [
 	^(self select: aDictionary) size
 ]
 
-{ #category : #queries }
+{ #category : #private }
 MongoCollection >> performQuery: aMongoQuery [
+
 	^ database query: aMongoQuery
 ]
 
@@ -221,15 +249,17 @@ MongoCollection >> printOn: aStream [
 
 { #category : #accessing }
 MongoCollection >> qualifiedName [
-	^database qualifiedName , '.' , name
+
+	^ database qualifiedName , '.' , name
 ]
 
 { #category : #queries }
 MongoCollection >> query: aBlock [
 	| query |
+
 	query := self newQuery.
 	aBlock value: query.
-	^self performQuery: query
+	 ^self performQuery: query
 ]
 
 { #category : #queries }
@@ -241,8 +271,11 @@ MongoCollection >> queryOne: aBlock [
 ]
 
 { #category : #removing }
-MongoCollection >> remove: aDictionary [ 
-	database delete: aDictionary collection: name
+MongoCollection >> remove: aDictionary [
+
+	database
+		delete: aDictionary
+		collection: self
 ]
 
 { #category : #removing }
@@ -298,6 +331,7 @@ MongoCollection >> select: aDictionary limit: limit offset: offset order: orderD
 
 { #category : #private }
 MongoCollection >> setDatabase: aMongoDatabase name: aString [
+
 	database := aMongoDatabase.
 	name := aString
 ]
@@ -315,24 +349,33 @@ MongoCollection >> sizeForQuery: aDictionary [
 
 	| reply |
 	reply := database
-		command:
-			(OrderedIdentityDictionary new
-				at: #count put: name;
-				at: #query put: aDictionary;
-				yourself)
-		flags: QueryOperation flagSlaveOk.
+		command: (OrderedIdentityDictionary new
+			at: #count put: name;
+			at: #query put: aDictionary;
+			yourself)
+		flags: 0.
 
 	^ (reply at: 'n') asInteger	"Why in the world is it a double?"
 ]
 
 { #category : #operations }
 MongoCollection >> update: origDictionary with: newDictionary [
-	database update: origDictionary with: newDictionary collection: name
+
+	database
+		update: origDictionary
+		with: newDictionary
+		collection: self
 ]
 
 { #category : #operations }
-MongoCollection >> update: origDictionary with: newDictionary flags: aFlag [
-	database update: origDictionary with: newDictionary collection: name flags: aFlag
+MongoCollection >> update: origDictionary with: newDictionary upsert: upsertBoolean multi: multiBoolean [
+
+	database
+		update: origDictionary
+		with: newDictionary
+		collection: self
+		upsert: upsertBoolean
+		multi: multiBoolean
 ]
 
 { #category : #operations }

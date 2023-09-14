@@ -12,7 +12,7 @@ Class {
 		'responseTo',
 		'id'
 	],
-	#category : 'Mongo-Core-Operations'
+	#category : #'Mongo-Core-Operations'
 }
 
 { #category : #'instance creation' }
@@ -38,6 +38,7 @@ ReplyOperation >> isFinished [
 { #category : #reading }
 ReplyOperation >> read [
 	| formatter size opCode responseFlag |
+	
 	formatter := LittleEndianStream on: stream.
 	size := formatter nextInt32.
 	id := formatter nextInt32.

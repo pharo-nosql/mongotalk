@@ -4,7 +4,7 @@ A MongoReadConcernTest is a test class for testing the behavior of MongoReadConc
 Class {
 	#name : #MongoReadConcernTest,
 	#superclass : #TestCase,
-	#category : 'Mongo-Tests-Core-Utilities'
+	#category : #'Mongo-Tests-Core-Utilities'
 }
 
 { #category : #running }
@@ -26,6 +26,6 @@ MongoReadConcernTest >> testReusesDictionary [
 	| aReadConcern twoAnswers |
 	aReadConcern := MongoReadConcern local.
 	twoAnswers := (1 to: 2)
-		collect: [ :each | aReadConcern concernForCommand ].
+		collect: [ :each | aReadConcern asConcernForCommand ].
 	self assert: twoAnswers asIdentitySet size equals: 1
 ]

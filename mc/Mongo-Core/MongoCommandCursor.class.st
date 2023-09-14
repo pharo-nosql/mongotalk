@@ -18,16 +18,15 @@ Class {
 		'timeoutOrNil',
 		'flags'
 	],
-	#category : 'Mongo-Core-Utilities'
+	#category : #'Mongo-Core-Utilities'
 }
 
 { #category : #'instance creation' }
-MongoCommandCursor class >> database: aMongoDatabase dictionary: aCollection [ 
-	^ self basicNew
-		initializeDatabase: aMongoDatabase
-		command: aCollection;
-		yourself.
+MongoCommandCursor class >> database: aMongoDatabase dictionary: aCollection [
 
+	^ self basicNew
+		initializeDatabase: aMongoDatabase command: aCollection;
+		yourself
 ]
 
 { #category : #accessing }
@@ -41,10 +40,10 @@ MongoCommandCursor >> batchSizeOrNil: anObject [
 ]
 
 { #category : #enumerating }
-MongoCommandCursor >> collect: aBlockClosure [ 
-	^ Array streamContents: [ :stream |
-		self do: [ :each | stream nextPut: (aBlockClosure value: each) ] ]
+MongoCommandCursor >> collect: aBlock [
 
+	^ Array streamContents: [ :stream |
+		self do: [ :each | stream nextPut: (aBlock value: each) ] ]
 ]
 
 { #category : #accessing }
@@ -54,7 +53,8 @@ MongoCommandCursor >> command [
 
 { #category : #enumerating }
 MongoCommandCursor >> contents [
-	^ self collect: #yourself
+
+	^ self collect: [ :each | each ]
 ]
 
 { #category : #accessing }
@@ -63,18 +63,25 @@ MongoCommandCursor >> database [
 ]
 
 { #category : #enumerating }
-MongoCommandCursor >> do: aBlockClosure [ 
-	batch := self firstBatch.
+MongoCommandCursor >> do: aBlock [
 
-	[	batch documents do: aBlockClosure.
+	batch := self firstBatch.
+	[
+		batch documents do: aBlock.
 		batch atEnd ifTrue: [ ^self ].
-		batch := (database collectionAt: batch collectionName) commandGetMore: batch cursorId batchSize: self batchSizeOrNil timeout: self timeoutOrNil
-		] repeat
+		batch := (database collectionAt: batch collectionName)
+			commandGetMore: batch cursorId
+			batchSize: self batchSizeOrNil
+			timeout: self timeoutOrNil
+	] repeat
 ]
 
 { #category : #enumerating }
 MongoCommandCursor >> firstBatch [
-	^ MongoQueryBatch newFromFirstBatchResponse: (database command: command flags: self flags)
+
+	^ MongoQueryBatch newFromFirstBatchResponse: (database
+		command: command
+		flags: 0)
 ]
 
 { #category : #accessing }
@@ -90,11 +97,11 @@ MongoCommandCursor >> flags: flagsAsInteger [
 ]
 
 { #category : #initialization }
-MongoCommandCursor >> initializeDatabase: aMongoDatabase command: aCollection [ 
+MongoCommandCursor >> initializeDatabase: aMongoDatabase command: aCollection [
+
 	self initialize.
-	
 	database := aMongoDatabase.
-	command := aCollection.
+	command := aCollection
 ]
 
 { #category : #convenience }

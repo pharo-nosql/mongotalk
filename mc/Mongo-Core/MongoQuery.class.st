@@ -19,7 +19,7 @@ Class {
 		'flags',
 		'operation'
 	],
-	#category : 'Mongo-Core-Base'
+	#category : #'Mongo-Core-Base'
 }
 
 { #category : #accessing }
@@ -29,7 +29,8 @@ MongoQuery >> chunkSize [
 
 { #category : #accessing }
 MongoQuery >> chunkSize: anInteger [
-	^chunkSize := anInteger
+
+	^ chunkSize := anInteger
 ]
 
 { #category : #accessing }
@@ -49,6 +50,7 @@ MongoQuery >> database [
 
 { #category : #accessing }
 MongoQuery >> database: aMongoDatabase [
+
 	database := aMongoDatabase
 ]
 
@@ -84,7 +86,8 @@ MongoQuery >> doBlock [
 
 { #category : #accessing }
 MongoQuery >> doBlock: aBlock [
-	doBlock := aBlock.
+
+	doBlock := aBlock
 ]
 
 { #category : #accessing }
@@ -139,7 +142,8 @@ MongoQuery >> offset: anInteger [
 
 { #category : #accessing }
 MongoQuery >> operation [
-	^ operation ifNil: [ QueryOperation  ]
+
+	^ operation
 ]
 
 { #category : #accessing }
@@ -159,11 +163,14 @@ MongoQuery >> order: anArrayOfAssociation [
 
 { #category : #'perform query' }
 MongoQuery >> perform [
-	^collection performQuery: self.
+
+	^ collection performQuery: self
 ]
 
 { #category : #accessing }
 MongoQuery >> qualifiedName [
+
+	collection ifNil: [ ^ nil ].	
 	^ database name, '.', collection name
 ]
 
