@@ -18,7 +18,7 @@ mongo open.
 ## Install Mongo driver
 
 Evaluate the following script in Pharo:
-```Smalltalk
+```smalltalk
 Metacello new
 	repository: 'github://pharo-nosql/mongotalk/mc';
 	baseline: 'MongoTalk';
@@ -28,12 +28,36 @@ Metacello new
 ---
 ## Install MongoClient
 
-```Smalltalk
+```smalltalk
 Metacello new
 	repository: 'github://pharo-nosql/mongotalk/mc';
 	baseline: 'MongoTalk';
 	load: #(Client)
 ```
+
+---
+## Older mongo versions (< 5)
+Current driver (v5) is incompatible with older mongo versions, if you require to connect to one of those older databases, you will need to first install a legacy driver: 
+
+```smalltalk
+Metacello new
+	repository: 'github://pharo-nosql/mongotalk/mc';
+	baseline: 'MongoTalk';
+	load: #('Mongo-DriverLegacy')
+```
+
+Then you will need to explicitly declare its use in your mongo client: 
+```
+db := Mongo new
+	useLegacyDriver;
+	open. 
+```
+
+Alternatively, you can also set the default driver to be used in any connection:
+```smalltalk
+MongoDriver defaultDriver: MongoLegacyDriver.
+```
+*This is useful if you are using [Voyage](https://github.com/pharo-nosql/voyage), for example.*
 
 ---
 # The MongoDB specification
