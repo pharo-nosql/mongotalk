@@ -47,7 +47,7 @@ Metacello new
 ```
 
 Then you will need to explicitly declare its use in your mongo client: 
-```
+```smalltalk
 db := Mongo new
 	useLegacyDriver;
 	open. 
