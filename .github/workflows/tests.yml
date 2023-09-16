@@ -38,5 +38,5 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
-          name: ${{matrix.os}}-${{matrix.smalltalk}}
+          name: ${{matrix.os}}-${{ matrix.pharo-version }}
           token: ${{ secrets.CODECOV_TOKEN }}
