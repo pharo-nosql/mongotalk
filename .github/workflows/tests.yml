@@ -34,3 +34,9 @@ jobs:
         run: smalltalkci -s ${{ matrix.pharo-version }} ${{ matrix.ston }}
         shell: bash
         timeout-minutes: 40
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          name: ${{matrix.os}}-${{matrix.smalltalk}}
+          token: ${{ secrets.CODECOV_TOKEN }}
