@@ -33,6 +33,8 @@ jobs:
       - name: Get Pharo and Run Tests
         run: smalltalkci -s ${{ matrix.pharo-version }} ${{ matrix.ston }}
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         timeout-minutes: 40
 
       - name: Upload coverage to Codecov
