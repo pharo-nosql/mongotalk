@@ -1,5 +1,5 @@
 # MongoTalk 
-A Pharo driver for [MongoDB](https://www.mongodb.com/).
+A [Pharo](https://www.pharo.org) driver for [MongoDB](https://www.mongodb.com/).
 
 [![CI](https://github.com/pharo-nosql/mongotalk/actions/workflows/tests.yml/badge.svg)](https://github.com/pharo-nosql/mongotalk/actions/workflows/tests.yml)
 [![Coverage Status](https://codecov.io/github/pharo-nosql/mongotalk/coverage.svg?branch=master)](https://codecov.io/gh/pharo-nosql/mongotalk/branch/master)
