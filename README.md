@@ -2,7 +2,6 @@
 A Pharo driver for [MongoDB](https://www.mongodb.com/).
 
 [![CI](https://github.com/pharo-nosql/mongotalk/actions/workflows/tests.yml/badge.svg)](https://github.com/pharo-nosql/mongotalk/actions/workflows/tests.yml)
-
 [![Coverage Status](https://codecov.io/github/pharo-nosql/mongotalk/coverage.svg?branch=master)](https://codecov.io/gh/pharo-nosql/mongotalk/branch/master)
 
 [![Pharo 10](https://img.shields.io/badge/Pharo-10-%23aac9ff.svg)](https://pharo.org/download)
