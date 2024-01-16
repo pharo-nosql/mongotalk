@@ -455,7 +455,7 @@ Mongo >> urlString [
 Mongo >> useDriver: aDriver [
 
 	driver := aDriver.
-	aDriver connection: self
+	aDriver root: self
 ]
 
 { #category : #operations }
