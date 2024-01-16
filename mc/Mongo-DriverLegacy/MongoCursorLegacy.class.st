@@ -28,11 +28,10 @@ MongoCursorLegacy >> execute [
 					collection: query collection ]
 			ifNil: [
 				self cursorQuery: query ].
-
-		reply := OpMsgReply fromStream: root stream.
+			
+		reply := (ReplyOperation stream: root stream) read.
 		reply responseTo = requestId
 			ifFalse: [ ^ MongoWireProtocolError signal: 'Unexpected responseTo in response' ].
-
 		reply do: [:each |
 			numberReturned < limit ifTrue: [
 				query doBlock value: each.
