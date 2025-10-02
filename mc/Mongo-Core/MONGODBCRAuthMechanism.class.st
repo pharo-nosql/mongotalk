@@ -9,22 +9,24 @@ See:
 
 "
 Class {
-	#name : #MONGODBCRAuthMechanism,
-	#superclass : #MongoAuthMechanism,
-	#category : 'Mongo-Core-Auth'
+	#name : 'MONGODBCRAuthMechanism',
+	#superclass : 'MongoAuthMechanism',
+	#category : 'Mongo-Core-Auth',
+	#package : 'Mongo-Core',
+	#tag : 'Auth'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MONGODBCRAuthMechanism class >> description [
 	^ 'Challenge Response'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MONGODBCRAuthMechanism class >> isAbstract [
 	^ false
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MONGODBCRAuthMechanism >> authenticateUsername: user password: pass forcedDatabase: aDatabase [
 	| nonce reply pwd key |
 	reply := self root

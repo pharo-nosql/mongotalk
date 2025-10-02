@@ -2,16 +2,18 @@
 I represent the description of a mongodb server. The main information I provide is extracted from a mongodb's ismaster command, but I also know the roundtrip time to get such answer from the server.
 "
 Class {
-	#name : #MongoServerDescription,
-	#superclass : #MongoAbstractServerDescription,
+	#name : 'MongoServerDescription',
+	#superclass : 'MongoAbstractServerDescription',
 	#instVars : [
 		'isMaster',
 		'roundtripDurationAverage'
 	],
-	#category : 'Mongo-Client-Topology'
+	#category : 'Mongo-Client-Topology',
+	#package : 'Mongo-Client',
+	#tag : 'Topology'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoServerDescription class >> urlString: urlString isMaster: aMongoIsMaster roundtripTime: aDuration [
 	^ self basicNew
 		initializeUrlString: urlString
@@ -20,7 +22,7 @@ MongoServerDescription class >> urlString: urlString isMaster: aMongoIsMaster ro
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerDescription >> differencesFrom: anotherMongoServerDescription do: aBlockClosure [
 
 	"If there is a diff in super, stop here."
@@ -34,29 +36,29 @@ MongoServerDescription >> differencesFrom: anotherMongoServerDescription do: aBl
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoServerDescription >> initializeUrlString: aUrlString isMaster: aMongoIsMaster roundtripDurationAverage: aDuration [
 	self initializeUrlString: aUrlString.
 	isMaster := aMongoIsMaster.
 	roundtripDurationAverage := aDuration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerDescription >> isMaster [
 	^ isMaster
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoServerDescription >> isSecondary [
 	^ isMaster isSecondary
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoServerDescription >> isSuccess [
 	^ true
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoServerDescription >> printOn: aStream [
 	super printOn: aStream.
 
@@ -73,12 +75,12 @@ MongoServerDescription >> printOn: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerDescription >> roundtripDurationAverage [
 	^ roundtripDurationAverage
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerDescription >> staleness [
 	^ isMaster isReplicaSet
 		ifTrue: [ isMaster staleness ]

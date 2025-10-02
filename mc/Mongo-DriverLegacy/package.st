@@ -1,1 +1,1 @@
-Package { #name : #'Mongo-DriverLegacy' }
+Package { #name : 'Mongo-DriverLegacy' }

@@ -2,22 +2,24 @@
 I represent  an error ocurred in a Mongo $cmd operation.
 "
 Class {
-	#name : #MongoCommandError,
-	#superclass : #MongoNativeError,
-	#category : 'Mongo-Core-Errors'
+	#name : 'MongoCommandError',
+	#superclass : 'MongoNativeError',
+	#category : 'Mongo-Core-Errors',
+	#package : 'Mongo-Core',
+	#tag : 'Errors'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandError >> errmsg [
 	^ reply at: 'errmsg'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandError >> errorMessage [
 	^ reply at: 'errmsg' ifAbsent: 'unknown'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoCommandError >> isCollectionAlreadyExists [
 	"Test if the cause of error when adding a collection was that the mongodb instance already has such collection."
 
@@ -26,12 +28,12 @@ MongoCommandError >> isCollectionAlreadyExists [
 		ifAbsent: [ self errmsg = 'collection already exists' ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoCommandError >> isInsertionError [
 	^ self codeIfPresent: [ :code | code = 11000 ] ifAbsent: [ false ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoCommandError >> isNotMaster [
 	"Test if the cause of error was that the mongodb instance belongs to a replica set and it is not the master in the replSetConfig."
 
@@ -40,7 +42,7 @@ MongoCommandError >> isNotMaster [
 		ifAbsent: [ self errmsg = 'not master' ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoCommandError >> isNotMasterAndSlaveOkIsFalse [
 	"Test if the cause of error was that the mongodb instance belongs to a replica set and it is not the master and slaveOk property is false in the replSetConfig."
 
@@ -49,7 +51,7 @@ MongoCommandError >> isNotMasterAndSlaveOkIsFalse [
 		ifAbsent: [ self errmsg = 'not master and slaveOk=false' ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoCommandError >> isNotRunningWithReplSet [
 	"Test if the cause of error was that the mongodb instance was not ran with --replSet argument, which is needed to perform replication operations."
 

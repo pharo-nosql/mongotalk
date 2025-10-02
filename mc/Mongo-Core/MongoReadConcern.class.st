@@ -18,8 +18,8 @@ See more: https://docs.mongodb.com/v4.0/reference/read-concern/
 
 "
 Class {
-	#name : #MongoReadConcern,
-	#superclass : #Object,
+	#name : 'MongoReadConcern',
+	#superclass : 'Object',
 	#instVars : [
 		'dictionary'
 	],
@@ -30,47 +30,49 @@ Class {
 		'linearizable',
 		'snapshot'
 	],
-	#category : #'Mongo-Core-Utilities'
+	#category : 'Mongo-Core-Utilities',
+	#package : 'Mongo-Core',
+	#tag : 'Utilities'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReadConcern class >> available [
 	^ available ifNil: [ available := self newWithLevel: 'available' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReadConcern class >> linearizable [
 	^ linearizable ifNil: [ linearizable := self newWithLevel: 'linearizable' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReadConcern class >> local [
 	^ local ifNil: [ local := self newWithLevel: 'local' ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReadConcern class >> majority [
 	^ majority ifNil: [ majority := self newWithLevel: 'majority' ]
 ]
 
-{ #category : #'instance c' }
+{ #category : 'instance c' }
 MongoReadConcern class >> newWithLevel: aString [
 	^ self basicNew
 		initializeWithLevel: aString;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReadConcern class >> snapshot [
 	^ snapshot ifNil: [ snapshot := self newWithLevel: 'snapshot' ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 MongoReadConcern >> asConcernForCommand [
 	^ dictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReadConcern >> initializeWithLevel: aString [
 	self initialize.
 	dictionary := Dictionary new
@@ -78,7 +80,7 @@ MongoReadConcern >> initializeWithLevel: aString [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReadConcern >> level [
 	"Answer the read concern level"
 

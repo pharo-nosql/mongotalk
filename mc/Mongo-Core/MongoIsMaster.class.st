@@ -13,22 +13,24 @@ MongoDB drivers and clients use isMaster to determine the state of the replica s
 Read more at: https://docs.mongodb.com/v4.0/reference/command/isMaster/
 "
 Class {
-	#name : #MongoIsMaster,
-	#superclass : #Object,
+	#name : 'MongoIsMaster',
+	#superclass : 'Object',
 	#instVars : [
 		'response'
 	],
-	#category : 'Mongo-Core-Responses'
+	#category : 'Mongo-Core-Responses',
+	#package : 'Mongo-Core',
+	#tag : 'Responses'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoIsMaster class >> with: aCollection [
 	^ self basicNew
 		initializeWith: aCollection;
 		yourself
 ]
 
-{ #category : #'accessing - diff' }
+{ #category : 'accessing - diff' }
 MongoIsMaster >> basicDifferencesFrom: anotherMongoIsMaster do: aBlockClosure [
 	"Evaluate a block closure on each of the differences found between self and another IsMaster response (potentially from a different server in a replica set)."
 
@@ -39,7 +41,7 @@ MongoIsMaster >> basicDifferencesFrom: anotherMongoIsMaster do: aBlockClosure [
 		mine = theirs ifFalse: [ aBlockClosure cull: each cull: theirs -> mine ] ]
 ]
 
-{ #category : #'accessing - diff' }
+{ #category : 'accessing - diff' }
 MongoIsMaster >> differencesFrom: anotherMongoIsMaster do: aBlockClosure [
 	"Evaluate a block closure on each of the differences found between self and another IsMaster response (potentially from a different server in a replica set)."
 
@@ -48,25 +50,25 @@ MongoIsMaster >> differencesFrom: anotherMongoIsMaster do: aBlockClosure [
 		self replicaSetDifferencesFrom: anotherMongoIsMaster do: aBlockClosure ].
 ]
 
-{ #category : #'testing - common' }
+{ #category : 'testing - common' }
 MongoIsMaster >> hasDifferenceWith: anotherMongoIsMaster [
 	self differencesFrom: anotherMongoIsMaster do: [ ^ true ].
 	^ false
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> hasPrimary [
 	^ response includesKey: 'primary'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoIsMaster >> initializeWith: aCollection [ 
 	self initialize.
 	
 	response := aCollection.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoIsMaster >> isMaster [
 	"A boolean value that reports when this node is writable. If true, then this instance is a primary in a replica set, or a mongos instance, or a standalone mongod.
 
@@ -77,32 +79,32 @@ Source: https://docs.mongodb.com/manual/reference/command/isMaster/#isMaster.ism
 	^ response at: 'ismaster'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoIsMaster >> isPassive [
 	^ response at: 'passive' ifAbsent: [ false ]
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> isPrimary [
 	^ self isMaster and: [ self isReplicaSet ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoIsMaster >> isReadOnly [
 	^ response at: 'readOnly'
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> isReplicaSet [
 	^ response includesKey: 'setName'
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> isSecondary [
 	^ response at: 'secondary' ifAbsent: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoIsMaster >> isSharded [
 	"Answer whether it's a sharded instance.
 
@@ -112,27 +114,27 @@ MongoIsMaster >> isSharded [
 	^ response includesKey: 'msg'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoIsMaster >> isWrittable [
 	^ self isMaster
 ]
 
-{ #category : #'accessing - replica set' }
+{ #category : 'accessing - replica set' }
 MongoIsMaster >> lastWriteDateAndTime [
 	^ ((response at: 'lastWrite') at: 'lastWriteDate') asDateAndTime 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoIsMaster >> localTime [
 	^ (response at: 'localTime') asDateAndTime
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> primaryUrlString [
 	^ response at: 'primary' ifAbsent: [ '' ]
 ]
 
-{ #category : #'accessing - diff' }
+{ #category : 'accessing - diff' }
 MongoIsMaster >> replicaSetDifferencesFrom: anotherMongoIsMaster do: aBlockClosure [
 	"Evaluate a block closure on each of the replica set differences between self and another IsMaster response (potentially from a different server in a replica set)."
 
@@ -143,32 +145,32 @@ MongoIsMaster >> replicaSetDifferencesFrom: anotherMongoIsMaster do: aBlockClosu
 		mine = theirs ifFalse: [ aBlockClosure cull: each cull: theirs -> mine ] ]
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> replicaSetHosts [
 	^ response at: 'hosts'
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> replicaSetName [
 	^ response at: 'setName'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoIsMaster >> replicaSetPassives [
 	^ response at: 'passives' ifAbsent: [ #() ]
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> replicaSetUrls [
 	^ self replicaSetHosts collect: #asMongoUrl
 ]
 
-{ #category : #'accessing - common' }
+{ #category : 'accessing - common' }
 MongoIsMaster >> response [
 	^ response
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoIsMaster >> staleness [
 	"Answer the 'replication lag' of a non primary server.
 	
@@ -177,7 +179,7 @@ MongoIsMaster >> staleness [
 	^ self localTime - self lastWriteDateAndTime
 ]
 
-{ #category : #'replica set' }
+{ #category : 'replica set' }
 MongoIsMaster >> urlString [
 	"In a replica set, this is the url of the requested server. Not defined else."
 	

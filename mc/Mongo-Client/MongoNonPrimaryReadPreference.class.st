@@ -16,25 +16,27 @@ Extracted from documentation:
 Source: https://docs.mongodb.com/v4.0/core/read-preference/
 "
 Class {
-	#name : #MongoNonPrimaryReadPreference,
-	#superclass : #MongoReadPreference,
+	#name : 'MongoNonPrimaryReadPreference',
+	#superclass : 'MongoReadPreference',
 	#instVars : [
 		'maxStaleness'
 	],
-	#category : 'Mongo-Client-ReadPreferences'
+	#category : 'Mongo-Client-ReadPreferences',
+	#package : 'Mongo-Client',
+	#tag : 'ReadPreferences'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoNonPrimaryReadPreference >> hasMaxStalenessValue [
 	^ maxStaleness notNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoNonPrimaryReadPreference >> maxStaleness [
 	^ maxStaleness ifNil: [ self maxStalenessNullValue ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoNonPrimaryReadPreference >> maxStaleness: aDuration [
 	"Replica set members can lag behind the primary due to network congestion, low disk throughput, long-running operations, etc. 
 	The read preference maxStalenessSeconds option lets you specify a maximum replication lag, or “staleness”, for reads from secondaries. 
@@ -46,14 +48,14 @@ MongoNonPrimaryReadPreference >> maxStaleness: aDuration [
 	maxStaleness := aDuration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoNonPrimaryReadPreference >> maxStalenessNullValue [
 	"Mongodb documentation defines this value as disabled maxStaleness."
 
 	^ -1
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoNonPrimaryReadPreference >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 

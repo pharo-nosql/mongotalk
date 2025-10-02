@@ -2,26 +2,28 @@
 I represent the description of a mongodb server. See my subclasses.
 "
 Class {
-	#name : #MongoAbstractServerDescription,
-	#superclass : #Object,
+	#name : 'MongoAbstractServerDescription',
+	#superclass : 'Object',
 	#instVars : [
 		'urlString',
 		'dateAndTime'
 	],
-	#category : 'Mongo-Client-Topology'
+	#category : 'Mongo-Client-Topology',
+	#package : 'Mongo-Client',
+	#tag : 'Topology'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAbstractServerDescription >> dateAndTime [
 	^ dateAndTime
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoAbstractServerDescription >> dateAndTime: aDateAndTime [
 	dateAndTime := aDateAndTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAbstractServerDescription >> differencesFrom: anotherMongoServerDescription do: aBlockClosure [
 	self class = anotherMongoServerDescription class ifFalse: [
 		aBlockClosure
@@ -29,30 +31,30 @@ MongoAbstractServerDescription >> differencesFrom: anotherMongoServerDescription
 			cull: anotherMongoServerDescription class -> self class ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoAbstractServerDescription >> hasDifferenceWith: anotherMongoServerDescription [
 	self differencesFrom: anotherMongoServerDescription do: [ ^ true ].
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoAbstractServerDescription >> initializeUrlString: aUrlString [
 	self initialize.
 	urlString := aUrlString.
 	dateAndTime := DateAndTime now
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoAbstractServerDescription >> isError [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoAbstractServerDescription >> isSuccess [
 	^ false
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoAbstractServerDescription >> printOn: aStream [
 	super printOn: aStream.
 
@@ -61,18 +63,18 @@ MongoAbstractServerDescription >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoAbstractServerDescription >> printShortDescriptionOn: aStream [
 	aStream nextPutAll: urlString.
 	self isSuccess ifFalse: [ aStream nextPutAll: ' FAILED' ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAbstractServerDescription >> url [
 	^ urlString asMongoUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAbstractServerDescription >> urlString [
 	^ urlString
 ]

@@ -1,16 +1,18 @@
 Class {
-	#name : #MongoCommandCursorTest,
-	#superclass : #TestCase,
+	#name : 'MongoCommandCursorTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'collection',
 		'root',
 		'database',
 		'documents'
 	],
-	#category : #'Mongo-Tests-Core-Tests'
+	#category : 'Mongo-Tests-Core-Tests',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> assertExpectedDocuments: aCollection [
 	self assert: aCollection size equals: self expectedDocumentCount.
 
@@ -21,14 +23,14 @@ MongoCommandCursorTest >> assertExpectedDocuments: aCollection [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MongoCommandCursorTest >> baseDocumentForTesting [
 	^ OrderedDictionary new
 		at: 'type' put: 'test';
 		yourself
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> commandForTesting [
 	^ OrderedDictionary new
 		at: 'find' put: collection name;
@@ -36,12 +38,12 @@ MongoCommandCursorTest >> commandForTesting [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MongoCommandCursorTest >> expectedDocumentCount [
 	^ 1000
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MongoCommandCursorTest >> setUp [
 	root := Mongo default.
 	root open.
@@ -55,13 +57,13 @@ MongoCommandCursorTest >> setUp [
 	documents do: [ :each | collection add: each ].
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MongoCommandCursorTest >> tearDown [
 	database collections do: #drop.
 	root close.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> testCollect [
 	| cursor collected |
 	cursor := MongoCommandCursor database: database dictionary: self commandForTesting.
@@ -71,7 +73,7 @@ MongoCommandCursorTest >> testCollect [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> testCollectionFindWithFilter [
 	| commandCursor |
 
@@ -83,7 +85,7 @@ MongoCommandCursorTest >> testCollectionFindWithFilter [
 	self assert: commandCursor contents size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> testCollectionFindWithReadConcernLocal [
 	| commandCursor |
 	commandCursor := collection
@@ -95,7 +97,7 @@ MongoCommandCursorTest >> testCollectionFindWithReadConcernLocal [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> testCollectionFindWithoutFilterWithLimit [
 	| commandCursor |
 	commandCursor := collection
@@ -107,7 +109,7 @@ MongoCommandCursorTest >> testCollectionFindWithoutFilterWithLimit [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> testContents [
 	| cursor |
 	cursor := MongoCommandCursor database: database dictionary: self commandForTesting.
@@ -116,7 +118,7 @@ MongoCommandCursorTest >> testContents [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> testDo [
 	| cursor collected |
 	cursor := MongoCommandCursor database: database dictionary: self commandForTesting.
@@ -127,7 +129,7 @@ MongoCommandCursorTest >> testDo [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> testSpecifyingBatchSize [
 	| cursor |
 	cursor := MongoCommandCursor database: database dictionary: self commandForTesting.
@@ -137,7 +139,7 @@ MongoCommandCursorTest >> testSpecifyingBatchSize [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoCommandCursorTest >> testSpecifyingTimeoutSignalsError [
 	| cursor |
 	cursor := MongoCommandCursor

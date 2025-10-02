@@ -4,30 +4,49 @@ A driver from mongo wire protocol from v5.0 and later.
 https://www.mongodb.com/docs/manual/reference/mongodb-wire-protocol/
 "
 Class {
-	#name : #MongoDriverV5,
-	#superclass : #MongoDriver,
-	#category : #'Mongo-DriverV5-Base'
+	#name : 'MongoDriverV5',
+	#superclass : 'MongoDriver',
+	#traits : 'MongoTSocket',
+	#classTraits : 'MongoTSocket classTrait',
+	#category : 'Mongo-DriverV5-Base',
+	#package : 'Mongo-DriverV5',
+	#tag : 'Base'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoDriverV5 class >> isDefault [
 
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDriverV5 >> commandClass [
 
 	^ MongoCursorCommand
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDriverV5 >> commandQueryClass [
 
 	^ MongoCursorQuery
 ]
 
-{ #category : #operations }
+{ #category : 'private' }
+MongoDriverV5 >> cursorQuery: aQuery [
+	| id |
+
+	id := self nextRequestID.
+	(aQuery operation
+		id: id
+			stream: self stream
+			query: aQuery)
+		flags: aQuery flags;
+		write.
+
+	^ id
+]
+
+{ #category : 'operations' }
 MongoDriverV5 >> delete: aDocument collection: aMongoCollection [
 	| command |
 
@@ -46,7 +65,7 @@ MongoDriverV5 >> delete: aDocument collection: aMongoCollection [
 	^ self executeCommand: command
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriverV5 >> executeCommand: command [
 	| result |
 
@@ -62,7 +81,7 @@ MongoDriverV5 >> executeCommand: command [
 	^ result
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriverV5 >> insert: aDocument collection: aMongoCollection [
 	| command |
 
@@ -77,7 +96,7 @@ MongoDriverV5 >> insert: aDocument collection: aMongoCollection [
 	^ self executeCommand: command
 ]
 
-{ #category : #'private - factory' }
+{ #category : 'private - factory' }
 MongoDriverV5 >> newCommand: aQuery [
 
 	^ self commandClass
@@ -85,15 +104,15 @@ MongoDriverV5 >> newCommand: aQuery [
 		query: aQuery
 ]
 
-{ #category : #'private - factory' }
+{ #category : 'private - factory' }
 MongoDriverV5 >> newCommandQuery: aQuery [
 
 	^ self commandQueryClass
-		root: self root
+		root: self
 		query: aQuery
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoDriverV5 >> newQuery [
 
 	^ super newQuery 
@@ -101,7 +120,7 @@ MongoDriverV5 >> newQuery [
 		yourself
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoDriverV5 >> newQueryCommand: anOrderedDictionary database: aDatabase flags: flags [
 
 	^ MongoQuery new
@@ -112,7 +131,7 @@ MongoDriverV5 >> newQueryCommand: anOrderedDictionary database: aDatabase flags:
 		yourself
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriverV5 >> query: aMongoQuery [
 	| results |
 
@@ -129,7 +148,7 @@ MongoDriverV5 >> query: aMongoQuery [
 	^ results
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriverV5 >> queryOne: aMongoQuery [
 
 	aMongoQuery doBlock: [:each |
@@ -144,7 +163,7 @@ MongoDriverV5 >> queryOne: aMongoQuery [
 	^ nil
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriverV5 >> update: aDocument with: newDocument collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
 	| command |
 

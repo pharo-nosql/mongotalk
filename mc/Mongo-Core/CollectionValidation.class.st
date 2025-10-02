@@ -9,25 +9,27 @@ values
 
 "
 Class {
-	#name : #CollectionValidation,
-	#superclass : #Object,
+	#name : 'CollectionValidation',
+	#superclass : 'Object',
 	#instVars : [
 		'values'
 	],
-	#category : 'Mongo-Core-Utilities'
+	#category : 'Mongo-Core-Utilities',
+	#package : 'Mongo-Core',
+	#tag : 'Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 CollectionValidation class >> on: aDictionary [ 
 	^self new setValues: aDictionary
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 CollectionValidation >> isOK [
 	^(values at: 'ok') = 1.0
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 CollectionValidation >> setValues: aDictionary [ 
 	values := aDictionary
 ]

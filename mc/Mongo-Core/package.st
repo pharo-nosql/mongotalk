@@ -1,1 +1,1 @@
-Package { #name : #'Mongo-Core' }
+Package { #name : 'Mongo-Core' }

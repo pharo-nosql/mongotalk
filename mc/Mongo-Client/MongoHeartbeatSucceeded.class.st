@@ -2,16 +2,18 @@
 I'm announced by a MongoClient just after a monitor got the isMaster response from a mongodb server. I match with a previous MongoHeartbeatStarted announcement.
 "
 Class {
-	#name : #MongoHeartbeatSucceeded,
-	#superclass : #MongoHeartbeat,
+	#name : 'MongoHeartbeatSucceeded',
+	#superclass : 'MongoHeartbeat',
 	#instVars : [
 		'isMaster',
 		'roundTripTimeDuraton'
 	],
-	#category : 'Mongo-Client-Announcements'
+	#category : 'Mongo-Client-Announcements',
+	#package : 'Mongo-Client',
+	#tag : 'Announcements'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoHeartbeatSucceeded class >> urlString: aUrlString roundtripTimeDuraton: aDuration isMaster: aMongoIsMaster [
 	^ self basicNew
 		initializeWithUrlString: aUrlString
@@ -20,7 +22,7 @@ MongoHeartbeatSucceeded class >> urlString: aUrlString roundtripTimeDuraton: aDu
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoHeartbeatSucceeded >> initializeWithUrlString: aUrlString roundTripTimeDuraton: aDuration isMaster: aMongoIsMaster [
 	self initialize.
 	
@@ -29,12 +31,12 @@ MongoHeartbeatSucceeded >> initializeWithUrlString: aUrlString roundTripTimeDura
 	isMaster := aMongoIsMaster.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoHeartbeatSucceeded >> isMaster [
 	^ isMaster
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoHeartbeatSucceeded >> roundTripTimeDuraton [
 	^ roundTripTimeDuraton
 ]

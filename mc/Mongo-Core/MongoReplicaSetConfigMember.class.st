@@ -2,39 +2,41 @@
 I represent a member of a Mongo Replica Set configuration. More concretely, I reify part of the result of config command (https://docs.mongodb.com/v3.0/reference/command/replSetGetConfig/)
 "
 Class {
-	#name : #MongoReplicaSetConfigMember,
-	#superclass : #Object,
+	#name : 'MongoReplicaSetConfigMember',
+	#superclass : 'Object',
 	#instVars : [
 		'configuration'
 	],
-	#category : 'Mongo-Core-Responses'
+	#category : 'Mongo-Core-Responses',
+	#package : 'Mongo-Core',
+	#tag : 'Responses'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoReplicaSetConfigMember class >> with: aConfiguration [
 	^self basicNew
 		initialize: aConfiguration;
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoReplicaSetConfigMember >> initialize: aConfiguration [
 	self initialize.
 	
 	configuration := aConfiguration.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoReplicaSetConfigMember >> isArbiterOnly [
 	^(configuration at: 'arbiterOnly') "= 'true'"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReplicaSetConfigMember >> name [
 	^configuration at: 'host'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoReplicaSetConfigMember >> printOn: aStream [
 	super printOn: aStream.
 	
@@ -44,17 +46,17 @@ MongoReplicaSetConfigMember >> printOn: aStream [
 		nextPut: $).
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReplicaSetConfigMember >> priority [
 	^(configuration at: 'priority') asNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReplicaSetConfigMember >> tags [
 	^configuration at: 'tags'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoReplicaSetConfigMember >> votes [
 	^configuration at: 'votes'
 ]

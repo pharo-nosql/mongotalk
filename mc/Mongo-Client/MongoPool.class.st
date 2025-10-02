@@ -7,18 +7,20 @@ Source: https://github.com/mongodb/specifications/blob/03aed6c58dcd6afd81980876b
 
 "
 Class {
-	#name : #MongoPool,
-	#superclass : #Object,
+	#name : 'MongoPool',
+	#superclass : 'Object',
 	#instVars : [
 		'connections',
 		'url',
 		'mutex',
 		'settings'
 	],
-	#category : 'Mongo-Client-Client'
+	#category : 'Mongo-Client-Client',
+	#package : 'Mongo-Client',
+	#tag : 'Client'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoPool class >> url: aZnUrl maxConnections: aQuantity connectTimeout: aConnectTimeout socketTimeout: aSocketTimeout [
 	^ self basicNew
 		initializeUrl: aZnUrl
@@ -28,7 +30,7 @@ MongoPool class >> url: aZnUrl maxConnections: aQuantity connectTimeout: aConnec
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoPool class >> url: aZnUrl settings: aMongoSettings [
 	^ self basicNew
 		initializeUrl: aZnUrl
@@ -36,19 +38,19 @@ MongoPool class >> url: aZnUrl settings: aMongoSettings [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPool >> ensureCloseMongo: aMongo [
 	aMongo closeIfOpen
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoPool >> ensureOpenMongo: mongo [
+
 	mongo isOpen ifTrue: [ ^ self ].
-	mongo openWithTimeout: settings connectTimeout.
-	mongo socketTimeout: settings socketTimeout.
+	mongo openWithTimeout: settings connectTimeout
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoPool >> initializeUrl: aZnUrl settings: aMongoSettings [
 	self initialize.
 
@@ -62,7 +64,7 @@ MongoPool >> initializeUrl: aZnUrl settings: aMongoSettings [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPool >> mongoDo: aBlockClosure [
 	"Evaluate the BlockClosure with a Mongo instance. See #next.
 	
@@ -91,7 +93,7 @@ MongoPool >> mongoDo: aBlockClosure [
 				self return: mongo ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoPool >> next [
 	"Answer an instance of Mongo that is open (and then ready to be used). The instance may be either one cached from from the pool or a new one if there isn't any cached.
 	
@@ -109,7 +111,7 @@ MongoPool >> next [
 	^ mongo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPool >> resetAll [
 	"Remove and close all connections."
 	
@@ -118,7 +120,7 @@ MongoPool >> resetAll [
 			self ensureCloseMongo: connections removeLast ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoPool >> return: mongo [
 	"Release to this pool an instance of Mongo previously obtained via #next. Ideally, such Mongo instance should be open and ready to be answered by #next on a new operation."
 
@@ -128,7 +130,7 @@ MongoPool >> return: mongo [
 			ifFalse: [ connections add: mongo ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPool >> settings [
 	^ settings
 ]

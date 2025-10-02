@@ -2,17 +2,19 @@
 A MongoReadConcernTest is a test class for testing the behavior of MongoReadConcern
 "
 Class {
-	#name : #MongoReadConcernTest,
-	#superclass : #TestCase,
-	#category : #'Mongo-Tests-Core-Utilities'
+	#name : 'MongoReadConcernTest',
+	#superclass : 'TestCase',
+	#category : 'Mongo-Tests-Core-Utilities',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Utilities'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MongoReadConcernTest >> allLevelStrings [
 	^ #(local available majority linearizable snapshot)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoReadConcernTest >> testAllLevelsAreSingleton [
 	self allLevelStrings do: [ :level | 
 		| twoAnswers |
@@ -21,7 +23,7 @@ MongoReadConcernTest >> testAllLevelsAreSingleton [
 		self assert: twoAnswers asIdentitySet size equals: 1 ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoReadConcernTest >> testReusesDictionary [
 	| aReadConcern twoAnswers |
 	aReadConcern := MongoReadConcern local.

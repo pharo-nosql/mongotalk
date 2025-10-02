@@ -4,8 +4,8 @@ A Mongo query.
 See: https://docs.mongodb.com/v4.0/reference/mongodb-wire-protocol/
 "
 Class {
-	#name : #MongoQuery,
-	#superclass : #Object,
+	#name : 'MongoQuery',
+	#superclass : 'Object',
 	#instVars : [
 		'database',
 		'where',
@@ -19,167 +19,189 @@ Class {
 		'flags',
 		'operation'
 	],
-	#category : #'Mongo-Core-Base'
+	#category : 'Mongo-Core-Base',
+	#package : 'Mongo-Core',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'converting' }
+MongoQuery >> asOptionsDocument [
+
+	^ self fillOptionsTo: SmallDictionary new
+]
+
+{ #category : 'accessing' }
 MongoQuery >> chunkSize [
 	^chunkSize ifNil: [ chunkSize := self defaultChunkSize ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> chunkSize: anInteger [
 
 	^ chunkSize := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> collection [
 	^collection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> collection: aMongoCollection [
 	collection := aMongoCollection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> database [
 	^ database
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> database: aMongoDatabase [
 
 	database := aMongoDatabase
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 MongoQuery >> defaultChunkSize [
 	^0
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 MongoQuery >> defaultFields [
 	^nil
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 MongoQuery >> defaultLimit [
 	^0
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 MongoQuery >> defaultOffset [
 	^0
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 MongoQuery >> defaultWhere [
 	^Dictionary new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> doBlock [
 	^doBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> doBlock: aBlock [
 
 	doBlock := aBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> fields [
 	^ fields ifNil: [ fields := self defaultFields ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> fields: aDictionary [
 	fields := aDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'converting' }
+MongoQuery >> fillOptionsTo: opts [
+
+	self offset > 0 ifTrue: [ opts at: 'skip' put: self offset ].
+	self limit > 0 ifTrue: [  opts at: 'limit' put: self limit ].
+	self chunkSize > 0 ifTrue: [ opts at: 'batchSize' put: self chunkSize ].
+	self order ifNotNil: [ opts at: 'sort' put: self order ].
+	self fields ifNotNil: [ :fields |
+		opts
+			at: 'projection'
+			put: (fields keys collect: [ :each | each -> 1 ]) asOrderedDictionary ].
+	^ opts
+]
+
+{ #category : 'accessing' }
 MongoQuery >> flags [
 	"Query operation flags. See QueryOperation class side."
 	
 	^flags ifNil: [ flags := 0 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> flags: flagsAsInteger [
 	"Query operation flags. See QueryOperation class side."
 	
 	flags := flagsAsInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> from: anInteger to: anotherInteger [
 	self skip: anInteger - 1.
 	self limit: anotherInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> limit [
 	^ limit ifNil: [ limit := self defaultLimit]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> limit: anInteger [
 	limit := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> offset [
 	^ offset ifNil: [ offset := self defaultOffset ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> offset: anInteger [
 	offset := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> operation [
 
 	^ operation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> operation: operationClass [
 	operation  := operationClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> order [
 	^ order
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> order: anArrayOfAssociation [
 	order := anArrayOfAssociation asDictionary.
 ]
 
-{ #category : #'perform query' }
+{ #category : 'perform query' }
 MongoQuery >> perform [
 
 	^ collection performQuery: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> qualifiedName [
 
 	collection ifNil: [ ^ nil ].	
 	^ database name, '.', collection name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> where [
 	^ where ifNil: [ where := self defaultWhere]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQuery >> where: anObject [
 	where := anObject asMongoQuery 
 ]

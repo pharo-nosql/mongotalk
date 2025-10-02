@@ -2,12 +2,14 @@
 I represent commands can be sent to $cmd collection. I'm almost a ""query operation"" except for simpler format of request.
 "
 Class {
-	#name : #CommandOperation,
-	#superclass : #QueryOperation,
-	#category : #'Mongo-DriverLegacy-Operations'
+	#name : 'CommandOperation',
+	#superclass : 'QueryOperation',
+	#category : 'Mongo-DriverLegacy-Operations',
+	#package : 'Mongo-DriverLegacy',
+	#tag : 'Operations'
 }
 
-{ #category : #writing }
+{ #category : 'writing' }
 CommandOperation >> computeDataBytes [
 	^BSON writer 
 		nextOrderedDictionaryPut: mongoQuery where; 

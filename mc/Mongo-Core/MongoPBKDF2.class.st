@@ -29,8 +29,8 @@ derivedKey := PBKDF2 derivedKeySHA1Password: password salt: salt.`
 
 "
 Class {
-	#name : #MongoPBKDF2,
-	#superclass : #Object,
+	#name : 'MongoPBKDF2',
+	#superclass : 'Object',
 	#instVars : [
 		'prf',
 		'hLen',
@@ -39,10 +39,12 @@ Class {
 		'c',
 		'dkLen'
 	],
-	#category : #'Mongo-Core-Auth'
+	#category : 'Mongo-Core-Auth',
+	#package : 'Mongo-Core',
+	#tag : 'Auth'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoPBKDF2 class >> derivedKeyHashFunction: hashClass password: password salt: salt [
 	^ PBKDF2 new
 		hashFunction: hashClass;
@@ -51,7 +53,7 @@ MongoPBKDF2 class >> derivedKeyHashFunction: hashClass password: password salt: 
 		deriveKey
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoPBKDF2 class >> derivedKeyHashFunction: hashClass password: password salt: salt iterations: iterations length: length [
 	^ PBKDF2 new
 		hashFunction: hashClass;
@@ -62,7 +64,7 @@ MongoPBKDF2 class >> derivedKeyHashFunction: hashClass password: password salt: 
 		deriveKey
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoPBKDF2 class >> derivedKeyPseudoRandomFunction: prf password: password salt: salt iterations: iterations length: length [
 	^ PBKDF2 new
 		prf: prf;
@@ -73,7 +75,7 @@ MongoPBKDF2 class >> derivedKeyPseudoRandomFunction: prf password: password salt
 		deriveKey
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoPBKDF2 class >> derivedKeySHA1Password: password salt: salt [
 	^ PBKDF2 new
 		password: password;
@@ -81,12 +83,12 @@ MongoPBKDF2 class >> derivedKeySHA1Password: password salt: salt [
 		deriveKey
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> c: anInteger [
 	c := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> deriveBlock: i [
 	| u un |
 	un := prf
@@ -100,7 +102,7 @@ MongoPBKDF2 >> deriveBlock: i [
 	^ u
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> deriveKey [
 	| l |
 	dkLen > (((2 raisedTo: 32) - 1) * hLen)
@@ -114,17 +116,17 @@ MongoPBKDF2 >> deriveKey [
 		to: dkLen
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> dkLen: anInteger [
 	dkLen := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> hashFunction: anHashFunction [
 	self prf: anHashFunction new hmac
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoPBKDF2 >> initialize [
 	self
 		hashFunction: SHA1;
@@ -132,50 +134,50 @@ MongoPBKDF2 >> initialize [
 		length: 16
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> iterations: anInteger [
 	self c: anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> length: anInteger [
 	self dkLen: anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> p: aByteArray [
 	p := aByteArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> password: aString [
 	self p: aString asByteArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> prf: aPseudoRandomFunction [
 	prf := aPseudoRandomFunction.
 	hLen := self prfHLen: aPseudoRandomFunction
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> prfHLen: aPseudoRandomFunction [
 	^ aPseudoRandomFunction digestSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> prfKey: k message: m [
 	^ prf
 		key: k;
 		digestMessage: m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> s: aByteArray [
 	s := aByteArray
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoPBKDF2 >> salt: aString [
 	self s: aString asByteArray
 ]

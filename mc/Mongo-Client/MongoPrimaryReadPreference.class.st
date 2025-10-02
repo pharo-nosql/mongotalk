@@ -4,12 +4,14 @@ I represent a mongodb's ""primary"" ReadPreference.
 See: https://docs.mongodb.com/v4.0/reference/read-preference/#primary
 "
 Class {
-	#name : #MongoPrimaryReadPreference,
-	#superclass : #MongoReadPreference,
-	#category : 'Mongo-Client-ReadPreferences'
+	#name : 'MongoPrimaryReadPreference',
+	#superclass : 'MongoReadPreference',
+	#category : 'Mongo-Client-ReadPreferences',
+	#package : 'Mongo-Client',
+	#tag : 'ReadPreferences'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 MongoPrimaryReadPreference >> accept: aVisitor [
 	^ aVisitor visitPrimaryReadPreference: self
 ]

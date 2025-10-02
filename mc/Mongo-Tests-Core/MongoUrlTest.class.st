@@ -1,10 +1,12 @@
 Class {
-	#name : #MongoUrlTest,
-	#superclass : #TestCase,
-	#category : 'Mongo-Tests-Core-Tests'
+	#name : 'MongoUrlTest',
+	#superclass : 'TestCase',
+	#category : 'Mongo-Tests-Core-Tests',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoUrlTest >> testDefaultPortUrl [
 	| url |
 	url := 'db.myserver' asMongoUrl.
@@ -13,7 +15,7 @@ MongoUrlTest >> testDefaultPortUrl [
 	self assert: url port equals: 27017.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoUrlTest >> testFullUrl [
 	| url |
 	url := 'db.myserver:8888' asMongoUrl.

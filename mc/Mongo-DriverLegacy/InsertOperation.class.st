@@ -2,16 +2,18 @@
 Insert operation
 "
 Class {
-	#name : #InsertOperation,
-	#superclass : #MongoOperation,
+	#name : 'InsertOperation',
+	#superclass : 'MongoOperation',
 	#instVars : [
 		'objects',
 		'dataBytes'
 	],
-	#category : #'Mongo-DriverLegacy-Operations'
+	#category : 'Mongo-DriverLegacy-Operations',
+	#package : 'Mongo-DriverLegacy',
+	#tag : 'Operations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 InsertOperation class >> collection: aString id: idInteger stream: aStream objects: aCollection [
 	^(self collection: aString
 		id: idInteger
@@ -19,37 +21,37 @@ InsertOperation class >> collection: aString id: idInteger stream: aStream objec
 			setObjects: aCollection 
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 InsertOperation >> computeDataBytes [
 	^ BSON writeAll: objects
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 InsertOperation >> dataBytes [
 	^dataBytes ifNil: [dataBytes := self computeDataBytes]
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 InsertOperation >> fixedHeaderSize [
 	^ 20
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 InsertOperation >> messageSize [
 	^ self dataBytes size + collectionBytes size + 1 + self fixedHeaderSize
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 InsertOperation >> opCode [
 	^2002
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 InsertOperation >> setObjects: aCollection [
 	objects := aCollection
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 InsertOperation >> writeBody [
 	writer
 		nextInt32Put: 0;

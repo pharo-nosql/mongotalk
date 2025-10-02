@@ -1,25 +1,27 @@
 Class {
-	#name : #SCRAMSHA256AuthMechanism,
-	#superclass : #SCRAMAuthMechanism,
-	#category : 'Mongo-Core-Auth'
+	#name : 'SCRAMSHA256AuthMechanism',
+	#superclass : 'SCRAMAuthMechanism',
+	#category : 'Mongo-Core-Auth',
+	#package : 'Mongo-Core',
+	#tag : 'Auth'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SCRAMSHA256AuthMechanism class >> description [
 	^ 'SCRAM-SHA-256'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SCRAMSHA256AuthMechanism class >> isAbstract [
 	^ false
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SCRAMSHA256AuthMechanism >> hashFunction [
 	^ SHA256
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SCRAMSHA256AuthMechanism >> mechanismName [
 	^ 'SCRAM-SHA-256'
 ]

@@ -2,8 +2,8 @@
 Common superclass for Mongo authentication mechanisms.
 "
 Class {
-	#name : #MongoAuthMechanism,
-	#superclass : #Object,
+	#name : 'MongoAuthMechanism',
+	#superclass : 'Object',
 	#instVars : [
 		'root',
 		'forceDatabase'
@@ -11,35 +11,37 @@ Class {
 	#classInstVars : [
 		'authAgainstAdmin'
 	],
-	#category : #'Mongo-Core-Auth'
+	#category : 'Mongo-Core-Auth',
+	#package : 'Mongo-Core',
+	#tag : 'Auth'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism class >> authAgainstAdmin [
 	^ authAgainstAdmin ifNil: [ false ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism class >> authAgainstAdmin: boolean [
 	authAgainstAdmin := boolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism class >> beDefault [
 	Mongo defaultAuthMechanismClass: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism class >> description [
 	^ self subclassResponsibility 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism class >> isAbstract [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism class >> root: root [
 	|mech|
 	mech := self new root: root.
@@ -47,7 +49,7 @@ MongoAuthMechanism class >> root: root [
 	^ mech
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoAuthMechanism >> authenticateUsername: user password: pass database: aDatabase [
 
 	^self
@@ -56,27 +58,27 @@ MongoAuthMechanism >> authenticateUsername: user password: pass database: aDatab
 		forcedDatabase: (self forceDatabase ifNil: [ aDatabase ])
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoAuthMechanism >> authenticateUsername: user password: pass forcedDatabase: aDatabase [
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism >> forceDatabase [
 	^ forceDatabase
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism >> forceDatabase: anObject [
 	forceDatabase := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism >> root [
 	^ root
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoAuthMechanism >> root: anObject [
 	root := anObject
 ]

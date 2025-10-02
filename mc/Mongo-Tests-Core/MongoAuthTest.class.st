@@ -1,26 +1,28 @@
 Class {
-	#name : #MongoAuthTest,
-	#superclass : #TestCase,
+	#name : 'MongoAuthTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'root',
 		'database'
 	],
-	#category : #'Mongo-Tests-Core-Tests'
+	#category : 'Mongo-Tests-Core-Tests',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MongoAuthTest >> setUp [
 	root := Mongo default.
 	root open.
 	database := root databaseNamed: 'test'.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MongoAuthTest >> tearDown [
 	root close
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoAuthTest >> testDefaultAuthMechanism [
 
 	self assert: Mongo defaultAuthMechanismClass equals: SCRAMSHA1AuthMechanism.
@@ -28,7 +30,7 @@ MongoAuthTest >> testDefaultAuthMechanism [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoAuthTest >> testSCRAMSHA1AuthMechanism [
 	"ToDo: this test requires manual configuration. 
 	=> Run in command-line:

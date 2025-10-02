@@ -5,27 +5,29 @@ See: https://docs.mongodb.com/v4.0/core/security-scram/
 
 "
 Class {
-	#name : #SCRAMSHA1AuthMechanism,
-	#superclass : #SCRAMAuthMechanism,
-	#category : 'Mongo-Core-Auth'
+	#name : 'SCRAMSHA1AuthMechanism',
+	#superclass : 'SCRAMAuthMechanism',
+	#category : 'Mongo-Core-Auth',
+	#package : 'Mongo-Core',
+	#tag : 'Auth'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SCRAMSHA1AuthMechanism class >> description [
 	^ 'SCRAM-SHA-1'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SCRAMSHA1AuthMechanism class >> isAbstract [
 	^ false
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SCRAMSHA1AuthMechanism >> hashFunction [
 	^ SHA1
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SCRAMSHA1AuthMechanism >> mechanismName [
 	^ 'SCRAM-SHA-1'
 ]

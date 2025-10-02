@@ -2,18 +2,20 @@
 A command that performs a query in mongo (the equivallent of `find` in mongo). 
 "
 Class {
-	#name : #MongoCursorQuery,
-	#superclass : #MongoCursor,
-	#category : #'Mongo-DriverV5-Base'
+	#name : 'MongoCursorQuery',
+	#superclass : 'MongoCursor',
+	#category : 'Mongo-DriverV5-Base',
+	#package : 'Mongo-DriverV5',
+	#tag : 'Base'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 MongoCursorQuery >> driver [
 
-	^ root driver
+	^ root
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 MongoCursorQuery >> execute [
 	| limit reply numberReturned requestId |
 
@@ -35,7 +37,7 @@ MongoCursorQuery >> execute [
 			ifNil: [
 				self cursorQuery: query ].
 
-		reply := OpMsgReply fromStream: root stream.
+		reply := OpMsgReply fromStream: self driver stream.
 		reply responseTo = requestId
 			ifFalse: [ ^ MongoWireProtocolError signal: 'Unexpected responseTo in response' ].
 		reply isOk
@@ -50,7 +52,7 @@ MongoCursorQuery >> execute [
 	whileFalse
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoCursorQuery >> fetchMoreCursorId: cursorId chunkSize: count collection: aMongoCollection [
 
 	^ self cursorQuery: (self driver

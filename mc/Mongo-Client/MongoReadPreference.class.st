@@ -4,27 +4,29 @@ I represent a mongodb's ReadPreference.
 See: https://docs.mongodb.com/v4.0/reference/read-preference/
 "
 Class {
-	#name : #MongoReadPreference,
-	#superclass : #Object,
-	#category : 'Mongo-Client-ReadPreferences'
+	#name : 'MongoReadPreference',
+	#superclass : 'Object',
+	#category : 'Mongo-Client-ReadPreferences',
+	#package : 'Mongo-Client',
+	#tag : 'ReadPreferences'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoReadPreference class >> newNearest [
 	^ MongoNearestReadPreference new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoReadPreference class >> newPrimary [
 	^ MongoPrimaryReadPreference new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoReadPreference class >> newPrimaryPreferred [
 	^ MongoPrimaryPreferredReadPreference new
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 MongoReadPreference >> accept: aVisitor [
 	^ self subclassResponsibility
 ]
