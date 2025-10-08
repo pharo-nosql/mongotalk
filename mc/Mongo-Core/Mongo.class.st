@@ -176,6 +176,19 @@ Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	^ reply
 ]
 
+{ #category : 'operations' }
+Mongo >> commandCreateIndexName: aName keys: keyAssociations unique: aBoolean collection: aMongoCollection [
+	"keysAssociations is a collection of associations where 
+		key = field name to index
+		value = 1 - ascending. -1 descending"
+
+	^ self driver 
+		commandCreateIndexName: aName 
+		keys: keyAssociations
+		unique: aBoolean 
+		collection: aMongoCollection
+]
+
 { #category : 'operations - concern' }
 Mongo >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
 

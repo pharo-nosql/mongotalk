@@ -57,6 +57,34 @@ MongoDriver >> commandClass [
 ]
 
 { #category : 'operations' }
+MongoDriver >> commandCreateIndexName: aName keys: keyAssociations unique: aBoolean collection: aMongoCollection [
+	"Create index using Mongo command. Answer the output of the command.
+	See more on https://docs.mongodb.com/manual/reference/command/
+	
+	keysAssociations is a collection of associations where 
+		key = field name to index
+		value = 1 - ascending. -1 descending"
+	| commandSpec command |
+
+	commandSpec := OrderedDictionary new
+		at: 'createIndexes' put: aMongoCollection name;
+		at: 'indexes' put: { 
+			OrderedDictionary new 
+				at: 'key' put: keyAssociations asOrderedDictionary;
+				at: 'unique' put: (aBoolean ifTrue: [ 1 ] ifFalse: [ 0 ]);
+				at: 'name' put: aName; 
+				yourself };
+		yourself.
+		
+	command := self
+		newQueryCommand: commandSpec
+		database: aMongoCollection database
+		flags: 0.
+
+	^ self executeCommandAndVerify: command
+]
+
+{ #category : 'operations' }
 MongoDriver >> commandDelete: aDocument limit: aLimit collection: aMongoCollection writeConcern: aConcern [
 	"Delete using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/delete/"

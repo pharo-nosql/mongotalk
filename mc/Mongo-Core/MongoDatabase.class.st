@@ -122,6 +122,18 @@ MongoDatabase >> commandAndVerify: anOrderedDictionary [
 ]
 
 { #category : 'operations' }
+MongoDatabase >> commandCreateIndexName: aName keys: keysAssociations unique: aBoolean collection: aMongoCollection [
+	"keysAssociations is a collection of associations where 
+		key = field name to index
+		value = 1 - ascending. -1 descending"
+	^ self root 
+		commandCreateIndexName: aName 
+		keys: keysAssociations
+		unique: aBoolean 
+		collection: aMongoCollection
+]
+
+{ #category : 'operations' }
 MongoDatabase >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
 
 	^ self root

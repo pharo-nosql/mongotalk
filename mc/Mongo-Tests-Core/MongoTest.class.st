@@ -82,6 +82,18 @@ MongoTest >> testAddExistingCollection [
 ]
 
 { #category : 'tests' }
+MongoTest >> testCollectionCreateIndex [
+
+	collection := database collectionAt: 'collection'.
+	collection commandCreateIndexName: 'index_by_name' keys: { 'name' -> 1 } unique: true.
+
+	collection add: { 'name' -> 'test' } asDictionary.
+	self 
+		should: [ collection add: { 'name' -> 'test' } asDictionary ]
+		raise: MongoCommandError
+]
+
+{ #category : 'tests' }
 MongoTest >> testCollectionEnsureAdded [
 	collection := database collectionAt: 'collection'.
 	self deny: (database collectionNames includes: 'collection').

@@ -83,7 +83,7 @@ MongoDriverV5 >> executeCommand: command [
 
 { #category : 'operations' }
 MongoDriverV5 >> insert: aDocument collection: aMongoCollection [
-	| command |
+	| command reply |
 
 	"https://www.mongodb.com/docs/manual/reference/command/insert"
 	command := self
@@ -93,7 +93,17 @@ MongoDriverV5 >> insert: aDocument collection: aMongoCollection [
 		database: aMongoCollection database
 		flags: 0.
 
-	^ self executeCommand: command
+	reply := self executeCommand: command.
+	"For insertions, I need to validate I have a good insert reply, it is not enough with
+	 a simple 'ok'. So, if is ok (if I arrive here it will be) but 'n' = 0 (meaning there 
+	 was no insertion), I need to raise an error."
+	((reply at: #n) = 0) ifTrue: [ 
+		reply 
+			at: #writeErrors 
+			ifPresent: [ :errors | MongoCommandInsertError signalFor: errors first ]
+			ifAbsent: [ MongoCommandInsertError signalFor: Dictionary new ] ]. 
+
+	^ reply
 ]
 
 { #category : 'private - factory' }
