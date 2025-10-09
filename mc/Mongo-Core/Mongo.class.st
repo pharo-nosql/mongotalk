@@ -25,12 +25,11 @@ stream
 
 "
 Class {
-	#name : #Mongo,
-	#superclass : #Object,
+	#name : 'Mongo',
+	#superclass : 'Object',
 	#instVars : [
 		'host',
 		'port',
-		'stream',
 		'requestID',
 		'authMechanism',
 		'authCache',
@@ -42,31 +41,33 @@ Class {
 	#classInstVars : [
 		'defaultAuthMechanismClass'
 	],
-	#category : #'Mongo-Core-Base'
+	#category : 'Mongo-Core-Base',
+	#package : 'Mongo-Core',
+	#tag : 'Base'
 }
 
-{ #category : #constants }
+{ #category : 'constants' }
 Mongo class >> ascending [
 	"Ascending sort order"
 	
 	^1
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo class >> default [
 	"If there is no other default use the local one"
 	
 	^Default ifNil: [ Default := self local ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo class >> default: aMongo [
 	"Ability to set an own default"
 	
 	Default := aMongo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo class >> defaultAuthMechanismClass [
 	"Answer a subclass of MongoAuthMechanism that represents the default authentication mechanism for a Mongo instance.
 	
@@ -76,61 +77,61 @@ Mongo class >> defaultAuthMechanismClass [
 	^ defaultAuthMechanismClass ifNil: [ SCRAMSHA1AuthMechanism ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo class >> defaultAuthMechanismClass: class [
 	defaultAuthMechanismClass := class
 ]
 
-{ #category : #constants }
+{ #category : 'constants' }
 Mongo class >> descending [
 	"Descending sort order"
 	
 	^-1
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Mongo class >> host: aString port: anInteger [
 	"Return a new instance on the given server and port"
 	
 	^self new setHost: aString port: anInteger
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Mongo class >> local [
 	"Return the standard locally running MongoDB server instance"
 	
 	^self host: 'localhost' port: 27017
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 Mongo class >> url: aZnUrl [
 	"Return a new instance on the given URL"
 
 	^ self new setHost: aZnUrl host port: aZnUrl port
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 Mongo >> admin [
 	^self databaseNamed: 'admin'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> authCache [
 	^ authCache ifNil: [ 
 		authCache := Dictionary new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> authMechanism [
 	^ authMechanism ifNil: [ authMechanism := self class defaultAuthMechanismClass root: self ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> authMechanism: aMongoAuthMechanism [
 	authMechanism := aMongoAuthMechanism
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> authenticateUsername: user password: pass database: aDatabase [
 
 	^self authMechanism 
@@ -139,17 +140,18 @@ Mongo >> authenticateUsername: user password: pass database: aDatabase [
 		database: aDatabase
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> close [
-	stream close
+
+	self driver close
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> closeIfOpen [
 	self isOpen ifTrue: [ self close ]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> command: anOrderedDictionary database: aDatabase [
 
 	^ self
@@ -158,7 +160,7 @@ Mongo >> command: anOrderedDictionary database: aDatabase [
 		flags: 0
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	| query reply |
 
@@ -174,7 +176,20 @@ Mongo >> command: anOrderedDictionary database: aDatabase flags: flags [
 	^ reply
 ]
 
-{ #category : #'operations - concern' }
+{ #category : 'operations' }
+Mongo >> commandCreateIndexName: aName keys: keyAssociations unique: aBoolean collection: aMongoCollection [
+	"keysAssociations is a collection of associations where 
+		key = field name to index
+		value = 1 - ascending. -1 descending"
+
+	^ self driver 
+		commandCreateIndexName: aName 
+		keys: keyAssociations
+		unique: aBoolean 
+		collection: aMongoCollection
+]
+
+{ #category : 'operations - concern' }
 Mongo >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
 
 	^ self driver
@@ -184,7 +199,7 @@ Mongo >> commandDelete: aDocument limit: aLimit collection: collectionName write
 		writeConcern: aConcern
 ]
 
-{ #category : #'operations - concern' }
+{ #category : 'operations - concern' }
 Mongo >> commandFind: filterDictionary limit: aLimit collection: aMongoCollection readConcern: aMongoReadConcern [
 
 	^ self driver
@@ -194,7 +209,7 @@ Mongo >> commandFind: filterDictionary limit: aLimit collection: aMongoCollectio
 		readConcern: aMongoReadConcern
 ]
 
-{ #category : #'operations - concern' }
+{ #category : 'operations - concern' }
 Mongo >> commandInsert: newDictionary collection: aMongoCollection writeConcern: aConcern [
 
 	^ self driver
@@ -203,7 +218,7 @@ Mongo >> commandInsert: newDictionary collection: aMongoCollection writeConcern:
 		writeConcern: aConcern
 ]
 
-{ #category : #'operations - concern' }
+{ #category : 'operations - concern' }
 Mongo >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
 
 	^ self driver
@@ -213,22 +228,22 @@ Mongo >> commandUpdate: aDocument with: newDocument collection: aMongoCollection
 		writeConcern: aConcern
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> databaseNamed: aString [
 	^MongoDatabase root: self name: aString
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> databaseNames [
 	^ self listDatabases collect: [:each | each at: 'name' ]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> databases [
 	^ self databaseNames collect: [ :each | self databaseNamed: each ]
 ]
 
-{ #category : #'private - communicating' }
+{ #category : 'private - communicating' }
 Mongo >> delete: aDictionary collection: aCollection [
 
 	self driver
@@ -236,7 +251,7 @@ Mongo >> delete: aDictionary collection: aCollection [
 		collection: aCollection
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 Mongo >> driver [
 
 	^ driver ifNil: [
@@ -245,12 +260,12 @@ Mongo >> driver [
 			yourself ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> host [
 	^host
 ]
 
-{ #category : #'private - communicating' }
+{ #category : 'private - communicating' }
 Mongo >> insert: aDocument collection: aMongoCollection [
 
 	self driver
@@ -258,7 +273,7 @@ Mongo >> insert: aDocument collection: aMongoCollection [
 		collection: aMongoCollection
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 Mongo >> isAvailable [
 	"Return true when it is possible to connect to the mongo DB instance, false otherwise.
 	 When it is available it is also opened."
@@ -268,17 +283,18 @@ Mongo >> isAvailable [
 		do: [ ^false ]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> isMaster [
 	^ self admin isMaster
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 Mongo >> isOpen [ 
-	^stream notNil and: [ stream isConnected ]
+
+	^ self driver isOpen
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> listDatabases [
 	| command |
 	command := (OrderedIdentityDictionary new)
@@ -287,20 +303,20 @@ Mongo >> listDatabases [
 	^ (self admin command: command) at: 'databases'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> majorVersion [
 	"Get the mongodb instance major version (e.g. 2 or 3) as integer. See #version"
 
 	^ (self version splitOn: '.') first asInteger
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 Mongo >> newQuery [
 
 	^ self driver newQuery
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 Mongo >> newQueryCommand: anOrderedDictionary  database: aDatabase flags: flags [
 
 	^ self driver
@@ -309,41 +325,35 @@ Mongo >> newQueryCommand: anOrderedDictionary  database: aDatabase flags: flags 
 		flags: flags
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 Mongo >> nextRequestID [
 
 	^ requestID := requestID + 1 bitAnd: 16r3FFFFFFF
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> open [
 
-	stream := SocketStream openConnectionToHostNamed: host port: port.
-	stream binary.
-	stream socket 
-		setOption: 'TCP_NODELAY' 
-		value: 1.
+	self driver openFor: self.
 	authCache := nil
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> openWithTimeout: aDuration [
-	| addr |
-	"Waits the specified number of seconds to open the connection."
-	addr := NetNameResolver addressForName: host timeout: 20.
-	stream := SocketStream openConnectionToHost: addr port: port timeout: aDuration asSeconds.
-	stream socket setOption: 'TCP_NODELAY' value: 1.
-	stream binary.
+	
+	self driver 
+		openFor: self 
+		timeout: aDuration.
 	authCache := nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> port [
 
 	^ port
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 Mongo >> printOn: aStream [
 
 	aStream 
@@ -354,19 +364,19 @@ Mongo >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> query: aMongoQuery [
 
 	^ self driver query: aMongoQuery
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> queryOne: aMongoQuery [
 
 	^ self driver queryOne: aMongoQuery
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> replicaSetConfig [
 	"Answer the configuration of the replica set.
 	See more at: https://docs.mongodb.com/v3.2/reference/command/replSetGetConfig/"
@@ -374,7 +384,7 @@ Mongo >> replicaSetConfig [
 	^ self admin replicaSetConfig
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> replicaSetStatus [
 	"Answer the status of the replica set.
 	See more at: https://docs.mongodb.com/v3.2/reference/command/replSetGetStatus/"
@@ -382,7 +392,7 @@ Mongo >> replicaSetStatus [
 	^ self admin replicaSetStatus
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> replicaSetStepDown: aDuration [
 	"Forces the primary of the replica set to become a secondary, triggering an election for primary. The command steps down the primary for a specified number of seconds; during this period, the stepdown member is ineligible from becoming primary.
 
@@ -396,7 +406,7 @@ Mongo >> replicaSetStepDown: aDuration [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 Mongo >> setHost: aString port: anInteger [
 	requestID := 0.
 	host := aString.
@@ -404,27 +414,7 @@ Mongo >> setHost: aString port: anInteger [
 	"validate?"
 ]
 
-{ #category : #accessing }
-Mongo >> socketTimeout: aDuration [
-	"Set the timeout for next queries and commands to execute."
-
-	stream timeout: aDuration asSeconds
-]
-
-{ #category : #accessing }
-Mongo >> stream [
-
-	^ stream
-]
-
-{ #category : #accessing }
-Mongo >> stream: aStream [
-
-	stream := aStream.
-	authCache := nil
-]
-
-{ #category : #'private - communicating' }
+{ #category : 'private - communicating' }
 Mongo >> update: origDictionary with: newDictionary collection: aMongoCollection [
 
 	^ self
@@ -435,7 +425,7 @@ Mongo >> update: origDictionary with: newDictionary collection: aMongoCollection
 		multi: false
 ]
 
-{ #category : #'private - communicating' }
+{ #category : 'private - communicating' }
 Mongo >> update: origDictionary with: newDictionary collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
 
 	self driver
@@ -446,19 +436,19 @@ Mongo >> update: origDictionary with: newDictionary collection: aMongoCollection
 		multi: multiBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> urlString [
 	^ host asString, ':', port asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> useDriver: aDriver [
 
 	driver := aDriver.
 	aDriver root: self
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 Mongo >> username: aUserString password: aPasswordString database: aDatabase [
 	"authenticate a user for a database. MongoDB needs authentication only once 
 	every connection/session per database/user combination. So in order not to slow
@@ -475,7 +465,7 @@ Mongo >> username: aUserString password: aPasswordString database: aDatabase [
 				self authCache at: aDatabase name put: aUserString ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 Mongo >> version [
 	"Get the mongodb instance vrsion. The result is obtained via `buildInfo` command. 
 	See more: https://docs.mongodb.com/manual/reference/command/buildInfo/"

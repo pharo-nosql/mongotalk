@@ -2,17 +2,19 @@
 I implement SCRAM-SHA1 auth mechanism
 "
 Class {
-	#name : #SCRAMAuthMechanism,
-	#superclass : #MongoAuthMechanism,
-	#category : #'Mongo-Core-Auth'
+	#name : 'SCRAMAuthMechanism',
+	#superclass : 'MongoAuthMechanism',
+	#category : 'Mongo-Core-Auth',
+	#package : 'Mongo-Core',
+	#tag : 'Auth'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SCRAMAuthMechanism class >> isAbstract [
 	^ true
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SCRAMAuthMechanism >> authenticateUsername: username password: password forcedDatabase: database [
 	| nonce firstBare op resp serverFirst parsed iterations salt rnonce without_proof derivedKey clientKey storedKey authMsg clientSig clientProof clientFinal serverKey serverSig |
 	nonce := (Random new next asString allButFirst: 2) asByteArray base64Encoded.
@@ -86,22 +88,22 @@ SCRAMAuthMechanism >> authenticateUsername: username password: password forcedDa
 	^ true
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SCRAMAuthMechanism >> digestUsername: username password: password [
 	^ (MD5 hashMessage: username , ':mongo:' , password) hex
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SCRAMAuthMechanism >> hashFunction [
 	^ self subclassResponsibility
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SCRAMAuthMechanism >> mechanismName [
     ^ self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SCRAMAuthMechanism >> parseScramResponse: payload [
 	"
 	Parse response from ByteArray to Dictinary

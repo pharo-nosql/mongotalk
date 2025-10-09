@@ -7,8 +7,8 @@ Sources:
 
 "
 Class {
-	#name : #MongoServerSelection,
-	#superclass : #Object,
+	#name : 'MongoServerSelection',
+	#superclass : 'Object',
 	#instVars : [
 		'client',
 		'readPreference',
@@ -16,17 +16,19 @@ Class {
 		'selectedMonitor',
 		'timeoutMilliSeconds'
 	],
-	#category : 'Mongo-Client-Client'
+	#category : 'Mongo-Client-Client',
+	#package : 'Mongo-Client',
+	#tag : 'Client'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoServerSelection class >> client: aClient [
 	^ self basicNew
 		initializeWithClient: aClient;
 		yourself
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 MongoServerSelection >> execute [
 	"Detect a monitor that satisfy the readPreference and localThreshold, signalling MongoServerSelectionTimeout if none is found."
 	
@@ -44,24 +46,24 @@ MongoServerSelection >> execute [
 	] repeat
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoServerSelection >> initializeWithClient: aMongoClient [
 	self initialize.
 	client := aMongoClient.
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerSelection >> localThreshold [
 	^ localThreshold ifNil: [ localThreshold := client settings localThreshold ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerSelection >> localThreshold: aDuration [
 	localThreshold := aDuration
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoServerSelection >> randomEligibleMonitorOrNilIn: someMonitors [
 	"Detect a monitor that satisfy the readPreference and localThreshold."
 	
@@ -89,45 +91,45 @@ MongoServerSelection >> randomEligibleMonitorOrNilIn: someMonitors [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerSelection >> readPreference [
 	^ readPreference ifNil: [ readPreference := client settings readPreference ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerSelection >> readPreference: aReadPreference [
 	readPreference := aReadPreference
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 MongoServerSelection >> selectedMonitor [
 	^ selectedMonitor
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerSelection >> timeoutMilliSeconds [
 	^ timeoutMilliSeconds
 		ifNil: [ client settings serverSelectionTimeout asMilliSeconds ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoServerSelection >> timeoutMilliSeconds: aDuration [
 	^ timeoutMilliSeconds := aDuration
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 MongoServerSelection >> visitNearestReadPreference: aReadPreference [
 	^ self randomEligibleMonitorOrNilIn: client successfulMonitors
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 MongoServerSelection >> visitPrimaryPreferedReadPreference: aReadPreference [
 	^ client topology hasPrimary
 		ifTrue: [ client primaryMonitor ]
 		ifFalse: [ self randomEligibleMonitorOrNilIn: client successfulSecondaryMonitors ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 MongoServerSelection >> visitPrimaryReadPreference: aReadPreference [
 	^ client topology hasPrimary
 		ifTrue: [ client primaryMonitor ]

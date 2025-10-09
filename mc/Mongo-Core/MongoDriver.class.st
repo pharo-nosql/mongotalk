@@ -3,42 +3,44 @@ An abstract base for mongo drivers.
 My children are the real drivers, see there.
 "
 Class {
-	#name : #MongoDriver,
-	#superclass : #Object,
+	#name : 'MongoDriver',
+	#superclass : 'Object',
 	#instVars : [
 		'root'
 	],
 	#classVars : [
 		'Default'
 	],
-	#category : #'Mongo-Core-Base'
+	#category : 'Mongo-Core-Base',
+	#package : 'Mongo-Core',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDriver class >> defaultDriver [
 
 	^ Default ifNil: [ Default := self obtainDefaultDriver ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDriver class >> defaultDriver: aClass [
 
 	Default := aClass
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoDriver class >> isDefault [
 	
 	^ false
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoDriver class >> newDefault [
 
 	^ self defaultDriver new
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoDriver class >> obtainDefaultDriver [
 
 	^ self allSubclasses 
@@ -48,13 +50,41 @@ MongoDriver class >> obtainDefaultDriver [
 			self allSubclasses first ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDriver >> commandClass [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
+MongoDriver >> commandCreateIndexName: aName keys: keyAssociations unique: aBoolean collection: aMongoCollection [
+	"Create index using Mongo command. Answer the output of the command.
+	See more on https://docs.mongodb.com/manual/reference/command/
+	
+	keysAssociations is a collection of associations where 
+		key = field name to index
+		value = 1 - ascending. -1 descending"
+	| commandSpec command |
+
+	commandSpec := OrderedDictionary new
+		at: 'createIndexes' put: aMongoCollection name;
+		at: 'indexes' put: { 
+			OrderedDictionary new 
+				at: 'key' put: keyAssociations asOrderedDictionary;
+				at: 'unique' put: (aBoolean ifTrue: [ 1 ] ifFalse: [ 0 ]);
+				at: 'name' put: aName; 
+				yourself };
+		yourself.
+		
+	command := self
+		newQueryCommand: commandSpec
+		database: aMongoCollection database
+		flags: 0.
+
+	^ self executeCommandAndVerify: command
+]
+
+{ #category : 'operations' }
 MongoDriver >> commandDelete: aDocument limit: aLimit collection: aMongoCollection writeConcern: aConcern [
 	"Delete using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/delete/"
@@ -71,7 +101,7 @@ MongoDriver >> commandDelete: aDocument limit: aLimit collection: aMongoCollecti
 		yourself.
 
 	aConcern ifNotNil: [
-		commandSpec at: 'writeConcern' put: aConcern asConcernForCommand].
+		commandSpec at: 'writeConcern' put: aConcern asConcernForCommand ].
 
 	command := self
 		newQueryCommand: commandSpec
@@ -81,7 +111,7 @@ MongoDriver >> commandDelete: aDocument limit: aLimit collection: aMongoCollecti
 	^ self executeCommandAndVerify: command
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriver >> commandFind: filterDictionary limit: aLimit collection: aMongoCollection readConcern: aMongoReadConcern [
 	"Answer a MongoCommandCursor that will perform a find using Mongo command.
 
@@ -104,7 +134,7 @@ MongoDriver >> commandFind: filterDictionary limit: aLimit collection: aMongoCol
 		dictionary: commandSpec
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriver >> commandInsert: aDocument collection: aMongoCollection writeConcern: aConcern [
 	"Insert using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/insert/"
@@ -126,13 +156,13 @@ MongoDriver >> commandInsert: aDocument collection: aMongoCollection writeConcer
 	^ self executeCommandAndVerify: command
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDriver >> commandQueryClass [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriver >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
 	"Update using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/update/"
@@ -157,33 +187,25 @@ MongoDriver >> commandUpdate: aDocument with: newDocument collection: aMongoColl
 	^ self executeCommandAndVerify: command
 ]
 
-{ #category : #operations }
+{ #category : 'private' }
 MongoDriver >> cursorQuery: aQuery [
-	| id |
-
-	id := self nextRequestID.
-	(aQuery operation
-		id: id
-			stream: self stream
-			query: aQuery)
-		flags: aQuery flags;
-		write.
-
-	^ id
+	
+	self subclassResponsibility
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriver >> delete: aDocument collection: aMongoCollection [
 
 	self subclassResponsibility
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriver >> executeCommand: command [
+
 	^ self subclassResponsibility
 ]
 
-{ #category : #'private - operations' }
+{ #category : 'private - operations' }
 MongoDriver >> executeCommandAndVerify: aCommand [
 	| result |
 
@@ -196,25 +218,25 @@ MongoDriver >> executeCommandAndVerify: aCommand [
 	^ result
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriver >> insert: aDocument collection: aMongoCollection [
 
 	self subclassResponsibility
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoDriver >> newQuery [
 
 	^ MongoQuery new
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoDriver >> newQueryCommand: anOrderedDictionary database: aDatabase flags: flags [
 
 	self subclassResponsibility
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoDriver >> newQueryCommandWith: aBlock database: aDatabase flags: flags [
 	| spec |
 
@@ -227,36 +249,31 @@ MongoDriver >> newQueryCommandWith: aBlock database: aDatabase flags: flags [
 		flags: flags
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoDriver >> nextRequestID [
 
 	^ self root nextRequestID
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriver >> query: aMongoQuery [
+
 	^ self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDriver >> root [
 
 	^ root
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDriver >> root: aMongo [
 
 	root := aMongo
 ]
 
-{ #category : #private }
-MongoDriver >> stream [
-
-	^ self root stream
-]
-
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDriver >> update: aDocument with: newDocument collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
 
 	self subclassResponsibility

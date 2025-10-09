@@ -7,18 +7,20 @@ Source:
 https://github.com/mongodb/specifications/blob/f810e051a77edbb91540c06bd8596387f7eefcbd/source/server-discovery-and-monitoring/server-discovery-and-monitoring-monitoring.rst
 "
 Class {
-	#name : #MongoTopology,
-	#superclass : #Object,
+	#name : 'MongoTopology',
+	#superclass : 'Object',
 	#instVars : [
 		'type',
 		'primaryUrlString',
 		'secondaryUrlStrings',
 		'serversByUrlString'
 	],
-	#category : 'Mongo-Client-Topology'
+	#category : 'Mongo-Client-Topology',
+	#package : 'Mongo-Client',
+	#tag : 'Topology'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoTopology class >> newBasedOn: aMongoTopology updatedWith: aMongoServerDescription [
 	^ self basicNew
 		initializeBasedOn: aMongoTopology
@@ -26,14 +28,14 @@ MongoTopology class >> newBasedOn: aMongoTopology updatedWith: aMongoServerDescr
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoTopology >> basicServerAt: urlString put: aMongoServerDescription [
 	"Mutate this instance with aMongoServerDescription. Only use during initialization since the topology should be immutable."
 
 	^ serversByUrlString at: urlString put: aMongoServerDescription
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> differencesFrom: anotherMongoTopology do: aBlockClosure [
 
 	#(type primaryUrlString secondaryUrlStrings) do: [ :each | 
@@ -43,13 +45,13 @@ MongoTopology >> differencesFrom: anotherMongoTopology do: aBlockClosure [
 		mine = theirs ifFalse: [ aBlockClosure cull: each cull: theirs -> mine ] ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoTopology >> hasDifferenceWith: anotherMongoIsMaster [
 	self differencesFrom: anotherMongoIsMaster do: [ ^ true ].
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoTopology >> hasDifferencesInPrimaryUrlFrom: newServerDescription [
 
 	newServerDescription isSuccess ifFalse: [ ^false ].
@@ -61,19 +63,19 @@ MongoTopology >> hasDifferencesInPrimaryUrlFrom: newServerDescription [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoTopology >> hasPrimary [
 	^ primaryUrlString notNil and: [ (self serverAt: primaryUrlString) isSuccess ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoTopology >> hasWritableServer [
 	"Determines if the topology has a writable server available."
 
 	^ self hasPrimary
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoTopology >> initialize [
 	super initialize.
 	
@@ -83,7 +85,7 @@ MongoTopology >> initialize [
 	primaryUrlString := nil.
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoTopology >> initializeBasedOn: anotherMongoTopology updatedWith: aMongoServerDescription [
 
 	"Never loose some information from past topologies."
@@ -98,37 +100,37 @@ MongoTopology >> initializeBasedOn: anotherMongoTopology updatedWith: aMongoServ
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> isTypeReplicaSetNoPrimary [
 	^ type = MongoTopologyType replicaSetNoPrimary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> isTypeReplicaSetWithPrimary [
 	^ type = MongoTopologyType replicaSetWithPrimary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> isTypeSharded [
 	^ type = MongoTopologyType sharded
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> isTypeSingle [
 	^ type = MongoTopologyType single
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> isTypeUnknown [
 	^ type = MongoTopologyType unknown
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> numberOfServers [
 	^ serversByUrlString size
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoTopology >> overcomeErrorBasedOn: anotherMongoTopology updatedWith: aMongoServerDescription [
 
 	aMongoServerDescription urlString = anotherMongoTopology primaryUrlString
@@ -144,17 +146,17 @@ MongoTopology >> overcomeErrorBasedOn: anotherMongoTopology updatedWith: aMongoS
 	secondaryUrlStrings := anotherMongoTopology secondaryUrlStrings.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> primaryUrl [
 	^ primaryUrlString asMongoUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> primaryUrlString [
 	^ primaryUrlString
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoTopology >> printOn: aStream [
 	super printOn: aStream.
 	
@@ -171,42 +173,42 @@ MongoTopology >> printOn: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> secondaryUrlStrings [
 	^ secondaryUrlStrings
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> secondaryUrls [
 	^ secondaryUrlStrings collect: #asMongoUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> serverAt: urlString [
 	^ serversByUrlString at: urlString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> servers [
 	^ serversByUrlString values
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> serversByUrlString [
 	^ serversByUrlString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> serversUrlStrings [
 	^ serversByUrlString keys
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopology >> type [
 	^ type
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoTopology >> updateWithIsMasterResponseFrom: aMongoServerDescription [
 	| isMaster |
 	isMaster := aMongoServerDescription isMaster.

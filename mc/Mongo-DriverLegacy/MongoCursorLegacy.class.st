@@ -2,12 +2,14 @@
 A command that executes an operation in mongo.
 "
 Class {
-	#name : #MongoCursorLegacy,
-	#superclass : #MongoCursor,
-	#category : #'Mongo-DriverLegacy-Base'
+	#name : 'MongoCursorLegacy',
+	#superclass : 'MongoCursor',
+	#category : 'Mongo-DriverLegacy-Base',
+	#package : 'Mongo-DriverLegacy',
+	#tag : 'Base'
 }
 
-{ #category : #executing }
+{ #category : 'executing' }
 MongoCursorLegacy >> execute [
 	| limit reply numberReturned requestId |
 
@@ -41,7 +43,7 @@ MongoCursorLegacy >> execute [
 	whileFalse
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoCursorLegacy >> fetchMoreCursorId: cursorId chunkSize: count collection: aCollection [
 	| id |
 

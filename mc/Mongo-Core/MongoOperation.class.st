@@ -4,17 +4,19 @@ Common superclass for Mongo database operations on the Wire Protocol.
 See: https://docs.mongodb.com/v4.0/reference/mongodb-wire-protocol/
 "
 Class {
-	#name : #MongoOperation,
-	#superclass : #Object,
+	#name : 'MongoOperation',
+	#superclass : 'Object',
 	#instVars : [
 		'id',
 		'writer',
 		'collectionBytes'
 	],
-	#category : #'Mongo-Core-Operations'
+	#category : 'Mongo-Core-Operations',
+	#package : 'Mongo-Core',
+	#tag : 'Operations'
 }
 
-{ #category : #'private-instance creation' }
+{ #category : 'private-instance creation' }
 MongoOperation class >> collection: aString id: idInteger stream: aStream [
 	^ self new
 		setCollection: aString
@@ -22,25 +24,25 @@ MongoOperation class >> collection: aString id: idInteger stream: aStream [
 		stream: aStream
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 MongoOperation >> flush [
 
 	writer flush
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoOperation >> messageSize [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoOperation >> opCode [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoOperation >> setCollection: aString id: idInteger stream: aStream [
 
 	id := idInteger.
@@ -48,7 +50,7 @@ MongoOperation >> setCollection: aString id: idInteger stream: aStream [
 	collectionBytes := writer encode: aString
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 MongoOperation >> write [
 
 	self writeHeader.
@@ -56,12 +58,12 @@ MongoOperation >> write [
 	self flush
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 MongoOperation >> writeBody [
 	
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 MongoOperation >> writeHeader [
 
 	writer

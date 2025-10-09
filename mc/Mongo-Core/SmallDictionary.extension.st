@@ -1,6 +1,6 @@
-Extension { #name : #SmallDictionary }
+Extension { #name : 'SmallDictionary' }
 
-{ #category : #'*mongo-core' }
+{ #category : '*mongo-core' }
 SmallDictionary >> asMongoQuery [
 	^ self
 ]

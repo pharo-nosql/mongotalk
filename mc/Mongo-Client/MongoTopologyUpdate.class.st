@@ -2,16 +2,18 @@
 I'm an announced by a MongoClient when it's topology was updated (replaced).
 "
 Class {
-	#name : #MongoTopologyUpdate,
-	#superclass : #MongoClientAnnouncement,
+	#name : 'MongoTopologyUpdate',
+	#superclass : 'MongoClientAnnouncement',
 	#instVars : [
 		'oldTopology',
 		'newTopology'
 	],
-	#category : 'Mongo-Client-Announcements'
+	#category : 'Mongo-Client-Announcements',
+	#package : 'Mongo-Client',
+	#tag : 'Announcements'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoTopologyUpdate class >> from: aMongoServerDescription to: anotherMongoServerDescription [
 	^ self basicNew
 		initializeFrom: aMongoServerDescription
@@ -19,24 +21,24 @@ MongoTopologyUpdate class >> from: aMongoServerDescription to: anotherMongoServe
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoTopologyUpdate >> initializeFrom: aMongoTopology to: anotherMongoTopology [
 	self initialize.
 	oldTopology := aMongoTopology.
 	newTopology := anotherMongoTopology.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopologyUpdate >> newTopology [
 	^ newTopology
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTopologyUpdate >> oldTopology [
 	^ oldTopology
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoTopologyUpdate >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -45,7 +47,7 @@ MongoTopologyUpdate >> printOn: aStream [
 	self printRelevantChangesOn: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoTopologyUpdate >> printRelevantChangesOn: aStream [
 	aStream nextPutAll: '{ '.
 	newTopology

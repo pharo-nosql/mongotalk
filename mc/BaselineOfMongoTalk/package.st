@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfMongoTalk }
+Package { #name : 'BaselineOfMongoTalk' }

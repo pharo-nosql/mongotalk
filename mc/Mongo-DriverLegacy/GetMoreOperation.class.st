@@ -2,16 +2,18 @@
 Retrieve more objects
 "
 Class {
-	#name : #GetMoreOperation,
-	#superclass : #MongoOperation,
+	#name : 'GetMoreOperation',
+	#superclass : 'MongoOperation',
 	#instVars : [
 		'cursorId',
 		'returnCount'
 	],
-	#category : #'Mongo-DriverLegacy-Operations'
+	#category : 'Mongo-DriverLegacy-Operations',
+	#package : 'Mongo-DriverLegacy',
+	#tag : 'Operations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 GetMoreOperation class >> collection: aString id: idInteger stream: aStream cursorId: cursorInteger returnCount: countInteger [
 	^(self collection: aString
 		id: idInteger
@@ -20,28 +22,28 @@ GetMoreOperation class >> collection: aString id: idInteger stream: aStream curs
 			returnCount: countInteger 
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 GetMoreOperation >> fixedHeaderSize [
 	^ 32
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 GetMoreOperation >> messageSize [
 	^ collectionBytes size + 1 + self fixedHeaderSize
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GetMoreOperation >> opCode [
 	^2005
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 GetMoreOperation >> setCursorId: cursorInteger returnCount: countInteger [
 	cursorId := cursorInteger.
 	returnCount := countInteger 
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 GetMoreOperation >> writeBody [
 	writer
 		nextInt32Put: 0;

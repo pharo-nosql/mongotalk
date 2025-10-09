@@ -1,15 +1,17 @@
 Class {
-	#name : #MongoQueryBatch,
-	#superclass : #Object,
+	#name : 'MongoQueryBatch',
+	#superclass : 'Object',
 	#instVars : [
 		'documents',
 		'collectionName',
 		'cursorId'
 	],
-	#category : #'Mongo-Core-Responses'
+	#category : 'Mongo-Core-Responses',
+	#package : 'Mongo-Core',
+	#tag : 'Responses'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoQueryBatch class >> newFromFirstBatchResponse: aDictionary [
 	| cursorDictionary |
 
@@ -21,7 +23,7 @@ MongoQueryBatch class >> newFromFirstBatchResponse: aDictionary [
 		yourself
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoQueryBatch class >> newFromGetMoreResponse: aDictionary [
 
 	| cursorDictionary |
@@ -33,27 +35,27 @@ MongoQueryBatch class >> newFromGetMoreResponse: aDictionary [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQueryBatch >> atEnd [
 	^ self cursorId = 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQueryBatch >> collectionName [
 	^ collectionName
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQueryBatch >> cursorId [
 	^ cursorId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoQueryBatch >> documents [
 	^ documents
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoQueryBatch >> initializeWithCollectionName: aString documents: aCollection cursorId: anInteger [
 
 	self initialize.

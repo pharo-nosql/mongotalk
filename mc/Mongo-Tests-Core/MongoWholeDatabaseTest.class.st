@@ -1,10 +1,12 @@
 Class {
-	#name : #MongoWholeDatabaseTest,
-	#superclass : #MongoTest,
-	#category : 'Mongo-Tests-Core-Tests'
+	#name : 'MongoWholeDatabaseTest',
+	#superclass : 'MongoTest',
+	#category : 'Mongo-Tests-Core-Tests',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MongoWholeDatabaseTest >> setUp [
 	root := Mongo default.
 	root open.
@@ -12,13 +14,13 @@ MongoWholeDatabaseTest >> setUp [
 	collection := database addCollection: 'testCollection'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MongoWholeDatabaseTest >> tearDown [
 	database ifNotNil: [ database drop ].
 	root closeIfOpen
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoWholeDatabaseTest >> testBasics [
 	self assert: collection validate isOK
 ]

@@ -13,16 +13,18 @@ name
 
 "
 Class {
-	#name : #MongoCollection,
-	#superclass : #Object,
+	#name : 'MongoCollection',
+	#superclass : 'Object',
 	#instVars : [
 		'database',
 		'name'
 	],
-	#category : #'Mongo-Core-Base'
+	#category : 'Mongo-Core-Base',
+	#package : 'Mongo-Core',
+	#tag : 'Base'
 }
 
-{ #category : #convenience }
+{ #category : 'convenience' }
 MongoCollection class >> cmdVirtualCollection [
 	"Answer an object that represents '$cmd', a special virtual collection that
 	exposes MongoDB’s database commands.
@@ -34,7 +36,7 @@ MongoCollection class >> cmdVirtualCollection [
 
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoCollection class >> database: aMongoDatabase name: aString [
 
 	^self new
@@ -42,18 +44,28 @@ MongoCollection class >> database: aMongoDatabase name: aString [
 		name: aString
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MongoCollection >> add: aDictionary [
 
 	self insert: (Array with: aDictionary)
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MongoCollection >> addAll: aCollection [ 
 	self insert: aCollection
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
+MongoCollection >> commandCreateIndexName: aName keys: keysCollection unique: aBoolean [
+
+	^ database 
+		commandCreateIndexName: aName 
+		keys: keysCollection 
+		unique: aBoolean
+		collection: self
+]
+
+{ #category : 'operations' }
 MongoCollection >> commandDelete: aDocument limit: aLimit writeConcern: aConcern [
 	"Delete using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/delete/"
@@ -65,7 +77,7 @@ MongoCollection >> commandDelete: aDocument limit: aLimit writeConcern: aConcern
 		writeConcern: aConcern
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> commandFind: filterDictionary limit: aLimit readConcern: aMongoReadConcern [
 	"Answer a MongoCommandCursor that will perform a find using Mongo command.
 
@@ -80,7 +92,7 @@ MongoCollection >> commandFind: filterDictionary limit: aLimit readConcern: aMon
 		readConcern: aMongoReadConcern
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> commandGetMore: cursorId batchSize: batchSizeOrNil timeout: aDurationOrNil [
 	"Get a batch of documents from this collection using a cursor id obtained via commandFind* (for example).
 
@@ -110,7 +122,7 @@ MongoCollection >> commandGetMore: cursorId batchSize: batchSizeOrNil timeout: a
 	^ MongoQueryBatch newFromGetMoreResponse: (database command: dictionary)
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> commandInsert: newDictionary writeConcern: aConcern [
 	"Insert using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/insert/"
@@ -121,7 +133,7 @@ MongoCollection >> commandInsert: newDictionary writeConcern: aConcern [
 		writeConcern: aConcern
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> commandUpdate: aDocument with: newDocument [
 	"Update using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/update/"
@@ -132,7 +144,7 @@ MongoCollection >> commandUpdate: aDocument with: newDocument [
 		collection: self
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> commandUpdate: aDocument with: newDocument writeConcern: aConcern [
 	"Update using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/update/"
@@ -144,12 +156,12 @@ MongoCollection >> commandUpdate: aDocument with: newDocument writeConcern: aCon
 		writeConcern: aConcern
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCollection >> database [
 	^database
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> delete: aDictionary [
 
 	database
@@ -157,19 +169,19 @@ MongoCollection >> delete: aDictionary [
 		collection: self
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCollection >> detect: aDictionary [
 	^self queryOne: [ :query |
 		query where: aDictionary ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCollection >> do: aBlock [
-	^ self query: [ :query |
-		query doBlock: aBlock ]
+
+	^ (self query: [ :query | ]) do: aBlock
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> drop [
 	| result |
 
@@ -180,7 +192,7 @@ MongoCollection >> drop [
 		ifFalse: [ self error: 'I can''t drop the collection!' ]
 ]
 
-{ #category : #convenience }
+{ #category : 'convenience' }
 MongoCollection >> ensureAdded [
 
 	[ database addCollection: name ]
@@ -188,13 +200,13 @@ MongoCollection >> ensureAdded [
 		do: [ :error | ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoCollection >> includes: aDictionary [
 	"May be inefficient"
 	^(self sizeForQuery: aDictionary) > 0
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCollection >> inject: anObject into: aBlock [
 	| sum |
 	sum := anObject.
@@ -202,7 +214,7 @@ MongoCollection >> inject: anObject into: aBlock [
 	^sum
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> insert: aDocument [
 
 	database
@@ -210,17 +222,17 @@ MongoCollection >> insert: aDocument [
 		collection: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoCollection >> isEmpty [
 	^self size = 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCollection >> name [
 	^name
 ]
 
-{ #category : #'private - factory' }
+{ #category : 'private - factory' }
 MongoCollection >> newQuery [
 	
 	^ self database newQuery
@@ -228,18 +240,18 @@ MongoCollection >> newQuery [
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoCollection >> occurrencesOf: aDictionary [ 
 	^(self select: aDictionary) size
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoCollection >> performQuery: aMongoQuery [
 
 	^ database query: aMongoQuery
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoCollection >> printOn: aStream [
 	"Prints the receiver on a stream"
 	
@@ -247,13 +259,13 @@ MongoCollection >> printOn: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCollection >> qualifiedName [
 
 	^ database qualifiedName , '.' , name
 ]
 
-{ #category : #queries }
+{ #category : 'queries' }
 MongoCollection >> query: aBlock [
 	| query |
 
@@ -262,7 +274,7 @@ MongoCollection >> query: aBlock [
 	 ^self performQuery: query
 ]
 
-{ #category : #queries }
+{ #category : 'queries' }
 MongoCollection >> queryOne: aBlock [
 	| query |
 	query := self newQuery.
@@ -270,7 +282,7 @@ MongoCollection >> queryOne: aBlock [
 	^database queryOne: query
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 MongoCollection >> remove: aDictionary [
 
 	database
@@ -278,25 +290,25 @@ MongoCollection >> remove: aDictionary [
 		collection: self
 ]
 
-{ #category : #removing }
+{ #category : 'removing' }
 MongoCollection >> removeAll: aCollection [
 	"Worry about atomicity?"
 
 	aCollection do: [:each | self remove: each]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 MongoCollection >> replace: origDictionary with: newDictionary [
 	self update: origDictionary with: newDictionary
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCollection >> select: aDictionary [
 	^self query: [ :query |
 		query where: aDictionary ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCollection >> select: aDictionary limit: limit offset: offset [
 	^ self query: [:query |
 		query
@@ -306,7 +318,7 @@ MongoCollection >> select: aDictionary limit: limit offset: offset [
 	
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCollection >> select: aDictionary limit: limit offset: offset order: orderDictionary [
 	^ self query: [:query |
 		query
@@ -317,7 +329,7 @@ MongoCollection >> select: aDictionary limit: limit offset: offset order: orderD
 	
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCollection >> select: aDictionary limit: limit offset: offset order: orderDictionary flags: flags [
 	^ self query: [:query |
 		query
@@ -329,19 +341,19 @@ MongoCollection >> select: aDictionary limit: limit offset: offset order: orderD
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoCollection >> setDatabase: aMongoDatabase name: aString [
 
 	database := aMongoDatabase.
 	name := aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCollection >> size [
 	^self sizeForQuery: Dictionary new
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> sizeForQuery: aDictionary [
 	"Answer the count the number of matching documents in this collection.
 
@@ -358,7 +370,7 @@ MongoCollection >> sizeForQuery: aDictionary [
 	^ (reply at: 'n') asInteger	"Why in the world is it a double?"
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> update: origDictionary with: newDictionary [
 
 	database
@@ -367,7 +379,7 @@ MongoCollection >> update: origDictionary with: newDictionary [
 		collection: self
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> update: origDictionary with: newDictionary upsert: upsertBoolean multi: multiBoolean [
 
 	database
@@ -378,7 +390,7 @@ MongoCollection >> update: origDictionary with: newDictionary upsert: upsertBool
 		multi: multiBoolean
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoCollection >> validate [
 	| reply |
 	reply := database command: (OrderedIdentityDictionary new at: #validate put: name; yourself).

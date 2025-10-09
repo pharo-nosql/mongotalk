@@ -5,29 +5,31 @@ Spec: 'If the client experiences any error when checking a server, it stores err
 
 "
 Class {
-	#name : #MongoErrorServerDescription,
-	#superclass : #MongoAbstractServerDescription,
+	#name : 'MongoErrorServerDescription',
+	#superclass : 'MongoAbstractServerDescription',
 	#instVars : [
 		'errorDescription'
 	],
-	#category : 'Mongo-Client-Topology'
+	#category : 'Mongo-Client-Topology',
+	#package : 'Mongo-Client',
+	#tag : 'Topology'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoErrorServerDescription class >> urlString: urlString errorDescription: anErrorDescription [
 	^ self basicNew
 		initializeUrlString: urlString errorDescription: anErrorDescription;
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoErrorServerDescription >> initializeUrlString: aUrlString errorDescription: anErrorDescription [
 	self initializeUrlString: aUrlString.
 	errorDescription := anErrorDescription.
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoErrorServerDescription >> isError [
 	^ true
 ]

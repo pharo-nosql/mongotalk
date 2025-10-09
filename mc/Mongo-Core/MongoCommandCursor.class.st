@@ -8,8 +8,8 @@ https://docs.mongodb.com/manual/reference/command/getMore/#dbcmd.getMore
 
 "
 Class {
-	#name : #MongoCommandCursor,
-	#superclass : #Object,
+	#name : 'MongoCommandCursor',
+	#superclass : 'Object',
 	#instVars : [
 		'database',
 		'batch',
@@ -18,10 +18,12 @@ Class {
 		'timeoutOrNil',
 		'flags'
 	],
-	#category : #'Mongo-Core-Utilities'
+	#category : 'Mongo-Core-Utilities',
+	#package : 'Mongo-Core',
+	#tag : 'Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoCommandCursor class >> database: aMongoDatabase dictionary: aCollection [
 
 	^ self basicNew
@@ -29,40 +31,40 @@ MongoCommandCursor class >> database: aMongoDatabase dictionary: aCollection [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandCursor >> batchSizeOrNil [
 	^ batchSizeOrNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandCursor >> batchSizeOrNil: anObject [
 	batchSizeOrNil := anObject
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCommandCursor >> collect: aBlock [
 
 	^ Array streamContents: [ :stream |
 		self do: [ :each | stream nextPut: (aBlock value: each) ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandCursor >> command [
 	^ command
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCommandCursor >> contents [
 
 	^ self collect: [ :each | each ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandCursor >> database [
 	^ database
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCommandCursor >> do: aBlock [
 
 	batch := self firstBatch.
@@ -76,7 +78,7 @@ MongoCommandCursor >> do: aBlock [
 	] repeat
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 MongoCommandCursor >> firstBatch [
 
 	^ MongoQueryBatch newFromFirstBatchResponse: (database
@@ -84,19 +86,19 @@ MongoCommandCursor >> firstBatch [
 		flags: 0)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandCursor >> flags [
 	^ flags ifNil: [ 0 ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandCursor >> flags: flagsAsInteger [
 	"Query operation flags. See QueryOperation class side."
 	
 	flags := flagsAsInteger
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoCommandCursor >> initializeDatabase: aMongoDatabase command: aCollection [
 
 	self initialize.
@@ -104,17 +106,17 @@ MongoCommandCursor >> initializeDatabase: aMongoDatabase command: aCollection [
 	command := aCollection
 ]
 
-{ #category : #convenience }
+{ #category : 'convenience' }
 MongoCommandCursor >> setFlagSlaveOk [
 	self flags: self flags | QueryOperation flagSlaveOk
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandCursor >> timeoutOrNil [
 	^ timeoutOrNil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCommandCursor >> timeoutOrNil: aDuration [
 	timeoutOrNil := aDuration
 ]

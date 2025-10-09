@@ -7,22 +7,24 @@ See documentation in my #accessing protocol.
 See more in the web: https://docs.mongodb.com/manual/reference/write-concern/
 "
 Class {
-	#name : #MongoWriteConcern,
-	#superclass : #Object,
+	#name : 'MongoWriteConcern',
+	#superclass : 'Object',
 	#instVars : [
 		'w',
 		'j',
 		'wtimeout'
 	],
-	#category : #'Mongo-Core-Utilities'
+	#category : 'Mongo-Core-Utilities',
+	#package : 'Mongo-Core',
+	#tag : 'Utilities'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoWriteConcern class >> majority [
 	^'majority'
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 MongoWriteConcern >> asConcernForCommand [
 	| dict |
 
@@ -33,7 +35,7 @@ MongoWriteConcern >> asConcernForCommand [
 		ifFalse: [ dict ]
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 MongoWriteConcern >> asKeysAndValuesInto: aDictionary [
 
 	self j ifNotNil: [:value | aDictionary at: 'j' put: value ].
@@ -41,14 +43,14 @@ MongoWriteConcern >> asKeysAndValuesInto: aDictionary [
 	self wtimeout ifNotNil: [:value | aDictionary at: 'wtimeout' put: value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoWriteConcern >> j [
 	"Answer the 'j' option of this mongodb write concern. See #j:"
 
 	^ j
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoWriteConcern >> j: aBoolean [
 	"Set the 'j' option of this mongodb write concern. The j option requests acknowledgement from MongoDB that the write operation has been written to the journal.
 	
@@ -58,14 +60,14 @@ MongoWriteConcern >> j: aBoolean [
 	j := aBoolean
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoWriteConcern >> w [
 	"Answer the 'w' option of this mongodb write concern. See #w:"
 	
 	^ w
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoWriteConcern >> w: anObject [
 	"Set the 'w' option of this mongodb write concern. The w option requests acknowledgement that the write operation has propagated to a specified number of mongod instances or to mongod instances with specified tags.
 
@@ -80,7 +82,7 @@ MongoWriteConcern >> w: anObject [
 	w := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoWriteConcern >> wtimeout [
 	"Answer the 'wtimeout' option of this mongodb write concern. See #wtimeout:"
 	
@@ -89,7 +91,7 @@ MongoWriteConcern >> wtimeout [
 		ifFalse: [ wtimeout ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoWriteConcern >> wtimeout: aTimeOutInMilliseconds [
 	"Set the 'wtimeout' option of this mongodb write concern. This option specifies a time limit, in milliseconds, for the write concern. wtimeout is only applicable for w values greater than 1.
 	

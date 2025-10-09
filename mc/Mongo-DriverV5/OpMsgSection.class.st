@@ -7,8 +7,8 @@ See:
 - https://github.com/mongodb/specifications/blob/master/source/message/OP_MSG.rst
 "
 Class {
-	#name : #OpMsgSection,
-	#superclass : #Object,
+	#name : 'OpMsgSection',
+	#superclass : 'Object',
 	#instVars : [
 		'bytes',
 		'size',
@@ -18,10 +18,12 @@ Class {
 		'NULL_SIZE',
 		'TYPE_SIZE'
 	],
-	#category : #'Mongo-DriverV5-Operations'
+	#category : 'Mongo-DriverV5-Operations',
+	#package : 'Mongo-DriverV5',
+	#tag : 'Operations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OpMsgSection class >> fromStream: stream size: size [
 	
 	^ (self sectionClass: stream nextByte) new
@@ -29,14 +31,14 @@ OpMsgSection class >> fromStream: stream size: size [
 		yourself
 ]
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 OpMsgSection class >> initialize [
 
 	TYPE_SIZE := 1.
 	NULL_SIZE := 1
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OpMsgSection class >> sectionClass: type [
 
 	type = 0 ifTrue: [ ^ OpMsgSectionType0 ].
@@ -45,7 +47,7 @@ OpMsgSection class >> sectionClass: type [
 	self error: 'Should not arrive here'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OpMsgSection >> batchDocuments [
 	"used to traverse batched answers"
 
@@ -55,43 +57,43 @@ OpMsgSection >> batchDocuments [
 		ifAbsent: [ { self document } ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OpMsgSection >> bytes [
 
 	^ bytes
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OpMsgSection >> computeSize [
 
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OpMsgSection >> document [
 
 	^ document
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OpMsgSection >> fromStream: stream size: streamSize [
 
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OpMsgSection >> size [
 
 	^ size ifNil: [ size := self computeSize ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OpMsgSection >> type [
 
 	^ self subclassResponsibility
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 OpMsgSection >> writeOn: writer [
 
 	writer nextBytePut: self type

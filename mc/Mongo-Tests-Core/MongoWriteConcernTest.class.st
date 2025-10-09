@@ -2,12 +2,14 @@
 I have some very basic WriteConcern format tests
 "
 Class {
-	#name : #MongoWriteConcernTest,
-	#superclass : #TestCase,
-	#category : #'Mongo-Tests-Core-Tests'
+	#name : 'MongoWriteConcernTest',
+	#superclass : 'TestCase',
+	#category : 'Mongo-Tests-Core-Tests',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Tests'
 }
 
-{ #category : #'tests-as yet unclassified' }
+{ #category : 'tests-as yet unclassified' }
 MongoWriteConcernTest >> testAsConcernForCommand [
 	| writeConcern formatted |
 

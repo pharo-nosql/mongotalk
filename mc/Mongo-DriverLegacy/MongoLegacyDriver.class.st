@@ -2,24 +2,43 @@
 A legacy driver for mongo wire protocol (previous to v5.0) 
 "
 Class {
-	#name : #MongoLegacyDriver,
-	#superclass : #MongoDriver,
-	#category : #'Mongo-DriverLegacy-Base'
+	#name : 'MongoLegacyDriver',
+	#superclass : 'MongoDriver',
+	#traits : 'MongoTSocket',
+	#classTraits : 'MongoTSocket classTrait',
+	#category : 'Mongo-DriverLegacy-Base',
+	#package : 'Mongo-DriverLegacy',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoLegacyDriver >> commandClass [
 
 	^ self commandQueryClass
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoLegacyDriver >> commandQueryClass [
 
 	^ MongoCursorLegacy
 ]
 
-{ #category : #operations }
+{ #category : 'private' }
+MongoLegacyDriver >> cursorQuery: aQuery [
+	| id |
+
+	id := self nextRequestID.
+	(aQuery operation
+		id: id
+			stream: self stream
+			query: aQuery)
+		flags: aQuery flags;
+		write.
+
+	^ id
+]
+
+{ #category : 'operations' }
 MongoLegacyDriver >> delete: aDocument collection: aMongoCollection [
 
 	(DeleteOperation
@@ -30,13 +49,13 @@ MongoLegacyDriver >> delete: aDocument collection: aMongoCollection [
 		write
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoLegacyDriver >> executeCommand: query [
 
 	^ self queryOne: query
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoLegacyDriver >> insert: aDocument collection: aMongoCollection [
 
 	(InsertOperation
@@ -47,7 +66,7 @@ MongoLegacyDriver >> insert: aDocument collection: aMongoCollection [
 		write
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoLegacyDriver >> newCommandQuery: aQuery [
 
 	^ self commandQueryClass
@@ -55,7 +74,7 @@ MongoLegacyDriver >> newCommandQuery: aQuery [
 		query: aQuery
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoLegacyDriver >> newQuery [
 
 	^ super newQuery
@@ -63,7 +82,7 @@ MongoLegacyDriver >> newQuery [
 		yourself
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoLegacyDriver >> newQueryCommand: anOrderedDictionary database: aDatabase flags: flags [
 
 	^ MongoQuery new
@@ -75,7 +94,7 @@ MongoLegacyDriver >> newQueryCommand: anOrderedDictionary database: aDatabase fl
 		yourself
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoLegacyDriver >> query: aMongoQuery [
 	| results |
 
@@ -94,7 +113,7 @@ MongoLegacyDriver >> query: aMongoQuery [
 	^ results
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoLegacyDriver >> queryOne: aMongoQuery [
 
 	aMongoQuery doBlock: [:each |
@@ -112,7 +131,7 @@ MongoLegacyDriver >> queryOne: aMongoQuery [
 	^ nil
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoLegacyDriver >> update: aDocument with: newDocument collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
 	| flags |
 

@@ -2,16 +2,18 @@
 Delete operation
 "
 Class {
-	#name : #DeleteOperation,
-	#superclass : #MongoOperation,
+	#name : 'DeleteOperation',
+	#superclass : 'MongoOperation',
 	#instVars : [
 		'query',
 		'dataBytes'
 	],
-	#category : #'Mongo-DriverLegacy-Operations'
+	#category : 'Mongo-DriverLegacy-Operations',
+	#package : 'Mongo-DriverLegacy',
+	#tag : 'Operations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 DeleteOperation class >> collection: aString id: idInteger stream: aStream query: aDictionary [
 	^(self
 		collection: aString 
@@ -20,37 +22,37 @@ DeleteOperation class >> collection: aString id: idInteger stream: aStream query
 			setQuery: aDictionary
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 DeleteOperation >> computeDataBytes [
 	^ BSON write: query
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 DeleteOperation >> dataBytes [
 	^dataBytes ifNil: [dataBytes := self computeDataBytes]
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 DeleteOperation >> fixedHeaderSize [
 	^ 24
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 DeleteOperation >> messageSize [
 	^ self dataBytes size + collectionBytes size + 1 + self fixedHeaderSize
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 DeleteOperation >> opCode [
 	^2006
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 DeleteOperation >> setQuery: aDictionary [
 	query := aDictionary 
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 DeleteOperation >> writeBody [
 	writer
 		nextInt32Put: 0;

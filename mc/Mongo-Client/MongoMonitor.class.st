@@ -4,8 +4,8 @@ I am a monitor that tracks the status of a MongoDB server.
 I am a key collaborator for instances of MongoClient.
 "
 Class {
-	#name : #MongoMonitor,
-	#superclass : #TKTService,
+	#name : 'MongoMonitor',
+	#superclass : 'TKTService',
 	#instVars : [
 		'client',
 		'roundtripTimeCalculator',
@@ -15,10 +15,12 @@ Class {
 		'latestServerDescription',
 		'mongo'
 	],
-	#category : 'Mongo-Client-Client'
+	#category : 'Mongo-Client-Client',
+	#package : 'Mongo-Client',
+	#tag : 'Client'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoMonitor class >> urlString: urlString client: aMongoClient initialServerDescription: aMongoServerDescription [
 	^ self basicNew
 		initializeUrlString: urlString
@@ -27,7 +29,7 @@ MongoMonitor class >> urlString: urlString client: aMongoClient initialServerDes
 		yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoMonitor >> checkOnce [
 	"Heatbeat: Perform a single attempt to call ismaster, and handle either success or failure."
 
@@ -39,7 +41,7 @@ MongoMonitor >> checkOnce [
 			self handleHeatbeatError: error ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoMonitor >> doCheckAndHandleSuccess [
 
 	| response roundtripDuration |
@@ -51,22 +53,20 @@ MongoMonitor >> doCheckAndHandleSuccess [
 	self handleHeatbeatSuccess: response for: roundtripDuration.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoMonitor >> ensureMongoIsClosed [
 	mongo closeIfOpen
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoMonitor >> ensureMongoIsOpened [
 	"Spec: 'Socket timeout for monitoring is connectTimeoutMS'"
 
-	mongo isOpen ifFalse: [
-		mongo
-			openWithTimeout: client settings connectTimeout;
-			socketTimeout: client settings connectTimeout ]
+	mongo isOpen ifTrue: [ ^ self ].
+	mongo openWithTimeout: client settings connectTimeout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> handleConnectionError: anError [
 	"React to a connection error to a server. This includes both heatbeat and
 	command connections.
@@ -83,7 +83,7 @@ MongoMonitor >> handleConnectionError: anError [
 			errorDescription: anError description)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoMonitor >> handleHeatbeatError: anError [
 	"React to a heatbeat failure."
 
@@ -95,7 +95,7 @@ MongoMonitor >> handleHeatbeatError: anError [
 	self handleConnectionError: anError.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> handleHeatbeatSuccess: isMasterResponse for: roundtripDuration [
 	client announceIfNeeded: [
 		MongoHeartbeatSucceeded 
@@ -112,7 +112,7 @@ MongoMonitor >> handleHeatbeatSuccess: isMasterResponse for: roundtripDuration [
 			roundtripTime: self roundtripDurationAverage)
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoMonitor >> initializeUrlString: aUrlString client: aMongoClient initialServerDescription: aMongoServerDescription [
 	self initialize.
 
@@ -130,23 +130,23 @@ MongoMonitor >> initializeUrlString: aUrlString client: aMongoClient initialServ
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoMonitor >> isStarted [
 	^ self isRunning
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> latestServerDescription [
 	^ latestServerDescription
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> latestServerDescription: aServerDescription [
 	latestServerDescription := aServerDescription.
 	client refreshTopologyWith: latestServerDescription
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> name [
 	^ 'Monitor {1} - client {2}'
 		format:
@@ -154,12 +154,12 @@ MongoMonitor >> name [
 			client identityHash}
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> pool [
 	^ pool
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoMonitor >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -173,12 +173,12 @@ MongoMonitor >> printOn: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> roundtripDurationAverage [
 	^ roundtripTimeCalculator average milliSeconds
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> staleness [
 	^ latestServerDescription isSuccess
 		ifTrue: [ latestServerDescription staleness ]
@@ -186,7 +186,7 @@ MongoMonitor >> staleness [
 
 ]
 
-{ #category : #stepping }
+{ #category : 'stepping' }
 MongoMonitor >> stepService [
 	"Check server and inform response"
 	self checkOnce.
@@ -196,13 +196,13 @@ MongoMonitor >> stepService [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> tearDown [
 	self ensureMongoIsClosed.
 	pool resetAll.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMonitor >> urlString [
 	^ urlString
 ]

@@ -17,21 +17,22 @@ I provide methods that are useful to  set up and manage the replica set test res
 
 "
 Class {
-	#name : #MongoBasicReplicationTestResources,
-	#superclass : #Object,
+	#name : 'MongoBasicReplicationTestResources',
+	#superclass : 'Object',
 	#classInstVars : [
 		'replicaSet'
 	],
-	#category : 'Mongo-Tests-Core'
+	#category : 'Mongo-Tests-Core',
+	#package : 'Mongo-Tests-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoBasicReplicationTestResources class >> allMongoUrls [
 
 	^ { self mongoUrlA. self mongoUrlB. self mongoUrlC.}
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> cleanupSockets [
 
 	SocketStream allInstancesDo: #destroy.
@@ -40,68 +41,68 @@ MongoBasicReplicationTestResources class >> cleanupSockets [
 
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> continueAllServers [
 	replicaSet servers do: #sigcont
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoBasicReplicationTestResources class >> databaseName [
 	^ 'test'
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> ensureStarted [
 	replicaSet
 		ifNil: [ self start ]
 		ifNotNil: [ replicaSet ensureAllServersStarted ]
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> initialize [
 	SessionManager default registerUserClassNamed: self name
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoBasicReplicationTestResources class >> mongoUrlA [
 
 	^ 'localhost:27031' asMongoUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoBasicReplicationTestResources class >> mongoUrlB [ 
 
 	^ 'localhost:27032' asMongoUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoBasicReplicationTestResources class >> mongoUrlC [
 
 	^ 'localhost:27033' asMongoUrl
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> shutDown: aboutToQuit [
 	aboutToQuit ifTrue: [ self stop ]
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> signalStopA [
 	^ (replicaSet serverAtUrl: self mongoUrlA) sigstop
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> signalStopB [
 	^ (replicaSet serverAtUrl: self mongoUrlB) sigstop
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> startUp: resuming [
 	resuming ifTrue: [ replicaSet := nil ].
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> stepDown: aDuration url: aZnUrl [
 	
 	| mongo |
@@ -111,17 +112,17 @@ MongoBasicReplicationTestResources class >> stepDown: aDuration url: aZnUrl [
 	mongo closeIfOpen
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> stepDownA: aDuration [
 	self stepDown: aDuration url: self mongoUrlA
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> stepDownB: aDuration [
 	self stepDown: aDuration url: self mongoUrlB
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> stop [
 	"Stop the testing scenario. See description in class comment."
 
@@ -131,7 +132,7 @@ MongoBasicReplicationTestResources class >> stop [
 		replicaSet := nil ]
 ]
 
-{ #category : #'stop/continue' }
+{ #category : 'stop/continue' }
 MongoBasicReplicationTestResources class >> waitTestingScenario [
 
 	| retryingDelay end |

@@ -5,8 +5,8 @@ See: https://github.com/mongodb/specifications/
 
 "
 Class {
-	#name : #MongoClient,
-	#superclass : #Object,
+	#name : 'MongoClient',
+	#superclass : 'Object',
 	#instVars : [
 		'monitors',
 		'topology',
@@ -17,22 +17,24 @@ Class {
 	#classVars : [
 		'PRIMARY_READ_PREFERENCE'
 	],
-	#category : 'Mongo-Client-Client'
+	#category : 'Mongo-Client-Client',
+	#package : 'Mongo-Client',
+	#tag : 'Client'
 }
 
-{ #category : #'class initialization' }
+{ #category : 'class initialization' }
 MongoClient class >> initialize [
 	PRIMARY_READ_PREFERENCE := MongoReadPreference newPrimary
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoClient class >> withUrls: aCollection [
 	^ self basicNew
 		initializeWith: aCollection;
 		yourself
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoClient >> addMonitorsForAll: newUrlStrings andDo: aBlockClosure [
 	newUrlStrings do: [ :each | 
 		| newMonitor initialServerDescription |
@@ -46,18 +48,18 @@ MongoClient >> addMonitorsForAll: newUrlStrings andDo: aBlockClosure [
 		aBlockClosure cull: newMonitor ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoClient >> announceIfNeeded: aBlockThatValuesToAnAnnouncement [
 	self shouldAnnounce ifTrue: [
 		announcer announce: aBlockThatValuesToAnAnnouncement value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoClient >> announcer [
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoClient >> discoverUrlsFrom: urlsAsStrings [
 	"MongoDB specs state that hosts must not be removed from the list of known hosts: any host may dissapear temporarily only.
 	Note 1: This method assumes discovery is performed when monitors are started, then it starts any new monitor.
@@ -68,7 +70,7 @@ MongoClient >> discoverUrlsFrom: urlsAsStrings [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoClient >> handleConnectionError: anError on: selectedMonitor [
 	"React (internally) to connection error and then pass the error to the external handler."
 	
@@ -76,7 +78,7 @@ MongoClient >> handleConnectionError: anError on: selectedMonitor [
 	anError pass
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoClient >> handleMongoQueryOrCommandError: aMongoQueryOrCommandError on: selectedMonitor [
 	"Handles an error happened during the execution of a query or command."
 
@@ -91,7 +93,7 @@ MongoClient >> handleMongoQueryOrCommandError: aMongoQueryOrCommandError on: sel
 	aMongoQueryOrCommandError pass
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoClient >> initializeWith: initialUrls [
 	| initialUrlStrings |
 	self initialize.
@@ -108,17 +110,17 @@ MongoClient >> initializeWith: initialUrls [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoClient >> isMonitoringSteadyState [
 	^ topology isTypeReplicaSetWithPrimary or: [ topology isTypeSingle ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoClient >> isStarted [
 	^ monitors allSatisfy: [ :each | each isStarted ]
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 MongoClient >> mongoDo: aBlockClosure [
 	"Evaluate aBlockClosure with a Mongo instance selected using the default parameters."
 
@@ -127,7 +129,7 @@ MongoClient >> mongoDo: aBlockClosure [
 		serverSelection: self newServerSelection
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 MongoClient >> mongoDo: aBlockClosure readPreference: aReadPreference [
 	"Evaluate aBlockClosure with a Mongo instance selected using aReadPreference instead of the default parameter."
 
@@ -139,7 +141,7 @@ MongoClient >> mongoDo: aBlockClosure readPreference: aReadPreference [
 
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 MongoClient >> mongoDo: aBlockClosure readPreference: aReadPreference localThreshold: localThresholdDuration [
 	"Evaluate aBlockClosure with a Mongo instance selected using aReadPreference and localThresholdDuration instead of the default parameters."
 
@@ -152,7 +154,7 @@ MongoClient >> mongoDo: aBlockClosure readPreference: aReadPreference localThres
 
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 MongoClient >> mongoDo: aBlockClosure serverSelection: aMongoServerSelection [
 	"Evaluate aBlockClosure with a Mongo instance selected using the parameters setted in aMongoServerSelection."
 
@@ -166,24 +168,24 @@ MongoClient >> mongoDo: aBlockClosure serverSelection: aMongoServerSelection [
 			self handleConnectionError: error on: selectedMonitor ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoClient >> monitoringFrequency [
 	^ self isMonitoringSteadyState
 		ifTrue: [ settings heartbeatFrequency ]
 		ifFalse: [ settings minHeartbeatFrequency ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoClient >> monitors [
 	^ monitors
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoClient >> newServerSelection [
 	^ MongoServerSelection client: self
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 MongoClient >> primaryMongoDo: aBlockClosure [
 	"Evaluate aBlockClosure with a 'primary' Mongo instance."
 
@@ -193,12 +195,12 @@ MongoClient >> primaryMongoDo: aBlockClosure [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoClient >> primaryMonitor [
 	^ monitors at: topology primaryUrlString
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoClient >> printOn: aStream [
 	"Append a sequence of characters to aStream that identify the receiver."
 
@@ -208,7 +210,7 @@ MongoClient >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoClient >> printStatusOn: aStream [
 
 	| numberOfStartedMonitors totalServers |
@@ -223,7 +225,7 @@ MongoClient >> printStatusOn: aStream [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoClient >> refreshTopologyWith: newServerDescription [
 
 	topologyMutex critical: [
@@ -251,23 +253,23 @@ MongoClient >> refreshTopologyWith: newServerDescription [
 	].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoClient >> settings [
 	^ settings
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoClient >> shouldAnnounce [
 	^ announcer notNil and: [ announcer numberOfSubscriptions > 0 ]
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 MongoClient >> start [
 	monitors valuesDo: #start.
 
 ]
 
-{ #category : #API }
+{ #category : 'API' }
 MongoClient >> stop [
 	monitors valuesDo: [ :each |
 		each isRunning ifTrue: [
@@ -275,13 +277,13 @@ MongoClient >> stop [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoClient >> successfulMonitors [
 	^ monitors select: [ :each |
 		each latestServerDescription isSuccess ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoClient >> successfulSecondaryMonitors [
 	^ monitors select: [ :each |
 		each latestServerDescription isSuccess and: [
@@ -289,12 +291,12 @@ MongoClient >> successfulSecondaryMonitors [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoClient >> topology [
 	^ topology
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoClient >> updatedPoolSettings [
 	monitors do: [ :each | each pool resetAll ]
 ]

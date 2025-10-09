@@ -2,8 +2,8 @@
 A reply operation
 "
 Class {
-	#name : #ReplyOperation,
-	#superclass : #Object,
+	#name : 'ReplyOperation',
+	#superclass : 'Object',
 	#instVars : [
 		'stream',
 		'cursorId',
@@ -12,30 +12,32 @@ Class {
 		'responseTo',
 		'id'
 	],
-	#category : #'Mongo-Core-Operations'
+	#category : 'Mongo-Core-Operations',
+	#package : 'Mongo-Core',
+	#tag : 'Operations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 ReplyOperation class >> stream: aStream [
 	^self new setStream: aStream 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ReplyOperation >> cursorId [
 	^cursorId
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 ReplyOperation >> do: aBlock [
 	returnCount timesRepeat: [aBlock value: (BSON read: stream)]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 ReplyOperation >> isFinished [
 	^cursorId = 0
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 ReplyOperation >> read [
 	| formatter size opCode responseFlag |
 	
@@ -50,17 +52,17 @@ ReplyOperation >> read [
 	returnCount := formatter nextInt32	"Element count"
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ReplyOperation >> responseTo [
 	^ responseTo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ReplyOperation >> returnCount [
 	^returnCount 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 ReplyOperation >> setStream: aStream [
 	stream := aStream
 ]

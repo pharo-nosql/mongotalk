@@ -13,39 +13,41 @@ succeedAuth
 
 "
 Class {
-	#name : #MongoMock,
-	#superclass : #Mongo,
+	#name : 'MongoMock',
+	#superclass : 'Mongo',
 	#instVars : [
 		'succeedAuth',
 		'authCalls'
 	],
-	#category : 'Mongo-Tests-Core-Mocks'
+	#category : 'Mongo-Tests-Core-Mocks',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Mocks'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMock >> authCalls [
 	^ authCalls
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMock >> authShouldFail [
 	succeedAuth := false
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoMock >> authenticateUsername: user password: pass database: aDatabase [
 	authCalls := authCalls + 1.
 	^ succeedAuth 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : 'initialize-release' }
 MongoMock >> initialize [ 
 	super initialize.
 	succeedAuth := true.
 	authCalls := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoMock >> reset [
 	authCalls := 0.
 	authCache := Dictionary new

@@ -1,6 +1,6 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*Mongo-Core' }
+{ #category : '*Mongo-Core' }
 String >> asMongoUrl [
 	| url |
 	url := ZnUrl fromString: self defaultScheme: #mongodb.

@@ -1,24 +1,26 @@
 Class {
-	#name : #MongoMockTests,
-	#superclass : #TestCase,
+	#name : 'MongoMockTests',
+	#superclass : 'TestCase',
 	#instVars : [
 		'mongo'
 	],
-	#category : 'Mongo-Tests-Core-Tests'
+	#category : 'Mongo-Tests-Core-Tests',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Tests'
 }
 
-{ #category : #setup }
+{ #category : 'setup' }
 MongoMockTests >> setUp [
 	super setUp.
 	mongo := MongoMock new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoMockTests >> testAuthenticationSucceeds [
 	self assert: (mongo authenticateUsername: 'foo' password: 'bar' database: 'baz')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoMockTests >> testDatabaseAuthenticationDifferentUser [
 	| database |
 	database := mongo databaseNamed: 'foo'.
@@ -29,7 +31,7 @@ MongoMockTests >> testDatabaseAuthenticationDifferentUser [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoMockTests >> testDatabaseAuthenticationSameUser [
 	| database1 database2 |
 	database1 := mongo databaseNamed: 'foo'.
@@ -41,7 +43,7 @@ MongoMockTests >> testDatabaseAuthenticationSameUser [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoMockTests >> testDatabaseAuthenticationSameUserTwice [
 	| database |
 	database := mongo databaseNamed: 'foo'.
@@ -51,7 +53,7 @@ MongoMockTests >> testDatabaseAuthenticationSameUserTwice [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoMockTests >> testTwoDatabasesAuthenticationSameUser [
 	| database1 database2 |
 	database1 := mongo databaseNamed: 'foo1'.

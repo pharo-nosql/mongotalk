@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfMongoTalk,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfMongoTalk
+	#name : 'BaselineOfMongoTalk',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfMongoTalk',
+	#package : 'BaselineOfMongoTalk'
 }
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BaselineOfMongoTalk >> baseline: spec [
 	<baseline>
 	spec
@@ -19,6 +20,7 @@ BaselineOfMongoTalk >> baseline: spec [
 				package: 'Mongo-Squeak' with: [ spec requires: #('Mongo-BSON') ];
 				package: 'Mongo-Core' with: [ spec requires: #('Mongo-Squeak' 'Mongo-BSON') ];
 				package: 'Mongo-DriverV5' with: [ spec requires: #('Mongo-Core') ];
+				"package: 'Mongo-DriverC' with: [ spec requires: #('Mongo-Core') ];"
 				package: 'Mongo-DriverLegacy' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ];
@@ -36,6 +38,7 @@ BaselineOfMongoTalk >> baseline: spec [
 			spec
 				group: 'default' with: #('Core' 'Tests');
 				group: 'Core' with: #('Mongo-Core' 'Mongo-Queries' 'Mongo-DriverV5');
+				"group: 'MongoC' with: #('Core' 'Mongo-DriverC');"
 				group: 'Tools' with: #('Mongo-Pharo-Tools');
 				group: 'Tests' with: #('Core' 'Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
 				"group: 'Tests + ReplicaSet Tests' with: #(Tests 'Mongo-Tests-ReplicaSet');"
@@ -51,7 +54,7 @@ BaselineOfMongoTalk >> baseline: spec [
 		do: [ spec package: 'Mongo-BSON' with: [ spec requires: #('Mongo-Pharo11') ] ]
 ]
 
-{ #category : #'external projects' }
+{ #category : 'external projects' }
 BaselineOfMongoTalk >> taskIt: spec [
 	spec baseline: 'TaskIt' with: [
 		spec

@@ -2,18 +2,20 @@
 A command to execute commands in mongo (this would be the equivallent of `runCommand` in the mongo cli)
 "
 Class {
-	#name : #MongoCursorCommand,
-	#superclass : #MongoCursor,
-	#category : #'Mongo-DriverV5-Base'
+	#name : 'MongoCursorCommand',
+	#superclass : 'MongoCursor',
+	#category : 'Mongo-DriverV5-Base',
+	#package : 'Mongo-DriverV5',
+	#tag : 'Base'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 MongoCursorCommand >> driver [
 
-	^ root driver
+	^ root
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 MongoCursorCommand >> execute [
 	| reply requestId |
 

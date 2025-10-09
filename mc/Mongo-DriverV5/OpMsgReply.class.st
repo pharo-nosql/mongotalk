@@ -2,55 +2,57 @@
 Implementation of OP_MSG for replies.
 "
 Class {
-	#name : #OpMsgReply,
-	#superclass : #OpMSG,
+	#name : 'OpMsgReply',
+	#superclass : 'OpMSG',
 	#instVars : [
 		'responseTo',
 		'sections',
 		'size'
 	],
-	#category : #'Mongo-DriverV5-Operations'
+	#category : 'Mongo-DriverV5-Operations',
+	#package : 'Mongo-DriverV5',
+	#tag : 'Operations'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OpMsgReply class >> fromStream: aStream [
 
 	^ self new fromStream: aStream
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 OpMsgReply >> batchDo: aBlock [
 
 	sections do: [ :each |
 		each batchDocuments do: aBlock ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OpMsgReply >> cursorId [
 
 	^ self firstDocument at: 'cursor' at: 'id'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OpMsgReply >> documents [
 
 	^ Array streamContents: [ :stream |
 		self do: [ :each | stream nextPut: each ] ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OpMsgReply >> firstDocument [
 
 	^ self firstSection document
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OpMsgReply >> firstSection [
 
 	^ sections first
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OpMsgReply >> fromStream: aStream [
 	| stream opCode flags remainingSize |
 
@@ -75,31 +77,31 @@ OpMsgReply >> fromStream: aStream [
 		remainingSize := remainingSize - section size ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OpMsgReply >> isBatch [
 
 	^ self firstDocument includesKey: #cursor
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OpMsgReply >> isFinished [
 
 	^ (self firstDocument at: 'cursor' at: 'id') = 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 OpMsgReply >> isOk [
 
 	^ (self firstDocument at: 'ok') = 1.0
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OpMsgReply >> messageSize [
 
 	^ size
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 OpMsgReply >> readSection: stream size: aSize [
  	
 	^ OpMsgSection 
@@ -107,7 +109,7 @@ OpMsgReply >> readSection: stream size: aSize [
 		size: aSize
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OpMsgReply >> responseTo [
 
 	^ responseTo

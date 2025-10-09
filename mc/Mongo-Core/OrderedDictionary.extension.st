@@ -1,6 +1,6 @@
-Extension { #name : #OrderedDictionary }
+Extension { #name : 'OrderedDictionary' }
 
-{ #category : #'*mongo-core' }
+{ #category : '*mongo-core' }
 OrderedDictionary >> asMongoQuery [
 	^ self
 ]

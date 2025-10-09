@@ -13,61 +13,54 @@ root
 
 "
 Class {
-	#name : #MongoCursor,
-	#superclass : #Object,
+	#name : 'MongoCursor',
+	#superclass : 'Object',
 	#instVars : [
 		'root',
 		'query',
 		'queryOperationFlags'
 	],
-	#category : #'Mongo-Core-Utilities'
+	#category : 'Mongo-Core-Utilities',
+	#package : 'Mongo-Core',
+	#tag : 'Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoCursor class >> root: aMongo query: aMongoQuery [
 	^self new
 		root: aMongo;
 		query: aMongoQuery.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoCursor >> cursorQuery: aQuery [
-	| id |
 
-	id := self root nextRequestID.
-	(aQuery operation
-		id: id
-			stream: self root stream
-			query: aQuery)
-		flags: aQuery flags;
-		write.
-
-	^ id
+	^ self driver cursorQuery: aQuery
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 MongoCursor >> execute [
 
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCursor >> query [
 	^ query
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCursor >> query: anObject [
 
 	query := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCursor >> root [
 	^ root
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoCursor >> root: anObject [
 	root := anObject
 ]

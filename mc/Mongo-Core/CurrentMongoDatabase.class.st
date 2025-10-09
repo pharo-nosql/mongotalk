@@ -9,7 +9,9 @@ The value of this variable is going to be the database when you perform:
 everything inside that code will have access to aDatabase by calling 'CurrentMongoDatabase value' 
 "
 Class {
-	#name : #CurrentMongoDatabase,
-	#superclass : #DynamicVariable,
-	#category : 'Mongo-Core-Utilities'
+	#name : 'CurrentMongoDatabase',
+	#superclass : 'DynamicVariable',
+	#category : 'Mongo-Core-Utilities',
+	#package : 'Mongo-Core',
+	#tag : 'Utilities'
 }

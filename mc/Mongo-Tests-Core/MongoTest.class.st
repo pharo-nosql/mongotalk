@@ -1,15 +1,17 @@
 Class {
-	#name : #MongoTest,
-	#superclass : #TestCase,
+	#name : 'MongoTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'collection',
 		'root',
 		'database'
 	],
-	#category : #'Mongo-Tests-Core-Tests'
+	#category : 'Mongo-Tests-Core-Tests',
+	#package : 'Mongo-Tests-Core',
+	#tag : 'Tests'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 MongoTest >> aWriteConcern [
 
 	^ MongoWriteConcern new
@@ -19,25 +21,27 @@ MongoTest >> aWriteConcern [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MongoTest >> setUp [
 
+	Mongo default: nil.
 	root := Mongo default.
 	root open.
 	database := root databaseNamed: 'test'.
 	collection := database getCollection: 'testCollection'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MongoTest >> tearDown [
 
 	database ifNotNil: [ database collections do: #drop ].
 	root closeIfOpen.
+	Mongo default: nil.
 
 	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testAdd [
 	| data |
 
@@ -46,7 +50,7 @@ MongoTest >> testAdd [
 	self assert: (collection includes: data)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testAddAll [
 	| data |
 	data := Array 
@@ -57,7 +61,7 @@ MongoTest >> testAddAll [
 	self assert: (collection includes: data last)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testAddArray [
 	| data |
 	data := Dictionary new at: 'key' put: #(3 1 2 44 5 432); yourself.
@@ -65,16 +69,31 @@ MongoTest >> testAddArray [
 	self assert: (collection includes: data)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testAddExistingCollection [
+	"In fact, this is not useful anymore as the mongo database
+	 answers 'OK' always, even if already exists (but it does 
+	 not re-create it, it just answer 'OK')"
+	self skip.
 
 	self 
 		should: [ database addCollection: 'testCollection' ]
-		raise: MongoCollectionAlreadyExists.
-
+		raise: MongoCollectionAlreadyExists
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
+MongoTest >> testCollectionCreateIndex [
+
+	collection := database collectionAt: 'collection'.
+	collection commandCreateIndexName: 'index_by_name' keys: { 'name' -> 1 } unique: true.
+
+	collection add: { 'name' -> 'test' } asDictionary.
+	self 
+		should: [ collection add: { 'name' -> 'test' } asDictionary ]
+		raise: MongoCommandError
+]
+
+{ #category : 'tests' }
 MongoTest >> testCollectionEnsureAdded [
 	collection := database collectionAt: 'collection'.
 	self deny: (database collectionNames includes: 'collection').
@@ -85,12 +104,12 @@ MongoTest >> testCollectionEnsureAdded [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testCollectionValidation [
 	self assert: collection validate isOK
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testCollections [
 	| new |
 	new := database addCollection: 'collection'.
@@ -98,7 +117,7 @@ MongoTest >> testCollections [
 		ensure: [new drop]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testCursor [
 	| count data query commandQuery |
 
@@ -122,7 +141,7 @@ MongoTest >> testCursor [
 	self assert: count equals: 4
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testDatabaseCollectionNames [
 	| names |
 
@@ -131,26 +150,26 @@ MongoTest >> testDatabaseCollectionNames [
 	self deny: (names includes: 'testCollection42')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testDatabaseHasCollectionNamed [
 
 	self assert: (database hasCollectionNamed: 'testCollection').
 	self deny: (database hasCollectionNamed: 'testCollection42')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testDatabaseNames [
 
 	self assert: (root databaseNames includes: 'test')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testDatabases [
 
 	self assert: (root databases contains: [:each | each name = 'test'])
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testDelete [
 	| results data |
 
@@ -164,7 +183,7 @@ MongoTest >> testDelete [
 	self assert: results isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testDo [
 	| count |
 
@@ -177,33 +196,34 @@ MongoTest >> testDo [
 	self assert: count equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testError [
 	"induce an error and make sure an exception is thrown"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testGetExistingCollection [
 	| existing |
 	existing := database getCollection: 'testCollection'.
 	self assert: existing name = 'testCollection'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testGetNoneExistingCollection [
+
 	self deny: (database collectionNames includes: 'collection').
 	database getCollection: 'collection'.
-	self assert: (database collectionNames includes: 'collection').
+	self assert: (database collectionNames includes: 'collection')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testInjectInto [
 	collection add: (Dictionary new at: 'key' put: 2; yourself).
 	collection add: (Dictionary new at: 'key' put: 3; yourself).
 	self assert: (collection inject: 0 into: [:sum :each | sum + (each at: 'key')]) = 5
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testInsertAndQuery [
 	| results |
 	collection add: (Dictionary new at: 'key' put: 'value'; yourself).
@@ -212,7 +232,7 @@ MongoTest >> testInsertAndQuery [
 	self assert: (results first at: 'key') = 'value'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testInsertAndQueryWithFields [
 	| results |
 	collection add: (Dictionary new 
@@ -228,9 +248,10 @@ MongoTest >> testInsertAndQueryWithFields [
 	self deny: (results first includesKey: 'key')
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testInsertDuplicateError [
 	| value wasInsertionError |
+	
 	value := { '_id' -> 1 } asDictionary.
 	collection commandInsert: value writeConcern: nil.
 
@@ -243,10 +264,10 @@ MongoTest >> testInsertDuplicateError [
 		withExceptionDo: [ :error |
 			wasInsertionError := error isInsertionError ].
 
-	self assert: wasInsertionError.
+	self assert: wasInsertionError
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testInsertTwoAndQuery [
 	| results |
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
@@ -256,7 +277,7 @@ MongoTest >> testInsertTwoAndQuery [
 	self assert: results size = 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testInsertWithWriteConcern [
 	| result new |
 
@@ -268,7 +289,7 @@ MongoTest >> testInsertWithWriteConcern [
 	self assert: (result first at: 'key') equals: 'new value'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testInsertWithWriteConcernAndQuery [
 	| results |
 	collection 
@@ -279,7 +300,7 @@ MongoTest >> testInsertWithWriteConcernAndQuery [
 	self assert: (results first at: 'key') = 'value'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testIsEmpty [
 	| data |
 	data := Dictionary new at: 'key' put: 'value'; yourself.
@@ -288,13 +309,13 @@ MongoTest >> testIsEmpty [
 	self deny: collection isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testMajorVersion [
 
 	self assert: root majorVersion isInteger
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testOccurrencesOf [
 	| data |
 	data := (Dictionary new)
@@ -304,7 +325,7 @@ MongoTest >> testOccurrencesOf [
 	self assert: (collection occurrencesOf: data) equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testOrderBy [
 	| results query |
 	collection add: (Dictionary new at: 'key' put: 'b'; yourself).
@@ -321,7 +342,7 @@ MongoTest >> testOrderBy [
 	self assert: (results first at: 'key') equals: 'a'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testRemove [
 	| data |
 	data := Dictionary new at: 'key' put: 'value'; yourself.
@@ -331,7 +352,7 @@ MongoTest >> testRemove [
 	self assert: collection isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testRemoveAll [
 	| data |
 	data := Array 
@@ -343,21 +364,23 @@ MongoTest >> testRemoveAll [
 	self assert: collection isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testRemoveBoth [
 	"Unlike regular collections, MongCollection>>remove: is more like copyWithout:,
 	removing all instances of the offending element."
-
 	| data |
-	data := Dictionary new at: 'key' put: 'value'; yourself.
+	
+	data := Dictionary new 
+		at: 'key' put: 'value'; 
+		yourself.
 	collection add: data.
 	collection add: data.
-	self assert: collection size = 2.
+	self assert: collection size equals: 2.
 	collection remove: data.
 	self assert: collection isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testRemoveMissingElementSucceeds [
 	"Unlike Collection, MongoCollection succeeds if you try to remove a missing element.
 	Hence there is no need for remove:ifAbsent:."
@@ -371,7 +394,7 @@ MongoTest >> testRemoveMissingElementSucceeds [
 	self assert: collection size = 1 "No exception"
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testRemoveWithWriteConcern [
 	| data |
 	data := Dictionary new at: 'key' put: 'value'; yourself.
@@ -381,7 +404,7 @@ MongoTest >> testRemoveWithWriteConcern [
 	self assert: collection isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testSelect [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
@@ -390,7 +413,7 @@ MongoTest >> testSelect [
 	self assert: selected size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testSelectWithLimit [
 	| selected query |
 
@@ -407,7 +430,7 @@ MongoTest >> testSelectWithLimit [
 	self assert: selected size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testSelectWithLimitAndNumberToSkip [
 	| firstBatch secondBatch |
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
@@ -425,7 +448,7 @@ MongoTest >> testSelectWithLimitAndNumberToSkip [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testUpdateWithUpsert [
 	| result old new |
 
@@ -456,7 +479,7 @@ MongoTest >> testUpdateWithUpsert [
 	self assert: (result first at: 'key') equals: 'new value'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testUpdateWithWriteConcern [
 	| result old new |
 
@@ -470,7 +493,7 @@ MongoTest >> testUpdateWithWriteConcern [
 	self assert: (result first at: 'key') equals: 'new value'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MongoTest >> testVersion [
 
 	self assert: root version isString

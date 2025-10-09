@@ -13,23 +13,25 @@ root
 
 "
 Class {
-	#name : #MongoDatabase,
-	#superclass : #Object,
+	#name : 'MongoDatabase',
+	#superclass : 'Object',
 	#instVars : [
 		'root',
 		'name'
 	],
-	#category : #'Mongo-Core-Base'
+	#category : 'Mongo-Core-Base',
+	#package : 'Mongo-Core',
+	#tag : 'Base'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoDatabase class >> root: aMongo name: aString [ 
 	^self new
 		setRoot: aMongo
 		name: aString
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> addCollection: aString [
 	^ self
 		addCollection: aString
@@ -38,16 +40,19 @@ MongoDatabase >> addCollection: aString [
 		max: nil
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoDatabase >> addCollection: aString capped: aCapped size: aSize max: aMax [
 	| command |
+	
 	command := OrderedIdentityDictionary new
-					at: #create put: aString;
-					yourself.
+		at: #create put: aString;
+		yourself.
+
 	aCapped ifTrue: [
 		command at: #capped put: true.
-		aSize ifNotNil: [command at: #size put: aSize].
-		aMax ifNotNil: [command at: #max put: aMax]].
+		aSize ifNotNil: [ command at: #size put: aSize ].
+		aMax ifNotNil: [ command at: #max put: aMax ] ].
+	
 	[ self command: command ]
 		on: MongoCommandError
 		do: [ :error |
@@ -55,17 +60,18 @@ MongoDatabase >> addCollection: aString capped: aCapped size: aSize max: aMax [
 			error isCollectionAlreadyExists
 				ifTrue: [ (MongoCollectionAlreadyExists new collectionName: aString) signal ]
 				ifFalse: [ error signal ] ].
+	
 	^ self collectionAt: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDatabase >> collectionAt: aString [ 
 	"Answers a MongoCollection for this database that has aString as name (may not exist)."
 
 	^ MongoCollection database: self name: aString
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> collectionNames [
 	"Answer the names of the collections in this database.
 
@@ -83,19 +89,19 @@ MongoDatabase >> collectionNames [
 		collect: [ :each | each at: 'name' ].
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> collections [
 	"Answer the collections in this database"
 
 	^ self collectionNames collect: [ :each | self collectionAt: each ]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> command: anOrderedDictionary [
 	^ root command: anOrderedDictionary database: self
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> command: anOrderedDictionary flags: flags [
 
 	^ root 
@@ -104,7 +110,7 @@ MongoDatabase >> command: anOrderedDictionary flags: flags [
 		flags: flags
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> commandAndVerify: anOrderedDictionary [
 	| res |
 	res := root command: anOrderedDictionary database: self.
@@ -115,7 +121,19 @@ MongoDatabase >> commandAndVerify: anOrderedDictionary [
 	^ res
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
+MongoDatabase >> commandCreateIndexName: aName keys: keysAssociations unique: aBoolean collection: aMongoCollection [
+	"keysAssociations is a collection of associations where 
+		key = field name to index
+		value = 1 - ascending. -1 descending"
+	^ self root 
+		commandCreateIndexName: aName 
+		keys: keysAssociations
+		unique: aBoolean 
+		collection: aMongoCollection
+]
+
+{ #category : 'operations' }
 MongoDatabase >> commandDelete: aDocument limit: aLimit collection: collectionName writeConcern: aConcern [
 
 	^ self root
@@ -125,7 +143,7 @@ MongoDatabase >> commandDelete: aDocument limit: aLimit collection: collectionNa
 		writeConcern: aConcern
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> commandFind: filterDictionary limit: aLimit collection: aMongoCollection readConcern: aMongoReadConcern [
 
 	^ self root
@@ -135,7 +153,7 @@ MongoDatabase >> commandFind: filterDictionary limit: aLimit collection: aMongoC
 		readConcern: aMongoReadConcern
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> commandInsert: newDictionary collection: aMongoCollection writeConcern: aConcern [
 	"Insert using Mongo command. Answer the output of the command.
 	See more on https://docs.mongodb.com/manual/reference/command/insert/"
@@ -146,7 +164,7 @@ MongoDatabase >> commandInsert: newDictionary collection: aMongoCollection write
 		writeConcern: aConcern
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> commandUpdate: aDocument with: newDocument collection: aMongoCollection [
 
 	^ self
@@ -156,7 +174,7 @@ MongoDatabase >> commandUpdate: aDocument with: newDocument collection: aMongoCo
 		writeConcern: nil
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> commandUpdate: aDocument with: newDocument collection: aMongoCollection writeConcern: aConcern [
 
 	^ self root
@@ -166,7 +184,7 @@ MongoDatabase >> commandUpdate: aDocument with: newDocument collection: aMongoCo
 		writeConcern: aConcern
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> delete: aDictionary collection: aMongoCollection [
 
 	root
@@ -174,7 +192,7 @@ MongoDatabase >> delete: aDictionary collection: aMongoCollection [
 		collection: aMongoCollection
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 MongoDatabase >> do: aBlock [
 	"Performs aBlock and provides access to the database to 
 	anyone calling CurrentMongoDatabase value."
@@ -184,26 +202,26 @@ MongoDatabase >> do: aBlock [
 		during: [ ^ aBlock value ]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> drop [
 	self command: (OrderedIdentityDictionary new at: #dropDatabase put: 1.0; yourself)
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> getCollection: aString [
 	^ (self collectionAt: aString)
 		ensureAdded;
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 MongoDatabase >> hasCollectionNamed: aString [
 	"Answers true if this database has a collection named aString"
 	
 	^ self collectionNames includes: aString
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> insert: aDocument collection: aMongoCollection [
 
 	root
@@ -211,7 +229,7 @@ MongoDatabase >> insert: aDocument collection: aMongoCollection [
 		collection: aMongoCollection
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> isMaster [
 
 	| reply |
@@ -220,7 +238,7 @@ MongoDatabase >> isMaster [
 	^ MongoIsMaster with: reply
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> lastError [
 	"Answer the result of getLastError mongodb command. 
 	
@@ -230,7 +248,7 @@ MongoDatabase >> lastError [
 	^ self lastError: nil
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> lastError: aWriteConcernOrNil [
 	"Answer the result of getLastError mongodb command. 
 	
@@ -247,7 +265,7 @@ MongoDatabase >> lastError: aWriteConcernOrNil [
 	^MongoLastError newFor: reply
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> listCollections [
 	"Answer the raw response of listCollections command.
 	See more at https://docs.mongodb.com/manual/reference/command/listCollections/"
@@ -255,12 +273,12 @@ MongoDatabase >> listCollections [
 	^ self command: { #listCollections -> 1 } asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDatabase >> name [
 	^name
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 MongoDatabase >> newQuery [
 
 	^ root newQuery
@@ -268,31 +286,31 @@ MongoDatabase >> newQuery [
 		yourself
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoDatabase >> printOn: aStream [
 
 	aStream nextPutAll: name asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDatabase >> qualifiedName [
 	^self name
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> query: aMongoQuery [
 	
 	aMongoQuery database: self.
 	^ root query: aMongoQuery
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> queryOne: aMongoQuery [
 	aMongoQuery database: self.
 	^root queryOne: aMongoQuery.
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> replSetInitiate: configuration [
 	"Answer the response of this command, that initializes a new replica set.
 
@@ -304,7 +322,7 @@ MongoDatabase >> replSetInitiate: configuration [
 			yourself)
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> replicaSetConfig [
 	"Answer the configuration of the replica set.
 	See more at: https://docs.mongodb.com/v3.2/reference/command/replSetGetConfig/"
@@ -315,7 +333,7 @@ MongoDatabase >> replicaSetConfig [
 	^MongoReplicaSetConfig with: reply
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> replicaSetStatus [
 	"Answer the status of the replica set. Only works on 'admin' collection.
 	See more at: https://docs.mongodb.com/v3.2/reference/command/replSetGetStatus/"
@@ -326,18 +344,18 @@ MongoDatabase >> replicaSetStatus [
 	^MongoReplicaSetStatus with: reply
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoDatabase >> root [
 	^root
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 MongoDatabase >> setRoot: aMongo name: aString [ 
 	root := aMongo.
 	name := aString
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> update: origDictionary with: newDictionary collection: aMongoCollection [
 
 	root
@@ -346,7 +364,7 @@ MongoDatabase >> update: origDictionary with: newDictionary collection: aMongoCo
 		collection: aMongoCollection
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> update: origDictionary with: newDictionary collection: aMongoCollection upsert: upsertBoolean multi: multiBoolean [
 
 	root
@@ -357,7 +375,7 @@ MongoDatabase >> update: origDictionary with: newDictionary collection: aMongoCo
 		multi: multiBoolean
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 MongoDatabase >> username: user password: password [
 	^ root username: user password: password database: self
 ]

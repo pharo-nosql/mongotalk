@@ -2,17 +2,19 @@
 I support a tailable cursor on a capped collection...
 "
 Class {
-	#name : #MongoTailableCursor,
-	#superclass : #Object,
+	#name : 'MongoTailableCursor',
+	#superclass : 'Object',
 	#instVars : [
 		'root',
 		'query',
 		'cursorId'
 	],
-	#category : #'Mongo-Core-Utilities'
+	#category : 'Mongo-Core-Utilities',
+	#package : 'Mongo-Core',
+	#tag : 'Utilities'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MongoTailableCursor >> create [
 	| op reply |
 	query chunkSize: 0.
@@ -28,12 +30,12 @@ MongoTailableCursor >> create [
 	reply do: query doBlock.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MongoTailableCursor >> cursorId [
 	^ cursorId
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MongoTailableCursor >> next [
 	query chunkSize: 1.
 	self requestNext.
@@ -41,20 +43,22 @@ MongoTailableCursor >> next [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MongoTailableCursor >> query: anObject [
 	query := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'private' }
 MongoTailableCursor >> readNext [
 	| reply |
-	reply := (ReplyOperation stream: root stream) read.
+	
+	reply := (ReplyOperation stream: root driver stream) read.
 	reply do: query doBlock.
+	
 	^reply
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MongoTailableCursor >> requestNext [
 
 	root
@@ -63,7 +67,7 @@ MongoTailableCursor >> requestNext [
 		chunkSize: query chunkSize
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 MongoTailableCursor >> root: anObject [
 	root := anObject
 ]

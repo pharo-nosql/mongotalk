@@ -1,6 +1,6 @@
-Extension { #name : #Mongo }
+Extension { #name : 'Mongo' }
 
-{ #category : #'*Mongo-DriverLegacy' }
+{ #category : '*Mongo-DriverLegacy' }
 Mongo >> useLegacyDriver [
 
 	self useDriver: MongoLegacyDriver new
