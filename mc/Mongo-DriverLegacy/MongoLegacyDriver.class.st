@@ -67,6 +67,14 @@ MongoLegacyDriver >> insert: aDocument collection: aMongoCollection [
 ]
 
 { #category : 'factory' }
+MongoLegacyDriver >> newCommandQuery: aQuery [
+
+	^ self commandQueryClass
+		root: self root
+		query: aQuery
+]
+
+{ #category : 'factory' }
 MongoLegacyDriver >> newQuery [
 
 	^ super newQuery

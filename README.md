@@ -1,7 +1,12 @@
 # MongoTalk 
-A Pharo driver for [MongoDB](https://www.mongodb.com/).
+A [Pharo](https://www.pharo.org) driver for [MongoDB](https://www.mongodb.com/).
 
 [![CI](https://github.com/pharo-nosql/mongotalk/actions/workflows/tests.yml/badge.svg)](https://github.com/pharo-nosql/mongotalk/actions/workflows/tests.yml)
+[![Coverage Status](https://codecov.io/github/pharo-nosql/mongotalk/coverage.svg?branch=master)](https://codecov.io/gh/pharo-nosql/mongotalk/branch/master)
+
+[![Pharo 10](https://img.shields.io/badge/Pharo-10-%23aac9ff.svg)](https://pharo.org/download)
+[![Pharo 11](https://img.shields.io/badge/Pharo-11-%23aac9ff.svg)](https://pharo.org/download)
+[![Pharo 12](https://img.shields.io/badge/Pharo-12-%23aac9ff.svg)](https://pharo.org/download)
 
 ## Getting Started
 
@@ -18,7 +23,7 @@ mongo open.
 ## Install Mongo driver
 
 Evaluate the following script in Pharo:
-```Smalltalk
+```smalltalk
 Metacello new
 	repository: 'github://pharo-nosql/mongotalk/mc';
 	baseline: 'MongoTalk';
@@ -26,54 +31,9 @@ Metacello new
 ```
 
 ---
-# Client for Replica Sets
-
-## Introduction
-
-The driver described above is enough in a [MongoDB standalone server](https://docs.mongodb.com/manual/reference/glossary/#term-standalone) configuration where there only one server can execute the operations.
-This job can get much more complex when the configuration is a [MongoDB Replica Set](https://docs.mongodb.com/manual/reference/glossary/#term-replica-set).
-In this case, a group of servers maintain the same data set providing redundancy and high availability access.
-
-The following figure shows a Replica Set configuration composed by 3 servers (a.k.a. members).
-The [Primary server](https://docs.mongodb.com/manual/core/replica-set-primary/) is the only member in the replica set that receives **write** operations.
-However, all members of the replica set can accept **read** operations (see [Read Preference](https://docs.mongodb.com/v4.0/core/read-preference/)).
-
-![ReplicaSetFigure](https://docs.mongodb.com/manual/_images/replica-set-read-write-operations-primary.bakedsvg.svg)
-
-The replica set can have at most one primary. If the current primary becomes unavailable, an election determines the new primary.
-
-## MongoClient
-
-To help in this kind of scenarios, the `MongoClient` monitors the Replica Set status to provide the instance of `Mongo` that your application requires to perform an operation.
-
-You can create a client and make it start monitoring as follows:
-~~~Smalltalk
-client := MongoClient withUrls: urlsOfSomeReplicaSetMembers.
-client start.
-~~~
-
-After some milliseconds, it should be ready to, for example, receive write operations such as:
-~~~Smalltalk
-client primaryMongoDo: [ :mongo |
-	((mongo
-		databaseNamed: 'test')
-		getCollection: 'pilots')
-		add: { 'name' -> 'Fangio' } asDictionary ].
-~~~
-
-Until more documentation is available, you have these options to learn about this client:
-
-* **Example.** Evaluate and browse this code: `MongoClientExample openInWindows`.
-
-* **Test suites.**
-Browse the class hierarchy of `MongoClientTest` where you can see diverse tests, setUps, and tearDowns.
-
-* **Visual Monitor.**
-You can check [this repository](https://github.com/ObjectProfile/pharo-mongo-client-monitor), which watches the events announced by a `MongoClient` to help to better understand them via visualizations.
-
 ## Install MongoClient
 
-```Smalltalk
+```smalltalk
 Metacello new
 	repository: 'github://pharo-nosql/mongotalk/mc';
 	baseline: 'MongoTalk';
@@ -81,7 +41,30 @@ Metacello new
 ```
 
 ---
+## Older mongo versions (< 5)
+Current driver (v5) is incompatible with older mongo versions, if you require to connect to one of those older databases, you will need to first install a legacy driver: 
 
+```smalltalk
+Metacello new
+	repository: 'github://pharo-nosql/mongotalk/mc';
+	baseline: 'MongoTalk';
+	load: #('Mongo-DriverLegacy')
+```
+
+Then you will need to explicitly declare its use in your mongo client: 
+```smalltalk
+db := Mongo new
+	useLegacyDriver;
+	open. 
+```
+
+Alternatively, you can also set the default driver to be used in any connection:
+```smalltalk
+MongoDriver defaultDriver: MongoLegacyDriver.
+```
+*This is useful if you are using [Voyage](https://github.com/pharo-nosql/voyage), for example.*
+
+---
 # The MongoDB specification
 
 The MongoDB core team proposes a [specification](https://github.com/mongodb/specifications) with suggested and required  behavior for drivers (clients).
@@ -146,3 +129,5 @@ This is only a partial implementation of the whole MongoDB specification.
 
 For example, our `MongoClient` doesn't provide any direct read or write operation (as the specification requires).
 Instead, such operations are supported by first obtaining an instance of `Mongo` (the connection to a particular server) and then obtaining the db/collection to perform the operations.
+
+Current implementation lacks ReplicaSet support.
