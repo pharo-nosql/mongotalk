@@ -5,7 +5,7 @@ SmalltalkCISpec {
       #baseline : 'MongoTalk',
       #directory : 'mc',
       #platforms : [ #pharo ],
-      #load : [ 'Core', MongoC', 'Tests' ]
+      #load : [ 'Core', 'MongoC', 'Tests' ]
     }
   ],
   #testing : {
