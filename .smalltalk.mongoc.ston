@@ -1,0 +1,17 @@
+SmalltalkCISpec {
+  #preTesting: '.github/scripts/preTestingMongoC.st',
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'MongoTalk',
+      #directory : 'mc',
+      #platforms : [ #pharo ],
+      #load : [ 'Core', MongoC', 'Tests' ]
+    }
+  ],
+  #testing : {
+    #coverage : {
+      #packages : [ 'Mongo*' ],
+      #format: #lcov
+    }
+  }
+}

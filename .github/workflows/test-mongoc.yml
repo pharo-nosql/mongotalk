@@ -1,0 +1,43 @@
+name: MongoC
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        pharo-version: [ Pharo64-14, Pharo64-13, Pharo64-12, Pharo64-11 ]
+        ston: [ .smalltalk.mongoc.ston ]
+        mongodb-version: [ 5, 6 ]
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.ston }}, ${{ matrix.pharo-version }}, ${{ matrix.mongodb-version }}
+    steps:
+      - uses: actions/checkout@v3
+
+
+      - name: Install libmongoc and libbson
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libmongoc-1.0-0 libbson-1.0-0
+
+      - name: Create mongoDB Docker container      
+        run: sudo docker run -d -p 27017:27017 mongo:${{ matrix.mongodb-version }}
+        
+      - name: Setup SmalltalkCI
+        uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-image: ${{ matrix.pharo-version }}
+
+      - name: Get Pharo and Run Tests
+        run: smalltalkci -s ${{ matrix.pharo-version }} ${{ matrix.ston }}
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        timeout-minutes: 40
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          name: ${{matrix.os}}-${{ matrix.pharo-version }}
+          token: ${{ secrets.CODECOV_TOKEN }}
