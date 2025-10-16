@@ -79,6 +79,16 @@ BaselineOfMongoTalk >> libmongoc: spec [
 		spec repository: 'github://pharo-cig/pharo-libmongoc:v1.0' ]
 ]
 
+{ #category : 'accessing' }
+BaselineOfMongoTalk >> project [
+	
+	| aProject |
+	
+	aProject := super project.
+	aProject loadType: #atomic.
+	^ aProject
+]
+
 { #category : 'external projects' }
 BaselineOfMongoTalk >> unifiedFFI: spec [
 	
