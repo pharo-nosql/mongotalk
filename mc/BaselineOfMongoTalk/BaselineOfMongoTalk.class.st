@@ -20,7 +20,7 @@ BaselineOfMongoTalk >> baseline: spec [
 				package: 'Mongo-Squeak' with: [ spec requires: #('Mongo-BSON') ];
 				package: 'Mongo-Core' with: [ spec requires: #('Mongo-Squeak' 'Mongo-BSON') ];
 				package: 'Mongo-DriverV5' with: [ spec requires: #('Mongo-Core') ];
-				"package: 'Mongo-DriverC' with: [ spec requires: #('Mongo-Core') ];"
+				package: 'Mongo-DriverC' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-DriverLegacy' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ];
@@ -38,11 +38,11 @@ BaselineOfMongoTalk >> baseline: spec [
 			spec
 				group: 'default' with: #('Core' 'Tests');
 				group: 'Core' with: #('Mongo-Core' 'Mongo-Queries' 'Mongo-DriverV5');
-				"group: 'MongoC' with: #('Core' 'Mongo-DriverC');"
+				group: 'MongoC' with: #('Core' 'Mongo-DriverC');
 				group: 'Tools' with: #('Mongo-Pharo-Tools');
 				group: 'Tests' with: #('Core' 'Mongo-Tests-BSON' 'Mongo-Tests-Core' 'Mongo-Tests-Queries');
 				"group: 'Tests + ReplicaSet Tests' with: #(Tests 'Mongo-Tests-ReplicaSet');"
-				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests') ].
+				group: 'Client' with: #('default' 'Mongo-Client' 'Mongo-Client-Tests') ]
 				"group: 'Client + ReplicaSet Tests' with: #('Client' 'Mongo-Client-ReplicaSet-Tests') ]".
 
 	spec
