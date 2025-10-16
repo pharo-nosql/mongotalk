@@ -12,8 +12,8 @@ BaselineOfMongoTalk >> baseline: spec [
 		for: #common
 		do: [
 
-			self libbson: spec.
-			self libmongoc: spec.
+			self libbson: spec requires: #().
+			self libmongoc: spec requires: #('LibBSON').
 
 			spec
 				"Core and Client, without any test."
@@ -56,6 +56,8 @@ BaselineOfMongoTalk >> baseline: spec [
 		for: #(#'pharo11.x' #'pharo12.x' #'pharo13.x')
 		do: [  
 			self unifiedFFI: spec.
+			self libbson: spec requires: #('UnifiedFFI').
+			self libmongoc: spec requires: #('UnifiedFFI' 'LibBSON').
 			spec 
 				package: 'Mongo-DriverC' 
 				with: [ spec requires: #('Mongo-Core' 'UnifiedFFI' 'LibBSON' 'LibMongoC') ] ].
@@ -66,26 +68,21 @@ BaselineOfMongoTalk >> baseline: spec [
 ]
 
 { #category : 'external projects' }
-BaselineOfMongoTalk >> libbson: spec [
+BaselineOfMongoTalk >> libbson: spec requires: aCollection [
 
 	spec baseline: 'LibBSON' with: [
-		spec repository: 'github://pharo-cig/pharo-libbson:v1.0' ]
+		spec 
+			repository: 'github://pharo-cig/pharo-libbson:v1.0';
+			requires: aCollection ]
 ]
 
 { #category : 'external projects' }
-BaselineOfMongoTalk >> libmongoc: spec [
+BaselineOfMongoTalk >> libmongoc: spec requires: aCollection [
 
 	spec baseline: 'LibMongoC' with: [
-		spec repository: 'github://pharo-cig/pharo-libmongoc:v1.0' ]
-]
-
-{ #category : 'external projects' }
-BaselineOfMongoTalk >> taskIt: spec [
-	spec baseline: 'TaskIt' with: [
-		spec
-			repository: 'github://pharo-contributions/taskit:v1.1.1';
-			loads: #(core) ]
-
+		spec 
+			repository: 'github://pharo-cig/pharo-libmongoc:v1.0';
+			requires: aCollection ]
 ]
 
 { #category : 'external projects' }
