@@ -12,6 +12,9 @@ BaselineOfMongoTalk >> baseline: spec [
 		for: #common
 		do: [
 
+			self libbson: spec.
+			self libmongoc: spec.
+
 			spec
 				"Core and Client, without any test."
 				package: 'Mongo-Pharo11';
@@ -20,7 +23,7 @@ BaselineOfMongoTalk >> baseline: spec [
 				package: 'Mongo-Squeak' with: [ spec requires: #('Mongo-BSON') ];
 				package: 'Mongo-Core' with: [ spec requires: #('Mongo-Squeak' 'Mongo-BSON') ];
 				package: 'Mongo-DriverV5' with: [ spec requires: #('Mongo-Core') ];
-				package: 'Mongo-DriverC' with: [ spec requires: #('Mongo-Core') ];
+				package: 'Mongo-DriverC' with: [ spec requires: #('Mongo-Core' 'LibBSON' 'LibMongoC') ];
 				package: 'Mongo-DriverLegacy' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ];
 				package: 'Mongo-Pharo-Tools' with: [ spec requires: #('Mongo-Core' 'Mongo-Queries') ];
@@ -52,6 +55,20 @@ BaselineOfMongoTalk >> baseline: spec [
 	spec 
 		for: #(#'pharo10.x' #'pharo11.x')
 		do: [ spec package: 'Mongo-BSON' with: [ spec requires: #('Mongo-Pharo11') ] ]
+]
+
+{ #category : 'external projects' }
+BaselineOfMongoTalk >> libbson: spec [
+
+	spec baseline: 'LibBSON' with: [
+		spec repository: 'github://pharo-cig/pharo-libbson:v1.0' ]
+]
+
+{ #category : 'external projects' }
+BaselineOfMongoTalk >> libmongoc: spec [
+
+	spec baseline: 'LibMongoC' with: [
+		spec repository: 'github://pharo-cig/pharo-libmongoc:v1.0' ]
 ]
 
 { #category : 'external projects' }
