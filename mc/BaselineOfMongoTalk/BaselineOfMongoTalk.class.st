@@ -52,6 +52,14 @@ BaselineOfMongoTalk >> baseline: spec [
 		for: #(#'pharo10.x' #'pharo11.x' #'pharo12.x')
 		do: [  spec package: 'Mongo-Client' with: [ spec requires: #('Mongo-Core') ] ].
 
+	spec
+		for: #(#'pharo11.x' #'pharo12.x' #'pharo13.x')
+		do: [  
+			self unifiedFFI: spec.
+			spec 
+				package: 'Mongo-DriverC' 
+				with: [ spec requires: #('Mongo-Core' 'UnifiedFFI' 'LibBSON' 'LibMongoC') ] ].
+
 	spec 
 		for: #(#'pharo10.x' #'pharo11.x')
 		do: [ spec package: 'Mongo-BSON' with: [ spec requires: #('Mongo-Pharo11') ] ]
@@ -78,4 +86,15 @@ BaselineOfMongoTalk >> taskIt: spec [
 			repository: 'github://pharo-contributions/taskit:v1.1.1';
 			loads: #(core) ]
 
+]
+
+{ #category : 'external projects' }
+BaselineOfMongoTalk >> unifiedFFI: spec [
+	
+	spec
+		baseline: 'UnifiedFFI'
+		with: [ 
+			spec 
+				repository: 'github://pharo-cig/UnifiedFFI:v1.0';
+				className: 'BaselineOfUnifiedFFIFull' ]
 ]
