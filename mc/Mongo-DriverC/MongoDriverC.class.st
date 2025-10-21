@@ -161,7 +161,7 @@ MongoDriverC >> deleteOne: aDocument collection: aMongoCollection [
 	reply := BsonT new.
 	error :=  BsonErrorT new.
 	result := 0.
-	^ [ 
+	[ 
 		result := mongoc 
 			collection_delete_oneCollection: (self collectionFor: aMongoCollection)
 			selector: doc getHandle
