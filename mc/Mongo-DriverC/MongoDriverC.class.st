@@ -213,7 +213,7 @@ MongoDriverC >> executeCommand: aCommand [
 	reply := BsonT new.
 	error :=  BsonErrorT new.
 	result := 0.
-	^ [ 
+	[ 
 		result := self mongoc
 			client_command_simpleClient: client
 			db_name: aCommand database name
@@ -318,7 +318,7 @@ MongoDriverC >> insertMany: aCollection collection: aMongoCollection writeConcer
 	reply := BsonT new.
 	error :=  BsonErrorT new.
 	result := 0.
-	^ [ 
+	[ 
 		result := self mongoc 
 			collection_insert_manyCollection: (self collectionFor: aMongoCollection)
 			documents: docHandles
@@ -357,7 +357,7 @@ MongoDriverC >> insertOne: aDocument collection: aMongoCollection writeConcern: 
 		opts := bson new.
 		mongoc write_concern_appendWrite_concern: writeConcern doc: opts getHandle ].
 	
-	^ [ 
+	[ 
 		result := self mongoc 
 			collection_insert_oneCollection: (self collectionFor: aMongoCollection)
 			document: doc getHandle
@@ -498,7 +498,7 @@ MongoDriverC >> updateMany: aDocument with: newDocument collection: aMongoCollec
 	upsertBoolean ifTrue: [
 		opts := self jsonToBson: { #upsert -> true } asDictionary ].
 	
-	^ [ 
+	[ 
 		result := mongoc 
 			collection_update_manyCollection: (self collectionFor: aMongoCollection)
 			selector: filter getHandle
@@ -539,7 +539,7 @@ MongoDriverC >> updateOne: aDocument with: newDocument collection: aMongoCollect
 	upsertBoolean ifTrue: [
 		opts := self jsonToBson: { #upsert -> true } asDictionary ].
 	
-	^ [ 
+	[ 
 		result := mongoc 
 			collection_update_oneCollection: (self collectionFor: aMongoCollection)
 			selector: filter getHandle
