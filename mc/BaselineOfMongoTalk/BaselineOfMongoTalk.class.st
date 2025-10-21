@@ -96,6 +96,6 @@ BaselineOfMongoTalk >> unifiedFFI: spec [
 		baseline: 'UnifiedFFI'
 		with: [ 
 			spec 
-				repository: 'github://pharo-cig/UnifiedFFI:v1.0';
+				repository: 'github://pharo-cig/UnifiedFFI:v1.1';
 				className: 'BaselineOfUnifiedFFIFull' ]
 ]
