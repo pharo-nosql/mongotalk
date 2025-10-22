@@ -95,8 +95,6 @@ MongoDriverC >> cursorQuery: aMongoQuery [
 	"This message returns an open cursor used to traverse the collection."
 	| filter data cursor opts |
 
-	logger trace: aMongoQuery.
-
 	filter := self jsonToBson: aMongoQuery where.
 	opts := aMongoQuery asOptionsDocument 
 		ifNotEmpty: [ :optionsDocument | self jsonToBson: optionsDocument ]
@@ -206,8 +204,6 @@ MongoDriverC >> destroyCollections [
 { #category : 'operations' }
 MongoDriverC >> executeCommand: aCommand [
 	| doc result reply error resultJson |
-
-	logger trace: aCommand.
 
 	doc := self jsonToBson: aCommand where.
 	reply := BsonT new.
@@ -441,8 +437,6 @@ MongoDriverC >> openFor: aMongo [
 MongoDriverC >> query: aMongoQuery [
 	"gets a cursor query and iterates it to retrieve a list of documents" 
 	| results cursor |
-
-	logger trace: aMongoQuery.
 
 	[ 
 		cursor := self cursorQuery: aMongoQuery.
