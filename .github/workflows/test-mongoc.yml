@@ -19,6 +19,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libmongoc-1.0-0t64
+          find / -name "libmongoc*" 2>/dev/null
 
       - name: Create mongoDB Docker container      
         run: sudo docker run -d -p 27017:27017 mongo:${{ matrix.mongodb-version }}
