@@ -1,4 +1,5 @@
 SmalltalkCISpec {
+  #preLoading: '.github/scripts/preLoadingMongoC.st',
   #preTesting: '.github/scripts/preTestingMongoC.st',
   #loading : [
     SCIMetacelloLoadSpec {
