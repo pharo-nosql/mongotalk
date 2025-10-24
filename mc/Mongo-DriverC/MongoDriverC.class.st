@@ -28,6 +28,11 @@ MongoDriverC >> bsonToJson: aBson [
 	^ BSON read: internalData readStream
 ]
 
+{ #category : 'initialization' }
+MongoDriverC >> close [
+	self destroyClient
+]
+
 { #category : 'private' }
 MongoDriverC >> collectionFor: aMongoCollection [
 
@@ -381,7 +386,7 @@ MongoDriverC >> insertOne: aDocument collection: aMongoCollection writeConcern: 
 { #category : 'testing' }
 MongoDriverC >> isOpen [
 
-	^ false
+	^ client isNullOrNil not
 ]
 
 { #category : 'private' }
