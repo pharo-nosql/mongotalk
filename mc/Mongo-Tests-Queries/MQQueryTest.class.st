@@ -17,40 +17,47 @@ root
 
 "
 Class {
-	#name : #MQQueryTest,
-	#superclass : #TestCase,
+	#name : 'MQQueryTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'collection',
 		'root',
 		'database'
 	],
-	#category : 'Mongo-Tests-Queries-Base'
+	#category : 'Mongo-Tests-Queries-Base',
+	#package : 'Mongo-Tests-Queries',
+	#tag : 'Base'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MQQueryTest >> setUp [
+
+	Mongo default: nil.
 	root := Mongo default.
 	root open.
 	database := root databaseNamed: 'test'.
 	collection := database addCollection: 'testCollection'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MQQueryTest >> tearDown [
+
 	collection drop.
-	root close
+	root close.
+	Mongo default: nil	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testAnd [
 	| selected |
+
 	collection add: (Dictionary new at: 'key1' put: 1; at: 'key2' put: 2; yourself).
 	collection add: (Dictionary new at: 'key1' put: '1'; at: 'key2' put: 3; yourself).
 	selected := collection select: [ :each | (each key1 = 1) & (each key2 = 2)] .
 	self assert: selected size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testAndNot [
 	| selected block |
 	collection add: (Dictionary new at: 'key1' put: 1; yourself).
@@ -65,7 +72,7 @@ MQQueryTest >> testAndNot [
 	self assert: (collection select: block) size equals: 4
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testAt [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
@@ -78,7 +85,7 @@ MQQueryTest >> testAt [
 	self assert: (selected at: 'key1') equals: 'value1'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testComparison [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 1; yourself).
@@ -107,7 +114,7 @@ MQQueryTest >> testComparison [
 	self assert: selected size equals: 5.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testDetect [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
@@ -116,7 +123,7 @@ MQQueryTest >> testDetect [
 	self assert: (selected at: 'key1') equals: 'value1'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testMatchesRegex [
 	collection add: (Dictionary new at: 'key1' put: 'hello';  yourself).
 	
@@ -124,7 +131,7 @@ MQQueryTest >> testMatchesRegex [
 	self assert: (collection select: [ :each | each key1 matchesRegex: '^hel$']) size equals: 0. 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testNestedQueries [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 1; yourself).
@@ -143,7 +150,7 @@ MQQueryTest >> testNestedQueries [
 	self assert: selected size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testNor [
 	| selected block |
 	collection add: (Dictionary new at: 'key1' put: 1; yourself).
@@ -159,7 +166,7 @@ MQQueryTest >> testNor [
 	self assert: (collection select: block) size equals: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testNot [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 1; yourself).
@@ -174,7 +181,7 @@ MQQueryTest >> testNot [
 	self assert: selected size equals: 2.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testOr [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 1; at: 'key2' put: 2; yourself).
@@ -183,7 +190,7 @@ MQQueryTest >> testOr [
 	self assert: selected size equals: 2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testSelect [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
@@ -192,7 +199,7 @@ MQQueryTest >> testSelect [
 	self assert: selected size equals: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testSize [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: #(1 2 3 4 5); yourself).
@@ -202,7 +209,7 @@ MQQueryTest >> testSize [
 	self should: [ collection select: [ :each | each key1 size =  'string' ] ] raise: MQQueryError 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testType [
 	| selected |
 	collection add: (Dictionary new at: 'key1' put: 1; yourself).
@@ -212,11 +219,14 @@ MQQueryTest >> testType [
 	self should: [ collection select: [ :each | each key1 type =  'string' ] ] raise: MQQueryError 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 MQQueryTest >> testWhere [
 	| selected |
+	
 	collection add: (Dictionary new at: 'key1' put: 'value1'; yourself).
-	collection add: (Dictionary new at: 'key2' put: 'value2'; yourself).
-	selected := collection detect: [ :each | each where: 'this.key1 = "value1"'].
-	self assert: (selected at: 'key1') equals: 'value1'
+	collection add: (Dictionary new at: 'key1' put: 'value2'; yourself).
+	collection add: (Dictionary new at: 'key1' put: 'value3'; yourself).
+	selected := collection detect: [ :each | each where: 'this.key1 == "value2"'].
+	"it should find just the second element"
+	self assert: (selected at: 'key1') equals: 'value2'
 ]

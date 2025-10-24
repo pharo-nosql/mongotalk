@@ -456,6 +456,29 @@ MongoDriverC >> query: aMongoQuery [
  	^ results
 ]
 
+{ #category : 'operations' }
+MongoDriverC >> queryOne: aMongoQuery [
+	"gets a cursor query and iterates it to retrieve a list of documents.
+	 this is almost identical than query:, but I set the chunkSize to 1, so I am sure 
+	 I get just one answer. Since I know I will have one (or zero) I do not create 
+	 a collection to handle results. instead, I just get the first one (this is an 
+	 optimization)." 
+	| result cursor |
+
+	[ 
+		aMongoQuery chunkSize: 1.
+		cursor := self cursorQuery: aMongoQuery.
+		result := nil.
+		self 
+			forEachDocumentInCursor: cursor 
+			do: [ :each | result := each ] ]
+	ensure: [
+		cursor isNullOrNil 
+			ifFalse: [ mongoc cursor_destroy: cursor ] ].
+ 			
+ 	^ result
+]
+
 { #category : 'private' }
 MongoDriverC >> retrieveMongoCollectionDatabase: dbName name: aName [
 
