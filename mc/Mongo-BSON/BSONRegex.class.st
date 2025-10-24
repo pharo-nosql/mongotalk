@@ -9,33 +9,35 @@ value
 
 "
 Class {
-	#name : #BSONRegex,
-	#superclass : #Object,
+	#name : 'BSONRegex',
+	#superclass : 'Object',
 	#instVars : [
 		'value'
 	],
-	#category : 'Mongo-BSON-Utilities'
+	#category : 'Mongo-BSON-Utilities',
+	#package : 'Mongo-BSON',
+	#tag : 'Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BSONRegex class >> value: aString [
 	^self basicNew 
 		initialize: aString;
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BSONRegex >> bsonTypeCode [ 
 	^11
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 BSONRegex >> initialize: aString [ 
 	value := aString.
 	self initialize
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 BSONRegex >> printOn: aStream [ 
 	aStream 
 		nextPut: $/;
@@ -44,12 +46,12 @@ BSONRegex >> printOn: aStream [
 		nextPut: $i
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BSONRegex >> value [ 
 	^value
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSONRegex >> writeBSONOn: aBSON [ 
 	aBSON nextRegexPut: self
 ]

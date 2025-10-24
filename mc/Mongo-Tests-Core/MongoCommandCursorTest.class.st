@@ -45,6 +45,8 @@ MongoCommandCursorTest >> expectedDocumentCount [
 
 { #category : 'running' }
 MongoCommandCursorTest >> setUp [
+
+	Mongo default: nil.
 	root := Mongo default.
 	root open.
 	database := root databaseNamed: 'test'.
@@ -59,15 +61,18 @@ MongoCommandCursorTest >> setUp [
 
 { #category : 'running' }
 MongoCommandCursorTest >> tearDown [
+
 	database collections do: #drop.
 	root close.
+	Mongo default: nil
 ]
 
 { #category : 'tests' }
 MongoCommandCursorTest >> testCollect [
 	| cursor collected |
-	cursor := MongoCommandCursor database: database dictionary: self commandForTesting.
 	
+	cursor := MongoCommandCursor database: database dictionary: self commandForTesting.
+
 	collected := cursor collect: [ :each | each ].
 	self assertExpectedDocuments: collected.
 

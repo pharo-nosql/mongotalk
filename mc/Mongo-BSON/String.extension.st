@@ -1,11 +1,11 @@
-Extension { #name : #String }
+Extension { #name : 'String' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 String >> asBSONRegex [
 	^BSONRegex value: self
 ]
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 String >> bsonTypeCode [
 	^2
 ]

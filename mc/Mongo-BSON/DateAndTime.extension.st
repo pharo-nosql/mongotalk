@@ -1,6 +1,6 @@
-Extension { #name : #DateAndTime }
+Extension { #name : 'DateAndTime' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 DateAndTime >> asBSONMilliSeconds [
 	| dateAndTimeUTC |
 

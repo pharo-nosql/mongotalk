@@ -1,6 +1,6 @@
-Extension { #name : #Symbol }
+Extension { #name : 'Symbol' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 Symbol >> bsonTypeCode [
 	^ 2
 ]

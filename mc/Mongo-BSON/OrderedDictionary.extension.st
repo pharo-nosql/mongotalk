@@ -1,11 +1,11 @@
-Extension { #name : #OrderedDictionary }
+Extension { #name : 'OrderedDictionary' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 OrderedDictionary >> bsonTypeCode [
 	^3
 ]
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 OrderedDictionary >> writeBSONOn: aBSON [ 
 	aBSON nextOrderedDictionaryPut: self
 ]

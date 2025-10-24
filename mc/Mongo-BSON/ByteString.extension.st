@@ -1,6 +1,6 @@
-Extension { #name : #ByteString }
+Extension { #name : 'ByteString' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 ByteString >> writeBSONOn: aBSON [ 
 	aBSON nextSizedStringPut: self
 ]

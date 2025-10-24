@@ -1,11 +1,11 @@
-Extension { #name : #SequenceableCollection }
+Extension { #name : 'SequenceableCollection' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 SequenceableCollection >> bsonTypeCode [
 	^4
 ]
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 SequenceableCollection >> writeBSONOn: aBSON [ 
 	self asArray writeBSONOn: aBSON
 ]

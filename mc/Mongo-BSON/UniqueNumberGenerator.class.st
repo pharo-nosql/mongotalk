@@ -4,22 +4,24 @@ Since this is a not easy task, it can be tricky to provide a unique startegy in 
 My children provide different strategies. 
 "
 Class {
-	#name : #UniqueNumberGenerator,
-	#superclass : #Object,
-	#category : 'Mongo-BSON-Generators'
+	#name : 'UniqueNumberGenerator',
+	#superclass : 'Object',
+	#category : 'Mongo-BSON-Generators',
+	#package : 'Mongo-BSON',
+	#tag : 'Generators'
 }
 
-{ #category : #acccessing }
+{ #category : 'acccessing' }
 UniqueNumberGenerator >> nextNumber [ 
 	^ self subclassResponsibility
 ]
 
-{ #category : #registration }
+{ #category : 'registration' }
 UniqueNumberGenerator >> register [ 
 	
 ]
 
-{ #category : #registration }
+{ #category : 'registration' }
 UniqueNumberGenerator >> unregister [ 
 	
 ]

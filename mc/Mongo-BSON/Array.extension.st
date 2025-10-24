@@ -1,6 +1,6 @@
-Extension { #name : #Array }
+Extension { #name : 'Array' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 Array >> writeBSONOn: aBSON [ 
 	aBSON nextArrayPut: self
 ]

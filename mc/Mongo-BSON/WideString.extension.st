@@ -1,6 +1,6 @@
-Extension { #name : #WideString }
+Extension { #name : 'WideString' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 WideString >> writeBSONOn: aBSON [
 	aBSON nextWideStringPut: self
 ]
