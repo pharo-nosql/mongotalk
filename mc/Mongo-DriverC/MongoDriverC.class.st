@@ -247,7 +247,7 @@ MongoDriverC >> forEachDocumentInCursor: cursor do: aBlock [
 	| docHandle doc |
 
 	docHandle := FFIOop newValueHolder.
-	[ (self mongoc cursor_nextCursor: cursor bson: docHandle) = 1 ]
+	[ self mongoc cursor_nextCursor: cursor bson: docHandle ]
 	whileTrue: [
 		doc := BsonT fromHandle: docHandle value.
 		aBlock value: (self bsonToJson: doc) ]
