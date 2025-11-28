@@ -72,8 +72,8 @@ MongoDriverC >> commandCreateIndexName: aName keys: keyAssociations unique: aBoo
 			opts: BsonT null getHandle
 			reply: BsonT null getHandle 
 			error: error referenceTo getHandle.
-		result = 1 ifFalse: [ 
-			MongoCCommandError signalFor: error ] ] 
+		result ifFalse: [ 
+			MongoCCommandError signalFor: error ] ]
 	ensure: [
 		mongoc index_model_destroy: model.
  		bson destroy: keys.
@@ -141,7 +141,7 @@ MongoDriverC >> deleteMany: aDocument collection: aMongoCollection [
 			opts: BsonT null getHandle
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				deletedCount := replyJson at: 'deletedCount' ]
@@ -171,7 +171,7 @@ MongoDriverC >> deleteOne: aDocument collection: aMongoCollection [
 			opts: BsonT null getHandle
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				deletedCount := replyJson at: 'deletedCount' ]
@@ -222,7 +222,7 @@ MongoDriverC >> executeCommand: aCommand [
 			read_prefs: ExternalAddress null
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [ 
 				resultJson := self bsonToJson: reply ]
 			ifFalse: [
@@ -327,7 +327,7 @@ MongoDriverC >> insertMany: aCollection collection: aMongoCollection writeConcer
 			opts: opts getHandle
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				insertedCount := replyJson at: 'insertedCount' ]
@@ -365,7 +365,7 @@ MongoDriverC >> insertOne: aDocument collection: aMongoCollection writeConcern: 
 			opts: opts getHandle
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				insertedId := replyJson at: 'insertedId' ]
@@ -528,8 +528,7 @@ MongoDriverC >> updateMany: aDocument with: newDocument collection: aMongoCollec
 			opts: opts getHandle 
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				matchedCount := replyJson at: 'matchedCount'.
@@ -569,8 +568,7 @@ MongoDriverC >> updateOne: aDocument with: newDocument collection: aMongoCollect
 			opts: opts getHandle 
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				matchedCount := replyJson at: 'matchedCount'.
