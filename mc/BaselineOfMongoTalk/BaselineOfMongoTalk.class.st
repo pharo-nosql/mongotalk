@@ -69,14 +69,14 @@ BaselineOfMongoTalk >> baseline: spec [
 BaselineOfMongoTalk >> libbson: spec [
 
 	spec baseline: 'LibBSON' with: [
-		spec repository: 'github://pharo-cig/pharo-libbson:v1.0' ]
+		spec repository: 'github://pharo-cig/pharo-libbson:v1.0.1' ]
 ]
 
 { #category : 'external projects' }
 BaselineOfMongoTalk >> libmongoc: spec [
 
 	spec baseline: 'LibMongoC' with: [
-		spec repository: 'github://pharo-cig/pharo-libmongoc:v1.0' ]
+		spec repository: 'github://pharo-cig/pharo-libmongoc:v2.0' ]
 ]
 
 { #category : 'accessing' }
