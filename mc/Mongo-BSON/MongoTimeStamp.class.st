@@ -11,43 +11,45 @@ See more on: https://docs.mongodb.org/manual/reference/bson-types/#timestamps
 
 "
 Class {
-	#name : #MongoTimeStamp,
-	#superclass : #Object,
+	#name : 'MongoTimeStamp',
+	#superclass : 'Object',
 	#instVars : [
 		'value'
 	],
-	#category : 'Mongo-BSON-Utilities'
+	#category : 'Mongo-BSON-Utilities',
+	#package : 'Mongo-BSON',
+	#tag : 'Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 MongoTimeStamp class >> value: nextInt64 [
 	^ self basicNew
 		initialize: nextInt64;
 		yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 MongoTimeStamp >> = other [
 	^other class == self class and: [ other value = value ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTimeStamp >> bsonTypeCode [ 
 	^17
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 MongoTimeStamp >> hash [
 	^self class hash bitXor: value hash
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 MongoTimeStamp >> initialize: aInt64 [ 
 	value := aInt64.
 	self initialize.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 MongoTimeStamp >> printOn: aStream [ 
 	aStream 
 		nextPut: $/;
@@ -56,12 +58,12 @@ MongoTimeStamp >> printOn: aStream [
 		nextPut: $i
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MongoTimeStamp >> value [
 	^ value
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 MongoTimeStamp >> writeBSONOn: aBSON [ 
 	aBSON nextTimestampPut: self
 ]

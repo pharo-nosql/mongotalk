@@ -49,5 +49,5 @@ MongoCCommandError >> isCollectionAlreadyExists [
 { #category : 'accessing' }
 MongoCCommandError >> messageText [
 
-	^ messageText
+	^ '{1}: {2}' format: { self code. messageText }
 ]

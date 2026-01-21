@@ -4,67 +4,69 @@
 </smalltalkDoc>
 "
 Class {
-	#name : #LittleEndianStream,
-	#superclass : #Object,
+	#name : 'LittleEndianStream',
+	#superclass : 'Object',
 	#instVars : [
 		'stream'
 	],
-	#category : #'Mongo-BSON-Utilities'
+	#category : 'Mongo-BSON-Utilities',
+	#package : 'Mongo-BSON',
+	#tag : 'Utilities'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LittleEndianStream class >> on: aReadStream [ 
 	^self new setReader: aReadStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LittleEndianStream >> contents [
 	^stream contents
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> encode: aString [
 
 	^ ZnUTF8Encoder default encodeString: aString
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> flush [
 	stream flush
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 LittleEndianStream >> nextByte [
 	"Worry about sign? What sayeth the spec?"
 
 	^stream next
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> nextBytePut: anInteger [ 
 	stream nextPut: anInteger
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 LittleEndianStream >> nextBytes: anInteger [
 
 	^stream next: anInteger
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> nextBytesPut: aByteArray [
 
 	stream nextPutAll: aByteArray
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> nextEncodedStringPut: aByteArray [ 
 	self 
 		nextBytesPut: aByteArray;
 		null
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 LittleEndianStream >> nextInt32 [
 	| unsigned |
 	unsigned := self nextUInt32.
@@ -73,7 +75,7 @@ LittleEndianStream >> nextInt32 [
 		ifFalse: [((2 raisedTo: 32) - unsigned) negated]
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> nextInt32Put: anInteger [ 
 	self nextBytePut: (anInteger bitAnd: 16rFF).
 	self nextBytePut: ((anInteger bitShift: -8) bitAnd: 16rFF).
@@ -81,7 +83,7 @@ LittleEndianStream >> nextInt32Put: anInteger [
 	self nextBytePut: ((anInteger bitShift: -24) bitAnd: 16rFF)
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 LittleEndianStream >> nextInt64 [
 	| unsigned |
 	unsigned := stream next + (stream next bitShift: 8) + (stream next bitShift: 16) + (stream next bitShift: 24) + (stream next bitShift: 32) + (stream next bitShift: 40) + (stream next bitShift: 48) + (stream next bitShift: 56).
@@ -90,7 +92,7 @@ LittleEndianStream >> nextInt64 [
 		ifFalse: [((2 raisedTo: 64) - unsigned) negated]
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> nextInt64Put: anInteger [ 
 	self nextBytePut: (anInteger bitAnd: 16rFF).
 	self nextBytePut: ((anInteger bitShift: -8) bitAnd: 16rFF).
@@ -102,7 +104,7 @@ LittleEndianStream >> nextInt64Put: anInteger [
 	self nextBytePut: ((anInteger bitShift: -56) bitAnd: 16rFF)
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> nextSizedStringPut: aString [
 	| encoded |
 	encoded := self encode: aString.
@@ -110,7 +112,7 @@ LittleEndianStream >> nextSizedStringPut: aString [
 	self nextEncodedStringPut: encoded
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 LittleEndianStream >> nextString [
 	| bytes |
 
@@ -118,7 +120,7 @@ LittleEndianStream >> nextString [
 	^ bytes utf8Decoded asString
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 LittleEndianStream >> nextString: aNumber [
 	| string |
 
@@ -127,7 +129,7 @@ LittleEndianStream >> nextString: aNumber [
 	^ string utf8Decoded
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> nextStringPut: aString [ 
 	| encoded |
 "	encoder := UTF8StreamEncoder new.
@@ -136,32 +138,32 @@ LittleEndianStream >> nextStringPut: aString [
 	self nextEncodedStringPut: encoded 
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 LittleEndianStream >> nextUInt32 [
 	^stream next + (stream next bitShift: 8) + (stream next bitShift: 16) + (stream next bitShift: 24)
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 LittleEndianStream >> null [
 	self nextBytePut: 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LittleEndianStream >> position [
 	^stream position
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LittleEndianStream >> position: anInteger [ 
 	stream position: anInteger
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 LittleEndianStream >> setReader: aReadStream [ 
 	stream := aReadStream
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 LittleEndianStream >> skip: aNumber [
 	stream skip: aNumber
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #SocketStream }
+Extension { #name : 'SocketStream' }
 
-{ #category : #'*mongo-bson-extensions' }
+{ #category : '*mongo-bson-extensions' }
 SocketStream >> position: aNumber [
 	aNumber > lastRead 
 		ifTrue: [ self skip: lastRead - aNumber ].

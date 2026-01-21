@@ -1,11 +1,11 @@
-Extension { #name : #Boolean }
+Extension { #name : 'Boolean' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 Boolean >> bsonTypeCode [
 	^8
 ]
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 Boolean >> writeBSONOn: aBSON [ 
 	aBSON nextBooleanPut: self
 ]

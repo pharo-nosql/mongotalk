@@ -1,1 +1,1 @@
-Package { #name : #'Mongo-Tests-Queries' }
+Package { #name : 'Mongo-Tests-Queries' }

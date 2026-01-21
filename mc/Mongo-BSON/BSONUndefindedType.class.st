@@ -9,32 +9,34 @@ code
 
 "
 Class {
-	#name : #BSONUndefindedType,
-	#superclass : #BSONError,
+	#name : 'BSONUndefindedType',
+	#superclass : 'BSONError',
 	#instVars : [
 		'code'
 	],
-	#category : 'Mongo-BSON-Exceptions'
+	#category : 'Mongo-BSON-Exceptions',
+	#package : 'Mongo-BSON',
+	#tag : 'Exceptions'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 BSONUndefindedType class >> signalCode: aNumber [
 	^self new 
 		code: aNumber;
 		signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BSONUndefindedType >> code [
 	^code
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BSONUndefindedType >> code: aNumber [
 	code := aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BSONUndefindedType >> messageText [ 
 	^'Undefined type ', self code asString
 ]

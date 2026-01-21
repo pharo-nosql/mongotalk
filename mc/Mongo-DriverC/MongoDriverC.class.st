@@ -28,6 +28,11 @@ MongoDriverC >> bsonToJson: aBson [
 	^ BSON read: internalData readStream
 ]
 
+{ #category : 'initialization' }
+MongoDriverC >> close [
+	self destroyClient
+]
+
 { #category : 'private' }
 MongoDriverC >> collectionFor: aMongoCollection [
 
@@ -67,8 +72,8 @@ MongoDriverC >> commandCreateIndexName: aName keys: keyAssociations unique: aBoo
 			opts: BsonT null getHandle
 			reply: BsonT null getHandle 
 			error: error referenceTo getHandle.
-		result = 1 ifFalse: [ 
-			MongoCCommandError signalFor: error ] ] 
+		result ifFalse: [ 
+			MongoCCommandError signalFor: error ] ]
 	ensure: [
 		mongoc index_model_destroy: model.
  		bson destroy: keys.
@@ -94,8 +99,6 @@ MongoDriverC >> commandQueryClass [
 MongoDriverC >> cursorQuery: aMongoQuery [
 	"This message returns an open cursor used to traverse the collection."
 	| filter data cursor opts |
-
-	logger trace: aMongoQuery.
 
 	filter := self jsonToBson: aMongoQuery where.
 	opts := aMongoQuery asOptionsDocument 
@@ -131,14 +134,14 @@ MongoDriverC >> deleteMany: aDocument collection: aMongoCollection [
 	reply := BsonT new.
 	error :=  BsonErrorT new.
 	result := 0.
-	^ [ 
+	[ 
 		result := mongoc 
 			collection_delete_manyCollection: (self collectionFor: aMongoCollection)
 			selector: doc getHandle
 			opts: BsonT null getHandle
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				deletedCount := replyJson at: 'deletedCount' ]
@@ -161,14 +164,14 @@ MongoDriverC >> deleteOne: aDocument collection: aMongoCollection [
 	reply := BsonT new.
 	error :=  BsonErrorT new.
 	result := 0.
-	^ [ 
+	[ 
 		result := mongoc 
 			collection_delete_oneCollection: (self collectionFor: aMongoCollection)
 			selector: doc getHandle
 			opts: BsonT null getHandle
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				deletedCount := replyJson at: 'deletedCount' ]
@@ -207,13 +210,11 @@ MongoDriverC >> destroyCollections [
 MongoDriverC >> executeCommand: aCommand [
 	| doc result reply error resultJson |
 
-	logger trace: aCommand.
-
 	doc := self jsonToBson: aCommand where.
 	reply := BsonT new.
 	error :=  BsonErrorT new.
 	result := 0.
-	^ [ 
+	[ 
 		result := self mongoc
 			client_command_simpleClient: client
 			db_name: aCommand database name
@@ -221,7 +222,7 @@ MongoDriverC >> executeCommand: aCommand [
 			read_prefs: ExternalAddress null
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [ 
 				resultJson := self bsonToJson: reply ]
 			ifFalse: [
@@ -246,7 +247,7 @@ MongoDriverC >> forEachDocumentInCursor: cursor do: aBlock [
 	| docHandle doc |
 
 	docHandle := FFIOop newValueHolder.
-	[ (self mongoc cursor_nextCursor: cursor bson: docHandle) = 1 ]
+	[ self mongoc cursor_nextCursor: cursor bson: docHandle ]
 	whileTrue: [
 		doc := BsonT fromHandle: docHandle value.
 		aBlock value: (self bsonToJson: doc) ]
@@ -318,7 +319,7 @@ MongoDriverC >> insertMany: aCollection collection: aMongoCollection writeConcer
 	reply := BsonT new.
 	error :=  BsonErrorT new.
 	result := 0.
-	^ [ 
+	[ 
 		result := self mongoc 
 			collection_insert_manyCollection: (self collectionFor: aMongoCollection)
 			documents: docHandles
@@ -326,7 +327,7 @@ MongoDriverC >> insertMany: aCollection collection: aMongoCollection writeConcer
 			opts: opts getHandle
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				insertedCount := replyJson at: 'insertedCount' ]
@@ -357,14 +358,14 @@ MongoDriverC >> insertOne: aDocument collection: aMongoCollection writeConcern: 
 		opts := bson new.
 		mongoc write_concern_appendWrite_concern: writeConcern doc: opts getHandle ].
 	
-	^ [ 
+	[ 
 		result := self mongoc 
 			collection_insert_oneCollection: (self collectionFor: aMongoCollection)
 			document: doc getHandle
 			opts: opts getHandle
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				insertedId := replyJson at: 'insertedId' ]
@@ -385,7 +386,7 @@ MongoDriverC >> insertOne: aDocument collection: aMongoCollection writeConcern: 
 { #category : 'testing' }
 MongoDriverC >> isOpen [
 
-	^ false
+	^ client isNullOrNil not
 ]
 
 { #category : 'private' }
@@ -442,8 +443,6 @@ MongoDriverC >> query: aMongoQuery [
 	"gets a cursor query and iterates it to retrieve a list of documents" 
 	| results cursor |
 
-	logger trace: aMongoQuery.
-
 	[ 
 		cursor := self cursorQuery: aMongoQuery.
 		results := OrderedCollection new.
@@ -455,6 +454,29 @@ MongoDriverC >> query: aMongoQuery [
 			ifFalse: [ mongoc cursor_destroy: cursor ] ].
  			
  	^ results
+]
+
+{ #category : 'operations' }
+MongoDriverC >> queryOne: aMongoQuery [
+	"gets a cursor query and iterates it to retrieve a list of documents.
+	 this is almost identical than query:, but I set the chunkSize to 1, so I am sure 
+	 I get just one answer. Since I know I will have one (or zero) I do not create 
+	 a collection to handle results. instead, I just get the first one (this is an 
+	 optimization)." 
+	| result cursor |
+
+	[ 
+		aMongoQuery chunkSize: 1.
+		cursor := self cursorQuery: aMongoQuery.
+		result := nil.
+		self 
+			forEachDocumentInCursor: cursor 
+			do: [ :each | result := each ] ]
+	ensure: [
+		cursor isNullOrNil 
+			ifFalse: [ mongoc cursor_destroy: cursor ] ].
+ 			
+ 	^ result
 ]
 
 { #category : 'private' }
@@ -498,7 +520,7 @@ MongoDriverC >> updateMany: aDocument with: newDocument collection: aMongoCollec
 	upsertBoolean ifTrue: [
 		opts := self jsonToBson: { #upsert -> true } asDictionary ].
 	
-	^ [ 
+	[ 
 		result := mongoc 
 			collection_update_manyCollection: (self collectionFor: aMongoCollection)
 			selector: filter getHandle
@@ -506,8 +528,7 @@ MongoDriverC >> updateMany: aDocument with: newDocument collection: aMongoCollec
 			opts: opts getHandle 
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				matchedCount := replyJson at: 'matchedCount'.
@@ -539,7 +560,7 @@ MongoDriverC >> updateOne: aDocument with: newDocument collection: aMongoCollect
 	upsertBoolean ifTrue: [
 		opts := self jsonToBson: { #upsert -> true } asDictionary ].
 	
-	^ [ 
+	[ 
 		result := mongoc 
 			collection_update_oneCollection: (self collectionFor: aMongoCollection)
 			selector: filter getHandle
@@ -547,8 +568,7 @@ MongoDriverC >> updateOne: aDocument with: newDocument collection: aMongoCollect
 			opts: opts getHandle 
 			reply: reply referenceTo getHandle
 			error: error referenceTo getHandle.
-
-		result = 1
+		result
 			ifTrue: [
 				replyJson := self bsonToJson: reply.
 				matchedCount := replyJson at: 'matchedCount'.

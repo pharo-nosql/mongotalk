@@ -3,37 +3,39 @@ I'm a sequential number generator.
 I'm not very effective, but I can be useful in certain restrained scenarios. 
 "
 Class {
-	#name : #SequentialGenerator,
-	#superclass : #UniqueNumberGenerator,
+	#name : 'SequentialGenerator',
+	#superclass : 'UniqueNumberGenerator',
 	#instVars : [
 		'currentNumber',
 		'startNumber'
 	],
-	#category : 'Mongo-BSON-Generators'
+	#category : 'Mongo-BSON-Generators',
+	#package : 'Mongo-BSON',
+	#tag : 'Generators'
 }
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SequentialGenerator class >> defaultStartNumber [
 	^ 0
 ]
 
-{ #category : #acccessing }
+{ #category : 'acccessing' }
 SequentialGenerator >> nextNumber [ 
 	currentNumber := currentNumber + 1.
 	^ currentNumber.
 ]
 
-{ #category : #registration }
+{ #category : 'registration' }
 SequentialGenerator >> register [ 
 	currentNumber := self startNumber.
 ]
 
-{ #category : #acccessing }
+{ #category : 'acccessing' }
 SequentialGenerator >> startNumber [ 
 	^ startNumber ifNil: [ self class defaultStartNumber ]
 ]
 
-{ #category : #acccessing }
+{ #category : 'acccessing' }
 SequentialGenerator >> startNumber: aNumber [ 
 	startNumber := aNumber.
 ]

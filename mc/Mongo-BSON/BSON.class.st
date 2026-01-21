@@ -4,22 +4,24 @@
 </smalltalkDoc>
 "
 Class {
-	#name : #BSON,
-	#superclass : #Object,
+	#name : 'BSON',
+	#superclass : 'Object',
 	#instVars : [
 		'stream'
 	],
-	#category : #'Mongo-BSON-Base'
+	#category : 'Mongo-BSON-Base',
+	#package : 'Mongo-BSON',
+	#tag : 'Base'
 }
 
-{ #category : #codec }
+{ #category : 'codec' }
 BSON class >> read: aStream [
 	| reader |
 	reader := LittleEndianStream on: aStream.
 	^(self new setStream: reader) nextDictionary
 ]
 
-{ #category : #codec }
+{ #category : 'codec' }
 BSON class >> write: aDictionary [
  
 	^self writer 
@@ -27,7 +29,7 @@ BSON class >> write: aDictionary [
 		contents
 ]
 
-{ #category : #codec }
+{ #category : 'codec' }
 BSON class >> writeAll: aCollection [ 
 	| writer |
 	writer := self writer.
@@ -35,19 +37,19 @@ BSON class >> writeAll: aCollection [
 	^writer contents
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 BSON class >> writer [
 	^self new setStream: (LittleEndianStream on: ByteArray new writeStream)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BSON >> addObjectType: anInteger to: aDictionary [
 	aDictionary 
 		at: self nextKey
 		put: (self nextValueForType: anInteger)
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> basicNextDictionaryPut: aCollection [
 	| start end |
 	
@@ -61,22 +63,22 @@ BSON >> basicNextDictionaryPut: aCollection [
 	stream position: end
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BSON >> contents [
 	^stream contents
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BSON >> isInt32: anInteger [
 	^anInteger between: (2 raisedTo: 31) negated and: (2 raisedTo: 31) - 1
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 BSON >> isInt64: anInteger [
 	^anInteger between: (2 raisedTo: 63) negated and: (2 raisedTo: 63) - 1
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextArray [
 	| elements results index |
 	elements := self nextDictionary.
@@ -88,7 +90,7 @@ BSON >> nextArray [
 	^results
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextArrayPut: anArray [
 	| elements start end |
 	elements := SmallDictionary new.
@@ -104,14 +106,14 @@ BSON >> nextArrayPut: anArray [
 	stream position: end
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextAssociationPut: anAssociation [ 
 	stream nextBytePut: (self typeCode: anAssociation value).
 	self nextStringPut: anAssociation key.
 	anAssociation value writeBSONOn: self
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextBinary [
 	| size  subType |
 	size := stream nextUInt32.
@@ -122,17 +124,17 @@ BSON >> nextBinary [
 	^ stream nextBytes: size 
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextBoolean [
 	^stream nextByte = 1
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextBooleanPut: aBoolean [
 	stream nextBytePut: (aBoolean ifTrue: [1] ifFalse: [0])
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextByteArrayPut: aByteArray [
 	stream 
 		nextInt32Put: aByteArray size;
@@ -140,29 +142,29 @@ BSON >> nextByteArrayPut: aByteArray [
 		nextBytesPut: aByteArray
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextDate [
 
 	^ stream nextInt64 asBSONDate
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextDateAndTime [
 	
 	^ stream nextInt64 asBSONDateAndTime
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextDateAndTimePut: aDateAndTime [
 	stream nextInt64Put: aDateAndTime asBSONMilliSeconds
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextDatePut: aDate [ 
 	stream nextInt64Put: aDate asBSONMilliSeconds
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextDictionary [
 	| result byteSize |
 	result := Dictionary new.
@@ -175,16 +177,20 @@ BSON >> nextDictionary [
 	^BSONError signal: 'Attempt to read off end of stream'
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextDictionaryPut: aDictionary [
 	"write associations sorted and having the _id field in first place. This is kept for 
 	legacy reasons although the necessity for having fields sorted is not obvious"
-	self basicNextDictionaryPut: (
-		aDictionary associations 
-			asSortedCollection: [:a :b | a key = '_id' | (a key < b key)]) 
+	| associations |
+	
+	associations := (aDictionary includesKey: '_id')
+		ifTrue: [ aDictionary associations sorted: [:a :b | a key = '_id' | (a key < b key) ] ]
+		ifFalse: [ aDictionary associations ].
+	
+	self basicNextDictionaryPut: associations
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextDouble [
 	| result |
 	
@@ -195,7 +201,7 @@ BSON >> nextDouble [
 	^result
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextDoublePut: aDouble [ 
 	| writer lowWord highWord |
 
@@ -208,17 +214,17 @@ BSON >> nextDoublePut: aDouble [
 	stream nextBytesPut: writer contents
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextInt32 [
 	^stream nextInt32
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextInt64 [
 	^stream nextInt64
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextIntegerPut: anInteger [
 	"Seems like this belongs here instead of the caller or the stream, but not certain"
 
@@ -227,22 +233,22 @@ BSON >> nextIntegerPut: anInteger [
 	BSONError signal: 'Integer too large: ' , anInteger printString
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextKey [
 	^stream nextString
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextNil [
 	^nil
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextNilPut [
 	"This method intentionally if reluctantly left blank"
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextOID [
 	"read ObjectId from stream. ObjectId is encoded big-endian"
 	| value |
@@ -252,7 +258,7 @@ BSON >> nextOID [
 	^OID value: value normalize
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextOIDPut: anOID [ 
 	"write ObjectId to stream. ObjectId is encoded big-endian"
 	| value |
@@ -261,7 +267,7 @@ BSON >> nextOIDPut: anOID [
 		stream nextBytePut: (value byteAt: digitIndex)]
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextOrderedDictionaryPut: aDictionary [
 	"write associations as they are in the dictionary. This supports dictionaries that
 	have special order.  Mongo is looking up some of the key-value based collections 
@@ -270,24 +276,24 @@ BSON >> nextOrderedDictionaryPut: aDictionary [
 	self basicNextDictionaryPut:  aDictionary associations
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextRegex [ 
 	^RxParser safelyParse: self nextSizedString
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextRegexPut: aBSONRegex [
 	stream nextStringPut: aBSONRegex value
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextSizedString [
 	| size result  |
 	size := stream nextUInt32.
 	^ stream nextString: size
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextSizedStringPut: aString [
 	| encoded |
 	encoded := stream encode: aString.
@@ -296,37 +302,37 @@ BSON >> nextSizedStringPut: aString [
 	stream null
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextStringPut: aByteString [
 	stream nextStringPut: aByteString
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextSymbol [
 	^self nextSizedString asSymbol
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextSymbolPut: aByteSymbol [ 
 	self nextSizedStringPut: aByteSymbol
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextTimestamp [
 	^MongoTimeStamp value: self nextInt64
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextTimestampPut: aMongoTimeStamp [ 
 	stream nextInt64Put: aMongoTimeStamp value
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextUUID: aByteArray [ 
 	^ UUID newFrom: aByteArray
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextUUIDPut: aUUID [
 	stream 
 		nextInt32Put: aUUID size;
@@ -335,13 +341,13 @@ BSON >> nextUUIDPut: aUUID [
 		nextBytesPut: aUUID 
 ]
 
-{ #category : #reading }
+{ #category : 'reading' }
 BSON >> nextUndefined [
 	"Not sure what I should reply here"
 	^nil
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BSON >> nextValueForType: anInteger [ 
 	"Uglyness for performance"
 	anInteger == 7 		ifTrue: [ ^self nextOID ].
@@ -363,17 +369,17 @@ BSON >> nextValueForType: anInteger [
 	BSONUndefindedType signalCode: anInteger.
 ]
 
-{ #category : #writing }
+{ #category : 'writing' }
 BSON >> nextWideStringPut: aWideString [ 
 	self nextSizedStringPut: aWideString
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 BSON >> setStream: aStream [
 	stream := aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BSON >> typeCode: anObject [
 	^anObject bsonTypeCode
 ]

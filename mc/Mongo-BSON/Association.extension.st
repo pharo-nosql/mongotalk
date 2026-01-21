@@ -1,6 +1,6 @@
-Extension { #name : #Association }
+Extension { #name : 'Association' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 Association >> writeBSONOn: aBSON [ 
 	aBSON nextAssociationPut: self
 ]

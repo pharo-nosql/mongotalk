@@ -8,8 +8,8 @@ It has four fields;
 -  A 3 byte counter.
 "
 Class {
-	#name : #OID,
-	#superclass : #Object,
+	#name : 'OID',
+	#superclass : 'Object',
 	#instVars : [
 		'value'
 	],
@@ -20,10 +20,12 @@ Class {
 		'counter',
 		'machineIdentifier'
 	],
-	#category : #'Mongo-BSON-Base'
+	#category : 'Mongo-BSON-Base',
+	#package : 'Mongo-BSON',
+	#tag : 'Base'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OID class >> counterNext [ 
 	"increase the 24 bit counter and return"
 	^ counter := counter 
@@ -31,19 +33,19 @@ OID class >> counterNext [
 						ifNotNil:[counter + 1 \\ 16rFFFFFF]
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 OID class >> initialize [
 	self reset.
 	Smalltalk addToShutDownList: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OID class >> machineIdentifier [
 	^ machineIdentifier ifNil: [ machineIdentifier := self newMachineIdentifier ]
 
 ]
 
-{ #category : #resetting }
+{ #category : 'resetting' }
 OID class >> newCounter [
 	"A new 3-byte counter, initialized to a random value, as per the spec."
 	"Abuse the fact that we use a type4 UUID as machine identifier, and copy some of the random unused bits from that."
@@ -52,19 +54,19 @@ OID class >> newCounter [
 		normalize.
 ]
 
-{ #category : #resetting }
+{ #category : 'resetting' }
 OID class >> newMachineIdentifier [
 	"Used to be an MD5 hash of local hostname, but that primitive always returns 'localhost' on at least Macs...
 	Use a UUID instead, it will be different for the same machine after restarts, but the OID should never be used to identify a documents origin anyways."
 	^ UUID new uuidData
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OID class >> nextOID [
 	^ self new
 ]
 
-{ #category : #resetting }
+{ #category : 'resetting' }
 OID class >> reset [
 	<script>
 	machineIdentifier := nil.
@@ -72,34 +74,34 @@ OID class >> reset [
 	
 ]
 
-{ #category : #'startup-shutdown' }
+{ #category : 'startup-shutdown' }
 OID class >> shutDown: quitting [
 	"reset counter and machine identifier on image save. We want at least calculate a new
 	machine identifier if the image started somewhere else"
 	self reset
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 OID class >> value: anInteger [ 
 	^self basicNew setValue: anInteger
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OID >> = anObject [
 	^anObject class = self class and: [anObject value = self value]
 ]
 
-{ #category : #mongo }
+{ #category : 'mongo' }
 OID >> bsonTypeCode [
 	^ 7
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 OID >> hash [
 	^ value hash
 ]
 
-{ #category : #initialize }
+{ #category : 'initialize' }
 OID >> initialize [
 	"initialize value corresponding to the mongo spec. It is a 12-byte value containing:
 	* 4-byte timestamp
@@ -125,7 +127,7 @@ OID >> initialize [
 		
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 OID >> printOn: aStream [ 
 	aStream 
 		nextPutAll: 'OID';
@@ -134,23 +136,23 @@ OID >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 OID >> setValue: anInteger [ 
 	value := anInteger
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OID >> timeStamp [
 	"extract the upper 4 bytes from the object id which is the timestamp in seconds"
 	^ value bitShift: -64
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 OID >> value [
 	^value
 ]
 
-{ #category : #mongo }
+{ #category : 'mongo' }
 OID >> writeBSONOn: aBSON [ 
 	aBSON nextOIDPut: self
 ]

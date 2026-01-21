@@ -1,6 +1,6 @@
-Extension { #name : #LargeInteger }
+Extension { #name : 'LargeInteger' }
 
-{ #category : #'*Mongo-BSON' }
+{ #category : '*Mongo-BSON' }
 LargeInteger >> digitAt: index put: value [ 
 	"Primitive. Store the second argument (value) in the indexable field of 
 	the receiver indicated by index. Fail if the value is negative or is larger 
